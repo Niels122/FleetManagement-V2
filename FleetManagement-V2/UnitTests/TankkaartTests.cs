@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domein.Enums;
+using Domein.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

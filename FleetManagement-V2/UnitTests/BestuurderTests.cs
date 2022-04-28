@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Domein.Enums;
+using Domein.Exceptions;
+using Domein.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +10,7 @@ using Xunit;
 
 namespace UnitTests
 {
-    class BestuurderTests
+    public class BestuurderTests
     {
         [Fact]
         public void Test_NieuweBestuurder_Valid()
