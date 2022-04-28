@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Domein.Enums;
+using Domein.Interfaces;
+using Domein.Objects;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +13,17 @@ namespace Persistentie
 {
     public class BestuurderRepository : IBestuurderRepository
     {
+        //TODO: implement interface
+        public void CreateBestuurder(Bestuurder bestuurder)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteBestuurder(Bestuurder bestuurder)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Bestuurder> GeefBestuurders()
         {
             List<Bestuurder> bestuurders = new List<Bestuurder>();
@@ -81,6 +96,16 @@ namespace Persistentie
             List<string> rijksnummers = new List<string>();
 
             return rijksnummers;
+        }
+
+        public Bestuurder ReadBestuurder()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateBestuurder(Bestuurder bestuurder)
+        {
+            throw new NotImplementedException();
         }
     }
 }
