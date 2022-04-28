@@ -92,5 +92,10 @@ namespace Domein.Objects
                 Nummerplaat = nummerplaat;
             }
         }
+
+        public override string? ToString()
+        {
+            return string.Format("Chassisnummer= {0}, Merk= {1}, Nummerplaat= {2}", Chassisnummer, Merk, Model);
+        }
     }
 }
