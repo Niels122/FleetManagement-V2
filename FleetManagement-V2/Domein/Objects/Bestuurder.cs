@@ -78,7 +78,7 @@ namespace Domein.Objects
                 throw new RijksregisternummerException("Rijksregister mag niet leeg zijn");
             }
             ValideerRijkssregisternummer(rijksnummer);
-            foreach (string rijksnr in _bestuurdersRepo.GeefRijksregisternummers()) //NOG TE FIXEN: System.NullReferenceException: 'Object reference not set to an instance of an object.'
+            foreach (string rijksnr in _bestuurdersRepo.GeefRijksregisternummers()) //TODO: FIX System.NullReferenceException: 'Object reference not set to an instance of an object.'
             {
                 if (rijksnr == rijksnummer)
                 {
