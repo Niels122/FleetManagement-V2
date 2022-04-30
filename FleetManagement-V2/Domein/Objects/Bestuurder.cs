@@ -62,7 +62,10 @@ namespace Domein.Objects
             Voornaam = voornaam;
         }
 
-        public void SetGeboortedatum(int geboortedatum)
+        //TODO: Check op geboortedatum (persoon kan niet voor 1900 geboren zijn, kan niet geboren zijn in de toekomst(na huidige datum)
+        //      Een maand kan niet groter zijn dan 12 en dag niet groter dan 31, beide kunnen niet kleiner dan 1
+        //      Moet dit geen datetime worden?
+        public void SetGeboortedatum(int geboortedatum) 
         {
             if (geboortedatum == null)
             {
