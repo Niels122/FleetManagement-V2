@@ -11,23 +11,15 @@ namespace Domein.Objects
 {
     public class Bestuurder
     {
-        private IBestuurderRepository _bestuurdersRepo;
-
         public string Naam { get; set; }
         public string Voornaam { get; set; }
         public int Geboortedatum { get; set; }
         public string Rijksregisternummer { get; set; }
         public Rijbewijs Rijbewijs { get; set; }
-        public Adres? Adres { get; set; }
+        public Adres Adres { get; set; }
         public Voertuig Voertuig { get; set; }
         public Tankkaart Tankkaart { get; set; }
 
-        public Bestuurder(string naam, string voornaam, Rijbewijs rijbewijs)
-        {
-            SetNaam(naam);
-            SetVoornaam(voornaam);
-            Rijbewijs = rijbewijs;
-        }
         public Bestuurder(string naam, string voornaam, int geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs)
         {
             SetNaam(naam);
@@ -37,7 +29,7 @@ namespace Domein.Objects
             Rijbewijs = rijbewijs;
         }
 
-        public Bestuurder(string naam, string voornaam, int geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs, Adres? adres, Voertuig voertuig, Tankkaart tankkaart) : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs)
+        public Bestuurder(string naam, string voornaam, int geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs, Adres adres, Voertuig voertuig, Tankkaart tankkaart) : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs)
         {
             Adres = adres;
             Voertuig = voertuig;
@@ -67,10 +59,10 @@ namespace Domein.Objects
         //      Moet dit geen datetime worden?
         public void SetGeboortedatum(int geboortedatum) 
         {
-            if (geboortedatum == null)
-            {
-                throw new BestuurderException("Geboortedatum mag niet leeg zijn");
-            }
+            //if (geboortedatum == null)
+            //{
+                //throw new BestuurderException("Geboortedatum mag niet leeg zijn");
+            //}
             Geboortedatum = geboortedatum;
         }
 
@@ -81,43 +73,30 @@ namespace Domein.Objects
                 throw new RijksregisternummerException("Rijksregister mag niet leeg zijn");
             }
             ValideerRijkssregisternummer(rijksnummer);
-            foreach (string rijksnr in _bestuurdersRepo.GeefRijksregisternummers()) //TODO: FIX System.NullReferenceException: 'Object reference not set to an instance of an object.'
-            {
-                if (rijksnr == rijksnummer)
-                {
-                    throw new RijksregisternummerException("Dit rijksregisternummer zit al in het systeem.");
-                }
-            }
-            //Rijksregisternummer.ToString(rijksnummer);
+
             Rijksregisternummer = rijksnummer;
         }
 
-        public void ValideerRijkssregisternummer(string rijksnummer)    //in GUI enkel int aanvaarden en dan omzetten naar string om hier te kunnen manipuleren
+        public void ValideerRijkssregisternummer(string rijksnummer)    //in GUI enkel int aanvaarden en dan omzetten naar string om hier te kunnen manipuleren OPTIONEEL
         {
             if (double.TryParse(rijksnummer, out double result))              //Hier klopt iets nog niet mijn unit test slaagt niet. IK denk dat er ook nog een andere manier is om deze check te doen.
-            {
-
+            {                                                                   //waarom double?
                 if (rijksnummer.Length == 11)
                 {
-                    if (0 < int.Parse(rijksnummer.Substring(0, 1)) && int.Parse(rijksnummer.Substring(0, 1)) < 32)
+                    if (0 < int.Parse(rijksnummer.Substring(0, 2)) && int.Parse(rijksnummer.Substring(0, 2)) < 32) //geboortedag check
                     {
-                        if (0 < int.Parse(rijksnummer.Substring(2, 2)) && int.Parse(rijksnummer.Substring(2, 2)) < 13) //Controle van MAAND van rijksregisternummer (Geldigheidscheck)
+                        if (0 < int.Parse(rijksnummer.Substring(2, 2)) && int.Parse(rijksnummer.Substring(2, 2)) < 13) // geboortemaand check
                         {
-                            if (0 < int.Parse(rijksnummer.Substring(0, 2)) && int.Parse(rijksnummer.Substring(0, 2)) < 100)//Controle JAAR check.
+                            if (-1 < int.Parse(rijksnummer.Substring(4, 2)) && int.Parse(rijksnummer.Substring(4, 2)) < 100) //geboortejaar chek
                             {
-                                if (0 < int.Parse(rijksnummer.Substring(6, 3)) && int.Parse(rijksnummer.Substring(6, 3)) < 999)// Controlle 3 cijfers 7-8-9, CHECK
+                                if (0 < int.Parse(rijksnummer.Substring(6, 3)) && int.Parse(rijksnummer.Substring(6, 3)) < 999) //herkenningsgetal check
                                 {
-                                    if (-1 < int.Parse(rijksnummer.Substring(9, 2)) % 97 && int.Parse(rijksnummer.Substring(9, 2)) < 97)
+                                    if (-1 < int.Parse(rijksnummer.Substring(0, 9)) % 97 && int.Parse(rijksnummer.Substring(0, 9)) % 97 < 97) //controlegetal check
                                     {
-
-                                        //Rijksregisternummer.ToString(rijksnummer);
-
                                         Rijksregisternummer = rijksnummer;
                                     }
-                                    else if (-1 < int.Parse(rijksnummer.Insert(9, "2").Substring(0, 9)) % 97 && int.Parse(rijksnummer.Insert(0, "2").Substring(0, 9)) < 97)
+                                    else if (-1 < int.Parse(rijksnummer.Insert(0, "2").Substring(0, 10)) % 97 && int.Parse(rijksnummer.Insert(0, "2").Substring(0, 10)) % 97 < 97)
                                     {
-                                        //Rijksregisternummer.ToString(rijksnummer);
-
                                         Rijksregisternummer = rijksnummer;
                                     }
                                     else { throw new RijksregisternummerException("De laatste twee cijfers zijn ongeldig."); }

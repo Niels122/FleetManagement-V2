@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domein.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,7 +20,7 @@ namespace Domein.Controllers
             _bc = bc;
         }
 
-        public List<List<String>> GeefBestuurders()
+        public List<Bestuurder> GeefBestuurders()
         {
             return _bc.GeefBestuurders();
         }

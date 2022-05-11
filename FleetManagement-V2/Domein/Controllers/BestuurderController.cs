@@ -1,4 +1,5 @@
 ﻿using Domein.Interfaces;
+using Domein.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,19 +17,33 @@ namespace Domein.Controllers
             _bestuurderRepo = bestuurderRepo;
         }
 
-        public List<List<string>> GeefBestuurders() //geeft lijst van bestuurders terug in een string
+        public List<Bestuurder> GeefBestuurders()
         {
-            return _bestuurderRepo.GeefBestuurders()
-                .Select(bestuurder => new List<string>()
-                {
-                    bestuurder.Naam,
-                    bestuurder.Voornaam,
-                    bestuurder.Geboortedatum.ToString(),
-                    bestuurder.Rijksregisternummer,
-                    bestuurder.Rijbewijs.ToString(),
-                    bestuurder.Adres.ToString()
-                })
-                .ToList();
+            return _bestuurderRepo.GeefBestuurders();
         }
+        
+            //foreach (string rijksnr in _bestuurdersRepo.GeefRijksregisternummers()) 
+            //{
+            //    if (rijksnr == rijksnummer)
+            //    {
+            //        throw new RijksregisternummerException("Dit rijksregisternummer zit al in het systeem.");
+            //    }
+            //}
+
+
+        //public List<List<string>> GeefBestuurders() //geeft lijst van bestuurders terug in een string
+        //{
+        //    return _bestuurderRepo.GeefBestuurders()
+        //        .Select(bestuurder => new List<string>()
+        //        {
+        //            bestuurder.Naam,
+        //            bestuurder.Voornaam,
+        //            bestuurder.Geboortedatum.ToString(),
+        //            bestuurder.Rijksregisternummer,
+        //            bestuurder.Rijbewijs.ToString(),
+        //            bestuurder.Adres.ToString()
+        //        })
+        //        .ToList();
+        //}
     }
 }
