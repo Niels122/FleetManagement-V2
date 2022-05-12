@@ -11,4 +11,9 @@
     <ProjectReference Include="..\Domein\Domein.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TankkaartWindow\" />
+    <Folder Include="VoertuigWindow\" />
+  </ItemGroup>
+
 </Project>
