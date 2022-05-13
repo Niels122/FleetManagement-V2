@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Domein.Objects
 {
-    public class Bestuurder
+    public class Bestuurder //test
     {
         public string Naam { get; set; }
         public string Voornaam { get; set; }
