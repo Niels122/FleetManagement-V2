@@ -16,7 +16,7 @@ namespace Domein.Objects
         public DateTime Geldigheidsdatum { get; set; }
         public bool Geblokkeerd { get; set; } //Toegevoegd om te kunnen checken of een tankkaart al dan niet geblokkeerd is
         public int? Pincode { get; set; }
-        public Brandstof? Brandstof { get; set; }
+        public Brandstoftype Brandstof { get; set; }
         public Bestuurder? Bestuurder { get; set; }
 
 
@@ -28,7 +28,7 @@ namespace Domein.Objects
             Geblokkeerd = geblokkeerd;
         }
 
-        public Tankkaart(int kaartnummer, DateTime geldigheidsdatum, bool geblokkeerd, int? pincode, Brandstof? brandstof, Bestuurder? bestuurder) : this(kaartnummer, geldigheidsdatum, geblokkeerd)
+        public Tankkaart(int kaartnummer, DateTime geldigheidsdatum, bool geblokkeerd, int? pincode, Brandstoftype brandstof, Bestuurder? bestuurder) : this(kaartnummer, geldigheidsdatum, geblokkeerd)
         {
             Pincode = pincode;
             Brandstof = brandstof;

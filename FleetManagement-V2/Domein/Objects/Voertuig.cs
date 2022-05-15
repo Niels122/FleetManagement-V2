@@ -19,8 +19,8 @@ namespace Domein.Objects
         public string Nummerplaat { get; set; }
         public Brandstoftype Brandstoftype { get; set; }
         public Wagentype Wagentype { get; set; }
-        public Kleur Kleur { get; set; }
-        public Deuren AantalDeuren { get; set; }
+        public string Kleur { get; set; }
+        public int AantalDeuren { get; set; }
         public Bestuurder Bestuurder { get; set; }
 
         public Voertuig(string merk, string model, int chassisnummer, string nummerplaat, Brandstoftype brandstoftype, Wagentype wagentype)
@@ -34,7 +34,7 @@ namespace Domein.Objects
         }
 
         public Voertuig(string merk, string model, int chassisnummer, string nummerplaat, Brandstoftype brandstoftype, Wagentype wagentype,
-                            Kleur kleur, Deuren deuren, Bestuurder bestuurder) : this(merk, model, chassisnummer, nummerplaat, brandstoftype, wagentype)
+                            string kleur, int deuren, Bestuurder bestuurder) : this(merk, model, chassisnummer, nummerplaat, brandstoftype, wagentype)
         {
             Kleur = kleur;
             AantalDeuren = deuren;
