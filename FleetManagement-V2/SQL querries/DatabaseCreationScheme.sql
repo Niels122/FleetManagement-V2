@@ -1,4 +1,4 @@
---DROP TABLE bestuurder; 
+--DROP TABLE bestuurder;
 CREATE TABLE bestuurder (
 	id INT IDENTITY(1,1) PRIMARY KEY,
 	naam VARCHAR(45) NULL,
@@ -12,7 +12,7 @@ CREATE TABLE bestuurder (
 )
 GO
 
--- DROP TABLE tankkaart;
+--DROP TABLE tankkaart;
 CREATE TABLE tankkaart(
 	id INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	tankkaartnummer VARCHAR(45) NOT NULL UNIQUE,
@@ -23,7 +23,6 @@ CREATE TABLE tankkaart(
 )
 GO
 
---
 --DROP TABLE voertuig;
 CREATE TABLE voertuig (
 	id INT IDENTITY(1,1) PRIMARY KEY,
@@ -38,6 +37,7 @@ CREATE TABLE voertuig (
 )
 GO
 
+--DROP TABLE adres;
 CREATE TABLE adres(
 	id INT IDENTITY(1,1) PRIMARY KEY,
 	straat VARCHAR(255) NOT NULL,
