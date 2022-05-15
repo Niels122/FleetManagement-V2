@@ -7,4 +7,13 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Domein\Domein.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TankkaartWindow\" />
+    <Folder Include="VoertuigWindow\" />
+  </ItemGroup>
+
 </Project>

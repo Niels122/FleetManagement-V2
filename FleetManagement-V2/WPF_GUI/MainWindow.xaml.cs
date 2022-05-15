@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domein.Controllers;
+using Domein.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,5 @@ namespace WPF_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-        }
     }
 }

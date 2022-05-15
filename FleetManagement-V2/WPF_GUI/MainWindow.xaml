@@ -5,8 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="MainWindow" Height="600" Width="1000">
+    <DockPanel>
+            <DockPanel DockPanel.Dock="Top">
+                
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Bottom">
+            <Button Width="200" Height="200">Bestuurders</Button>
+            <Button Width="200" Height="200">Voertuigen</Button>
+            <Button Width="200" Height="200">Tankkaarten</Button>
+        </DockPanel>
+        </DockPanel>
+        
 </Window>
