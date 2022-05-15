@@ -35,13 +35,14 @@ namespace Domein.Controllers
 
 
         #region Voertuig
-        public List<List<string>> GeefVoertuigen()
+        public List<List<String>> GeefVoertuigen()
         {
             return _vc.GeefVoertuigen()
-                .Select(voertuig => new List<string>()
+                .Select(voertuig => new List<String>()
                 {
                     voertuig.Merk,
-                    voertuig.Model
+                    voertuig.Model,
+                    voertuig.Chassisnummer
                 })
                 .ToList();
 

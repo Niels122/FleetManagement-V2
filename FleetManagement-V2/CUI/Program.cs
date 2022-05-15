@@ -25,7 +25,9 @@ namespace CUI
 
             DomeinController dc = new DomeinController(vc,tc,bc);
 
+            Console.WriteLine("Dit zijn de voertuigen:");
             dc.GeefVoertuigen().ForEach(Console.WriteLine);
+
 
 
         }

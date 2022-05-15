@@ -58,7 +58,7 @@ namespace Persistentie
                                 while (reader.Read())
                                 {
                                     string nummerplaat = (string)reader["nummerplaat"];
-                                    int chassisnummer = (int)reader["chassisnummer"];
+                                    string chassisnummer = (string)reader["chassisnummer"];
                                     string merk = (string)reader["merk"];
                                     string model = (string)reader["model"];
                                     string wagentype = (string)reader["typevoertuig"];
