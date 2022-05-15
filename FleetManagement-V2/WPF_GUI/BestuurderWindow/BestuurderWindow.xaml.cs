@@ -31,15 +31,15 @@ namespace WPF_GUI
 
         private void RefreshBestuurders()
         {
-            List<Bestuurder> bestuurderView = new();
-            List<List<String>> bestuurdersInfo = _dc.GeefBestuurders();
+            //List<Bestuurder> bestuurderView = new();
+            //List<List<String>> bestuurdersInfo = _dc.GeefBestuurders();
 
-            foreach (List<String> bestuurderInfo in bestuurdersInfo)
-            {
-                //bestuurderView.Add(new BestuurderView(bestuurderInfo[0], bestuurderInfo[1], bestuurderInfo[2]));
-            }
+            //foreach (List<String> bestuurderInfo in bestuurdersInfo)
+            //{
+            //    //bestuurderView.Add(new BestuurderView(bestuurderInfo[0], bestuurderInfo[1], bestuurderInfo[2]));
+            //}
 
-            LVOverzichtBestuurder.ItemsSource = bestuurderView;
+            //LVOverzichtBestuurder.ItemsSource = bestuurderView;
         }
 
     }
