@@ -1,4 +1,5 @@
 ﻿using Domein.Interfaces;
+using Domein.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,11 @@ namespace Domein.Controllers
         public VoertuigController(IVoertuigRepository voertuigRepo)
         {
             _voertuigRepo = voertuigRepo;
+        }
+
+        public List<Voertuig> GeefVoertuigen()
+        {
+            return _voertuigRepo.GeefVoertuigen();
         }
     }
 }

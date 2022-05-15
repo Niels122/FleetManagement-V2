@@ -20,9 +20,32 @@ namespace Domein.Controllers
             _bc = bc;
         }
 
+        #region Bestuurder
         public List<Bestuurder> GeefBestuurders()
         {
             return _bc.GeefBestuurders();
         }
+        #endregion
+
+
+
+        #region Tankkaart
+
+        #endregion
+
+
+        #region Voertuig
+        public List<List<string>> GeefVoertuigen()
+        {
+            return _vc.GeefVoertuigen()
+                .Select(voertuig => new List<string>()
+                {
+                    voertuig.Merk,
+                    voertuig.Model
+                })
+                .ToList();
+
+        }
+        #endregion
     }
 }
