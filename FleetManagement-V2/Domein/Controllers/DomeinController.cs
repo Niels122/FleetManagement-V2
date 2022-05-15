@@ -42,11 +42,21 @@ namespace Domein.Controllers
                 {
                     voertuig.Merk,
                     voertuig.Model,
-                    voertuig.Chassisnummer
+                    voertuig.Chassisnummer,
+                    voertuig.Nummerplaat,
+                    voertuig.Brandstoftype.ToString(),
+                    voertuig.Wagentype.ToString(),
+                    voertuig.Kleur,
+                    voertuig.AantalDeuren.ToString(),
                 })
                 .ToList();
 
+
         }
+        //public List<Voertuig> GeefVoertuigen()
+        //{
+        //    return _vc.GeefVoertuigen();
+        //}
         #endregion
     }
 }

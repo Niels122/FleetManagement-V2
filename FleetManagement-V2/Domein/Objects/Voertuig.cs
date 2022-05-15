@@ -103,9 +103,9 @@ namespace Domein.Objects
             return base.GetHashCode();
         }
 
-        public override string ToString()
-        {
-            return base.ToString();
-        }
+        //public override string ToString()
+        //{
+        //    return string.Format($"Merk, Model, Chassisnummer, Nummerplaat, Brandstoftype, Wagentype, Kleur, {AantalDeuren}");
+        //}
     }
 }
