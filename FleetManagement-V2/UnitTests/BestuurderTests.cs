@@ -21,7 +21,7 @@ namespace UnitTests
         [Fact]
         public void Test_NieuweBestuurder_OverloadCtor_Valid()
         {
-            Voertuig voertuig = new("Mercedes", "CLS", 5555, "AAA-111", Brandstoftype.benzine, Wagentype.personenauto);
+            Voertuig voertuig = new("Mercedes", "CLS", "5555", "AAA-111", Brandstoftype.benzine, Wagentype.personenauto);
             Tankkaart tankkaart = new(1234, new System.DateTime(2022, 12, 20), false);
             Adres adres = new("Pelikaanstraat", "122", "Oudenaarde", "9700");
             Bestuurder bst = new("Van Maelzaeke", "Niels", 07121999, "99120750392", Rijbewijs.B, adres, voertuig, tankkaart);

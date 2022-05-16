@@ -16,7 +16,7 @@ namespace Domein.Interfaces
         #region CRUD operations
         void CreateVoertuig(Voertuig voertuig);
         Voertuig ReadVoertuig();
-        void UpdateVoertuig(Voertuig voertuig);
+        void UpdateVoertuig(Voertuig oudVoertuigInfo, Voertuig nieuwVoertuigInfo);
         void DeleteVoertuig(Voertuig voertuig);
         #endregion
     }

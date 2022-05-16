@@ -8,6 +8,6 @@ namespace Domein.Enums
 {
     public enum Brandstoftype
     {
-        benzine, diesel, hybrideBenzine, hybdrideDiesel, elektrisch
+        benzine, diesel, hybrideBenzine, hybrideDiesel, elektrisch
     }
 }

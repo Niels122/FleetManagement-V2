@@ -21,7 +21,7 @@ namespace UnitTests
         {
             Bestuurder bestuurderNiels = new("Van Maelzaeke", "Niels", 07121999, "99120750392", Rijbewijs.B);
 
-            Tankkaart tankkaart = new(123456789, new DateTime(2023, 12, 31), false, 1234, Brandstof.Benzine, bestuurderNiels);
+            Tankkaart tankkaart = new(123456789, new DateTime(2023, 12, 31), false, 1234, Brandstoftype.benzine, bestuurderNiels);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 
 using Domein.Controllers;
+using Domein.Objects;
 using Persistentie;
 using System;
 
@@ -25,8 +26,21 @@ namespace CUI
 
             DomeinController dc = new DomeinController(vc,tc,bc);
 
-            Console.WriteLine(dc.GeefBestuurders());
+            Console.WriteLine("Dit zijn de voertuigen:");
 
+            List<List<string>> voertuigen = dc.GeefVoertuigen();
+
+            foreach (List<string> voertuig in voertuigen)
+            {
+                voertuig.ForEach(x => Console.WriteLine(x));
+            }
+
+            //voertuigen.ForEach(Console.WriteLine);
+
+            //foreach (Voertuig voertuig in dc.GeefVoertuigen())
+            //{
+            //    Console.WriteLine(voertuig.ToString());
+            //}
 
         }
     }
