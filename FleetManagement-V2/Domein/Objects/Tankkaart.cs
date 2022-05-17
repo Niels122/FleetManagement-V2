@@ -12,12 +12,12 @@ namespace Domein.Objects
     {
         private ITankkaartRepository _tankkaartRepo;
 
-        public int Kaartnummer { get; set; }
-        public DateTime Geldigheidsdatum { get; set; }
-        public bool Geblokkeerd { get; set; } //Toegevoegd om te kunnen checken of een tankkaart al dan niet geblokkeerd is
-        public int? Pincode { get; set; }
-        public Brandstoftype Brandstof { get; set; }
-        public Bestuurder? Bestuurder { get; set; }
+        public int Kaartnummer { get; private set; }
+        public DateTime Geldigheidsdatum { get; private set; }
+        public bool Geblokkeerd { get; private set; } //Toegevoegd om te kunnen checken of een tankkaart al dan niet geblokkeerd is
+        public int? Pincode { get; private set; }
+        public Brandstoftype Brandstof { get; private set; }
+        public Bestuurder? Bestuurder { get; private set; }
 
 
 

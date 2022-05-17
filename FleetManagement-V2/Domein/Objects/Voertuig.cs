@@ -13,15 +13,15 @@ namespace Domein.Objects
     {
         private IVoertuigRepository _voertuigRepo;
 
-        public string Merk { get; set; } //Merk en Model in een dictionary steken?
-        public string Model { get; set; }
-        public string Chassisnummer { get; set; }
-        public string Nummerplaat { get; set; }
-        public Brandstoftype Brandstoftype { get; set; }
-        public Wagentype Wagentype { get; set; }
-        public string Kleur { get; set; }
-        public int AantalDeuren { get; set; }
-        public Bestuurder Bestuurder { get; set; }
+        public string Merk { get; private set; } //Merk en Model in een dictionary steken?
+        public string Model { get; private set; }
+        public string Chassisnummer { get; private set; }
+        public string Nummerplaat { get; private set; }
+        public Brandstoftype Brandstoftype { get; private set; }
+        public Wagentype Wagentype { get; private set; }
+        public string Kleur { get; private set; }
+        public int AantalDeuren { get; private set; }
+        public Bestuurder Bestuurder { get; private set; }
 
         public Voertuig(string merk, string model, string chassisnummer, string nummerplaat, Brandstoftype brandstoftype, Wagentype wagentype)
         {
