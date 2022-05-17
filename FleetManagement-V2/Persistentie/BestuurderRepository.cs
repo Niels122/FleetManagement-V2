@@ -13,6 +13,8 @@ namespace Persistentie
 {
     public class BestuurderRepository : IBestuurderRepository
     {
+        private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog = FleetmanagementDB; Integrated Security = True; TrustServerCertificate=True";
+
         //TODO: implement interface
         public void CreateBestuurder(Bestuurder bestuurder)
         {
@@ -26,7 +28,7 @@ namespace Persistentie
 
         public List<Bestuurder> GeefBestuurders()
         {
-            List<Bestuurder> bestuurders = new List<Bestuurder>();
+            List<Bestuurder> bestuurders = new();
 
             var builder = new MySqlConnectionStringBuilder
             {
@@ -67,15 +69,15 @@ namespace Persistentie
                                     string naam = (string)dataReader["naam"];
                                     Console.WriteLine("STAP 8");
                                     string voornaam = (string)dataReader["voornaam"];
-                                    Console.WriteLine("STAP 9");  //vanaf hier blokkeert het om de 1 of andere reden
-                                    //int geboortedatum = (int)dataReader["geboortedatum"];
+                                    Console.WriteLine("STAP 9"); 
+                                    DateTime geboortedatum = DateTime.ParseExact((string)dataReader["geboortedatum"], "DD/MM/YYYY", null);
                                     Console.WriteLine("STAP 10");
-                                    //string rijksregisternummer = (string)dataReader["rijksregisternummer"];
+                                    string rijksregisternummer = (string)dataReader["rijksregisternummer"];
                                     Console.WriteLine("STAP 11");
-                                    //Rijbewijs rijbewijs = (Rijbewijs)dataReader["rijbewijs"];
+                                    Rijbewijs rijbewijs = (Rijbewijs)dataReader["rijbewijs"];
                                     Console.WriteLine("STAP 12");
 
-                                    bestuurders.Add(new Bestuurder(naam, voornaam, 111, "", Rijbewijs.G));
+                                    bestuurders.Add(new Bestuurder(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs));
                                     Console.WriteLine("STAP 13");
                                 }
                             }
