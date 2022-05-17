@@ -21,14 +21,20 @@ namespace Domein.Controllers
         {
             return _bestuurderRepo.GeefBestuurders();
         }
+
+
+
+
+
+
         
-            //foreach (string rijksnr in _bestuurdersRepo.GeefRijksregisternummers()) 
-            //{
-            //    if (rijksnr == rijksnummer)
-            //    {
-            //        throw new RijksregisternummerException("Dit rijksregisternummer zit al in het systeem.");
-            //    }
-            //}
+        //foreach (string rijksnr in _bestuurdersRepo.GeefRijksregisternummers()) 
+        //{
+        //    if (rijksnr == rijksnummer)
+        //    {
+        //        throw new RijksregisternummerException("Dit rijksregisternummer zit al in het systeem.");
+        //    }
+        //}
 
 
         //public List<List<string>> GeefBestuurders() //geeft lijst van bestuurders terug in een string
