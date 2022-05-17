@@ -26,14 +26,31 @@ namespace CUI
 
             DomeinController dc = new DomeinController(vc,tc,bc);
 
-            Console.WriteLine("Dit zijn de voertuigen:");
 
-            List<List<string>> voertuigen = dc.GeefVoertuigen();
 
-            foreach (List<string> voertuig in voertuigen)
-            {
-                voertuig.ForEach(x => Console.WriteLine(x));
-            }
+
+            //alle mogelijke constructoren van Bestuurder
+            Bestuurder a = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G);
+            Bestuurder aa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Adres());
+            Bestuurder aaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Adres(), new Voertuig());
+            Bestuurder aaaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Adres(), new Voertuig(), new Tankkaart());
+            Bestuurder aaaaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Adres(), new Tankkaart());
+            Bestuurder aaaaaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Voertuig());
+            Bestuurder aaaaaaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Voertuig(), new Tankkaart());
+            Bestuurder aaaaaaaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Tankkaart());
+
+
+
+
+
+            //Console.WriteLine("Dit zijn de voertuigen:");
+
+            //List<List<string>> voertuigen = dc.GeefVoertuigen();
+
+            //foreach (List<string> voertuig in voertuigen)
+            //{
+            //    voertuig.ForEach(x => Console.WriteLine(x));
+            //}
 
             //voertuigen.ForEach(Console.WriteLine);
 
