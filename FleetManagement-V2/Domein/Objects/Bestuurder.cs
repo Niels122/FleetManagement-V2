@@ -23,7 +23,8 @@ namespace Domein.Objects
         #region constructoren
         // https://stackoverflow.com/questions/1814953/how-to-do-constructor-chaining-in-c-sharp
         // https://stackoverflow.com/questions/40660936/constructor-chaining-with-class-as-parameter
-        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs, Adres adres = null, Voertuig voertuig = null, Tankkaart tankkaart = null)
+        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs, 
+            Adres adres, Voertuig voertuig, Tankkaart tankkaart)
         {
             SetNaam(naam);
             SetVoornaam(voornaam);
@@ -34,8 +35,56 @@ namespace Domein.Objects
             if (voertuig != null) SetVoertuig(voertuig);
             if (tankkaart != null) SetTankkaart(tankkaart);
         }
+
+        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs)
+            :this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, null, null)
+        {
+
+        }
+
+        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+            Adres adres)
+            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, null, null)
+        {
+
+        }
+
+        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+            Adres adres, Voertuig voertuig)
+            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, voertuig, null)
+        {
+
+        }
+
+        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+            Adres adres, Tankkaart tankkaart)
+            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, null, tankkaart)
+        {
+
+        }
+
+        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+            Voertuig voertuig)
+            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, voertuig, null)
+        {
+
+        }
+
+        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+            Voertuig voertuig, Tankkaart tankkaart)
+            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, voertuig, tankkaart)
+        {
+
+        }
+
+        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+            Tankkaart tankkaart)
+            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, null, tankkaart)
+        {
+
+        }
         #endregion
-        
+
         #region setters
         public void SetNaam(string naam)
         {
@@ -60,7 +109,7 @@ namespace Domein.Objects
         public void SetGeboortedatum(DateTime geboortedatum)
         {
             DateTime datum;
-            if (DateTime.TryParseExact(geboortedatum.ToString(), "DD/MM/YYYY", null, System.Globalization.DateTimeStyles.None, out datum))
+            if (DateTime.TryParseExact(geboortedatum.ToString(), "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out datum))
             {
                 Geboortedatum = datum;
             }
@@ -103,7 +152,7 @@ namespace Domein.Objects
 
         public void SetTankkaart(Tankkaart tankkaart)
         {
-            Voertuig = Voertuig;
+            Tankkaart = tankkaart;
         }
         #endregion
 

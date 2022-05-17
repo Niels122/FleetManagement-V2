@@ -13,6 +13,11 @@ namespace Domein.Objects
         public string Stad { get; private set; }
         public string Postcode { get; private set; }
 
+        public Adres()
+        {
+
+        }
+
         public Adres(string straat, string nummer, string stad, string postcode)
         {
             Straat = straat;

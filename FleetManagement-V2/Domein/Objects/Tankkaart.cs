@@ -19,7 +19,10 @@ namespace Domein.Objects
         public Brandstoftype Brandstof { get; private set; }
         public Bestuurder? Bestuurder { get; private set; }
 
+        public Tankkaart()
+        {
 
+        }
 
         public Tankkaart(int kaartnummer, DateTime geldigheidsdatum, bool geblokkeerd)
         {

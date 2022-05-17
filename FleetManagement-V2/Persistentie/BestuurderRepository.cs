@@ -70,14 +70,14 @@ namespace Persistentie
                                     Console.WriteLine("STAP 8");
                                     string voornaam = (string)dataReader["voornaam"];
                                     Console.WriteLine("STAP 9"); 
-                                    DateTime geboortedatum = DateTime.ParseExact((string)dataReader["geboortedatum"], "DD/MM/YYYY", null);
+                                    DateTime geboortedatum = DateTime.ParseExact((string)dataReader["geboortedatum"], "dd-MM-yyyy", null);
                                     Console.WriteLine("STAP 10");
                                     string rijksregisternummer = (string)dataReader["rijksregisternummer"];
                                     Console.WriteLine("STAP 11");
                                     Rijbewijs rijbewijs = (Rijbewijs)dataReader["rijbewijs"];
                                     Console.WriteLine("STAP 12");
 
-                                    bestuurders.Add(new Bestuurder(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs));
+                                    bestuurders.Add(new Bestuurder(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, null, null));
                                     Console.WriteLine("STAP 13");
                                 }
                             }

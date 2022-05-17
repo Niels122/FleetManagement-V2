@@ -23,6 +23,11 @@ namespace Domein.Objects
         public int AantalDeuren { get; private set; }
         public Bestuurder Bestuurder { get; private set; }
 
+        public Voertuig()
+        {
+
+        }
+
         public Voertuig(string merk, string model, string chassisnummer, string nummerplaat, Brandstoftype brandstoftype, Wagentype wagentype)
         {
             SetMerk(merk);
