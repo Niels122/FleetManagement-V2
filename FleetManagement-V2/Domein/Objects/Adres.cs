@@ -8,10 +8,15 @@ namespace Domein.Objects
 {
     public class Adres
     {
-        public string Straat { get; set; }
-        public string Nummer { get; set; }
-        public string Stad { get; set; }
-        public string Postcode { get; set; }
+        public string Straat { get; private set; }
+        public string Nummer { get; private set; }
+        public string Stad { get; private set; }
+        public string Postcode { get; private set; }
+
+        public Adres()
+        {
+
+        }
 
         public Adres(string straat, string nummer, string stad, string postcode)
         {
