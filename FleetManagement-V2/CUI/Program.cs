@@ -2,6 +2,7 @@
 
 
 using Domein.Controllers;
+using Domein;
 using Domein.Objects;
 using Persistentie;
 using System;
@@ -13,73 +14,52 @@ namespace CUI
 
         static void Main(string[] args)
         {
+            BestuurderRepository bestuurderRepo = new BestuurderRepository();
+            AdresRepository adresRepo = new AdresRepository();
+            VoertuigRepository voertuigRepo = new VoertuigRepository();
+            TankkaartRepository tankkaartRepo = new TankkaartRepository();
 
+            BestuurderController bestuurderCon = new BestuurderController(bestuurderRepo);
+            AdresController adresCon = new AdresController(adresRepo);
+            VoertuigController voertuigCon = new VoertuigController(voertuigRepo);
+            TankkaartController tankkaartCon = new TankkaartController(tankkaartRepo);
 
-            VoertuigRepository vr = new VoertuigRepository();
-            BestuurderRepository br = new BestuurderRepository();
-            TankkaartRepository tr = new TankkaartRepository();
+            DomeinController dc = new DomeinController(voertuigCon, tankkaartCon, bestuurderCon, adresCon);
 
-            VoertuigController vc = new VoertuigController(vr);
-            BestuurderController bc = new BestuurderController(br);
-            TankkaartController tc = new TankkaartController(tr);
-
-
-            DomeinController dc = new DomeinController(vc, tc, bc);
-
-
+            //Console.WriteLine("Dit zijn de bestuurders met hun adres, automodel en tankkaartid:");
+            //foreach(Bestuurder bestuurder in bc.GeefBestuurdersMetDetails)
 
             #region Bestuurder
-            //alle mogelijke constructoren van Bestuurder
-            Bestuurder a = new Bestuurder("", "", new DateTime(1999 - 11 - 11), "", Domein.Enums.Rijbewijs.G);
-            Bestuurder aa = new Bestuurder("", "", new DateTime(1999 - 11 - 11), "", Domein.Enums.Rijbewijs.G, new Adres());
-            Bestuurder aaa = new Bestuurder("", "", new DateTime(1999 - 11 - 11), "", Domein.Enums.Rijbewijs.G, new Adres(), new Voertuig());
-            Bestuurder aaaa = new Bestuurder("", "", new DateTime(1999 - 11 - 11), "", Domein.Enums.Rijbewijs.G, new Adres(), new Voertuig(), new Tankkaart());
-            Bestuurder aaaaa = new Bestuurder("", "", new DateTime(1999 - 11 - 11), "", Domein.Enums.Rijbewijs.G, new Adres(), new Tankkaart());
-            Bestuurder aaaaaa = new Bestuurder("", "", new DateTime(1999 - 11 - 11), "", Domein.Enums.Rijbewijs.G, new Voertuig());
-            Bestuurder aaaaaaa = new Bestuurder("", "", new DateTime(1999 - 11 - 11), "", Domein.Enums.Rijbewijs.G, new Voertuig(), new Tankkaart());
-            Bestuurder aaaaaaaa = new Bestuurder("", "", new DateTime(1999 - 11 - 11), "", Domein.Enums.Rijbewijs.G, new Tankkaart());
-
-            Console.WriteLine("Dit zijn de bestuurders:");
-            
-            foreach(List<string> bestuurdersLijst in dc.GeefBestuurders())
+            Console.WriteLine("Dit zijn de bestuurders:");            
+            foreach(Bestuurder bestuurder in dc.GeefBestuurders())
             {
-                bestuurdersLijst.ForEach(x => Console.WriteLine(x));
+                Console.WriteLine(bestuurder.ToString());   
             }
-
             #endregion
 
-            foreach (Voertuig voertuig in voertuigen)
+            #region
+            Console.WriteLine("Dit zijn de adressen:");
+            foreach(Adres adres in adresCon.GeefAdressen())
             {
-                if (voertuig != null)
-                {
-                    voertuigenInfo.Add(voertuig.ToString());
-                }
-                else
-                {
-                    break;
-                }
+                Console.WriteLine(adres.ToString());
+            }
+            #endregion
 
+            #region
             Console.WriteLine("Dit zijn de voertuigen:");
-
-            foreach (List<string> voertuig in dc.GeefVoertuigen())
+            foreach(Voertuig voertuig in voertuigCon.GeefVoertuigen())
             {
-                voertuig.ForEach(x => Console.WriteLine(x));
+                Console.WriteLine(voertuig.ToString());
             }
+            #endregion
+
+            #region
+            Console.WriteLine("Dit zijn de tankkaarten:");
+            foreach(Tankkaart tankkaart in tankkaartCon.GeefTankkaarten())
+            {
+                Console.WriteLine(tankkaart.ToString());
             }
-            //List<List<string>> voertuigen = dc.GeefVoertuigen();
-
-            //foreach (List<string> voertuig in voertuigen)
-            //{
-            //    voertuig.ForEach(x => Console.WriteLine(x));
-            //}
-
-            //voertuigen.ForEach(Console.WriteLine);
-
-            //foreach (Voertuig voertuig in dc.GeefVoertuigen())
-            //{
-            //    Console.WriteLine(voertuig.ToString());
-            //}
-
+            #endregion
         }
     }
 }
