@@ -22,7 +22,7 @@ namespace UnitTests
         [Fact]
         public void Test_NieuwVoertuigOverloadCtor_Valid()
         {
-            Bestuurder bestuurderNiels = new("Van Maelzaeke", "Niels", 07121999, "99120750392", Rijbewijs.B);
+            Bestuurder bestuurderNiels = new("Van Maelzaeke", "Niels", new DateTime(2022,12,07), "99120750392", Rijbewijs.B);
             Voertuig voertuig = new Voertuig("Mercedes", "CLA", "1224454", "AAA-111", Brandstoftype.benzine, Wagentype.personenauto, "beige", 3 , bestuurderNiels);
         }
         [Theory]

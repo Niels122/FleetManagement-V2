@@ -19,7 +19,7 @@ namespace UnitTests
         [Fact]
         public void Test_NieuweTankkaartOverloadedCtor_Valid()
         {
-            Bestuurder bestuurderNiels = new("Van Maelzaeke", "Niels", 07121999, "99120750392", Rijbewijs.B);
+            Bestuurder bestuurderNiels = new("Van Maelzaeke", "Niels", new DateTime(2022, 12, 07), "99120750392", Rijbewijs.B);
 
             Tankkaart tankkaart = new(123456789, new DateTime(2023, 12, 31), false, 1234, Brandstoftype.benzine, bestuurderNiels);
         }
