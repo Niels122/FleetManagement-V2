@@ -9,7 +9,7 @@ INSERT INTO bestuurder
       ,[adresId])
 
 	  VALUES 
-	  ('Van Maelzaeke','Niels','2024-12-31', '99120750392','B',1,1,1)
+	  ('Van Maelzaeke','Niels','1996-11-11', '99120750392','B',1,1,1)
 
 
 
@@ -47,3 +47,5 @@ INSERT INTO bestuurder
 
 	  VALUES
 	  ('Pelikaanstraat', '122', 9700, 'Oudenaarde')
+
+	 

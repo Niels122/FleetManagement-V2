@@ -109,7 +109,7 @@ namespace Domein.Objects
         public void SetGeboortedatum(DateTime geboortedatum)
         {
             DateTime datum;
-            if (DateTime.TryParseExact(geboortedatum.ToString(), "dd-MM-yyyy", null, System.Globalization.DateTimeStyles.None, out datum))
+            if (DateTime.TryParseExact(geboortedatum.ToString("yyyy-MM-dd"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out datum))
             {
                 Geboortedatum = datum;
             }
@@ -170,11 +170,11 @@ namespace Domein.Objects
 
             if (rijksnummer.Length == 11)
             {
-                if (0 < int.Parse(rijksnummer.Substring(0, 2)) && int.Parse(rijksnummer.Substring(0, 2)) < 32) //geboortedag check
+                if (-1 < int.Parse(rijksnummer.Substring(0, 2)) && int.Parse(rijksnummer.Substring(0, 2)) < 100) //geboortedag check
                 {
                     if (0 < int.Parse(rijksnummer.Substring(2, 2)) && int.Parse(rijksnummer.Substring(2, 2)) < 13) // geboortemaand check
                     {
-                        if (-1 < int.Parse(rijksnummer.Substring(4, 2)) && int.Parse(rijksnummer.Substring(4, 2)) < 100) //geboortejaar chek
+                        if (0 < int.Parse(rijksnummer.Substring(4, 2)) && int.Parse(rijksnummer.Substring(4, 2)) < 32) //geboortejaar chek
                         {
                             if (0 < int.Parse(rijksnummer.Substring(6, 3)) && int.Parse(rijksnummer.Substring(6, 3)) < 999) //herkenningsgetal check
                             {
@@ -201,8 +201,8 @@ namespace Domein.Objects
 
         public override string ToString()
         {
-            return string.Format("Naam: {0}, Voornaam: {1}, Geboortedatum: {2}, Rijksregisternummer: {3}, Rijbewijs:",
-                Naam, Voornaam, Geboortedatum, Rijksregisternummer);
+            return string.Format("Naam: {0}, Voornaam: {1}, Geboortedatum: {2}, Rijksregisternummer: {3}, Rijbewijs: {4}",
+                Naam, Voornaam, Geboortedatum, Rijksregisternummer, Rijbewijs);
         }
     }
 }

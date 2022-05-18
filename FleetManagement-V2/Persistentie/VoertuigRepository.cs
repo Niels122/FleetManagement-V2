@@ -4,7 +4,7 @@ using Domein.Interfaces;
 using Domein.Objects;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.Data.SqlClient; //in Gevorderd was dit Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -116,13 +116,13 @@ namespace Persistentie
                     }
                     finally
                     {
-                        conn.Close();
+                        conn.Close(); //wordt dit niet automatisch gedaan?
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new VoertuigException(ex.Message);
+                throw new VoertuigException(ex.Message); //snap ik niet
             }
 
             return voertuigen;

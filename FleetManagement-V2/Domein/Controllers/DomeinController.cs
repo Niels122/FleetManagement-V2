@@ -21,24 +21,30 @@ namespace Domein.Controllers
         }
 
         #region Bestuurder
-        public List<Bestuurder> GeefBestuurders()
+        public List<List<string>> GeefBestuurders()
         {
-            return _bc.GeefBestuurders();
+            return _bc.GeefBestuurders()
+                .Select(bestuurder => new List<string>()
+                {
+                    bestuurder.Naam,
+                    bestuurder.Voornaam,
+                    bestuurder.Geboortedatum.ToString(),
+                    bestuurder.Rijksregisternummer,
+                    bestuurder.Rijbewijs.ToString(),
+                })
+                .ToList();
         }
         #endregion
-
-
 
         #region Tankkaart
 
         #endregion
 
-
         #region Voertuig
-        public List<List<String>> GeefVoertuigen()
+        public List<List<string>> GeefVoertuigen()
         {
             return _vc.GeefVoertuigen()
-                .Select(voertuig => new List<String>()
+                .Select(voertuig => new List<string>()
                 {
                     voertuig.Merk,
                     voertuig.Model,
@@ -50,9 +56,8 @@ namespace Domein.Controllers
                     voertuig.AantalDeuren.ToString(),
                 })
                 .ToList();
-
-
         }
+
         //public List<Voertuig> GeefVoertuigen()
         //{
         //    return _vc.GeefVoertuigen();
