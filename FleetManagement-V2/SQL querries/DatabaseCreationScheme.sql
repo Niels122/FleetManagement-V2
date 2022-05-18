@@ -47,6 +47,8 @@ CREATE TABLE bestuurder (
 )
 GO
 
+
+
 ALTER TABLE bestuurder ADD CONSTRAINT FK_AdresIdBestuurder FOREIGN KEY (adresId) REFERENCES adres(id);
 ALTER TABLE bestuurder ADD CONSTRAINT FK_VoertuigIdBestuurder FOREIGN KEY (voertuigId) REFERENCES voertuig(id);
 ALTER TABLE bestuurder ADD CONSTRAINT FK_TankkaartIdBestuurder FOREIGN KEY (tankkaartId) REFERENCES tankkaart(id);
