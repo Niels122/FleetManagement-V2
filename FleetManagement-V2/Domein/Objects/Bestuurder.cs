@@ -11,78 +11,80 @@ namespace Domein.Objects
 {
     public class Bestuurder
     {
+        public int DriverId { get; private set; }
         public string Naam { get; private set; }
         public string Voornaam { get; private set; }
-        public DateTime Geboortedatum { get; private set; } //kan dit niet gewoon in string want wordt gecheckt in setter als bij het ophalen uit db
+        public DateTime Geboortedatum { get; private set; } 
         public string Rijksregisternummer { get; private set; }
         public Rijbewijs Rijbewijs { get; private set; }
-        public Adres Adres { get; private set; }
-        public Voertuig Voertuig { get; private set; }
-        public Tankkaart Tankkaart { get; private set; }
+        public int? AdresId { get; private set; }
+        public int? VoertuigId { get; private set; }
+        public int? TankkaartId { get; private set; }
 
-        #region constructoren
-        // https://stackoverflow.com/questions/1814953/how-to-do-constructor-chaining-in-c-sharp
-        // https://stackoverflow.com/questions/40660936/constructor-chaining-with-class-as-parameter
-        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs, 
-            Adres adres, Voertuig voertuig, Tankkaart tankkaart)
+        public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer,
+            Rijbewijs rijbewijs, int? adresId = null, int? voertuigId = null, int? tankkaartId = null)
         {
+            DriverId = driverId;
             SetNaam(naam);
             SetVoornaam(voornaam);
             SetGeboortedatum(geboortedatum);
             SetRijksregisternummer(rijksregisternummer);
             SetRijbewijs(rijbewijs);
-            if (adres != null) SetAdres(adres);
-            if (voertuig != null) SetVoertuig(voertuig);
-            if (tankkaart != null) SetTankkaart(tankkaart);
+            SetAdres(adresId);
+            SetVoertuig(voertuigId);
+            SetTankkaart(tankkaartId);
         }
 
-        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs)
-            :this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, null, null)
-        {
+        #region foute constructors
+        //// https://stackoverflow.com/questions/1814953/how-to-do-constructor-chaining-in-c-sharp
+        //// https://stackoverflow.com/questions/40660936/constructor-chaining-with-class-as-parameter
+        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs)
+        //    :this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, null, null)
+        //{
 
-        }
+        //}
 
-        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-            Adres adres)
-            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, null, null)
-        {
+        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+        //    Adres adres)
+        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, null, null)
+        //{
 
-        }
+        //}
 
-        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-            Adres adres, Voertuig voertuig)
-            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, voertuig, null)
-        {
+        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+        //    Adres adres, Voertuig voertuig)
+        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, voertuig, null)
+        //{
 
-        }
+        //}
 
-        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-            Adres adres, Tankkaart tankkaart)
-            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, null, tankkaart)
-        {
+        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+        //    Adres adres, Tankkaart tankkaart)
+        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, null, tankkaart)
+        //{
 
-        }
+        //}
 
-        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-            Voertuig voertuig)
-            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, voertuig, null)
-        {
+        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+        //    Voertuig voertuig)
+        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, voertuig, null)
+        //{
 
-        }
+        //}
 
-        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-            Voertuig voertuig, Tankkaart tankkaart)
-            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, voertuig, tankkaart)
-        {
+        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+        //    Voertuig voertuig, Tankkaart tankkaart)
+        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, voertuig, tankkaart)
+        //{
 
-        }
+        //}
 
-        public Bestuurder(string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-            Tankkaart tankkaart)
-            : this(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, null, tankkaart)
-        {
+        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
+        //    Tankkaart tankkaart)
+        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, null, tankkaart)
+        //{
 
-        }
+        //}
         #endregion
 
         #region setters
@@ -140,19 +142,19 @@ namespace Domein.Objects
             }
         }
 
-        public void SetAdres(Adres adres)
+        public void SetAdres(int? adres)
         {
-            Adres = adres;
+            AdresId = adres;
         }
 
-        public void SetVoertuig(Voertuig voertuig)
+        public void SetVoertuig(int? voertuig)
         {
-            Voertuig = voertuig;
+            VoertuigId = voertuig;
         }
 
-        public void SetTankkaart(Tankkaart tankkaart)
+        public void SetTankkaart(int? tankkaart)
         {
-            Tankkaart = tankkaart;
+            TankkaartId = tankkaart;
         }
         #endregion
 
