@@ -27,6 +27,14 @@ namespace Domein.Controllers
 
 
 
+
+
+
+
+
+
+
+
         
         //foreach (string rijksnr in _bestuurdersRepo.GeefRijksregisternummers()) 
         //{
@@ -34,22 +42,6 @@ namespace Domein.Controllers
         //    {
         //        throw new RijksregisternummerException("Dit rijksregisternummer zit al in het systeem.");
         //    }
-        //}
-
-
-        //public List<List<string>> GeefBestuurders() //geeft lijst van bestuurders terug in een string
-        //{
-        //    return _bestuurderRepo.GeefBestuurders()
-        //        .Select(bestuurder => new List<string>()
-        //        {
-        //            bestuurder.Naam,
-        //            bestuurder.Voornaam,
-        //            bestuurder.Geboortedatum.ToString(),
-        //            bestuurder.Rijksregisternummer,
-        //            bestuurder.Rijbewijs.ToString(),
-        //            bestuurder.Adres.ToString()
-        //        })
-        //        .ToList();
         //}
     }
 }

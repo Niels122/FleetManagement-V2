@@ -19,6 +19,5 @@ namespace Domein.Exceptions
         public BestuurderException(string message, Exception innerException) : base(message, innerException)
         {
         }
-
     }
 }

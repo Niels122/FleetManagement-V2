@@ -1,4 +1,5 @@
 ﻿using Domein.Interfaces;
+using Domein.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,11 @@ namespace Domein.Controllers
         public TankkaartController(ITankkaartRepository tankkaartRepo)
         {
             _tankkaartRepo = tankkaartRepo;
+        }
+
+        public List<Tankkaart> GeefTankkaarten()
+        {
+            return _tankkaartRepo.GeefTankkaarten();
         }
     }
 }
