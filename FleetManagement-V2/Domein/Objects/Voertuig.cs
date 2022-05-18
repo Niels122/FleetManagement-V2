@@ -13,7 +13,7 @@ namespace Domein.Objects
     {
         private IVoertuigRepository _voertuigRepo;
 
-        public int Id { get; set; }
+        public int VoertuigId { get; private set; }
         public string Merk { get; private set; } //Merk en Model in een dictionary steken?
         public string Model { get; private set; }
         public string Chassisnummer { get; private set; }
@@ -22,12 +22,19 @@ namespace Domein.Objects
         public Wagentype Wagentype { get; private set; }
         public string Kleur { get; private set; }
         public int? AantalDeuren { get; private set; }
-        public Bestuurder Bestuurder { get; set; }
+        public int? BestuurderId { get; private set; }
 
-
-        public Voertuig(int id, string merk, string model, string chassisnummer, string nummerplaat, Brandstoftype brandstoftype, Wagentype wagentype, string kleur = null, int? aantalDeuren = null, Bestuurder bestuurder = null)
+        public override string ToString()
         {
-            Id = Id;
+            return string.Format("VoertuigId: {0}, Merk: {1}, Model: {2}, Chassisnummer: {3}, Nummerplaat: {4}, Brandstoftype: {5}, " +
+                "Wagentype: {6}, Nummerplaat: {7}, Brandstoftype: {8}, Wagentype: {9}",
+                VoertuigId, Merk, Model, Chassisnummer, Nummerplaat, Brandstoftype, Wagentype, Kleur, AantalDeuren, BestuurderId);
+        }
+
+        public Voertuig(int voertuigId, string merk, string model, string chassisnummer, string nummerplaat, 
+            Brandstoftype brandstoftype, Wagentype wagentype, string kleur = null, int? aantalDeuren = null, int? bestuurderId = null)
+        {
+            VoertuigId = voertuigId;
             SetMerk(merk);
             SetModel(model);
             SetChassisnummer(chassisnummer);
@@ -36,7 +43,7 @@ namespace Domein.Objects
             Wagentype = wagentype;
             Kleur = kleur;
             AantalDeuren = aantalDeuren;
-            Bestuurder = bestuurder;
+            BestuurderId = bestuurderId;
         }
 
         public void SetMerk(string merk)

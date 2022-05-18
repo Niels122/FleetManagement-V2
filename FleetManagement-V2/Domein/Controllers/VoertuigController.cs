@@ -18,8 +18,7 @@ namespace Domein.Controllers
         }
 
         public List<Voertuig> GeefVoertuigen()
-        {
-            
+        {            
             return _voertuigRepo.GeefVoertuigen();
         }
     }

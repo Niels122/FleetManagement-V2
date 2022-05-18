@@ -8,23 +8,27 @@ namespace Domein.Objects
 {
     public class Adres
     {   
-        public int Id { get; set; }
+        public int AdresId { get; private set; }
         public string Straat { get; private set; }
         public string Nummer { get; private set; }
+        public int Postcode { get; private set; }
         public string Stad { get; private set; }
-        public string Postcode { get; private set; }
 
-        public Adres()
+        public Adres(int adresId, string straat, string nummer, int postcode, string stad)
         {
-
-        }
-
-        public Adres(string straat, string nummer, string stad, string postcode)
-        {
+            AdresId = adresId;
             Straat = straat;
             Nummer = nummer;
-            Stad = stad;
             Postcode = postcode;
+            Stad = stad;
+        }
+
+
+
+        public override string ToString()
+        {
+            return string.Format("AdresId: {0}, Straat: {1}, Nummer: {2}, Stad: {3}, Postcode: {4}",
+                AdresId, Straat, Nummer, Stad, Postcode);
         }
     }
 }

@@ -66,7 +66,6 @@ namespace Persistentie
                                     string brandstof = (string)reader["brandstof"];
                                     string kleur = (string)reader["kleur"];
                                     int aantaldeuren = (int)reader["aantaldeuren"];
-                                    Bestuurder bestuurder = null;
 
                                     #region setBrandstoftype
                                     //tabel in database met brandstoftype en id + foreign key of switch gebruiken
@@ -107,7 +106,7 @@ namespace Persistentie
                                     }
                                     #endregion
 
-                                    voertuigen.Add(new Voertuig(id, merk, model, chassisnummer, nummerplaat, brandstoftype, _wagentype, kleur, aantaldeuren, bestuurder));
+                                    voertuigen.Add(new Voertuig(id, merk, model, chassisnummer, nummerplaat, brandstoftype, _wagentype, kleur, aantaldeuren, null));
                                 }
                             }
                         }

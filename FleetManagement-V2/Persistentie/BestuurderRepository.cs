@@ -28,7 +28,7 @@ namespace Persistentie
 
         public List<Bestuurder> GeefBestuurders()
         {
-            List<Bestuurder> bestuurders = new();
+            List<Bestuurder> bestuurders = new List<Bestuurder>();
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -43,13 +43,14 @@ namespace Persistentie
                         {
                             while (dataReader.Read())
                             {
+                                int driverId = (int)dataReader["id"];
                                 string naam = (string)dataReader["naam"];
                                 string voornaam = (string)dataReader["voornaam"];
                                 DateTime geboortedatum = (DateTime)dataReader["geboortedatum"]; //checken of het het het juiste date format is. DateTime.ParseExact((string)dataReader["geboortedatum"], "yyyy-MM-dd", null);
                                 string rijksregisternummer = (string)dataReader["rijksregisternummer"]; 
                                 //Rijbewijs rijbewijs = (Rijbewijs)dataReader["rijbewijs"];
 
-                                bestuurders.Add(new Bestuurder(naam, voornaam, geboortedatum, rijksregisternummer, Rijbewijs.G, null, null, null));
+                                bestuurders.Add(new Bestuurder(driverId, naam, voornaam, geboortedatum, rijksregisternummer, Rijbewijs.G, null, null, null));
                             }
                         }
                     }
