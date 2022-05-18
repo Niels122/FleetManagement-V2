@@ -13,7 +13,7 @@ namespace CUI
 
         static void Main(string[] args)
         {
-            
+
 
             VoertuigRepository vr = new VoertuigRepository();
             BestuurderRepository br = new BestuurderRepository();
@@ -24,27 +24,33 @@ namespace CUI
             TankkaartController tc = new TankkaartController(tr);
 
 
-            DomeinController dc = new DomeinController(vc,tc,bc);
+            DomeinController dc = new DomeinController(vc, tc, bc);
 
 
 
 
             //alle mogelijke constructoren van Bestuurder
-            Bestuurder a = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G);
-            Bestuurder aa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Adres());
-            Bestuurder aaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Adres(), new Voertuig());
-            Bestuurder aaaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Adres(), new Voertuig(), new Tankkaart());
-            Bestuurder aaaaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Adres(), new Tankkaart());
-            Bestuurder aaaaaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Voertuig());
-            Bestuurder aaaaaaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Voertuig(), new Tankkaart());
-            Bestuurder aaaaaaaa = new Bestuurder("", "", new DateTime(11 - 11 - 1999), "", Domein.Enums.Rijbewijs.G, new Tankkaart());
 
 
 
+            Console.WriteLine("Dit zijn de voertuigen:");
+            List<Voertuig> voertuigen = dc.GeefVoertuigen();
+
+            List<string> voertuigenInfo = new();
+
+            foreach (Voertuig voertuig in voertuigen)
+            {
+                if (voertuig != null)
+                {
+                    voertuigenInfo.Add(voertuig.ToString());
+                }
+                else
+                {
+                    break;
+                }
 
 
-            //Console.WriteLine("Dit zijn de voertuigen:");
-
+            }
             //List<List<string>> voertuigen = dc.GeefVoertuigen();
 
             //foreach (List<string> voertuig in voertuigen)

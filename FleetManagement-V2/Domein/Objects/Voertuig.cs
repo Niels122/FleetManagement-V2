@@ -13,6 +13,7 @@ namespace Domein.Objects
     {
         private IVoertuigRepository _voertuigRepo;
 
+        public int Id { get; set; }
         public string Merk { get; private set; } //Merk en Model in een dictionary steken?
         public string Model { get; private set; }
         public string Chassisnummer { get; private set; }
@@ -20,29 +21,21 @@ namespace Domein.Objects
         public Brandstoftype Brandstoftype { get; private set; }
         public Wagentype Wagentype { get; private set; }
         public string Kleur { get; private set; }
-        public int AantalDeuren { get; private set; }
-        public Bestuurder Bestuurder { get; private set; }
+        public int? AantalDeuren { get; private set; }
+        public Bestuurder Bestuurder { get; set; }
 
-        public Voertuig()
+
+        public Voertuig(int id, string merk, string model, string chassisnummer, string nummerplaat, Brandstoftype brandstoftype, Wagentype wagentype, string kleur = null, int? aantalDeuren = null, Bestuurder bestuurder = null)
         {
-
-        }
-
-        public Voertuig(string merk, string model, string chassisnummer, string nummerplaat, Brandstoftype brandstoftype, Wagentype wagentype)
-        {
+            Id = Id;
             SetMerk(merk);
             SetModel(model);
             SetChassisnummer(chassisnummer);
             SetNummerplaat(nummerplaat);
             Brandstoftype = brandstoftype;
             Wagentype = wagentype;
-        }
-
-        public Voertuig(string merk, string model, string chassisnummer, string nummerplaat, Brandstoftype brandstoftype, Wagentype wagentype,
-                            string kleur, int deuren, Bestuurder bestuurder) : this(merk, model, chassisnummer, nummerplaat, brandstoftype, wagentype)
-        {
             Kleur = kleur;
-            AantalDeuren = deuren;
+            AantalDeuren = aantalDeuren;
             Bestuurder = bestuurder;
         }
 

@@ -35,21 +35,22 @@ namespace Domein.Controllers
 
 
         #region Voertuig
-        public List<List<String>> GeefVoertuigen()
+        public List<Voertuig> GeefVoertuigen(bool metBestuurder = true) //linken van voertuig aan bestuurder
         {
-            return _vc.GeefVoertuigen()
-                .Select(voertuig => new List<String>()
+            var result = _vc.GeefVoertuigen();
+            if (metBestuurder)
+            {
+                var bestuurders = _bc.GeefBestuurders();
+                foreach (var bestuurder in bestuurders)
                 {
-                    voertuig.Merk,
-                    voertuig.Model,
-                    voertuig.Chassisnummer,
-                    voertuig.Nummerplaat,
-                    voertuig.Brandstoftype.ToString(),
-                    voertuig.Wagentype.ToString(),
-                    voertuig.Kleur,
-                    voertuig.AantalDeuren.ToString(),
-                })
-                .ToList();
+                    var voertuig = result.Where(v => v.Id == bestuurder.VoertuigId).FirstOrDefault();
+                    voertuig.Bestuurder = bestuurder;
+
+                }
+
+            }
+            return result;
+
 
 
         }
