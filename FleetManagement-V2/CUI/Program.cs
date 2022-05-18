@@ -13,7 +13,7 @@ namespace CUI
 
         static void Main(string[] args)
         {
-            
+
 
             VoertuigRepository vr = new VoertuigRepository();
             BestuurderRepository br = new BestuurderRepository();
@@ -24,7 +24,7 @@ namespace CUI
             TankkaartController tc = new TankkaartController(tr);
 
 
-            DomeinController dc = new DomeinController(vc,tc,bc);
+            DomeinController dc = new DomeinController(vc, tc, bc);
 
 
 
@@ -48,6 +48,16 @@ namespace CUI
 
             #endregion
 
+            foreach (Voertuig voertuig in voertuigen)
+            {
+                if (voertuig != null)
+                {
+                    voertuigenInfo.Add(voertuig.ToString());
+                }
+                else
+                {
+                    break;
+                }
 
             Console.WriteLine("Dit zijn de voertuigen:");
 
@@ -55,6 +65,13 @@ namespace CUI
             {
                 voertuig.ForEach(x => Console.WriteLine(x));
             }
+            }
+            //List<List<string>> voertuigen = dc.GeefVoertuigen();
+
+            //foreach (List<string> voertuig in voertuigen)
+            //{
+            //    voertuig.ForEach(x => Console.WriteLine(x));
+            //}
 
             //voertuigen.ForEach(Console.WriteLine);
 

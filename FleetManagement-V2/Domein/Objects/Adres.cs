@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace Domein.Objects
 {
     public class Adres
-    {
+    {   
+        public int Id { get; set; }
         public string Straat { get; private set; }
         public string Nummer { get; private set; }
         public string Stad { get; private set; }

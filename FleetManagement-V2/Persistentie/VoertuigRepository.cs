@@ -48,7 +48,7 @@ namespace Persistentie
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new("SELECT nummerplaat, chassisnummer, merk, model, typevoertuig, brandstof, kleur, aantalDeuren FROM dbo.voertuig", conn);
+                    SqlCommand cmd = new("SELECT id, nummerplaat, chassisnummer, merk, model, typevoertuig, brandstof, kleur, aantalDeuren FROM dbo.voertuig", conn);
                     try
                     {
                         using (SqlDataReader reader = cmd.ExecuteReader())
@@ -57,6 +57,7 @@ namespace Persistentie
                             {
                                 while (reader.Read())
                                 {
+                                    int id = (int)reader["id"];
                                     string nummerplaat = (string)reader["nummerplaat"];
                                     string chassisnummer = (string)reader["chassisnummer"];
                                     string merk = (string)reader["merk"];
@@ -68,6 +69,7 @@ namespace Persistentie
                                     Bestuurder bestuurder = null;
 
                                     #region setBrandstoftype
+                                    //tabel in database met brandstoftype en id + foreign key of switch gebruiken
                                     //dit moet gebeuren omdat brandstoftype een enum is. Misschien is hier een mooiere oplossing voor maar dit is het enige wat ik zelf kon bedenken.
                                     Brandstoftype brandstoftype;
                                     if (brandstof == "elektrisch")
@@ -85,11 +87,7 @@ namespace Persistentie
                                     else if (brandstof == "hybridediesel")
                                     {
                                         brandstoftype = Brandstoftype.hybrideDiesel;
-                                    }
-                                    else if (brandstof == "hybridediesel")
-                                    {
-                                        brandstoftype = Brandstoftype.hybrideDiesel;
-                                    }
+                                    }                               
                                     else
                                     {
                                         brandstoftype = Brandstoftype.benzine;
@@ -109,7 +107,7 @@ namespace Persistentie
                                     }
                                     #endregion
 
-                                    voertuigen.Add(new Voertuig(merk, model, chassisnummer, nummerplaat, brandstoftype, _wagentype, kleur, aantaldeuren, bestuurder));
+                                    voertuigen.Add(new Voertuig(id, merk, model, chassisnummer, nummerplaat, brandstoftype, _wagentype, kleur, aantaldeuren, bestuurder));
                                 }
                             }
                         }
