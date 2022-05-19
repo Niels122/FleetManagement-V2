@@ -8,18 +8,29 @@
         Title="Fleet management app" Height="600" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="150"/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="100" />
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
+        
+        <Border BorderBrush="Black" Width="auto" BorderThickness="1" Margin="5">
+            <StackPanel>
+                <Button x:Name="btnBestuurders" Content="Bestuurders" Margin="10"/>
+                <Button x:Name="btnVoertuigen"  Content="Voertuigen"  Margin="10"/>
+                <Button x:Name="btnTankkaarten" Content="Tankkaarten" Margin="10"/>
+            </StackPanel>
 
-        <DockPanel Grid.Row="1" Grid.Column="1" Background="DimGray">
-            <Frame Source="BestuurderPagina.xaml">
-                
-            </Frame>
+        </Border>
+
+        <DockPanel Grid.Column="1">
+            <!--<Frame Source="BestuurderPagina.xaml">-->
+            <!--Door de MainWnd.content te veranderen (in de .cs file) zal ook de view binnen het frame worden aangepast.-->
+            <Frame x:Name="MainWnd" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+
         </DockPanel>
 
     </Grid>

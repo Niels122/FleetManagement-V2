@@ -1,7 +1,4 @@
-﻿using Domein;
-using Domein.Controllers;
-using Domein.Objects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,22 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace WPF_GUI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for NieuweBestuurderWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
-    {     
-        public MainWindow(DomeinController dc)
+    public partial class NieuweBestuurderWindow : Window
+    {
+        public NieuweBestuurderWindow()
         {
             InitializeComponent();
-
-            MainWnd.Content = new BestuurderPagina(dc);
         }
-  
     }
 }
