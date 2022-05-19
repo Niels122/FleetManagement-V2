@@ -19,9 +19,12 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
                         <Label  Content="Naam"/>
-                        <TextBox x:Name="tbNaam"/>
+                        <TextBox x:Name="tbNaam" HorizontalAlignment="Stretch"/>
                     </StackPanel>
                 </Grid>
             </Border>

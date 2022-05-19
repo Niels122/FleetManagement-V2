@@ -25,7 +25,14 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
+                    
                 </DockPanel>
+                <StackPanel DockPanel.Dock="Right">
+                    <Button x:Name="btnVoegBestuurderToe" Content="Voeg toe" Click="btnVoegBestuurderToe_Click"/>
+                    <Button x:Name="btnVerwijderBestuurder" Content="Verwijder" Click="btnVerwijderBestuurder_Click" />
+                    <Button x:Name="btnToonAlleInfo" Content="Toon info" />
+                    <Button x:Name="btnWijzigBestuurder" Content="Wijzig" />
+                </StackPanel>
             </DockPanel>
         </Grid>
     </Border>
