@@ -1,4 +1,5 @@
-﻿using Domein.Controllers;
+﻿using Domein;
+using Domein.Controllers;
 using Domein.Objects;
 using System;
 using System.Collections.Generic;

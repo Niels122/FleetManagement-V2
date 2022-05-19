@@ -14,14 +14,14 @@ namespace UnitTests
         [Fact]
         public void Test_NieuweTankkaart_Valid()
         {
-            Tankkaart tankkaart = new(123456789, new DateTime(2023, 12, 31), false);
+            Tankkaart tankkaart = new(1 ,"123456789", new DateTime(2023, 12, 31));
         }
         [Fact]
         public void Test_NieuweTankkaartOverloadedCtor_Valid()
         {
-            Bestuurder bestuurderNiels = new("Van Maelzaeke", "Niels", new DateTime(2022, 12, 07), "99120750392", Rijbewijs.B);
+            Bestuurder bestuurderNiels = new(1,"Van Maelzaeke", "Niels", new DateTime(2022, 12, 07), "99120750392", Rijbewijs.B);
 
-            Tankkaart tankkaart = new(123456789, new DateTime(2023, 12, 31), false, 1234, Brandstoftype.benzine, bestuurderNiels);
+            Tankkaart tankkaart = new(1, "123456789", new DateTime(2023, 12, 31));
         }
     }
 }

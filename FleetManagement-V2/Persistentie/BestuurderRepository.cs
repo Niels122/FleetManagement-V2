@@ -74,7 +74,7 @@ namespace Persistentie
                                     _rijbewijs = Rijbewijs.B;
                                 }
                                 #endregion
-                                bestuurders.Add(new Bestuurder(naam, voornaam, geboortedatum, rijksregisternummer, _rijbewijs, null, null, null));
+                                bestuurders.Add(new Bestuurder(driverId, naam, voornaam, geboortedatum, rijksregisternummer, _rijbewijs, null, null, null));
                             }
                         }
                     }
