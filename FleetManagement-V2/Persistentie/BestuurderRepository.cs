@@ -47,10 +47,34 @@ namespace Persistentie
                                 string naam = (string)dataReader["naam"];
                                 string voornaam = (string)dataReader["voornaam"];
                                 DateTime geboortedatum = (DateTime)dataReader["geboortedatum"]; //checken of het het het juiste date format is. DateTime.ParseExact((string)dataReader["geboortedatum"], "yyyy-MM-dd", null);
-                                string rijksregisternummer = (string)dataReader["rijksregisternummer"]; 
-                                //Rijbewijs rijbewijs = (Rijbewijs)dataReader["rijbewijs"];
+                                string rijksregisternummer = (string)dataReader["rijksregisternummer"];
+                                string rijbewijs = (string)dataReader["rijbewijs"];
 
-                                bestuurders.Add(new Bestuurder(driverId, naam, voornaam, geboortedatum, rijksregisternummer, Rijbewijs.G, null, null, null));
+                                #region setRijbewijs
+                                //van string naar enum.
+                                Rijbewijs _rijbewijs;
+                                if (rijbewijs.ToUpper() == "A")
+                                {
+                                    _rijbewijs = Rijbewijs.A;
+                                }
+                                if (rijbewijs.ToUpper() == "B")
+                                {
+                                    _rijbewijs = Rijbewijs.B;
+                                }
+                                if (rijbewijs.ToUpper() == "C")
+                                {
+                                    _rijbewijs = Rijbewijs.C;
+                                }
+                                if (rijbewijs.ToUpper() == "D")
+                                {
+                                    _rijbewijs = Rijbewijs.D;
+                                }                          
+                                else
+                                {
+                                    _rijbewijs = Rijbewijs.B;
+                                }
+                                #endregion
+                                bestuurders.Add(new Bestuurder(naam, voornaam, geboortedatum, rijksregisternummer, _rijbewijs, null, null, null));
                             }
                         }
                     }
