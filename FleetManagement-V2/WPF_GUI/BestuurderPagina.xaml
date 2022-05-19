@@ -7,10 +7,26 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="BestuurderPagina">
-
-    <Grid>
-        <DockPanel>
-        <TextBlock Text="BESTUURDERS"/>
-        </DockPanel>
-    </Grid>
+    <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+        <Grid Background="White">
+            <DockPanel Margin="10">
+                <DockPanel>
+                    <Label DockPanel.Dock="Top"  Content="Overzicht bestuurders:" FontWeight="Bold"/>
+                    <ListView x:Name="lvOverzichtBestuurders" DockPanel.Dock="Bottom" Margin="0,0,10,0" SelectionChanged="lvOverzichtBestuurders_SelectionChanged"
+                      SelectionMode="Single">
+                        <ListView.View>
+                            <GridView>
+                                <!--De namen van de binding moeten exact hetzelfde zijn als de naam van de property-->
+                                <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding DriverId}" />
+                                <GridViewColumn Header="Naam" Width="100" DisplayMemberBinding="{Binding Naam}" />
+                                <GridViewColumn Header="Voornaam" Width="100" DisplayMemberBinding="{Binding Voornaam}" />
+                                <GridViewColumn Header="Rijksregisternummer" Width="100" DisplayMemberBinding="{Binding Rijksregisternummer}" />
+                                <GridViewColumn Header="Rijbewijs" Width="100" DisplayMemberBinding="{Binding Rijbewijs}" />
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </DockPanel>
+        </Grid>
+    </Border>
 </Page>

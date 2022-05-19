@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domein;
+using Domein.Objects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +22,25 @@ namespace WPF_GUI
     /// </summary>
     public partial class BestuurderPagina : Page
     {
-        public BestuurderPagina()
+        private DomeinController _dc;
+        public BestuurderPagina(DomeinController dc)
         {
+            _dc = dc;
             InitializeComponent();
+            RefreshBestuurders();
+        }
+        private void RefreshBestuurders()
+        {
+            List<Bestuurder> bestuurders = _dc.GeefBestuurders(); 
+            foreach (Bestuurder bestuurder in bestuurders)          //over lijst van bestuurders lopen en deze invullen
+            {
+                lvOverzichtBestuurders.Items.Add(bestuurder);
+            }
+        }
+
+        private void lvOverzichtBestuurders_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

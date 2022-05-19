@@ -8,12 +8,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domein\Domein.csproj" />
+    <Compile Remove="TankkaartWindow\**" />
+    <Compile Remove="VoertuigWindow\**" />
+    <EmbeddedResource Remove="TankkaartWindow\**" />
+    <EmbeddedResource Remove="VoertuigWindow\**" />
+    <None Remove="TankkaartWindow\**" />
+    <None Remove="VoertuigWindow\**" />
+    <Page Remove="TankkaartWindow\**" />
+    <Page Remove="VoertuigWindow\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TankkaartWindow\" />
-    <Folder Include="VoertuigWindow\" />
+    <ProjectReference Include="..\Domein\Domein.csproj" />
+    <ProjectReference Include="..\Persistentie\Persistentie.csproj" />
   </ItemGroup>
 
 </Project>
