@@ -37,6 +37,17 @@ namespace Domein
         {
             return _adresCon.GeefAdressen();
         }
+
+        public List<Adres> GeefAdressenMetBestuurder()
+        {
+            List<Adres> adressen = new List<Adres>();
+            foreach(Adres adres in _adresCon.GeefAdressen())
+            {
+                adres.BestuurderId = _bestuurderCon.GeefBestuurderByAdresId(adres.AdresId);
+                adressen.Add(adres);
+            }
+            return adressen;
+        }
         #endregion
 
         #region Tankkaart
