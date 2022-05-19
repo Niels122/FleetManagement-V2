@@ -22,7 +22,12 @@ namespace Domein.Controllers
             return _bestuurderRepo.GeefBestuurders();
         }
 
-
+        public int? GeefBestuurderByAdresId(int adresId)
+        {
+            Bestuurder bestuurder = _bestuurderRepo.GeefBestuurders().Where(a => a.AdresId == adresId).FirstOrDefault();
+            int? result = bestuurder.AdresId;
+            return result;  
+        }
 
 
 

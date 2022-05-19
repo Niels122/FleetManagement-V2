@@ -38,7 +38,7 @@ namespace Persistentie
                                 int postcode = (int)dataReader["postcode"];
                                 string stad = (string)dataReader["stad"];
 
-                                adressen.Add(new Adres(adresId, straat, huisnummer, postcode, stad));
+                                adressen.Add(new Adres(adresId, straat, huisnummer, postcode, stad, null));
                             }
                         }
                     }

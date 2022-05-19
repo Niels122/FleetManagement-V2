@@ -38,8 +38,14 @@ namespace CUI
             #endregion
 
             #region
-            Console.WriteLine("Dit zijn de adressen:");
-            foreach(Adres adres in adresCon.GeefAdressen())
+            //Console.WriteLine("Dit zijn de adressen:");
+            //foreach(Adres adres in adresCon.GeefAdressen())
+            //{
+            //    Console.WriteLine(adres.ToString());
+            //}
+
+            Console.WriteLine("Dit zijn de adressen met bestuurders:");
+            foreach(Adres adres in dc.GeefAdressenMetBestuurder())
             {
                 Console.WriteLine(adres.ToString());
             }
