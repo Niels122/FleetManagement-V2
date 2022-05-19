@@ -48,7 +48,7 @@ namespace Persistentie
                                 string voornaam = (string)dataReader["voornaam"];
                                 DateTime geboortedatum = (DateTime)dataReader["geboortedatum"]; //checken of het het het juiste date format is. DateTime.ParseExact((string)dataReader["geboortedatum"], "yyyy-MM-dd", null);
                                 string rijksregisternummer = (string)dataReader["rijksregisternummer"];
-                                string rijbewijs = (string)dataReader["rijbewijs"];
+                                string rijbewijs = (string)dataReader["rijbewijstype"];
 
                                 #region setRijbewijs
                                 //van string naar enum.
@@ -81,9 +81,9 @@ namespace Persistentie
 
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw new BestuurderException("Er ging iets mis bij het ophalen van GeefBestuurders in de persistentielaag.");
+                throw new BestuurderException($"Er ging iets mis bij het ophalen van GeefBestuurders in de persistentielaag, {ex.Message}" );
             }
 
             return bestuurders;
