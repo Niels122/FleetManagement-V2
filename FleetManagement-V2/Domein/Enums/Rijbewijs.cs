@@ -8,11 +8,9 @@ namespace Domein.Enums
 {
     public enum Rijbewijs
     {
-        AM,
         A,
         B,
         C,
-        D,
-        G
+        D
     }
 }
