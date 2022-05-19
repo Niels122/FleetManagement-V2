@@ -1,6 +1,4 @@
-﻿using Domein.Controllers;
-using Domein.Objects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,14 +16,13 @@ using System.Windows.Shapes;
 namespace WPF_GUI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for BestuurderPagina.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class BestuurderPagina : Page
     {
-
-        public MainWindow()
+        public BestuurderPagina()
         {
-           
+            InitializeComponent();
         }
     }
 }
