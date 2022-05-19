@@ -30,11 +30,11 @@ namespace CUI
             //foreach(Bestuurder bestuurder in bc.GeefBestuurdersMetDetails)
 
             #region Bestuurder
-            Console.WriteLine("Dit zijn de bestuurders:");            
-            foreach(Bestuurder bestuurder in dc.GeefBestuurders())
-            {
-                Console.WriteLine(bestuurder.ToString());   
-            }
+            //Console.WriteLine("Dit zijn de bestuurders:");            
+            //foreach(Bestuurder bestuurder in dc.GeefBestuurders())
+            //{
+            //    Console.WriteLine(bestuurder.ToString());   
+            //}
             #endregion
 
             #region
@@ -46,19 +46,19 @@ namespace CUI
             #endregion
 
             #region
-            Console.WriteLine("Dit zijn de voertuigen:");
-            foreach(Voertuig voertuig in voertuigCon.GeefVoertuigen())
-            {
-                Console.WriteLine(voertuig.ToString());
-            }
+            //Console.WriteLine("Dit zijn de voertuigen:");
+            //foreach(Voertuig voertuig in voertuigCon.GeefVoertuigen())
+            //{
+            //    Console.WriteLine(voertuig.ToString());
+            //}
             #endregion
 
             #region
-            Console.WriteLine("Dit zijn de tankkaarten:");
-            foreach(Tankkaart tankkaart in tankkaartCon.GeefTankkaarten())
-            {
-                Console.WriteLine(tankkaart.ToString());
-            }
+            //Console.WriteLine("Dit zijn de tankkaarten:");
+            //foreach(Tankkaart tankkaart in tankkaartCon.GeefTankkaarten())
+            //{
+            //    Console.WriteLine(tankkaart.ToString());
+            //}
             #endregion
         }
     }

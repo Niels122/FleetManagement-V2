@@ -108,7 +108,7 @@ namespace Domein.Objects
         //https://stackoverflow.com/questions/371987/how-to-validate-a-datetime-in-c
         //https://stackoverflow.com/questions/2193012/string-was-not-recognized-as-a-valid-datetime-format-dd-mm-yyyy
         //https://stackoverflow.com/questions/33807694/how-to-check-if-date-is-in-correct-format-i-e-yyyy-mmm-dd
-        public void SetGeboortedatum(DateTime geboortedatum)
+        public void SetGeboortedatum(DateTime geboortedatum) //TODO: CUI geeft ook uur min en sec na geboortedatum
         {
             DateTime datum;
             if (DateTime.TryParseExact(geboortedatum.ToString("yyyy-MM-dd"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out datum))
