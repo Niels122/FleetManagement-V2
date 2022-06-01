@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domein;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,16 +13,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WPF_GUI
+namespace WPF_GUI.Tankkaart
 {
     /// <summary>
-    /// Interaction logic for NieuweBestuurderWindow.xaml
+    /// Interaction logic for NieuweTankkaartWindow.xaml
     /// </summary>
-    public partial class NieuweBestuurderWindow : Window
+    public partial class NieuweTankkaartWindow : Window
     {
-        public NieuweBestuurderWindow()
+        private DomeinController _dc;
+        public NieuweTankkaartWindow(DomeinController dc)
         {
             InitializeComponent();
+
+            _dc = dc;   
         }
     }
 }

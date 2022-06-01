@@ -45,14 +45,13 @@ namespace WPF_GUI
 
         private void btnVoegBestuurderToe_Click(object sender, RoutedEventArgs e)
         {
-            NieuweBestuurderWindow nieuweBestuurderWindow = new NieuweBestuurderWindow();
+            NieuweBestuurderWindow nieuweBestuurderWindow = new NieuweBestuurderWindow(_dc);
             nieuweBestuurderWindow.Show();
         }
 
         private void btnVerwijderBestuurder_Click(object sender, RoutedEventArgs e)
         {
-            NieuweBestuurderWindow nieuweBestuurderWindow = new NieuweBestuurderWindow();
-            nieuweBestuurderWindow.Show();
+          
         }
     }
 }
