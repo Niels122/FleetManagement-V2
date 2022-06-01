@@ -13,8 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_GUI.ToevoegenWindows;
 
-namespace WPF_GUI.Tankkaart
+namespace WPF_GUI.MainPages
 {
     /// <summary>
     /// Interaction logic for TankkaartPagina.xaml
@@ -35,6 +36,10 @@ namespace WPF_GUI.Tankkaart
         }
 
         private void btnVerwijderTankkaart_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void lvOverzichtTankkaarten_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

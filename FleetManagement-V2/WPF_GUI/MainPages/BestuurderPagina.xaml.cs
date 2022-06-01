@@ -14,8 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_GUI.ToevoegenWindows;
 
-namespace WPF_GUI
+namespace WPF_GUI.MainPages
 {
     /// <summary>
     /// Interaction logic for BestuurderPagina.xaml
@@ -25,19 +26,19 @@ namespace WPF_GUI
         private DomeinController _dc;
         public BestuurderPagina(DomeinController dc)
         {
-            _dc = dc;
             InitializeComponent();
+            _dc = dc;
             RefreshBestuurders();
         }
+
         private void RefreshBestuurders()
         {
-            List<Bestuurder> bestuurders = _dc.GeefBestuurders(); 
+            List<Bestuurder> bestuurders = _dc.GeefBestuurders();
             foreach (Bestuurder bestuurder in bestuurders)          //over lijst van bestuurders lopen en deze invullen
             {
                 lvOverzichtBestuurders.Items.Add(bestuurder);
             }
         }
-
         private void lvOverzichtBestuurders_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -51,7 +52,7 @@ namespace WPF_GUI
 
         private void btnVerwijderBestuurder_Click(object sender, RoutedEventArgs e)
         {
-          
+
         }
     }
 }

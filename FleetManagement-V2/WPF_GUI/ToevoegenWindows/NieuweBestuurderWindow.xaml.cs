@@ -13,19 +13,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WPF_GUI.Tankkaart
+namespace WPF_GUI.ToevoegenWindows
 {
     /// <summary>
-    /// Interaction logic for NieuweTankkaartWindow.xaml
+    /// Interaction logic for NieuweBestuurderWindow.xaml
     /// </summary>
-    public partial class NieuweTankkaartWindow : Window
+    public partial class NieuweBestuurderWindow : Window
     {
         private DomeinController _dc;
-        public NieuweTankkaartWindow(DomeinController dc)
+        public NieuweBestuurderWindow(DomeinController dc )
         {
             InitializeComponent();
-
-            _dc = dc;   
+            _dc = dc;
         }
     }
 }

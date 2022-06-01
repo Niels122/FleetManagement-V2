@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domein;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,19 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF_GUI.Voertuig
+namespace WPF_GUI.ToevoegenWindows
 {
     /// <summary>
-    /// Interaction logic for VoertuigPagina.xaml
+    /// Interaction logic for NieuweTankkaartWindow.xaml
     /// </summary>
-    public partial class VoertuigPagina : Page
+    public partial class NieuweTankkaartWindow : Window
     {
-        public VoertuigPagina()
+        private DomeinController _dc;
+        public NieuweTankkaartWindow(DomeinController dc)
         {
             InitializeComponent();
+            _dc = dc;
         }
     }
 }

@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Persistentie\Persistentie.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ReadWindows\" />
+  </ItemGroup>
+
 </Project>
