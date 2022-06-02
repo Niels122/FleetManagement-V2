@@ -31,8 +31,8 @@
                 <StackPanel DockPanel.Dock="Right">
                     <Button x:Name="btnVoegBestuurderToe" Content="Voeg toe" Click="btnVoegBestuurderToe_Click"/>
                     <Button x:Name="btnVerwijderBestuurder" Content="Verwijder" Click="btnVerwijderBestuurder_Click" />
-                    <Button x:Name="btnToonAlleInfo" Content="Toon info" />
-                    <Button x:Name="btnWijzigBestuurder" Content="Wijzig" />
+                    <Button x:Name="btnToonAlleInfo" Content="Toon info" Click="btnToonAlleInfo_Click" />
+                    <Button x:Name="btnWijzigBestuurder" Content="Wijzig" Click="btnWijzigBestuurder_Click" />
                 </StackPanel>
             </DockPanel>
         </Grid>

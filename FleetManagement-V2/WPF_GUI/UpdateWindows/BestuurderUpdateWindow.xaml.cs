@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domein;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,21 @@ namespace WPF_GUI.UpdateWindows
     /// </summary>
     public partial class BestuurderUpdateWindow : Window
     {
-        public BestuurderUpdateWindow()
+        private DomeinController _dc;
+        public BestuurderUpdateWindow(DomeinController dc)
         {
+            _dc = dc;
             InitializeComponent();
+        }
+
+        private void btnOpslaan_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAnnuleren_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

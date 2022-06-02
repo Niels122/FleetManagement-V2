@@ -24,12 +24,48 @@ namespace WPF_GUI
     /// </summary>
     public partial class MainWindow : Window
     {     
+        private string _actievePagina;
+        private DomeinController _dc;
         public MainWindow(DomeinController dc)
         {
+            _dc = dc;
             InitializeComponent();
 
-            MainWnd.Content = new BestuurderPagina(dc);
+            ZetActief("bestuurderPagina");
+
         }
-  
+        private void ZetActief(string pagina)
+        {
+            _actievePagina = pagina;
+           
+            switch(_actievePagina)
+            {
+                case "bestuurderPagina":
+                    MainWnd.Content = new BestuurderPagina(_dc);
+                    break;
+                case "voertuigPagina":
+                    MainWnd.Content = new VoertuigPagina(_dc);
+                    break;
+
+                case "tankkaartPagina":
+                    MainWnd.Content = new TankkaartPagina(_dc);
+                    break;
+            }    
+        }
+
+        private void btnBestuurders_Click(object sender, RoutedEventArgs e)
+        {
+            ZetActief("bestuurderPagina");
+        }
+
+        private void btnVoertuigen_Click(object sender, RoutedEventArgs e)
+        {
+            ZetActief("voertuigPagina");
+        }
+
+        private void btnTankkaarten_Click(object sender, RoutedEventArgs e)
+        {
+            ZetActief("tankkaartPagina");
+        }
     }
 }

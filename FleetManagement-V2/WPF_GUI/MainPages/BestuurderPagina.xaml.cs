@@ -14,7 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_GUI.ReadWindows;
 using WPF_GUI.ToevoegenWindows;
+using WPF_GUI.UpdateWindows;
 
 namespace WPF_GUI.MainPages
 {
@@ -46,13 +48,25 @@ namespace WPF_GUI.MainPages
 
         private void btnVoegBestuurderToe_Click(object sender, RoutedEventArgs e)
         {
-            NieuweBestuurderWindow nieuweBestuurderWindow = new NieuweBestuurderWindow(_dc);
+            NieuweBestuurderWindow nieuweBestuurderWindow = new(_dc);
             nieuweBestuurderWindow.Show();
         }
 
         private void btnVerwijderBestuurder_Click(object sender, RoutedEventArgs e)
         {
+           
+        }
 
+        private void btnToonAlleInfo_Click(object sender, RoutedEventArgs e)
+        {
+            BestuurderInfoWindow bestuurderInfoWindow = new(_dc, (Bestuurder)lvOverzichtBestuurders.SelectedItem);
+            bestuurderInfoWindow.Show();
+        }
+
+        private void btnWijzigBestuurder_Click(object sender, RoutedEventArgs e)
+        {
+            BestuurderUpdateWindow bestuurderUpdateWindow = new(_dc);
+            bestuurderUpdateWindow.Show();
         }
     }
 }
