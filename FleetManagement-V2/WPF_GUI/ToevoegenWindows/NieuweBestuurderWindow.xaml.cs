@@ -1,4 +1,6 @@
 ﻿using Domein;
+using Domein.Enums;
+using Domein.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,6 +27,63 @@ namespace WPF_GUI.ToevoegenWindows
         {
             InitializeComponent();
             _dc = dc;
+            FillRijbewijzen();
+            FillVoertuigen();
+            FillTankkaarten();
+        }
+
+        private void FillRijbewijzen()
+        {
+            var rijbewijzen = Enum.GetValues( typeof( Rijbewijs ) ).Cast<Rijbewijs>().ToList().Distinct(); //combobox vullen met mogelijkheden
+            cmbRijbewijs.ItemsSource = rijbewijzen;
+        }
+        private void FillVoertuigen()
+        {
+            var voertuigen = _dc.GeefVoertuigen();
+            var beschikbareVoertuigenNummerplaat = voertuigen.Where(v => v.BestuurderId == null).Select(v => v.Nummerplaat);
+
+            cmbNummerplaat.ItemsSource = beschikbareVoertuigenNummerplaat;
+        }
+        private void FillTankkaarten()
+        {
+            var tankkaarten = _dc.GeefTankkaarten();
+            var beschikbareTankkaarten = tankkaarten.Where(t => t.BestuurderId == null).Select(t => t.Kaartnummer);
+
+            cmbTankkaart.ItemsSource = beschikbareTankkaarten;
+
+        }
+
+        private void btnOpslaan_Click(object sender, RoutedEventArgs e)
+        {
+            CreateBestuurder();
+        }
+        private void CreateBestuurder()
+        {
+            try
+            {
+                DateTime geboortedatum = dpGeboortedatum.SelectedDate.Value;
+             
+                //(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adressId)
+                //adres apart object => id van adres gelijk aan adresid in bestuurder, ook voor tankaart en voertuig
+                createAdres(); //adres moet worden toegevoegd aan database
+                //voertuigId gelijk zetten aan id van het voertuig met geselecteerde nummerplaat.
+
+                int voertuigId;
+                int tankkaartId;              
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+           
+
+        }
+        private void createAdres()
+        {
+            //straat,huisnummer,postcode,stad
+            //Moet nog in persistentie geïmplementeerd wordern
         }
     }
 }

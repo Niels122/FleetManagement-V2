@@ -51,7 +51,7 @@
                             <TextBox Grid.Column="1" x:Name="tbAchternaam" Text="" VerticalAlignment="Center"/>
 
                             <Label Grid.Column="0"  Content="Geboortedatum"/>
-                            <TextBox Grid.Column="1" x:Name="tbGeboortedatum" Text="" VerticalAlignment="Center"/>
+                            <DatePicker Grid.Column="1" x:Name="dpGeboortedatum" Text="" VerticalAlignment="Center"/>
 
                             <Label Grid.Column="0"  Content="Rijksregisternummer"/>
                             <TextBox Grid.Column="1" x:Name="tbRijksregisternummer" Text="" VerticalAlignment="Center"/>
@@ -60,7 +60,7 @@
                             <ComboBox Grid.Column="1" x:Name="cmbRijbewijs" Text="" VerticalAlignment="Center"/>
 
                         <StackPanel Orientation="Horizontal">
-                            <Button Grid.Column="0"  x:Name="btnOpslaan"    Content="Opslaan"   Background="LawnGreen" Width="100"/>
+                            <Button Grid.Column="0"  x:Name="btnOpslaan"    Content="Opslaan"   Background="LawnGreen" Width="100" Click="btnOpslaan_Click"/>
                             <Button Grid.Column="1"  x:Name="btnAnnuleren"  Content="Annuleren" Background="Red" Width="100"/>
                         </StackPanel>
                     </StackPanel>
@@ -86,7 +86,7 @@
                             <Label Grid.Column="0"  Content="Stad"/>
                             <TextBox Grid.Column="1" x:Name="tbStad" Text="" VerticalAlignment="Center"/>
 
-                            <Label Grid.Column="0"  Content="Wagen toekennen via nummerplaat:"/>
+                            <Label Grid.Column="0"  Content="Voertuig toekennen via nummerplaat:"/>
                             <ComboBox Grid.Column="1" x:Name="cmbNummerplaat" Text="" VerticalAlignment="Center"/>
 
                             <Label Grid.Column="0"  Content="Tankkaart toekennen:"/>
