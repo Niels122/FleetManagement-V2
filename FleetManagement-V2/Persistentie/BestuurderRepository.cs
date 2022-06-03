@@ -35,7 +35,7 @@ namespace Persistentie
                 {
                     connection.Open();
 
-                    SqlCommand cmd = new("SELECT id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype FROM bestuurder;", connection);
+                    SqlCommand cmd = new("SELECT id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adresId FROM bestuurder;", connection);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
@@ -49,6 +49,9 @@ namespace Persistentie
                                 DateTime geboortedatum = (DateTime)dataReader["geboortedatum"]; //checken of het het het juiste date format is. DateTime.ParseExact((string)dataReader["geboortedatum"], "yyyy-MM-dd", null);
                                 string rijksregisternummer = (string)dataReader["rijksregisternummer"];
                                 string rijbewijs = (string)dataReader["rijbewijstype"];
+                                int voertuigId = (int)dataReader["voertuigId"];
+                                int tankkaartId = (int)dataReader["tankkaartId"];
+                                int adresId = (int)(dataReader["adresId"]);
 
                                 #region setRijbewijs
                                 //van string naar enum.
@@ -74,7 +77,7 @@ namespace Persistentie
                                     _rijbewijs = Rijbewijs.B;
                                 }
                                 #endregion
-                                bestuurders.Add(new Bestuurder(driverId, naam, voornaam, geboortedatum, rijksregisternummer, _rijbewijs, null, null, null));
+                                bestuurders.Add(new Bestuurder(driverId, naam, voornaam, geboortedatum, rijksregisternummer, _rijbewijs, adresId, voertuigId, tankkaartId));
                             }
                         }
                     }

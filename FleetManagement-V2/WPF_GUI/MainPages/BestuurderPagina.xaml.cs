@@ -54,7 +54,15 @@ namespace WPF_GUI.MainPages
 
         private void btnVerwijderBestuurder_Click(object sender, RoutedEventArgs e)
         {
-           
+            MessageBoxResult result = MessageBox.Show($"Bent u zeker dat u bestuurder {lvOverzichtBestuurders.SelectedItem} wilt verwijderen?", "Verwijder bestuurder", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                //_dc.verwijderBestuurder((Bestuurder)lvOverzichtBestuurders.SelectedItem) --> nog niet geimplementeerd
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                MessageBox.Show("Geen items verwijderd.");
+            }
         }
 
         private void btnToonAlleInfo_Click(object sender, RoutedEventArgs e)
