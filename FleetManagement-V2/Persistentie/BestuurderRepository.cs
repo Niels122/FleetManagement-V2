@@ -16,9 +16,24 @@ namespace Persistentie
     {
         private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog = FleetmanagementDB; Integrated Security = True; TrustServerCertificate=True";
 
-        public void CreateBestuurder(Bestuurder bestuurder)
+        public void CreateBestuurder(Bestuurder bestuurder) //checks gebeuren in domein
         {
-            throw new NotImplementedException();
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string insertSql = $"INSERT INTO bestuurder (naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adresId" +
+                        $"VALUES ('{bestuurder.Naam}', '{bestuurder.Voornaam}', '{bestuurder.Geboortedatum}', '{bestuurder.Rijksregisternummer}', '{bestuurder.Rijbewijs}', '{bestuurder.VoertuigId}', '{bestuurder.TankkaartId}', '{bestuurder.AdresId}');";
+                    SqlCommand insertCommand = new(insertSql, conn);
+                    insertCommand.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void DeleteBestuurder(Bestuurder bestuurder)
