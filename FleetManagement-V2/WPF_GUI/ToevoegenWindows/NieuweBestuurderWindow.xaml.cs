@@ -23,7 +23,7 @@ namespace WPF_GUI.ToevoegenWindows
     public partial class NieuweBestuurderWindow : Window
     {
         private DomeinController _dc;
-        public NieuweBestuurderWindow(DomeinController dc )
+        public NieuweBestuurderWindow(DomeinController dc)
         {
             InitializeComponent();
             _dc = dc;
@@ -34,7 +34,7 @@ namespace WPF_GUI.ToevoegenWindows
 
         private void FillRijbewijzen()
         {
-            var rijbewijzen = Enum.GetValues( typeof( Rijbewijs ) ).Cast<Rijbewijs>().ToList().Distinct(); //combobox vullen met mogelijkheden
+            var rijbewijzen = Enum.GetValues(typeof(Rijbewijs)).Cast<Rijbewijs>().ToList().Distinct(); //combobox vullen met mogelijkheden
             cmbRijbewijs.ItemsSource = rijbewijzen;
         }
         private void FillVoertuigen()
@@ -61,15 +61,49 @@ namespace WPF_GUI.ToevoegenWindows
         {
             try
             {
+
+
                 DateTime geboortedatum = dpGeboortedatum.SelectedDate.Value;
-             
+                //object maken van bestuurder, alles meegeven
                 //(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adressId)
                 //adres apart object => id van adres gelijk aan adresid in bestuurder, ook voor tankaart en voertuig
                 createAdres(); //adres moet worden toegevoegd aan database
                 //voertuigId gelijk zetten aan id van het voertuig met geselecteerde nummerplaat.
+                int? adresId = null;
+                int? voertuigId = null;
+                int? tankkaartId = null;
 
-                int voertuigId;
-                int tankkaartId;              
+
+                Rijbewijs _rijbewijs;
+                string rijbewijs = cmbRijbewijs.Text;
+
+                switch (rijbewijs.ToUpper())
+                {
+                    case "A":
+                        _rijbewijs = Rijbewijs.A;
+                        break;
+
+                    case "B":
+                        _rijbewijs = Rijbewijs.B;
+                        break;
+
+                    case "C":
+                        _rijbewijs = Rijbewijs.C;
+                        break;
+
+                    case "D":
+                        _rijbewijs = Rijbewijs.D;
+                        break;
+
+                    default:
+                        _rijbewijs = Rijbewijs.B;
+                        break;
+                }
+   
+
+                Bestuurder bestuurder = new(0, tbNaam.Text, tbAchternaam.Text, geboortedatum, tbRijksregisternummer.Text, _rijbewijs, adresId, voertuigId, tankkaartId);
+
+                _dc.CreateBestuurder(bestuurder);
 
             }
             catch (Exception ex)
@@ -77,7 +111,7 @@ namespace WPF_GUI.ToevoegenWindows
                 MessageBox.Show(ex.Message);
             }
 
-           
+
 
         }
         private void createAdres()

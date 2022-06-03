@@ -67,8 +67,15 @@ namespace WPF_GUI.MainPages
 
         private void btnToonAlleInfo_Click(object sender, RoutedEventArgs e)
         {
-            BestuurderInfoWindow bestuurderInfoWindow = new(_dc, (Bestuurder)lvOverzichtBestuurders.SelectedItem);
-            bestuurderInfoWindow.Show();
+            if (lvOverzichtBestuurders.SelectedItem != null)
+            {
+                BestuurderInfoWindow bestuurderInfoWindow = new(_dc, (Bestuurder)lvOverzichtBestuurders.SelectedItem);
+                bestuurderInfoWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Geen item geslecteerd", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void btnWijzigBestuurder_Click(object sender, RoutedEventArgs e)
