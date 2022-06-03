@@ -14,9 +14,9 @@ namespace Domein.Interfaces
 
         #region CRUD operations
         void CreateTankkaart(Tankkaart tankkaart);
-        Tankkaart ReadTankkaart(int kaartnummer);
+        Tankkaart ReadTankkaart(Tankkaart tankkaart);
         void UpdateTankkaart(Tankkaart tankkaart);
-        void DeleteTankkaart(int kaartnummer);
+        void DeleteTankkaart(Tankkaart tankkaart);
         #endregion
     }
 }

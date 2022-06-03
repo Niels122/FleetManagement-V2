@@ -16,9 +16,24 @@ namespace Persistentie
     {
         private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog = FleetmanagementDB; Integrated Security = True; TrustServerCertificate=True";
 
-        public void CreateBestuurder(Bestuurder bestuurder)
+        public void CreateBestuurder(Bestuurder bestuurder) //checks gebeuren in domein
         {
-            throw new NotImplementedException();
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string insertSql = $"INSERT INTO bestuurder (naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adresId" +
+                        $"VALUES ('{bestuurder.Naam}', '{bestuurder.Voornaam}', '{bestuurder.Geboortedatum}', '{bestuurder.Rijksregisternummer}', '{bestuurder.Rijbewijs}', '{bestuurder.VoertuigId}', '{bestuurder.TankkaartId}', '{bestuurder.AdresId}');";
+                    SqlCommand insertCommand = new(insertSql, conn);
+                    insertCommand.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void DeleteBestuurder(Bestuurder bestuurder)
@@ -35,7 +50,7 @@ namespace Persistentie
                 {
                     connection.Open();
 
-                    SqlCommand cmd = new("SELECT id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype FROM bestuurder;", connection);
+                    SqlCommand cmd = new("SELECT id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adresId FROM bestuurder;", connection);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
@@ -48,7 +63,10 @@ namespace Persistentie
                                 string voornaam = (string)dataReader["voornaam"];
                                 DateTime geboortedatum = (DateTime)dataReader["geboortedatum"]; //checken of het het het juiste date format is. DateTime.ParseExact((string)dataReader["geboortedatum"], "yyyy-MM-dd", null);
                                 string rijksregisternummer = (string)dataReader["rijksregisternummer"];
-                                string rijbewijs = (string)dataReader["rijbewijs"];
+                                string rijbewijs = (string)dataReader["rijbewijstype"];
+                                int voertuigId = (int)dataReader["voertuigId"];
+                                int tankkaartId = (int)dataReader["tankkaartId"];
+                                int adresId = (int)(dataReader["adresId"]);
 
                                 #region setRijbewijs
                                 //van string naar enum.
@@ -74,16 +92,16 @@ namespace Persistentie
                                     _rijbewijs = Rijbewijs.B;
                                 }
                                 #endregion
-                                bestuurders.Add(new Bestuurder(driverId, naam, voornaam, geboortedatum, rijksregisternummer, _rijbewijs, null, null, null));
+                                bestuurders.Add(new Bestuurder(driverId, naam, voornaam, geboortedatum, rijksregisternummer, _rijbewijs, adresId, voertuigId, tankkaartId));
                             }
                         }
                     }
 
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw new BestuurderException("Er ging iets mis bij het ophalen van GeefBestuurders in de persistentielaag.");
+                throw new BestuurderException($"Er ging iets mis bij het ophalen van GeefBestuurders in de persistentielaag, {ex.Message}" );
             }
 
             return bestuurders;

@@ -1,0 +1,97 @@
+﻿<Window x:Class="WPF_GUI.UpdateWindows.BestuurderUpdateWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_GUI.UpdateWindows"
+        mc:Ignorable="d"
+        Title="BestuurderUpdateWindow" Height="300" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="400"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="Width" Value="190" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="Width" Value="190" />
+            </Style>
+            <Style TargetType="ComboBox">
+                <Setter Property="Width" Value="190" />
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="20" />
+                <Setter Property="Padding" Value="10" />
+            </Style>
+        </Grid.Resources>
+        <DockPanel Grid.Column="0">
+            <StackPanel Orientation="Vertical">
+
+                <StackPanel Orientation="Horizontal">
+                        <Label Content="Naam" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox Name="naam" Text="" FontSize="15" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="Achternaam" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox Name="achternaam" Text=" " FontSize="15"  VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Geboortedatum" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox Name="geboortedatum" Text=" "  FontSize="15" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="Rijksregisternummer" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <TextBox Name="model" Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="Rijbewijs" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <ComboBox Name="rijbewijs" FontSize="15" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Label  Content="Voertuig" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        <ComboBox Name="voertuig"  Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label  Content="Tankkaart" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <ComboBox Name="tankkaart" Text=" " FontSize="15" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <DockPanel>
+                    <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
+                        <Button x:Name="btnOpslaan" Content="Opslaan" Background="LawnGreen" BorderThickness="1" Click="btnOpslaan_Click"/>
+                        <Button x:Name="btnAnnuleren" Content="Annuleren" Background="OrangeRed" BorderThickness="1" Click="btnAnnuleren_Click"/>
+                    </StackPanel>
+                </DockPanel>
+            </StackPanel>
+            </DockPanel>
+
+        <DockPanel Grid.Column="1">
+            <StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Straatnaam" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox Name="straatnaam" Text="" FontSize="15" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Huisnummer" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox Name="huisnummer" Text="" FontSize="15" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Postcode" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox Name="postcode" Text="" FontSize="15" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Stad" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                    <TextBox Name="stad" Text="" FontSize="15" VerticalAlignment="Center"/>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Window>

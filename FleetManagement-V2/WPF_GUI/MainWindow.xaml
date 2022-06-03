@@ -18,9 +18,9 @@
         
         <Border BorderBrush="Black" Width="auto" BorderThickness="1" Margin="5">
             <StackPanel>
-                <Button x:Name="btnBestuurders" Content="Bestuurders" Margin="10"/>
-                <Button x:Name="btnVoertuigen"  Content="Voertuigen"  Margin="10"/>
-                <Button x:Name="btnTankkaarten" Content="Tankkaarten" Margin="10"/>
+                <Button x:Name="btnBestuurders" Content="Bestuurders" Margin="10" Click="btnBestuurders_Click"/>
+                <Button x:Name="btnVoertuigen"  Content="Voertuigen"  Margin="10" Click="btnVoertuigen_Click"/>
+                <Button x:Name="btnTankkaarten" Content="Tankkaarten" Margin="10" Click="btnTankkaarten_Click"/>
             </StackPanel>
 
         </Border>
@@ -28,7 +28,7 @@
         <DockPanel Grid.Column="1">
             <!--<Frame Source="BestuurderPagina.xaml">-->
             <!--Door de MainWnd.content te veranderen (in de .cs file) zal ook de view binnen het frame worden aangepast.-->
-            <Frame x:Name="MainWnd" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Frame x:Name="MainWnd" Grid.RowSpan="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" NavigationUIVisibility="Hidden"/> <!--NavigationUIVisibility zorgt voor een navigatie balk, deze staat uit.-->
 
 
         </DockPanel>

@@ -130,7 +130,7 @@ namespace Persistentie
             throw new NotImplementedException();
         }
 
-        public void UpdateVoertuig(Voertuig oudVoertuigInfo, Voertuig nieuwVoertuigInfo)
+        public void UpdateVoertuig(Voertuig oudVoertuig, Voertuig nieuwVoertuig)
         {
             throw new NotImplementedException();
         }

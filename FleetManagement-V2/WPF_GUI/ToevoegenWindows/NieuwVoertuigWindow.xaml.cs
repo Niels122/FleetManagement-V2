@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WPF_GUI
+namespace WPF_GUI.ToevoegenWindows
 {
     /// <summary>
-    /// Interaction logic for NieuweBestuurderWindow.xaml
+    /// Interaction logic for NieuwVoertuigWindow.xaml
     /// </summary>
-    public partial class NieuweBestuurderWindow : Window
+    public partial class NieuwVoertuigWindow : Window
     {
-        public NieuweBestuurderWindow()
+        public NieuwVoertuigWindow()
         {
             InitializeComponent();
         }

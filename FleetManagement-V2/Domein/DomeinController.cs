@@ -23,14 +23,31 @@ namespace Domein
             _adresCon = ac;
         }
 
-        //public List<Bestuurder> Geef
+
 
         #region Bestuurder
         public List<Bestuurder> GeefBestuurders()
         {
             return _bestuurderCon.GeefBestuurders();
         }
+        public void CreateBestuurder(Bestuurder bestuurder)
+        {
+            _bestuurderCon.CreateBestuurder(bestuurder);
+        }
+
+        void UpdateBestuurder(Bestuurder bestuurder)
+        {
+            _bestuurderCon.UpdateBestuurder(bestuurder);
+        }
+
+        void DeleteBestuurder(Bestuurder bestuurder)
+        {
+            _bestuurderCon.DeleteBestuurder(bestuurder);
+        }
         #endregion
+
+
+
 
         #region Adres
         public List<Adres> GeefAdressen()
@@ -41,26 +58,74 @@ namespace Domein
         public List<Adres> GeefAdressenMetBestuurder()
         {
             List<Adres> adressen = new List<Adres>();
-            foreach(Adres adres in _adresCon.GeefAdressen())
+            foreach (Adres adres in _adresCon.GeefAdressen())
             {
                 adres.BestuurderId = _bestuurderCon.GeefBestuurderByAdresId(adres.AdresId);
                 adressen.Add(adres);
             }
             return adressen;
         }
+
+        public void CreateAdres(Adres adres)
+        {
+            _adresCon.CreateAdres(adres);
+        }
+        public void UpdateAdres(Adres adres)
+        {
+            _adresCon.UpdateAdres(adres);
+        }
+        public void DeleteAdres(Adres adres)
+        {
+            _adresCon.DeleteAdres(adres);
+        }
+
         #endregion
+
+
+
 
         #region Tankkaart
         public List<Tankkaart> GeefTankkaarten()
         {
             return _tankkaartCon.GeefTankkaarten();
         }
+
+        public void CreateTankkaart(Tankkaart tankkaart)
+        {
+            _tankkaartCon.CreateTankkaart(tankkaart);
+        }
+
+        public void DeleteTankkaart(Tankkaart tankkaart)
+        {
+            _tankkaartCon.DeleteTankkaart(tankkaart);
+        }
+        public void UpdateTankkaart(Tankkaart tankkaart)
+        {
+            _tankkaartCon.UpdateTankkaart(tankkaart);
+        }
         #endregion
+
+
 
         #region Voertuig
         public List<Voertuig> GeefVoertuigen()
         {
             return _voertuigCon.GeefVoertuigen();
+        }
+        public void CreateVoertuig(Voertuig voertuig)
+        {
+            _voertuigCon.CreateVoertuig(voertuig);
+        }
+
+        public void DeleteVoertuig(Voertuig voertuig)
+        {
+            _voertuigCon.DeleteVoertuig(voertuig);
+
+        }
+        public void UpdateVoertuig(Voertuig oudVoertuig, Voertuig nieuwVoertuig)
+        {
+            _voertuigCon.UpdateVoertuig(oudVoertuig, nieuwVoertuig);
+
         }
         #endregion
 
