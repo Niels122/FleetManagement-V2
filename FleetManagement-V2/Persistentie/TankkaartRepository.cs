@@ -56,7 +56,7 @@ namespace Persistentie
             throw new NotImplementedException();
         }
 
-        public void DeleteTankkaart(int kaartnummer)
+        public void DeleteTankkaart(Tankkaart tankkaart)
         {
             throw new NotImplementedException();
         }
@@ -68,7 +68,7 @@ namespace Persistentie
             return tanknummers;
         }
 
-        public Tankkaart ReadTankkaart(int kaartnummer)
+        public Tankkaart ReadTankkaart(Tankkaart tankkaart)
         {
             throw new NotImplementedException();
         }

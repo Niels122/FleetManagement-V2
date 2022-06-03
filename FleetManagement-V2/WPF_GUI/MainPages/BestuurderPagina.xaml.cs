@@ -76,5 +76,11 @@ namespace WPF_GUI.MainPages
             BestuurderUpdateWindow bestuurderUpdateWindow = new(_dc);
             bestuurderUpdateWindow.Show();
         }
+
+        private void lvOverzichtBestuurders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            BestuurderInfoWindow bestuurderInfoWindow = new(_dc, (Bestuurder)lvOverzichtBestuurders.SelectedItem);
+            bestuurderInfoWindow.Show();
+        }
     }
 }

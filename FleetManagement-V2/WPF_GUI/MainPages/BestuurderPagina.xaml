@@ -13,8 +13,8 @@
             <DockPanel Margin="10">
                 <Label DockPanel.Dock="Top"  Content="Overzicht bestuurders:" FontWeight="Bold"/>
                 <DockPanel>
-                    <ListView x:Name="lvOverzichtBestuurders" DockPanel.Dock="Bottom" Margin="0,0,10,0" SelectionChanged="lvOverzichtBestuurders_SelectionChanged"
-                      SelectionMode="Single">
+                    <ListView x:Name="lvOverzichtBestuurders" DockPanel.Dock="Bottom" Margin="0,0,10,0" SelectionChanged="lvOverzichtBestuurders_SelectionChanged" 
+                      SelectionMode="Single" MouseDoubleClick="lvOverzichtBestuurders_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
                                 <!--De namen van de binding moeten exact hetzelfde zijn als de naam van de property-->

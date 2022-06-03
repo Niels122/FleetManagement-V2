@@ -14,7 +14,17 @@ namespace Persistentie
     public class AdresRepository : IAdresRepository
     {
         private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog = FleetmanagementDB; Integrated Security = True; TrustServerCertificate=True";
-        
+
+        public void CreateAdres(Adres adres)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteAdres(Adres adres)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Adres> GeefAdressen()
         {
             List<Adres> adressen = new List<Adres>();
@@ -24,7 +34,7 @@ namespace Persistentie
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new("SELECT * FROM adres", conn);
+                    SqlCommand cmd = new("SELECT id, straat, huisnummer, postcode, stad FROM adres;", conn);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
@@ -50,6 +60,11 @@ namespace Persistentie
             }
 
             return adressen;
+        }
+
+        public void UpdateAdres(Adres adres)
+        {
+            throw new NotImplementedException();
         }
     }
 }

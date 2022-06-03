@@ -29,6 +29,20 @@ namespace Domein.Controllers
             return result;  
         }
 
+        public void CreateBestuurder(Bestuurder bestuurder)
+        {
+            _bestuurderRepo.CreateBestuurder(bestuurder);
+        }
+
+        public void UpdateBestuurder(Bestuurder bestuurder)
+        {
+            _bestuurderRepo.UpdateBestuurder(bestuurder);
+        }
+
+        public void DeleteBestuurder(Bestuurder bestuurder)
+        {
+            _bestuurderRepo.DeleteBestuurder(bestuurder);
+        }
 
 
 
@@ -40,7 +54,9 @@ namespace Domein.Controllers
 
 
 
-        
+
+
+
         //foreach (string rijksnr in _bestuurdersRepo.GeefRijksregisternummers()) 
         //{
         //    if (rijksnr == rijksnummer)
