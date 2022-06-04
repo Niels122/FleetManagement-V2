@@ -25,6 +25,13 @@
                                 <GridViewColumn Header="Rijbewijs" Width="100" DisplayMemberBinding="{Binding Rijbewijs}" />
                             </GridView>
                         </ListView.View>
+
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Toon info"/> <!--TODO: hier klopt nog iets niet, er mag enkel een context menu worden weergegeven wanneer een item geselecteerd is. + binding-->
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+
                     </ListView>
 
                 </DockPanel>

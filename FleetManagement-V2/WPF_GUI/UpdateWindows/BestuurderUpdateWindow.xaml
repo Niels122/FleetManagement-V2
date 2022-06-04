@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_GUI.UpdateWindows"
         mc:Ignorable="d"
-        Title="BestuurderUpdateWindow" Height="300" Width="800">
+        Title="BestuurderUpdateWindow" Height="350" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="400"/>
@@ -46,22 +46,22 @@
 
                     <StackPanel Orientation="Horizontal">
                         <Label Content="Rijksregisternummer" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <TextBox Name="model" Text=" " FontSize="15" VerticalAlignment="Center"/>
+                        <TextBox Name="rijksregisternummer" Text="" FontSize="15" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <Label  Content="Rijbewijs" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <ComboBox Name="rijbewijs" FontSize="15" VerticalAlignment="Center"/>
+                        <ComboBox Name="cmbRijbewijs" FontSize="15" VerticalAlignment="Center"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
                         <Label  Content="Voertuig" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        <ComboBox Name="voertuig"  Text=" " FontSize="15" VerticalAlignment="Center"/>
+                        <ComboBox Name="cmbVoertuig"  Text=" " FontSize="15" VerticalAlignment="Center"/>
                     </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Tankkaart" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <ComboBox Name="tankkaart" Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    <ComboBox Name="cmbTankkaart" Text=" " FontSize="15" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <DockPanel>
