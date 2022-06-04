@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_GUI.ReadWindows;
+using WPF_GUI.ToevoegenWindows;
 using WPF_GUI.UpdateWindows;
 
 namespace WPF_GUI.MainPages
@@ -26,11 +28,19 @@ namespace WPF_GUI.MainPages
         private DomeinController _dc;
         public VoertuigPagina(DomeinController dc)
         {
-            InitializeComponent();
-
             _dc = dc;
+            InitializeComponent();
+            RefreshVoertuigen();
         }
 
+        private void RefreshVoertuigen()
+        {
+            List<Voertuig> voertuigen = _dc.GeefVoertuigen();
+            foreach (Voertuig voertuig in voertuigen)          //over lijst van bestuurders lopen en deze invullen
+            {
+                lvOverzichtVoertuigen.Items.Add(voertuig);
+            }
+        }
         private void btnWijzigVoertuig_Click(object sender, RoutedEventArgs e)
         {
             VoertuigUpdateWindow viw = new VoertuigUpdateWindow((Voertuig)lvOverzichtVoertuigen.SelectedItem, _dc);
@@ -39,16 +49,19 @@ namespace WPF_GUI.MainPages
 
         private void btnVoegVoertuigToe_Click(object sender, RoutedEventArgs e)
         {
-
+            NieuwVoertuigWindow nieuwVoertuig = new(_dc);
+            nieuwVoertuig.Show();
         }
 
         private void btnVerwijderVoertuig_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void btnToonAlleInfo_Click(object sender, RoutedEventArgs e)
         {
+            VoertuigInfoWindow voertuigInfo = new(_dc, (Voertuig)lvOverzichtVoertuigen.SelectedItem);
+            voertuigInfo.Show();
 
         }
         private void lvOverzichtVoertuigen_SelectionChanged(object sender, SelectionChangedEventArgs e)

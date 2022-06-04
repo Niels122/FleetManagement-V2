@@ -18,7 +18,7 @@
                         <ListView.View>
                             <GridView>
                                 <!--De namen van de binding moeten exact hetzelfde zijn als de naam van de property-->
-                                <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding DriverId}" />
+                                <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding BestuurderId}" />
                                 <GridViewColumn Header="Naam" Width="100" DisplayMemberBinding="{Binding Naam}" />
                                 <GridViewColumn Header="Voornaam" Width="100" DisplayMemberBinding="{Binding Voornaam}" />
                                 <GridViewColumn Header="Rijksregisternummer" Width="100" DisplayMemberBinding="{Binding Rijksregisternummer}" />

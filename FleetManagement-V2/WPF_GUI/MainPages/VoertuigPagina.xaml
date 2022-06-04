@@ -24,11 +24,11 @@
                         <ListView.View>
                             <GridView>
                                 <!--De namen van de binding moeten exact hetzelfde zijn als de naam van de property-->
-                                <GridViewColumn Header="Voertuignummer" Width="100" DisplayMemberBinding="{Binding Kaartnummer}" />
-                                <GridViewColumn Header="Geldigheidsdatum" Width="100" DisplayMemberBinding="{Binding Geldigheidsdatum}" />
-                                <GridViewColumn Header="Brandstof" Width="100" DisplayMemberBinding="{Binding Brandstof}" />
-                                <GridViewColumn Header="Geblokkeerd" Width="100" DisplayMemberBinding="{Binding Geblokkeerd}" />
-                                <GridViewColumn Header="Voertuig" Width="100" DisplayMemberBinding="{Binding BestuurderId}" />
+                                <GridViewColumn Header="Merk"           Width="100" DisplayMemberBinding="{Binding Merk}" />
+                                <GridViewColumn Header="Chassisnummer"  Width="100" DisplayMemberBinding="{Binding Chassisnummer}" />
+                                <GridViewColumn Header="Nummerplaat"    Width="100" DisplayMemberBinding="{Binding Nummerplaat}" />
+                                <GridViewColumn Header="Brandstof"      Width="100" DisplayMemberBinding="{Binding Brandstoftype}" />
+                                <GridViewColumn Header="Bestuurder"     Width="100" DisplayMemberBinding="{Binding BestuurderId}" />
                             </GridView>
                         </ListView.View>
                     </ListView>

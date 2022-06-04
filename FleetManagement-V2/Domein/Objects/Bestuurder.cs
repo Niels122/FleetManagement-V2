@@ -11,7 +11,7 @@ namespace Domein.Objects
 {
     public class Bestuurder
     {
-        public int DriverId { get; private set; }
+        public int BestuurderId { get; private set; }
         public string Naam { get; private set; }
         public string Voornaam { get; private set; }
         public DateTime Geboortedatum { get; private set; } 
@@ -21,10 +21,10 @@ namespace Domein.Objects
         public int? VoertuigId { get; private set; }
         public int? TankkaartId { get; private set; }
 
-        public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer,
+        public Bestuurder(int bestuurderId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer,
             Rijbewijs rijbewijs, int? adresId = null, int? voertuigId = null, int? tankkaartId = null)
         {
-            DriverId = driverId;
+            BestuurderId = bestuurderId;
             SetNaam(naam);
             SetVoornaam(voornaam);
             SetGeboortedatum(geboortedatum);
