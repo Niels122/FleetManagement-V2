@@ -35,12 +35,12 @@ namespace Domein
             _bestuurderCon.CreateBestuurder(bestuurder);
         }
 
-        void UpdateBestuurder(Bestuurder bestuurder)
+        public void UpdateBestuurder(Bestuurder bestuurder)
         {
             _bestuurderCon.UpdateBestuurder(bestuurder);
         }
 
-        void DeleteBestuurder(Bestuurder bestuurder)
+        public void DeleteBestuurder(Bestuurder bestuurder)
         {
             _bestuurderCon.DeleteBestuurder(bestuurder);
         }

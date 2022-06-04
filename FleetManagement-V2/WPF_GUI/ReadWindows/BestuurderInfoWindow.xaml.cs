@@ -21,11 +21,10 @@ namespace WPF_GUI.ReadWindows
     /// </summary>
     public partial class BestuurderInfoWindow : Window
     {
-        private Bestuurder _bestuurder;
+    
         private DomeinController _dc;
         public BestuurderInfoWindow(DomeinController dc, Bestuurder bestuurder)
-        {
-            _bestuurder = bestuurder;
+        {        
             _dc = dc;
             InitializeComponent();
 

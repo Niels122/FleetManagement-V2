@@ -57,7 +57,19 @@ namespace WPF_GUI.MainPages
             MessageBoxResult result = MessageBox.Show($"Bent u zeker dat u bestuurder {lvOverzichtBestuurders.SelectedItem} wilt verwijderen?", "Verwijder bestuurder", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
-                //_dc.verwijderBestuurder((Bestuurder)lvOverzichtBestuurders.SelectedItem) --> nog niet geimplementeerd
+                try
+                {
+                    _dc.DeleteBestuurder((Bestuurder)lvOverzichtBestuurders.SelectedItem);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Er liep iets mis bij het verwijderen: {ex.Message}", "Er liep iets mis", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    RefreshBestuurders();
+                }
             }
             else if (result == MessageBoxResult.No)
             {
@@ -80,8 +92,15 @@ namespace WPF_GUI.MainPages
 
         private void btnWijzigBestuurder_Click(object sender, RoutedEventArgs e)
         {
-            BestuurderUpdateWindow bestuurderUpdateWindow = new(_dc);
-            bestuurderUpdateWindow.Show();
+            if (lvOverzichtBestuurders.SelectedItem != null)
+            {
+                BestuurderUpdateWindow bestuurderUpdateWindow = new(_dc, (Bestuurder)lvOverzichtBestuurders.SelectedItem);
+                bestuurderUpdateWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Geen item geslecteerd", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void lvOverzichtBestuurders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
