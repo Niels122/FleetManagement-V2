@@ -27,11 +27,20 @@ namespace WPF_GUI.ReadWindows
             _dc = dc;
             InitializeComponent();
 
+        
             var bestuurders = _dc.GeefBestuurders();
-            Bestuurder? bestuurder = bestuurders.Where(b => b.VoertuigId == voertuig.VoertuigId).FirstOrDefault();
+            Bestuurder? bstrdr = bestuurders.Where(b => b.VoertuigId == voertuig.VoertuigId).FirstOrDefault();
 
             id.Text = voertuig.VoertuigId.ToString();
-
+            merk.Text = voertuig.Merk;
+            model.Text = voertuig.Model;
+            chassisnummer.Text = voertuig.Chassisnummer;
+            nummerplaat.Text = voertuig.Nummerplaat;
+            brandstofType.Text = voertuig.Brandstoftype.ToString();
+            wagenType.Text = voertuig.Wagentype.ToString();
+            kleur.Text = voertuig.Kleur;
+            aantalDeuren.Text = voertuig.AantalDeuren.ToString();
+            bestuurder.Text = $"ID: {bstrdr?.BestuurderId} Naam: {bstrdr?.Voornaam + bstrdr?.Naam}";
 
         }
     }

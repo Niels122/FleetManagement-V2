@@ -35,10 +35,14 @@ namespace WPF_GUI.MainPages
 
         private void RefreshVoertuigen()
         {
+            var bestuurders = _dc.GeefBestuurders();
+
             List<Voertuig> voertuigen = _dc.GeefVoertuigen();
-            foreach (Voertuig voertuig in voertuigen)          //over lijst van bestuurders lopen en deze invullen
+            foreach (Voertuig voertuig in voertuigen)
             {
                 lvOverzichtVoertuigen.Items.Add(voertuig);
+                Bestuurder? bstrdr = bestuurders.Where(b => b.VoertuigId == voertuig.VoertuigId).FirstOrDefault();
+
             }
         }
         private void btnWijzigVoertuig_Click(object sender, RoutedEventArgs e)
@@ -55,18 +59,26 @@ namespace WPF_GUI.MainPages
 
         private void btnVerwijderVoertuig_Click(object sender, RoutedEventArgs e)
         {
-            
+            //TODO: implementeren
         }
 
         private void btnToonAlleInfo_Click(object sender, RoutedEventArgs e)
         {
-            VoertuigInfoWindow voertuigInfo = new(_dc, (Voertuig)lvOverzichtVoertuigen.SelectedItem);
-            voertuigInfo.Show();
+            if (lvOverzichtVoertuigen.SelectedItem != null)
+            {
+                VoertuigInfoWindow voertuigInfo = new(_dc, (Voertuig)lvOverzichtVoertuigen.SelectedItem);
+                voertuigInfo.Show();
+            }
+            else
+            {
+                MessageBox.Show("Geen item geslecteerd", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
 
         }
         private void lvOverzichtVoertuigen_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+        //TODO: double click event toevoegen voor items in listview
     }
 }

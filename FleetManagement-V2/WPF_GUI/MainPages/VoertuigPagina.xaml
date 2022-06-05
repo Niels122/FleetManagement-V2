@@ -28,17 +28,17 @@
                                 <GridViewColumn Header="Chassisnummer"  Width="100" DisplayMemberBinding="{Binding Chassisnummer}" />
                                 <GridViewColumn Header="Nummerplaat"    Width="100" DisplayMemberBinding="{Binding Nummerplaat}" />
                                 <GridViewColumn Header="Brandstof"      Width="100" DisplayMemberBinding="{Binding Brandstoftype}" />
-                                <GridViewColumn Header="Bestuurder"     Width="100" DisplayMemberBinding="{Binding BestuurderId}" />
+                                <GridViewColumn Header="Bestuurder"     Width="100" DisplayMemberBinding="{Binding }" />
                             </GridView>
                         </ListView.View>
                     </ListView>
 
                 </DockPanel>
                 <StackPanel DockPanel.Dock="Right">
-                    <Button x:Name="btnVoegVoertuigToe" Content="Voeg toe" Click="btnVoegVoertuigToe_Click"/>
-                    <Button x:Name="btnVerwijderVoertuig" Content="Verwijder" Click="btnVerwijderVoertuig_Click" />
-                    <Button x:Name="btnToonAlleInfo" Content="Toon info" Click="btnToonAlleInfo_Click" />
-                    <Button x:Name="btnWijzigVoertuig" Content="Wijzig" Click="btnWijzigVoertuig_Click" />
+                    <Button x:Name="btnVoegVoertuigToe"     Content="Voeg toe"  Click="btnVoegVoertuigToe_Click"/>
+                    <Button x:Name="btnVerwijderVoertuig"   Content="Verwijder" Click="btnVerwijderVoertuig_Click" />
+                    <Button x:Name="btnToonAlleInfo"        Content="Toon info" Click="btnToonAlleInfo_Click" />
+                    <Button x:Name="btnWijzigVoertuig"      Content="Wijzig"    Click="btnWijzigVoertuig_Click" />
                 </StackPanel>
             </DockPanel>
         </Grid>

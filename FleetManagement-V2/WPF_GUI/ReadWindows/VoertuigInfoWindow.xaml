@@ -5,75 +5,76 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_GUI.ReadWindows"
         mc:Ignorable="d"
-        Title="VoertuigInfoWindow" Height="450" Width="400">
+        Title="VoertuigInfoWindow" Height="450" Width="500">
     <Grid>
 
         <Grid.Resources>
-            <Style TargetType="TextBox">
-                <Setter Property="Width" Value="190" />
-                <Setter Property="IsReadOnly" Value="True" />
-            </Style>
             <Style TargetType="Label">
-                <Setter Property="Width" Value="190" />
+                <Setter Property="Width"               Value="190" />
+                <Setter Property="FontWeight"          Value="Bold" />
+                <Setter Property="FontSize"            Value="15" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="VerticalAlignment"   Value="Center" />
             </Style>
-            <Style TargetType="ComboBox">
-                <Setter Property="Width" Value="190" />
-            </Style>
-            <Style TargetType="Button">
-                <Setter Property="Margin" Value="20" />
-                <Setter Property="Padding" Value="10" />
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize"            Value="15" />
+                <Setter Property="Width"               Value="290" />
+                <Setter Property="IsReadOnly"          Value="True" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="VerticalAlignment"   Value="Center" />
+                <Setter Property="Text"                Value="" />
             </Style>
         </Grid.Resources>
         <DockPanel Grid.Column="0">
             <StackPanel Orientation="Vertical">
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="ID" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="id" Text="" FontSize="15" VerticalAlignment="Center"/>
+                    <Label   Content="ID" />
+                    <TextBox Name="id" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Label  Content="Merk" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="merk" Text=" " FontSize="15"  VerticalAlignment="Center"/>
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Model" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="model" Text=" "  FontSize="15" VerticalAlignment="Center"/>
+                    <Label  Content="Merk" />
+                    <TextBox Name="merk"  />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Chassisnummer" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="chassisnummer" Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    <Label   Content="Model" />
+                    <TextBox Name="model"    />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label  Content="Nummerplaat" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="nummerplaat" FontSize="15" VerticalAlignment="Center"/>
+                    <Label   Content="Chassisnummer" />
+                    <TextBox Name="chassisnummer" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label  Content="Brandstof type" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="brandstofType"  Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    <Label   Content="Nummerplaat" />
+                    <TextBox Name="nummerplaat"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label  Content="Wagen type" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="wagenType" Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    <Label   Content="Brandstof type" />
+                    <TextBox Name="brandstofType"  />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Kleur" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="kleur" Text="" FontSize="15" VerticalAlignment="Center"/>
+                    <Label  Content="Wagen type" />
+                    <TextBox Name="wagenType" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Aantal deuren" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="aantalDeuren" Text="" FontSize="15" VerticalAlignment="Center"/>
+                    <Label Content="Kleur" />
+                    <TextBox Name="kleur" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="Bestuurder" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="bestuurder" Text="" FontSize="15" VerticalAlignment="Center"/>
+                    <Label Content="Aantal deuren" />
+                    <TextBox Name="aantalDeuren" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Bestuurder" />
+                    <TextBox Name="bestuurder" />
                 </StackPanel>
 
             </StackPanel>
