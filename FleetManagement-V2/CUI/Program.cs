@@ -26,15 +26,32 @@ namespace CUI
 
             DomeinController dc = new DomeinController(voertuigCon, tankkaartCon, bestuurderCon, adresCon);
 
-            //Console.WriteLine("Dit zijn de bestuurders met hun adres, automodel en tankkaartid:");
-            //foreach(Bestuurder bestuurder in bc.GeefBestuurdersMetDetails)
+
+            //bestuurderfilterlijst
+            //Console.Write("Zoekterm: ");
+            //string zoekterm = Console.ReadLine();
+            //Console.Write("Kolom ('all' voor elke kolom): ");
+            //string kolom = Console.ReadLine();
+            //foreach (Bestuurder bestuurder in dc.FilterLijstBestuurder(zoekterm, kolom))
+            //{
+            //    Console.WriteLine(bestuurder.ToString());
+            //}
 
             #region Bestuurder
-            //Console.WriteLine("Dit zijn de bestuurders:");            
-            //foreach(Bestuurder bestuurder in dc.GeefBestuurders())
-            //{
-            //    Console.WriteLine(bestuurder.ToString());   
-            //}
+            Console.WriteLine("Dit zijn de bestuurders:");
+            foreach (Bestuurder bestuurder in dc.GeefBestuurders())
+            {
+                Console.WriteLine(bestuurder.ToString());
+            }
+
+            Bestuurder testBestuurder = new Bestuurder(3, "Janssens", "Jan", DateTime.Parse("11/11/1996"), "72111678912", Domein.Enums.Rijbewijs.A, 3, 3, 3);
+            bestuurderCon.CreateBestuurder(testBestuurder);
+
+            Console.WriteLine("Dit zijn de bestuurders:");
+            foreach (Bestuurder bestuurder in dc.GeefBestuurders())
+            {
+                Console.WriteLine(bestuurder.ToString());
+            }
             #endregion
 
             #region
@@ -44,11 +61,11 @@ namespace CUI
             //    Console.WriteLine(adres.ToString());
             //}
 
-            Console.WriteLine("Dit zijn de adressen met bestuurders:");
-            foreach(Adres adres in dc.GeefAdressenMetBestuurder())
-            {
-                Console.WriteLine(adres.ToString());
-            }
+            //Console.WriteLine("Dit zijn de adressen met bestuurders:");
+            //foreach (Adres adres in dc.GeefAdressenMetBestuurder())
+            //{
+            //    Console.WriteLine(adres.ToString());
+            //}
             #endregion
 
             #region

@@ -11,12 +11,13 @@ namespace Domein.Interfaces
     {
 
         List<Bestuurder> GeefBestuurders();
-        List<string> GeefRijksregisternummers();
+        //List<string> GeefRijksregisternummers();
 
         #region CRUD operations
         void CreateBestuurder(Bestuurder bestuurder);
         Bestuurder ReadBestuurder();
         void UpdateBestuurder(Bestuurder bestuurder);
+        void RetrieveBestuurder(Bestuurder bestuurder);
         void DeleteBestuurder(Bestuurder bestuurder); //Soft delete: implement column "IsDeleted"
         #endregion
     }

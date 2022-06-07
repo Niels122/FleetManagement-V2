@@ -24,6 +24,33 @@ namespace Domein
         }
 
 
+        public List<Bestuurder> FilterLijstBestuurder(string zoekterm, string kolom)
+        {
+            List<Bestuurder> lijst = new List<Bestuurder>();
+            string k = kolom.ToLower();
+
+            foreach(Bestuurder bestuurder in _bestuurderCon.GeefBestuurders())
+            {
+                List<string> paramater = new List<string>();
+                if (k == "bestuurderid" || k == "all") paramater.Add(bestuurder.BestuurderId.ToString());
+                if (k == "naam" || k == "all") paramater.Add(bestuurder.Naam);
+                if (k == "voornaam" || k == "all") paramater.Add(bestuurder.Voornaam);
+                if (k == "geboortedatum" || k == "all") paramater.Add(bestuurder.Geboortedatum.ToString());
+                if (k == "rijksregisternummer" || k == "all") paramater.Add(bestuurder.Rijksregisternummer);
+                if (k == "rijbewijs" || k == "all") paramater.Add(bestuurder.Rijbewijs.ToString());
+
+                foreach(string s in paramater)
+                {
+                    if (s.ToLower().Contains(zoekterm))
+                    {
+                        lijst.Add(bestuurder);
+                    }
+                }
+            }
+
+            return lijst;
+        }
+
 
         #region Bestuurder
         public List<Bestuurder> GeefBestuurders()
@@ -38,6 +65,11 @@ namespace Domein
         public void UpdateBestuurder(Bestuurder bestuurder)
         {
             _bestuurderCon.UpdateBestuurder(bestuurder);
+        }
+
+        public void RetrieveBestuurder(Bestuurder bestuurder)
+        {
+            _bestuurderCon.RetrieveBestuurder(bestuurder);
         }
 
         public void DeleteBestuurder(Bestuurder bestuurder)
@@ -60,7 +92,7 @@ namespace Domein
             List<Adres> adressen = new List<Adres>();
             foreach (Adres adres in _adresCon.GeefAdressen())
             {
-                adres.BestuurderId = _bestuurderCon.GeefBestuurderByAdresId(adres.AdresId);
+                adres.BestuurderId = _bestuurderCon.GeefBestuurderIdByAdresId(adres.AdresId);
                 adressen.Add(adres);
             }
             return adressen;

@@ -15,7 +15,7 @@ namespace Domein.Objects
         public string Stad { get; private set; }
         public int? BestuurderId { get; set; }
 
-        public Adres(int adresId, string straat, string nummer, int postcode, string stad, int? bestuurderId)
+        public Adres(int adresId, string straat, string nummer, int postcode, string stad, int? bestuurderId = null)
         {
             AdresId = adresId;
             Straat = straat;
