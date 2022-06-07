@@ -11,7 +11,7 @@ namespace Domein.Objects
 {
     public class Bestuurder
     {
-        public int DriverId { get; private set; }
+        public int BestuurderId { get; private set; }
         public string Naam { get; private set; }
         public string Voornaam { get; private set; }
         public DateTime Geboortedatum { get; private set; } 
@@ -21,10 +21,10 @@ namespace Domein.Objects
         public int? VoertuigId { get; private set; }
         public int? TankkaartId { get; private set; }
 
-        public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer,
+        public Bestuurder(int bestuurderId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer,
             Rijbewijs rijbewijs, int? adresId = null, int? voertuigId = null, int? tankkaartId = null)
         {
-            DriverId = driverId;
+            BestuurderId = bestuurderId;
             SetNaam(naam);
             SetVoornaam(voornaam);
             SetGeboortedatum(geboortedatum);
@@ -203,8 +203,8 @@ namespace Domein.Objects
 
         public override string ToString()
         {
-            return string.Format("Naam: {0}, Voornaam: {1}, Geboortedatum: {2}, Rijksregisternummer: {3}, Rijbewijs: {4}",
-                Naam, Voornaam, Geboortedatum, Rijksregisternummer, Rijbewijs);
+            return string.Format("ID: {0}, Naam: {1}, Voornaam: {2}, Geboortedatum: {3}, Rijksregisternummer: {4}, Rijbewijs: {5}, Adres: {6}, Voertuig: {7}, Tankkaart: {8}",
+                BestuurderId, Naam, Voornaam, Geboortedatum, Rijksregisternummer, Rijbewijs, AdresId, VoertuigId, TankkaartId);
         }
     }
 }

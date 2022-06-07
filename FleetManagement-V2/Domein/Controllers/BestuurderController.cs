@@ -22,7 +22,7 @@ namespace Domein.Controllers
             return _bestuurderRepo.GeefBestuurders();
         }
 
-        public int? GeefBestuurderByAdresId(int adresId)
+        public int? GeefBestuurderIdByAdresId(int adresId) //List<int> teruggeven voor als er meerdere bestuurders op 1 adres zijn
         {
             Bestuurder bestuurder = _bestuurderRepo.GeefBestuurders().Where(a => a.AdresId == adresId).FirstOrDefault();
             int? result = bestuurder.AdresId;
@@ -37,6 +37,11 @@ namespace Domein.Controllers
         public void UpdateBestuurder(Bestuurder bestuurder)
         {
             _bestuurderRepo.UpdateBestuurder(bestuurder);
+        }
+
+        public void RetrieveBestuurder(Bestuurder bestuurder)
+        {
+            _bestuurderRepo.RetrieveBestuurder(bestuurder);
         }
 
         public void DeleteBestuurder(Bestuurder bestuurder)
