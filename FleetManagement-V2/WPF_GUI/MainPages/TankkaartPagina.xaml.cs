@@ -1,4 +1,5 @@
 ﻿using Domein;
+using Domein.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_GUI.ReadWindows;
 using WPF_GUI.ToevoegenWindows;
+using WPF_GUI.UpdateWindows;
 
 namespace WPF_GUI.MainPages
 {
@@ -27,8 +30,18 @@ namespace WPF_GUI.MainPages
         {
             InitializeComponent();
             _dc = dc;
+            RefreshTankkaarten();
         }
 
+        private void RefreshTankkaarten()
+        {
+            var tankkaarten = _dc.GeefTankkaarten();
+
+            foreach (Tankkaart tankkaart in tankkaarten)
+            {
+                lvOverzichtTankkaarten.Items.Add(tankkaart);
+            }
+        }
         private void btnVoegTankkaartToe_Click(object sender, RoutedEventArgs e)
         {
             NieuweTankkaartWindow nieuweTankkaartWindow = new NieuweTankkaartWindow(_dc);
@@ -42,6 +55,18 @@ namespace WPF_GUI.MainPages
         private void lvOverzichtTankkaarten_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void btnToonAlleInfo_Click(object sender, RoutedEventArgs e)
+        {
+            TankkaartInfoWindow tankkaartInfo = new(_dc, (Tankkaart)lvOverzichtTankkaarten.SelectedItem);
+            tankkaartInfo.Show();
+        }
+
+        private void btnWijzigTankkaart_Click(object sender, RoutedEventArgs e)
+        {
+            TankkaartUpdateWindow tankkaartUpdate = new(_dc, (Tankkaart)lvOverzichtTankkaarten.SelectedItem);
+            tankkaartUpdate.Show();
         }
     }
 }

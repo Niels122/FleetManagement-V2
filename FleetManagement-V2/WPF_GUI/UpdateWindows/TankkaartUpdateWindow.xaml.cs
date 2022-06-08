@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Enums;
+using Domein.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,43 +15,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WPF_GUI.ToevoegenWindows
+namespace WPF_GUI.UpdateWindows
 {
     /// <summary>
-    /// Interaction logic for NieuwVoertuigWindow.xaml
+    /// Interaction logic for TankkaartUpdateWindow.xaml
     /// </summary>
-    public partial class NieuwVoertuigWindow : Window
+    public partial class TankkaartUpdateWindow : Window
     {
         private DomeinController _dc;
-        public NieuwVoertuigWindow(DomeinController dc)
+        public TankkaartUpdateWindow(DomeinController dc, Tankkaart tankkaart)
         {
             _dc = dc;
             InitializeComponent();
             FillBrandstofType();
-            FillWagenType();
-            FillKleur();
-            FillAantalDeuren();
+
+            kaartnummer.Text = tankkaart.Kaartnummer;
+            geldigheidsdatum.SelectedDate = tankkaart.Geldigheidsdatum;
+            geblokkeerd.IsChecked = tankkaart.Geblokkeerd;
+            pincode.Text = tankkaart.Pincode.ToString();
+            brandstofType.SelectedItem = tankkaart.Brandstof;
+
         }
         private void FillBrandstofType()
         {
             var brandstoftypes = Enum.GetValues(typeof(Brandstoftype)).Cast<Brandstoftype>().ToList().Distinct();
-            cmbBrandstoftype.ItemsSource = brandstoftypes;
-        }
-        private void FillWagenType()
-        {
-            var wagentypes = Enum.GetValues(typeof(Wagentype)).Cast<Wagentype>().ToList().Distinct();
-            cmbWagentype.ItemsSource = wagentypes;
-        }
-        private void FillKleur()
-        {
-            string[] kleuren = { "Zwart", "Wit", "Groen", "Blauw", "Geel" };
-            cmbKleur.ItemsSource = kleuren;
-
-        }
-        private void FillAantalDeuren()
-        {
-            var aantalDeuren = Enum.GetValues(typeof(Deuren)).Cast<Deuren>().ToList().Distinct();
-            cmbAantalDeuren.ItemsSource = aantalDeuren;
+            brandstofType.ItemsSource = brandstoftypes;
         }
 
         private void btnOpslaan_Click(object sender, RoutedEventArgs e)

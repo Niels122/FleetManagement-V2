@@ -5,8 +5,62 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_GUI.ToevoegenWindows"
         mc:Ignorable="d"
-        Title="NieuweTankkaartWindow" Height="450" Width="800">
+        Title="NieuweTankkaartWindow" Height="400" Width="400">
     <Grid>
-        
+
+        <DockPanel Margin=" 10">
+            <DockPanel.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="20" />
+                    <Setter Property="Padding" Value="10" />
+                </Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="2" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+                <Style TargetType="ComboBox">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="2" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style>
+                <Style TargetType="DatePicker">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="2" />
+                </Style>
+                <Style TargetType="CheckBox">
+                    <Setter Property="Margin" Value="5" />
+                    <Setter Property="Padding" Value="2" />
+                </Style>
+            </DockPanel.Resources>
+                <Grid>
+
+                    <StackPanel  Orientation="Vertical">
+
+                        <Label    Content="Kaartnummer"/>
+                        <TextBox  x:Name="tbKaartnummer" Text="" />
+
+                        <Label    Content="Geldigheidsdatum"/>
+                        <DatePicker  x:Name="dpGeldigheidsdatum" Text="" />
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label    Content="Geblokeerd"/>
+                            <CheckBox  x:Name="cbGeblokkeerd" />
+                        </StackPanel>
+
+                        <Label    Content="Brandstoftype"/>
+                        <ComboBox x:Name="cmbBrandstoftype" Text="" />
+
+                        <Label    Content="Pincode"/>
+                        <TextBox x:Name="tbPincode" Text="" />
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="btnOpslaan"    Content="Opslaan"   Background="LawnGreen" Width="100" Click="btnOpslaan_Click"/>
+                            <Button x:Name="btnAnnuleren"  Content="Annuleren" Background="Red"       Width="100" Click="btnAnnuleren_Click"/>
+                        </StackPanel>
+
+                    </StackPanel>
+                </Grid>
+        </DockPanel>
     </Grid>
 </Window>

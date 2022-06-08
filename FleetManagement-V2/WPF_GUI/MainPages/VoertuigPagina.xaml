@@ -24,21 +24,21 @@
                         <ListView.View>
                             <GridView>
                                 <!--De namen van de binding moeten exact hetzelfde zijn als de naam van de property-->
-                                <GridViewColumn Header="Voertuignummer" Width="100" DisplayMemberBinding="{Binding Kaartnummer}" />
-                                <GridViewColumn Header="Geldigheidsdatum" Width="100" DisplayMemberBinding="{Binding Geldigheidsdatum}" />
-                                <GridViewColumn Header="Brandstof" Width="100" DisplayMemberBinding="{Binding Brandstof}" />
-                                <GridViewColumn Header="Geblokkeerd" Width="100" DisplayMemberBinding="{Binding Geblokkeerd}" />
-                                <GridViewColumn Header="Voertuig" Width="100" DisplayMemberBinding="{Binding BestuurderId}" />
+                                <GridViewColumn Header="Merk"           Width="100" DisplayMemberBinding="{Binding Merk}" />
+                                <GridViewColumn Header="Chassisnummer"  Width="100" DisplayMemberBinding="{Binding Chassisnummer}" />
+                                <GridViewColumn Header="Nummerplaat"    Width="100" DisplayMemberBinding="{Binding Nummerplaat}" />
+                                <GridViewColumn Header="Brandstof"      Width="100" DisplayMemberBinding="{Binding Brandstoftype}" />
+                                <GridViewColumn Header="Bestuurder"     Width="100" DisplayMemberBinding="{Binding }" />
                             </GridView>
                         </ListView.View>
                     </ListView>
 
                 </DockPanel>
                 <StackPanel DockPanel.Dock="Right">
-                    <Button x:Name="btnVoegVoertuigToe" Content="Voeg toe" Click="btnVoegVoertuigToe_Click"/>
-                    <Button x:Name="btnVerwijderVoertuig" Content="Verwijder" Click="btnVerwijderVoertuig_Click" />
-                    <Button x:Name="btnToonAlleInfo" Content="Toon info" Click="btnToonAlleInfo_Click" />
-                    <Button x:Name="btnWijzigVoertuig" Content="Wijzig" Click="btnWijzigVoertuig_Click" />
+                    <Button x:Name="btnVoegVoertuigToe"     Content="Voeg toe"  Click="btnVoegVoertuigToe_Click"/>
+                    <Button x:Name="btnVerwijderVoertuig"   Content="Verwijder" Click="btnVerwijderVoertuig_Click" />
+                    <Button x:Name="btnToonAlleInfo"        Content="Toon info" Click="btnToonAlleInfo_Click" />
+                    <Button x:Name="btnWijzigVoertuig"      Content="Wijzig"    Click="btnWijzigVoertuig_Click" />
                 </StackPanel>
             </DockPanel>
         </Grid>
