@@ -79,6 +79,10 @@ namespace WPF_GUI.MainPages
         {
 
         }
-        //TODO: double click event toevoegen voor items in listview
+        private void lvOverzichtBestuurders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            VoertuigInfoWindow voertuigInfo = new(_dc, (Voertuig)lvOverzichtVoertuigen.SelectedItem);
+            voertuigInfo.Show();
+        }
     }
 }

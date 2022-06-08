@@ -11,6 +11,12 @@
     <Border BorderBrush="Black" BorderThickness="1" Margin="5">
         <Grid Background="White">
             <DockPanel Margin="10">
+                <DockPanel.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="2" />
+                    </Style>
+                </DockPanel.Resources>
                 <Label DockPanel.Dock="Top"  Content="Overzicht bestuurders:" FontWeight="Bold"/>
                 <DockPanel>
                     <ListView x:Name="lvOverzichtBestuurders" DockPanel.Dock="Bottom" Margin="0,0,10,0" SelectionChanged="lvOverzichtBestuurders_SelectionChanged" 
