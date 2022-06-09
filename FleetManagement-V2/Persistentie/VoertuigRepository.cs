@@ -48,26 +48,26 @@ namespace Persistentie
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new("SELECT id, nummerplaat, chassisnummer, merk, model, typevoertuig, brandstof, kleur, aantalDeuren FROM dbo.voertuig", conn);
-                    try
-                    {
-                        using (SqlDataReader reader = cmd.ExecuteReader())
-                        {
-                            if (reader.HasRows)
-                            {
-                                while (reader.Read())
-                                {
-                                    int id = (int)reader["id"];
-                                    string nummerplaat = (string)reader["nummerplaat"];
-                                    string chassisnummer = (string)reader["chassisnummer"];
-                                    string merk = (string)reader["merk"];
-                                    string model = (string)reader["model"];
-                                    string wagentype = (string)reader["typevoertuig"];
-                                    string brandstof = (string)reader["brandstof"];
-                                    string kleur = (string)reader["kleur"];
-                                    int aantaldeuren = (int)reader["aantaldeuren"];
+                    string readSql = "SELECT chassisnummer, nummerplaat, merk, model, typevoertuig, " +
+                        "brandstof, kleur, aantalDeuren FROM voertuig WHERE isDeleted = 0";
+                    SqlCommand cmd = new(readSql, conn);
 
-                                    #region setBrandstoftype
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.HasRows)
+                        {
+                            while (reader.Read())
+                            {
+                                string chassisnummer = (string)reader["chassisnummer"];
+                                string nummerplaat = (string)reader["nummerplaat"];
+                                string merk = (string)reader["merk"];
+                                string model = (string)reader["model"];
+                                string wagentype = (string)reader["typevoertuig"];
+                                string brandstof = (string)reader["brandstof"];
+                                string kleur = (string)reader["kleur"];
+                                int aantaldeuren = (int)reader["aantaldeuren"];
+
+                               #region setBrandstoftype
                                     //tabel in database met brandstoftype en id + foreign key of switch gebruiken
                                     //dit moet gebeuren omdat brandstoftype een enum is. Misschien is hier een mooiere oplossing voor maar dit is het enige wat ik zelf kon bedenken.
                                     Brandstoftype brandstoftype;
@@ -93,7 +93,7 @@ namespace Persistentie
                                     }
                                     #endregion
 
-                                    #region setWagentype
+                               #region setWagentype
                                     //van string naar enum.
                                     Wagentype _wagentype;
                                     if (wagentype == "personenauto")
@@ -106,20 +106,15 @@ namespace Persistentie
                                     }
                                     #endregion
 
-                                    voertuigen.Add(new Voertuig(id, merk, model, chassisnummer, nummerplaat, brandstoftype, _wagentype, kleur, aantaldeuren, null));
-                                }
+                                voertuigen.Add(new Voertuig(merk, model, chassisnummer, nummerplaat, brandstoftype, _wagentype, kleur, aantaldeuren, null));
                             }
                         }
-                    }
-                    finally
-                    {
-                        conn.Close(); //wordt dit niet automatisch gedaan?
                     }
                 }
             }
             catch (Exception ex)
             {
-                throw new VoertuigException(ex.Message); //snap ik niet
+                throw new VoertuigException($"Er gign iets mis in de persitentielaag bij het ophalen van de Voertuigen {ex.Message}"); 
             }
 
             return voertuigen;

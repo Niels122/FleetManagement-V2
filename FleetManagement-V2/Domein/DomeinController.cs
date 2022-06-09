@@ -53,9 +53,9 @@ namespace Domein
 
 
         #region Bestuurder
-        public List<Bestuurder> GeefBestuurders()
+        public List<Bestuurder> GeefBestuurders(string bestuurId = null)
         {
-            return _bestuurderCon.GeefBestuurders();
+            return _bestuurderCon.GeefBestuurders(bestuurId);
         }
         public void CreateBestuurder(Bestuurder bestuurder)
         {

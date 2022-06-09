@@ -11,18 +11,18 @@ namespace Domein.Objects
 {
     public class Bestuurder
     {
-        public int BestuurderId { get; private set; }
+        public string BestuurderId { get; private set; }
         public string Naam { get; private set; }
         public string Voornaam { get; private set; }
         public DateTime Geboortedatum { get; private set; } 
         public string Rijksregisternummer { get; private set; }
         public Rijbewijs Rijbewijs { get; private set; }
+        public string ChassisnummerVoertuig { get; private set; }
+        public string TankkaartNummer { get; private set; }
         public int? AdresId { get; private set; }
-        public int? VoertuigId { get; private set; }
-        public int? TankkaartId { get; private set; }
 
-        public Bestuurder(int bestuurderId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer,
-            Rijbewijs rijbewijs, int? adresId = null, int? voertuigId = null, int? tankkaartId = null)
+        public Bestuurder(string bestuurderId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer,
+            Rijbewijs rijbewijs, string chassisnummerVoertuig = null, string tankkaartnummer = null, int? adresId = null)
         {
             BestuurderId = bestuurderId;
             SetNaam(naam);
@@ -30,9 +30,9 @@ namespace Domein.Objects
             SetGeboortedatum(geboortedatum);
             SetRijksregisternummer(rijksregisternummer);
             SetRijbewijs(rijbewijs);
+            SetVoertuig(chassisnummerVoertuig);
+            SetTankkaart(tankkaartnummer);
             SetAdres(adresId);
-            SetVoertuig(voertuigId);
-            SetTankkaart(tankkaartId);
         }
 
         #region setters
@@ -90,19 +90,19 @@ namespace Domein.Objects
             }
         }
 
+        public void SetVoertuig(string chassisnummer)
+        {
+            ChassisnummerVoertuig = chassisnummer;
+        }
+
+        public void SetTankkaart(string tankkaart)
+        {
+            TankkaartNummer = tankkaart;
+        }
+
         public void SetAdres(int? adres)
         {
             AdresId = adres;
-        }
-
-        public void SetVoertuig(int? voertuig)
-        {
-            VoertuigId = voertuig;
-        }
-
-        public void SetTankkaart(int? tankkaart)
-        {
-            TankkaartId = tankkaart;
         }
         #endregion
 
@@ -152,7 +152,7 @@ namespace Domein.Objects
         public override string ToString()
         {
             return string.Format("ID: {0}, Naam: {1}, Voornaam: {2}, Geboortedatum: {3}, Rijksregisternummer: {4}, Rijbewijs: {5}, Adres: {6}, Voertuig: {7}, Tankkaart: {8}",
-                BestuurderId, Naam, Voornaam, Geboortedatum, Rijksregisternummer, Rijbewijs, AdresId, VoertuigId, TankkaartId);
+                BestuurderId, Naam, Voornaam, Geboortedatum, Rijksregisternummer, Rijbewijs, AdresId, ChassisnummerVoertuig, TankkaartNummer);
         }
     }
 }
