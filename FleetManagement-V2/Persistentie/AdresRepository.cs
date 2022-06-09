@@ -35,7 +35,8 @@ namespace Persistentie
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new("SELECT id, straat, huisnummer, postcode, stad FROM adres WHERE is_deleted = 0;", conn);
+                    string readSql = "SELECT id, straat, huisnummer, postcode, stad FROM adres";
+                    SqlCommand cmd = new(readSql , conn);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
@@ -57,9 +58,9 @@ namespace Persistentie
                     conn.Close();
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw new AdresException("Er ging iets mis bij het ophalen GeefAdressen in de persistentielaag.");
+                throw new AdresException($"Er ging iets mis bij het ophalen GeefAdressen in de persistentielaag, {ex.Message}");
             }
 
             return adressen;

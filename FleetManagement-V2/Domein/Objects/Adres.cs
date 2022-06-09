@@ -71,8 +71,8 @@ namespace Domein.Objects
 
         public override string ToString()
         {
-            return string.Format("AdresId: {0}, Straat: {1}, Nummer: {2}, Stad: {3}, Postcode: {4}, BestuurderId: {5}",
-                AdresId, Straat, Nummer, Stad, Postcode, BestuurderId);
+            return string.Format("AdresId: {0}, Straat: {1}, Nummer: {2}, Postcode: {3}, Stad: {4}, BestuurderId: {5}",
+                AdresId, Straat, Nummer, Postcode, Stad, BestuurderId);
         }
 
         
