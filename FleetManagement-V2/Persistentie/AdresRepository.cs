@@ -28,13 +28,14 @@ namespace Persistentie
         public List<Adres> GeefAdressen()
         {
             List<Adres> adressen = new List<Adres>();
+
             try
             {
                 using(SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new("SELECT id, straat, huisnummer, postcode, stad FROM adres;", conn);
+                    SqlCommand cmd = new("SELECT id, straat, huisnummer, postcode, stad FROM adres WHERE is_deleted = 0;", conn);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
@@ -52,6 +53,8 @@ namespace Persistentie
                             }
                         }
                     }
+
+                    conn.Close();
                 }
             }
             catch

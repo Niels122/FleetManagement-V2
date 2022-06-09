@@ -39,9 +39,9 @@ namespace Domein
                 if (k == "rijksregisternummer" || k == "all") paramater.Add(bestuurder.Rijksregisternummer);
                 if (k == "rijbewijs" || k == "all") paramater.Add(bestuurder.Rijbewijs.ToString());
 
-                foreach(string s in paramater)
+                foreach(string p in paramater)
                 {
-                    if (s.ToLower().Contains(zoekterm))
+                    if (p.ToLower().Contains(zoekterm))
                     {
                         lijst.Add(bestuurder);
                     }
@@ -78,9 +78,6 @@ namespace Domein
         }
         #endregion
 
-
-
-
         #region Adres
         public List<Adres> GeefAdressen()
         {
@@ -113,9 +110,6 @@ namespace Domein
 
         #endregion
 
-
-
-
         #region Tankkaart
         public List<Tankkaart> GeefTankkaarten()
         {
@@ -136,8 +130,6 @@ namespace Domein
             _tankkaartCon.UpdateTankkaart(tankkaart);
         }
         #endregion
-
-
 
         #region Voertuig
         public List<Voertuig> GeefVoertuigen()
@@ -161,17 +153,16 @@ namespace Domein
         }
         #endregion
 
-
         //public List<Voertuig> GeefVoertuigen(bool metBestuurder = true) //linken van voertuig aan bestuurder
         //{
-        //    var result = _vc.GeefVoertuigen();
+        //    var result = _voertuigCon.GeefVoertuigen();
         //    if (metBestuurder)
         //    {
-        //        var bestuurders = _bc.GeefBestuurders();
+        //        var bestuurders = _bestuurderCon.GeefBestuurders();
         //        foreach (var bestuurder in bestuurders)
         //        {
-        //            var voertuig = result.Where(v => v.Id == bestuurder.VoertuigId).FirstOrDefault();
-        //            voertuig.Bestuurder = bestuurder;
+        //            var voertuig = result.Where(v => v.VoertuigId == bestuurder.VoertuigId).FirstOrDefault();
+        //            voertuig.BestuurderId = bestuurder.BestuurderId;
 
         //        }
 

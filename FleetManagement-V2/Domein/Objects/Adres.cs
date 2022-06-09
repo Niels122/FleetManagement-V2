@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domein.Exceptions;
 
 namespace Domein.Objects
 {
@@ -15,15 +16,58 @@ namespace Domein.Objects
         public string Stad { get; private set; }
         public int? BestuurderId { get; set; }
 
-        public Adres(int adresId, string straat, string nummer, int postcode, string stad, int? bestuurderId = null)
+        public Adres(int adresId, string straat, string huisnummer, int postcode, string stad, int? bestuurderId = null)
         {
             AdresId = adresId;
+            SetStraat(straat);
+            SetHuisnummer(huisnummer);
+            SetPostcode(postcode);
+            SetStad(stad);
+            SetBestuurderId(bestuurderId);
+        }
+
+        #region
+        public void SetStraat(string straat)
+        {
+            if (string.IsNullOrWhiteSpace(straat))
+            {
+                throw new AdresException("Straatnaam moet ingevuld zijn.");
+            }
             Straat = straat;
-            Nummer = nummer;
+        }
+
+        public void SetHuisnummer(string huisnummer)
+        {
+            if (string.IsNullOrWhiteSpace(huisnummer))
+            {
+                throw new AdresException("Huisnummer moet ingevuld zijn.");
+            }
+            Nummer = huisnummer;
+        }
+
+        public void SetPostcode(int postcode)
+        {
+            if (postcode < 1000 || postcode > 9999)
+            {
+                throw new AdresException("Postcode is ongdeldig.");
+            }
             Postcode = postcode;
+        }
+
+        public void SetStad(string stad)
+        {
+            if (string.IsNullOrWhiteSpace(stad))
+            {
+                throw new AdresException("Stad moet ingevuld zijn.");
+            }
             Stad = stad;
+        }
+
+        public void SetBestuurderId(int? bestuurderId)
+        {
             BestuurderId = bestuurderId;
         }
+        #endregion
 
         public override string ToString()
         {
@@ -31,21 +75,6 @@ namespace Domein.Objects
                 AdresId, Straat, Nummer, Stad, Postcode, BestuurderId);
         }
 
-        //public List<Voertuig> GeefVoertuigen(bool metBestuurder = true) //linken van voertuig aan bestuurder
-        //{
-        //    var result = _vc.GeefVoertuigen();
-        //    if (metBestuurder)
-        //    {
-        //        var bestuurders = _bc.GeefBestuurders();
-        //        foreach (var bestuurder in bestuurders)
-        //        {
-        //            var voertuig = result.Where(v => v.Id == bestuurder.VoertuigId).FirstOrDefault();
-        //            voertuig.Bestuurder = bestuurder;
-
-        //        }
-
-        //    }
-        //    return result;
-        //}
+        
     }
 }
