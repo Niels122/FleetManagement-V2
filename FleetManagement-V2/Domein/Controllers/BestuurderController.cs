@@ -17,9 +17,9 @@ namespace Domein.Controllers
             _bestuurderRepo = bestuurderRepo;
         }
 
-        public List<Bestuurder> GeefBestuurders()
+        public List<Bestuurder> GeefBestuurders(string bestuurId = null)
         {
-            return _bestuurderRepo.GeefBestuurders();
+            return _bestuurderRepo.GeefBestuurders(bestuurId);
         }
 
         public int? GeefBestuurderIdByAdresId(int adresId) //List<int> teruggeven voor als er meerdere bestuurders op 1 adres zijn

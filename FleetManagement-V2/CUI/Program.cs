@@ -44,14 +44,15 @@ namespace CUI
             #endregion
 
             #region CRUD
-            Console.WriteLine("Dit zijn de bestuurders:");
-            foreach (Bestuurder bestuurder in dc.GeefBestuurders())
-            {
-                Console.WriteLine(bestuurder.ToString());
-            }
-            Console.WriteLine("-----------------------------------------------");
 
-            Bestuurder testBestuurder = new Bestuurder(0, "Hazard", "Eden", DateTime.Parse("23/10/1956"), "72111878912", Domein.Enums.Rijbewijs.A);
+            //Console.WriteLine("Dit zijn de bestuurders:");
+            //foreach (Bestuurder bestuurder in dc.GeefBestuurders())
+            //{
+            //    Console.WriteLine(bestuurder.ToString());
+            //}
+            //Console.WriteLine("-----------------------------------------------");
+
+            //Bestuurder testBestuurder = new Bestuurder(0, "Hazard", "Eden", DateTime.Parse("23/10/1956"), "72111878912", Domein.Enums.Rijbewijs.A);
             //bestuurderCon.CreateBestuurder(testBestuurder);
             //bestuurderCon.UpdateBestuurder(testBestuurder);   //getest op normale input, foute input (exception persistentie) en onbestaande input (exception persistentie)
             //bestuurderCon.DeleteBestuurder(testBestuurder);   //getest op normale input, foute input en onbestaande input
@@ -63,13 +64,15 @@ namespace CUI
             //{
             //    Console.WriteLine(bestuurder.ToString());
             //}
+
             #endregion
 
-        #endregion
+            #endregion
 
-            #region
+            #region Adressen
+
             //Console.WriteLine("Dit zijn de adressen:");
-            //foreach(Adres adres in adresCon.GeefAdressen())
+            //foreach (Adres adres in adresCon.GeefAdressen())
             //{
             //    Console.WriteLine(adres.ToString());
             //}
@@ -79,22 +82,27 @@ namespace CUI
             //{
             //    Console.WriteLine(adres.ToString());
             //}
+
             #endregion
 
-            #region
+            #region Voertuigen
+
             //Console.WriteLine("Dit zijn de voertuigen:");
-            //foreach(Voertuig voertuig in voertuigCon.GeefVoertuigen())
+            //foreach (Voertuig voertuig in voertuigCon.GeefVoertuigen())
             //{
             //    Console.WriteLine(voertuig.ToString());
             //}
+
             #endregion
 
-            #region
-            //Console.WriteLine("Dit zijn de tankkaarten:");
-            //foreach(Tankkaart tankkaart in tankkaartCon.GeefTankkaarten())
-            //{
-            //    Console.WriteLine(tankkaart.ToString());
-            //}
+            #region Tankkaarten
+
+            Console.WriteLine("Dit zijn de tankkaarten:");
+            foreach (Tankkaart tankkaart in tankkaartCon.GeefTankkaarten())
+            {
+                Console.WriteLine(tankkaart.ToString());
+            }
+
             #endregion
         }
     }
