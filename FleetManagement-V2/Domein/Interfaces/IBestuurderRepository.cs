@@ -10,15 +10,13 @@ namespace Domein.Interfaces
     public interface IBestuurderRepository
     {
 
-        List<Bestuurder> GeefBestuurders();
-        //List<string> GeefRijksregisternummers();
+        List<Bestuurder> GeefBestuurders(int? bestuurId = null);
 
         #region CRUD operations
         void CreateBestuurder(Bestuurder bestuurder);
-        Bestuurder ReadBestuurder();
         void UpdateBestuurder(Bestuurder bestuurder);
         void RetrieveBestuurder(Bestuurder bestuurder);
-        void DeleteBestuurder(Bestuurder bestuurder); //Soft delete: implement column "IsDeleted"
+        void DeleteBestuurder(Bestuurder bestuurder); 
         #endregion
     }
 

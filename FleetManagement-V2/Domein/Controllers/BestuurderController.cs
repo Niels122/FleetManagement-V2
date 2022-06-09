@@ -48,26 +48,5 @@ namespace Domein.Controllers
         {
             _bestuurderRepo.DeleteBestuurder(bestuurder);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //foreach (string rijksnr in _bestuurdersRepo.GeefRijksregisternummers()) 
-        //{
-        //    if (rijksnr == rijksnummer)
-        //    {
-        //        throw new RijksregisternummerException("Dit rijksregisternummer zit al in het systeem.");
-        //    }
-        //}
     }
 }

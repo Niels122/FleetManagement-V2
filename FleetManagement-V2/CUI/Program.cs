@@ -27,6 +27,11 @@ namespace CUI
             DomeinController dc = new DomeinController(voertuigCon, tankkaartCon, bestuurderCon, adresCon);
 
 
+
+
+            #region Bestuurder
+
+            #region filter
             //bestuurderfilterlijst
             //Console.Write("Zoekterm: ");
             //string zoekterm = Console.ReadLine();
@@ -36,23 +41,31 @@ namespace CUI
             //{
             //    Console.WriteLine(bestuurder.ToString());
             //}
-
-            #region Bestuurder
-            Console.WriteLine("Dit zijn de bestuurders:");
-            foreach (Bestuurder bestuurder in dc.GeefBestuurders())
-            {
-                Console.WriteLine(bestuurder.ToString());
-            }
-
-            Bestuurder testBestuurder = new Bestuurder(3, "Janssens", "Jan", DateTime.Parse("11/11/1996"), "72111678912", Domein.Enums.Rijbewijs.A, 3, 3, 3);
-            bestuurderCon.CreateBestuurder(testBestuurder);
-
-            Console.WriteLine("Dit zijn de bestuurders:");
-            foreach (Bestuurder bestuurder in dc.GeefBestuurders())
-            {
-                Console.WriteLine(bestuurder.ToString());
-            }
             #endregion
+
+            #region CRUD
+            Console.WriteLine("Dit zijn de bestuurders:");
+            foreach (Bestuurder bestuurder in dc.GeefBestuurders())
+            {
+                Console.WriteLine(bestuurder.ToString());
+            }
+            Console.WriteLine("-----------------------------------------------");
+
+            Bestuurder testBestuurder = new Bestuurder(0, "Hazard", "Eden", DateTime.Parse("23/10/1956"), "72111878912", Domein.Enums.Rijbewijs.A);
+            //bestuurderCon.CreateBestuurder(testBestuurder);
+            //bestuurderCon.UpdateBestuurder(testBestuurder);   //getest op normale input, foute input (exception persistentie) en onbestaande input (exception persistentie)
+            //bestuurderCon.DeleteBestuurder(testBestuurder);   //getest op normale input, foute input en onbestaande input
+            //bestuurderCon.RetrieveBestuurder(testBestuurder); //getest op normale input, foute input en onbestaande input
+
+            //Console.WriteLine("-----------------------------------------------");
+            //Console.WriteLine("Dit zijn de bestuurders:");
+            //foreach (Bestuurder bestuurder in dc.GeefBestuurders())
+            //{
+            //    Console.WriteLine(bestuurder.ToString());
+            //}
+            #endregion
+
+        #endregion
 
             #region
             //Console.WriteLine("Dit zijn de adressen:");

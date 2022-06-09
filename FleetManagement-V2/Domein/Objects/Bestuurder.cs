@@ -35,58 +35,6 @@ namespace Domein.Objects
             SetTankkaart(tankkaartId);
         }
 
-        #region foute constructors
-        //// https://stackoverflow.com/questions/1814953/how-to-do-constructor-chaining-in-c-sharp
-        //// https://stackoverflow.com/questions/40660936/constructor-chaining-with-class-as-parameter
-        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs)
-        //    :this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, null, null)
-        //{
-
-        //}
-
-        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-        //    Adres adres)
-        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, null, null)
-        //{
-
-        //}
-
-        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-        //    Adres adres, Voertuig voertuig)
-        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, voertuig, null)
-        //{
-
-        //}
-
-        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-        //    Adres adres, Tankkaart tankkaart)
-        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, adres, null, tankkaart)
-        //{
-
-        //}
-
-        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-        //    Voertuig voertuig)
-        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, voertuig, null)
-        //{
-
-        //}
-
-        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-        //    Voertuig voertuig, Tankkaart tankkaart)
-        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, voertuig, tankkaart)
-        //{
-
-        //}
-
-        //public Bestuurder(int driverId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer, Rijbewijs rijbewijs,
-        //    Tankkaart tankkaart)
-        //    : this(driverId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, null, null, tankkaart)
-        //{
-
-        //}
-        #endregion
-
         #region setters
         public void SetNaam(string naam)
         {
