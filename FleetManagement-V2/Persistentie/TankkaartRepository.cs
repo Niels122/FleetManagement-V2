@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
+using Domein.Enums;
 
 namespace Persistentie
 {
@@ -17,13 +18,16 @@ namespace Persistentie
         public List<Tankkaart> GeefTankkaarten()
         {
             List<Tankkaart> tankkaarten = new List<Tankkaart>();
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new("SELECT * FROM tankkaart", conn);
+                    string readSql = "SELECT tankkaartnummer, geldigheidsdatum, brandstof, pincode, " +
+                        "isGeblokkeerd FROM tankkaart WHERE isDeleted = 0";
+                    SqlCommand cmd = new(readSql, conn);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
@@ -31,21 +35,45 @@ namespace Persistentie
                         {
                             while (dataReader.Read())
                             {
-                                int tankkaartId = (int)dataReader["id"];
                                 string tankkaartnummer = (string)dataReader["tankkaartnummer"];
                                 DateTime geldigheidsdatum = (DateTime)dataReader["geldigheidsdatum"];
-                                string brandstof = (string)dataReader["brandstof"];
+                                bool isGeblokkeerd = (bool)dataReader["isGeblokkeerd"];
+                                string brandstoftype = (string)dataReader["brandstof"];
                                 int? pincode = (int?)dataReader["pincode"];
 
-                                tankkaarten.Add(new Tankkaart(tankkaartId, tankkaartnummer, geldigheidsdatum, pincode, null, null));
+                                #region setBrandstoftype
+                                Brandstoftype brandstof;
+                                if (brandstoftype == "elektrisch")
+                                {
+                                    brandstof = Brandstoftype.elektrisch;
+                                }
+                                else if (brandstoftype == "diesel")
+                                {
+                                    brandstof = Brandstoftype.diesel;
+                                }
+                                else if (brandstoftype == "hybridebenzine")
+                                {
+                                    brandstof = Brandstoftype.hybrideBenzine;
+                                }
+                                else if (brandstoftype == "hybridediesel")
+                                {
+                                    brandstof = Brandstoftype.hybrideDiesel;
+                                }
+                                else
+                                {
+                                    brandstof = Brandstoftype.benzine;
+                                }
+                                #endregion
+
+                                tankkaarten.Add(new Tankkaart(tankkaartnummer, geldigheidsdatum, isGeblokkeerd, pincode, brandstof, null));
                             }
                         }
                     }
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw new TankkaartException("Er ging iets mis bij het ophalen GeefAdressen in de persistentielaag.");
+                throw new TankkaartException($"Er ging iets mis in de persitentielaag bij het ophalen van de tankkaarten, {ex.Message}");
             }
 
             return tankkaarten;
