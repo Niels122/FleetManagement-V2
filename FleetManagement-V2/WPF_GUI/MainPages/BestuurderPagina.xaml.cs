@@ -35,6 +35,7 @@ namespace WPF_GUI.MainPages
 
         private void RefreshBestuurders()
         {
+            lvOverzichtBestuurders.Items.Clear();   //Lijst eerst wissen zodat er geen herhalingen zijn
             List<Bestuurder> bestuurders = _dc.GeefBestuurders();
             foreach (Bestuurder bestuurder in bestuurders)          //over lijst van bestuurders lopen en deze invullen
             {
