@@ -20,13 +20,13 @@ namespace Persistentie
         {                                                   //https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    connection.Open();
+                    conn.Open();
 
                     string insertSql = "INSERT INTO bestuurder (id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adresId)" +
                         "VALUES (@BestuurderId, @Naam, @Voornaam, @Geboortedatum, @Rijksregisternummer, @Rijbewijs, @VoertuigId, @TankkaartId, @AdresId)";
-                    SqlCommand insertCommand = new(insertSql, connection);
+                    SqlCommand insertCommand = new(insertSql, conn);
 
                     insertCommand.Parameters.AddWithValue("BestuurderId", bestuurder.BestuurderId);
                     insertCommand.Parameters.AddWithValue("@Naam", bestuurder.Naam);
@@ -62,12 +62,12 @@ namespace Persistentie
 
                     insertCommand.ExecuteNonQuery();
 
-                    connection.Close();
+                    conn.Close();
                 }
             }
             catch (Exception ex)
             {
-                throw new BestuurderException($"Er ging iets mis bij het creeren van een bestuurder in de persistentielaag, { ex.Message }");
+                throw new BestuurderException($"Er ging iets mis in de persitentielaag bij het creeren van de bestuurder, { ex.Message }");
             }
         }
 
@@ -75,64 +75,66 @@ namespace Persistentie
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    connection.Open();
+                    conn.Open();
 
                     string deleteSql = $"UPDATE bestuurder SET is_deleted = 1 " +
                         "WHERE id = @BestuurderId AND rijksregisternummer = @Rijksregisternummer";
-                    SqlCommand deleteCommand = new(deleteSql, connection);
-
-                    deleteCommand.Parameters.AddWithValue("BestuurderId", bestuurder.BestuurderId);
-                    deleteCommand.Parameters.AddWithValue("@Rijksregisternummer", bestuurder.Rijksregisternummer);
-
-                    deleteCommand.ExecuteNonQuery(); 
-
-                    connection.Close();
-                }
-            }
-            catch(Exception ex)
-            {
-                throw new BestuurderException($"Er ging iets mis bij het soft-deleten van een bestuurder, {ex.Message}");
-            }
-        }
-        public void RetrieveBestuurder(Bestuurder bestuurder)
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-
-                    string deleteSql = $"UPDATE bestuurder SET is_deleted = 0 " +
-                        "WHERE id = @BestuurderId AND rijksregisternummer = @Rijksregisternummer";
-                    SqlCommand deleteCommand = new(deleteSql, connection);
+                    SqlCommand deleteCommand = new(deleteSql, conn);
 
                     deleteCommand.Parameters.AddWithValue("BestuurderId", bestuurder.BestuurderId);
                     deleteCommand.Parameters.AddWithValue("@Rijksregisternummer", bestuurder.Rijksregisternummer);
 
                     deleteCommand.ExecuteNonQuery();
 
-                    connection.Close();
+                    conn.Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                throw new BestuurderException($"Er ging iets in de persitentielaag mis bij het soft-deleten van de bestuurder met ID: {bestuurder.BestuurderId}, {ex.Message}");
+            }
+        }
+        public void RetrieveBestuurder(Bestuurder bestuurder)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string deleteSql = $"UPDATE bestuurder SET is_deleted = 0 " +
+                        "WHERE id = @BestuurderId AND rijksregisternummer = @Rijksregisternummer";
+                    SqlCommand deleteCommand = new(deleteSql, conn);
+
+                    deleteCommand.Parameters.AddWithValue("BestuurderId", bestuurder.BestuurderId);
+                    deleteCommand.Parameters.AddWithValue("@Rijksregisternummer", bestuurder.Rijksregisternummer);
+
+                    deleteCommand.ExecuteNonQuery();
+
+                    conn.Close();
                 }
             }
             catch (Exception ex)
             {
-                throw new BestuurderException($"Er ging iets mis bij het soft-deleten van een bestuurder, {ex.Message}");
+                throw new BestuurderException($"Er ging iets mis in de persitentielaag bij het retrieven van de bestuurder met ID: {bestuurder.BestuurderId}, {ex.Message}");
             }
         }
 
-        public List<Bestuurder> GeefBestuurders()
+        public List<Bestuurder> GeefBestuurders(int? bestuurId = null)
         {
             List<Bestuurder> bestuurders = new List<Bestuurder>();
 
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    connection.Open();
+                    conn.Open();
 
-                    SqlCommand cmd = new($"SELECT id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adresId FROM bestuurder WHERE is_deleted = 0;", connection);
+                    string readSql = $"SELECT id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adresId FROM bestuurder WHERE is_deleted = 0";
+                    if (bestuurId != null) readSql += $" AND id = bestuurId";
+                    SqlCommand cmd = new(readSql, conn);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
@@ -179,34 +181,29 @@ namespace Persistentie
                         }
                     }
 
-                    connection.Close();
+                    conn.Close();
                 }
             }
             catch(Exception ex)
             {
-                throw new BestuurderException($"Er ging iets mis bij het ophalen van de bestuurders in de persistentielaag, {ex.Message}" );
+                throw new BestuurderException($"Er ging iets mis in de persitentielaag bij het ophalen van de bestuurders, {ex.Message}" );
             }
 
             return bestuurders;
-        }
-
-        public Bestuurder ReadBestuurder()
-        {
-            throw new NotImplementedException();
         }
 
         public void UpdateBestuurder(Bestuurder bestuurder)
         {
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    connection.Open();
+                    conn.Open();
 
                     string updateSql = "UPDATE bestuurder SET naam = @Naam, voornaam = @Voornaam, geboortedatum = @Geboortedatum, " +
                         "rijksregisternummer = @Rijksregisternummer, rijbewijstype = @Rijbewijs, voertuigId = @VoertuigId, " +
                         "tankkaartId = @TankkaartId, adresId = AdresId  WHERE id = @BestuurderId";
-                    SqlCommand updateCommand = new(updateSql, connection);
+                    SqlCommand updateCommand = new(updateSql, conn);
 
                     updateCommand.Parameters.AddWithValue("BestuurderId", bestuurder.BestuurderId);
                     updateCommand.Parameters.AddWithValue("@Naam", bestuurder.Naam);
@@ -242,20 +239,13 @@ namespace Persistentie
 
                     updateCommand.ExecuteNonQuery();
 
-                    connection.Close();
+                    conn.Close();
                 }
             }
             catch(Exception ex)
             {
-                throw new BestuurderException($"Er ging iets mis bij het updaten van een bestuurder in de persistentielaag, { ex.Message}");
+                throw new BestuurderException($"Er ging iets mis in de persitentielaag bij het updaten van de bestuurder met ID: {bestuurder.BestuurderId}, { ex.Message}");
             }
         }
-
-        //public List<string> GeefRijksregisternummers()
-        //{
-        //    List<string> rijksnummers = new List<string>();
-
-        //    return rijksnummers;
-        //}
     }
 }
