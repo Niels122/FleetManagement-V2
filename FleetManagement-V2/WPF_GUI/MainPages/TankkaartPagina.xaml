@@ -16,9 +16,52 @@
                         <Setter Property="Margin" Value="5" />
                         <Setter Property="Padding" Value="2" />
                     </Style>
+                    <Style TargetType="Label">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="2" />
+                    </Style>
+                    <Style TargetType="DatePicker">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="2" />
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="2" />
+                    </Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="2" />
+                    </Style>
+                    <Style TargetType="CheckBox">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="2" />
+                    </Style>
                 </DockPanel.Resources>
+                
+                
+               
                     <Label DockPanel.Dock="Top"  Content="Overzicht tankkaarten:" FontWeight="Bold"/>
                 <DockPanel>
+                    <StackPanel x:Name="Filter" DockPanel.Dock="Top" Orientation="Vertical">
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Kaartnummer"/>
+                            <TextBox x:Name="tbKaartnummer" Width="100"/>
+
+                            <Label Content="Geldigheidsdatum"/>
+                            <DatePicker x:Name="dpGeldig" Width="100"/>
+                            <Label Content="Brandstoftype"/>
+                            <ComboBox x:Name="cmbBrandstoftype" Width="100"/>
+
+                            <Label Content="Geblokkeerd"/>
+                            <CheckBox x:Name="cbGeblokkeerd" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Button x:Name="btnZoek" Content="Zoek" Width="75" Click="btnZoek_Click" />
+                            <Button x:Name="btnWisFilters" Content="Wis filter" Width="75" Click="btnWisFilters_Click" />
+                        </StackPanel>
+                    </StackPanel>
                     <ListView x:Name="lvOverzichtTankkaarten" MinWidth="700" DockPanel.Dock="Bottom" Margin="0,0,10,0" SelectionChanged="lvOverzichtTankkaarten_SelectionChanged"
                       SelectionMode="Single">
                         <ListView.View>

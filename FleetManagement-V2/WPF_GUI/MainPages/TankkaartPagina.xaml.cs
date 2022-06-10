@@ -70,5 +70,15 @@ namespace WPF_GUI.MainPages
             TankkaartUpdateWindow tankkaartUpdate = new(_dc, (Tankkaart)lvOverzichtTankkaarten.SelectedItem);
             tankkaartUpdate.Show();
         }
+
+        private void btnZoek_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnWisFilters_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
