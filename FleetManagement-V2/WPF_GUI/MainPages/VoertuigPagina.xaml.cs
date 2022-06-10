@@ -42,7 +42,7 @@ namespace WPF_GUI.MainPages
             {
                 lvOverzichtVoertuigen.Items.Add(voertuig);
                 Bestuurder? bstrdr = bestuurders.Where(b => b.ChassisnummerVoertuig == voertuig.Chassisnummer).FirstOrDefault();
-
+  
             }
         }
         private void btnWijzigVoertuig_Click(object sender, RoutedEventArgs e)
@@ -83,6 +83,16 @@ namespace WPF_GUI.MainPages
         {
             VoertuigInfoWindow voertuigInfo = new(_dc, (Voertuig)lvOverzichtVoertuigen.SelectedItem);
             voertuigInfo.Show();
+        }
+
+        private void btnZoek_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnWisFilters_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
