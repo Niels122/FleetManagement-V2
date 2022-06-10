@@ -10,7 +10,7 @@ namespace Domein
 {
     public class DomeinController
     {
-        private VoertuigController _voertuigCon;
+        private VoertuigController _voertuigCon;  
         private TankkaartController _tankkaartCon;
         private BestuurderController _bestuurderCon;
         private AdresController _adresCon;
@@ -24,12 +24,16 @@ namespace Domein
         }
 
 
+
+
+        #region Bestuurder
+
         public List<Bestuurder> FilterLijstBestuurder(string zoekterm, string kolom)
         {
             List<Bestuurder> lijst = new List<Bestuurder>();
             string k = kolom.ToLower();
 
-            foreach(Bestuurder bestuurder in _bestuurderCon.GeefBestuurders())
+            foreach (Bestuurder bestuurder in _bestuurderCon.GeefBestuurders())
             {
                 List<string> paramater = new List<string>();
                 if (k == "bestuurderid" || k == "all") paramater.Add(bestuurder.BestuurderId.ToString());
@@ -39,11 +43,14 @@ namespace Domein
                 if (k == "rijksregisternummer" || k == "all") paramater.Add(bestuurder.Rijksregisternummer);
                 if (k == "rijbewijs" || k == "all") paramater.Add(bestuurder.Rijbewijs.ToString());
 
-                foreach(string p in paramater)
+                foreach (string p in paramater)
                 {
                     if (p.ToLower().Contains(zoekterm))
                     {
-                        lijst.Add(bestuurder);
+                        if (!lijst.Contains(bestuurder))
+                        {
+                            lijst.Add(bestuurder);
+                        }
                     }
                 }
             }
@@ -51,12 +58,11 @@ namespace Domein
             return lijst;
         }
 
-
-        #region Bestuurder
         public List<Bestuurder> GeefBestuurders(string bestuurId = null)
         {
             return _bestuurderCon.GeefBestuurders(bestuurId);
         }
+
         public void CreateBestuurder(Bestuurder bestuurder)
         {
             _bestuurderCon.CreateBestuurder(bestuurder);
@@ -76,9 +82,14 @@ namespace Domein
         {
             _bestuurderCon.DeleteBestuurder(bestuurder);
         }
+
         #endregion
 
+
+
+
         #region Adres
+
         public List<Adres> GeefAdressen()
         {
             return _adresCon.GeefAdressen();
@@ -110,7 +121,40 @@ namespace Domein
 
         #endregion
 
+
+
+
+
         #region Tankkaart
+        public List<Tankkaart> FilterLijstTankkaart(string zoekterm, string kolom)
+        {
+            List<Tankkaart> lijst = new List<Tankkaart>();
+            string k = kolom.ToLower();
+
+            foreach (Tankkaart tankkaart in _tankkaartCon.GeefTankkaarten())
+            {
+                List<string> paramater = new List<string>();
+                if (k == "tankkaartnummer" || k == "all") paramater.Add(tankkaart.Kaartnummer);
+                if (k == "geldigheidsdatum" || k == "all") paramater.Add(tankkaart.Geldigheidsdatum.ToString());
+                if (k == "brandstof" || k == "all") paramater.Add(tankkaart.Brandstof.ToString());
+                if (k == "pincode" || k == "all") paramater.Add(tankkaart.Pincode.ToString());
+                if (k == "isGeblokkeerd" || k == "all") paramater.Add(tankkaart.Geblokkeerd.ToString());
+
+                foreach (string p in paramater)
+                {
+                    if (p.ToLower().Contains(zoekterm))
+                    {
+                        if (!lijst.Contains(tankkaart))
+                        {
+                            lijst.Add(tankkaart);
+                        }
+                    }
+                }
+            }
+
+            return lijst;
+        }
+
         public List<Tankkaart> GeefTankkaarten()
         {
             return _tankkaartCon.GeefTankkaarten();
@@ -129,7 +173,12 @@ namespace Domein
         {
             _tankkaartCon.UpdateTankkaart(tankkaart);
         }
+
         #endregion
+
+
+
+
 
         #region Voertuig
         public List<Voertuig> GeefVoertuigen()

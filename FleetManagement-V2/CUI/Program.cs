@@ -2,6 +2,7 @@
 
 
 using Domein.Controllers;
+using Domein.dbVullers;
 using Domein;
 using Domein.Objects;
 using Persistentie;
@@ -26,12 +27,24 @@ namespace CUI
 
             DomeinController dc = new DomeinController(voertuigCon, tankkaartCon, bestuurderCon, adresCon);
 
+            BestuurderVuller bv = new BestuurderVuller(bestuurderCon);
 
 
+
+            //bv.VulBestuurderTabel(1000);
+
+
+            #region Vuller
+
+            //Bestuurder test = new Bestuurder(bv.randomId(), bv.randomNaam(), bv.randomVoornaam(), bv.randomDatum(), bv.randomRijksregisternummer(), bv.randomRijbewijs());
+            //bestuurderCon.CreateBestuurder(test);
+
+            #endregion
 
             #region Bestuurder
 
             #region filter
+
             //bestuurderfilterlijst
             //Console.Write("Zoekterm: ");
             //string zoekterm = Console.ReadLine();
@@ -41,6 +54,17 @@ namespace CUI
             //{
             //    Console.WriteLine(bestuurder.ToString());
             //}
+
+            //tankkaartfilterlijst
+            Console.Write("Zoekterm: ");
+            string zoekterm = Console.ReadLine();
+            Console.Write("Kolom ('all' voor elke kolom): ");
+            string kolom = Console.ReadLine();
+            foreach (Tankkaart tankkaart in dc.FilterLijstTankkaart(zoekterm, kolom))
+            {
+                Console.WriteLine(tankkaart.ToString());
+            }
+
             #endregion
 
             #region CRUD
@@ -52,7 +76,7 @@ namespace CUI
             //}
             //Console.WriteLine("-----------------------------------------------");
 
-            //Bestuurder testBestuurder = new Bestuurder(0, "Hazard", "Eden", DateTime.Parse("23/10/1956"), "72111878912", Domein.Enums.Rijbewijs.A);
+            //Bestuurder testBestuurder = new Bestuurder("755952bs", "Baele", "Gert", DateTime.Parse("02/02/2002"), "77031925424", Domein.Enums.Rijbewijs.B);
             //bestuurderCon.CreateBestuurder(testBestuurder);
             //bestuurderCon.UpdateBestuurder(testBestuurder);   //getest op normale input, foute input (exception persistentie) en onbestaande input (exception persistentie)
             //bestuurderCon.DeleteBestuurder(testBestuurder);   //getest op normale input, foute input en onbestaande input
@@ -83,9 +107,9 @@ namespace CUI
             //    Console.WriteLine(adres.ToString());
             //}
 
-            #endregion
+            //#endregion
 
-            #region Voertuigen
+            //#region Voertuigen
 
             //Console.WriteLine("Dit zijn de voertuigen:");
             //foreach (Voertuig voertuig in voertuigCon.GeefVoertuigen())
@@ -93,15 +117,15 @@ namespace CUI
             //    Console.WriteLine(voertuig.ToString());
             //}
 
-            #endregion
+            //#endregion
 
-            #region Tankkaarten
+            //#region Tankkaarten
 
-            Console.WriteLine("Dit zijn de tankkaarten:");
-            foreach (Tankkaart tankkaart in tankkaartCon.GeefTankkaarten())
-            {
-                Console.WriteLine(tankkaart.ToString());
-            }
+            //Console.WriteLine("Dit zijn de tankkaarten:");
+            //foreach (Tankkaart tankkaart in tankkaartCon.GeefTankkaarten())
+            //{
+            //    Console.WriteLine(tankkaart.ToString());
+            //}
 
             #endregion
         }
