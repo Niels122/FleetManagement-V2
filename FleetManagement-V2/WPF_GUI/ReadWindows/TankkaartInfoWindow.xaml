@@ -30,11 +30,7 @@
         </Grid.Resources>
         <DockPanel Grid.Column="0">
             <StackPanel Orientation="Vertical">
-
-                <StackPanel Orientation="Horizontal">
-                    <Label   Content="ID" />
-                    <TextBox Name="id" />
-                </StackPanel>
+             
                 <StackPanel Orientation="Horizontal">
                     <Label    Content="Kaartnummer"/>
                     <TextBox  Name="kaartnummer" Text="" />
@@ -47,7 +43,7 @@
 
                 <StackPanel Orientation="Horizontal">
                     <Label   Content="Geblokkeerd" />
-                    <CheckBox Name="geblokkeerd" />
+                    <CheckBox Name="geblokkeerd" IsEnabled="False" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">

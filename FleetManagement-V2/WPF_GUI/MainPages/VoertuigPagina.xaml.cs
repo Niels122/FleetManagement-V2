@@ -41,7 +41,7 @@ namespace WPF_GUI.MainPages
             foreach (Voertuig voertuig in voertuigen)
             {
                 lvOverzichtVoertuigen.Items.Add(voertuig);
-                Bestuurder? bstrdr = bestuurders.Where(b => b.VoertuigId == voertuig.VoertuigId).FirstOrDefault();
+                Bestuurder? bstrdr = bestuurders.Where(b => b.ChassisnummerVoertuig == voertuig.Chassisnummer).FirstOrDefault();
 
             }
         }
