@@ -109,5 +109,15 @@ namespace WPF_GUI.MainPages
             BestuurderInfoWindow bestuurderInfoWindow = new(_dc, (Bestuurder)lvOverzichtBestuurders.SelectedItem);
             bestuurderInfoWindow.Show();
         }
+
+        private void btnZoek_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnWisFilters_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
