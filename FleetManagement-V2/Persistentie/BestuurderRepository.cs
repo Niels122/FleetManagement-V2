@@ -15,6 +15,80 @@ namespace Persistentie
     public class BestuurderRepository : IBestuurderRepository
     {
         private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog = FleetmanagementDB; Integrated Security = True; TrustServerCertificate=True";
+        
+        public List<Bestuurder> GeefBestuurders(string bestuurId = null)
+        {
+            List<Bestuurder> bestuurders = new List<Bestuurder>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string readSql = "SELECT id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, " +
+                        "chassisnummerVoertuig, tankkaartnummer, adresId FROM bestuurder WHERE isDeleted = 0";
+                    if (bestuurId != null) readSql += " AND id = bestuurId";
+                    SqlCommand cmd = new(readSql, conn);
+
+                    using (SqlDataReader dataReader = cmd.ExecuteReader())
+                    {
+                        if (dataReader.HasRows)
+                        {
+                            while (dataReader.Read())
+                            {
+                                string bestuurderId = (string)dataReader["id"];
+                                string naam = (string)dataReader["naam"];
+                                string voornaam = (string)dataReader["voornaam"];
+                                DateTime geboortedatum = (DateTime)dataReader["geboortedatum"]; //checken of het het het juiste date format is. DateTime.ParseExact((string)dataReader["geboortedatum"], "yyyy-MM-dd", null);
+                                string rijksregisternummer = (string)dataReader["rijksregisternummer"];
+                                string rijbewijs = (string)dataReader["rijbewijstype"];
+                                string chassisnummerVoertuig = Convert.IsDBNull(dataReader["chassisnummerVoertuig"]) ? null : (string)dataReader["chassisnummerVoertuig"];
+                                string tankkaartnummer = Convert.IsDBNull(dataReader["tankkaartnummer"]) ? null : (string)dataReader["tankkaartnummer"];
+                                int? adresId = Convert.IsDBNull(dataReader["adresId"]) ? null : (int?)dataReader["adresId"];
+
+                                #region setRijbewijs
+                                //van string naar enum.
+                                Rijbewijs _rijbewijs;
+                                if (rijbewijs.ToUpper() == "A") //moet else if zijn om dit juist te doen werken, later veranderen naar switch case
+                                {
+                                    _rijbewijs = Rijbewijs.A;
+                                }
+                                else
+                                if (rijbewijs.ToUpper() == "B")
+                                {
+                                    _rijbewijs = Rijbewijs.B;
+                                }
+                                else
+                                if (rijbewijs.ToUpper() == "C")
+                                {
+                                    _rijbewijs = Rijbewijs.C;
+                                }
+                                else
+                                if (rijbewijs.ToUpper() == "D")
+                                {
+                                    _rijbewijs = Rijbewijs.D;
+                                }
+                                else
+                                {
+                                    _rijbewijs = Rijbewijs.B;
+                                }
+                                #endregion
+                                bestuurders.Add(new Bestuurder(bestuurderId, naam, voornaam, geboortedatum, rijksregisternummer, _rijbewijs, chassisnummerVoertuig, tankkaartnummer, adresId));
+                            }
+                        }
+                    }
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new BestuurderException($"Er ging iets mis in de persitentielaag bij het ophalen van de bestuurders, {ex.Message}");
+            }
+
+            return bestuurders;
+        }
 
         public void CreateBestuurder(Bestuurder bestuurder) //https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html 
         {                                                  
@@ -28,7 +102,7 @@ namespace Persistentie
                         "VALUES (@BestuurderId, @Naam, @Voornaam, @Geboortedatum, @Rijksregisternummer, @Rijbewijs, @ChassisnummerVoertuig, @TankkaartNummer, @AdresId)";
                     SqlCommand insertCommand = new(insertSql, conn);
 
-                    insertCommand.Parameters.AddWithValue("BestuurderId", bestuurder.BestuurderId);
+                    insertCommand.Parameters.AddWithValue("@BestuurderId", bestuurder.BestuurderId);
                     insertCommand.Parameters.AddWithValue("@Naam", bestuurder.Naam);
                     insertCommand.Parameters.AddWithValue("@Voornaam", bestuurder.Voornaam);
                     insertCommand.Parameters.AddWithValue("@Geboortedatum", bestuurder.Geboortedatum);
@@ -69,129 +143,6 @@ namespace Persistentie
             {
                 throw new BestuurderException($"Er ging iets mis in de persitentielaag bij het creeren van de bestuurder, { ex.Message }");
             }
-        }
-
-        public void DeleteBestuurder(Bestuurder bestuurder)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                    string deleteSql = $"UPDATE bestuurder SET isDeleted= 1 " +
-                        "WHERE id = @BestuurderId AND rijksregisternummer = @Rijksregisternummer";
-                    SqlCommand deleteCommand = new(deleteSql, conn);
-
-                    deleteCommand.Parameters.AddWithValue("@BestuurderId", bestuurder.BestuurderId);
-                    deleteCommand.Parameters.AddWithValue("@Rijksregisternummer", bestuurder.Rijksregisternummer);
-
-                    deleteCommand.ExecuteNonQuery();
-
-                    conn.Close();
-                }
-            }
-            catch(Exception ex)
-            {
-                throw new BestuurderException($"Er ging iets in de persitentielaag mis bij het soft-deleten van de bestuurder met ID: {bestuurder.BestuurderId}, {ex.Message}");
-            }
-        }
-
-        public void RetrieveBestuurder(Bestuurder bestuurder)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                    string deleteSql = $"UPDATE bestuurder SET isDeleted = 0 " +
-                        "WHERE id = @BestuurderId AND rijksregisternummer = @Rijksregisternummer";
-                    SqlCommand deleteCommand = new(deleteSql, conn);
-
-                    deleteCommand.Parameters.AddWithValue("@BestuurderId", bestuurder.BestuurderId);
-                    deleteCommand.Parameters.AddWithValue("@Rijksregisternummer", bestuurder.Rijksregisternummer);
-
-                    deleteCommand.ExecuteNonQuery();
-
-                    conn.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new BestuurderException($"Er ging iets mis in de persitentielaag bij het retrieven van de bestuurder met ID: {bestuurder.BestuurderId}, {ex.Message}");
-            }
-        }
-
-        public List<Bestuurder> GeefBestuurders(string bestuurId = null)
-        {
-            List<Bestuurder> bestuurders = new List<Bestuurder>();
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                    string readSql = "SELECT id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, " +
-                        "chassisnummerVoertuig, tankkaartnummer, adresId FROM bestuurder WHERE isDeleted = 0";
-                    if (bestuurId != null) readSql += " AND id = bestuurId";
-                    SqlCommand cmd = new(readSql, conn);
-
-                    using (SqlDataReader dataReader = cmd.ExecuteReader())
-                    {
-                        if (dataReader.HasRows)
-                        {
-                            while (dataReader.Read())
-                            {
-                                string bestuurderId = (string)dataReader["id"];
-                                string naam = (string)dataReader["naam"];
-                                string voornaam = (string)dataReader["voornaam"];
-                                DateTime geboortedatum = (DateTime)dataReader["geboortedatum"]; //checken of het het het juiste date format is. DateTime.ParseExact((string)dataReader["geboortedatum"], "yyyy-MM-dd", null);
-                                string rijksregisternummer = (string)dataReader["rijksregisternummer"];
-                                string rijbewijs = (string)dataReader["rijbewijstype"];
-                                string chassisnummerVoertuig = Convert.IsDBNull(dataReader["chassisnummerVoertuig"]) ? null : (string)dataReader["chassisnummerVoertuig"];
-                                string tankkaartnummer = Convert.IsDBNull(dataReader["tankkaartnummer"]) ? null : (string)dataReader["tankkaartnummer"];
-                                int? adresId = Convert.IsDBNull(dataReader["adresId"]) ? null : (int?)dataReader["adresId"];
-
-                                #region setRijbewijs
-                                //van string naar enum.
-                                Rijbewijs _rijbewijs;
-                                if (rijbewijs.ToUpper() == "A") //moet else if zijn om dit juist te doen werken, later veranderen naar switch case
-                                {
-                                    _rijbewijs = Rijbewijs.A;
-                                } else
-                                if (rijbewijs.ToUpper() == "B")
-                                {
-                                    _rijbewijs = Rijbewijs.B;
-                                } else
-                                if (rijbewijs.ToUpper() == "C")
-                                {
-                                    _rijbewijs = Rijbewijs.C;
-                                } else
-                                if (rijbewijs.ToUpper() == "D")
-                                {
-                                    _rijbewijs = Rijbewijs.D;
-                                }                          
-                                else
-                                {
-                                    _rijbewijs = Rijbewijs.B;
-                                }
-                                #endregion
-                                bestuurders.Add(new Bestuurder(bestuurderId, naam, voornaam, geboortedatum, rijksregisternummer, _rijbewijs, chassisnummerVoertuig, tankkaartnummer, adresId));
-                            }
-                        }
-                    }
-
-                    conn.Close();
-                }
-            }
-            catch(Exception ex)
-            {
-                throw new BestuurderException($"Er ging iets mis in de persitentielaag bij het ophalen van de bestuurders, {ex.Message}");
-            }
-
-            return bestuurders;
         }
 
         public void UpdateBestuurder(Bestuurder bestuurder)
@@ -244,9 +195,61 @@ namespace Persistentie
                     conn.Close();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 throw new BestuurderException($"Er ging iets mis in de persitentielaag bij het updaten van de bestuurder met ID: {bestuurder.BestuurderId}, { ex.Message}");
+            }
+        }
+
+        public void DeleteBestuurder(Bestuurder bestuurder)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string deleteSql = $"UPDATE bestuurder SET isDeleted= 1 " +
+                        "WHERE id = @BestuurderId AND rijksregisternummer = @Rijksregisternummer";
+                    SqlCommand deleteCommand = new(deleteSql, conn);
+
+                    deleteCommand.Parameters.AddWithValue("@BestuurderId", bestuurder.BestuurderId);
+                    deleteCommand.Parameters.AddWithValue("@Rijksregisternummer", bestuurder.Rijksregisternummer);
+
+                    deleteCommand.ExecuteNonQuery();
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new BestuurderException($"Er ging iets in de persitentielaag mis bij het verwijderen van de bestuurder met ID: {bestuurder.BestuurderId}, {ex.Message}");
+            }
+        }
+
+        public void RetrieveBestuurder(Bestuurder bestuurder)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string deleteSql = $"UPDATE bestuurder SET isDeleted = 0 " +
+                        "WHERE id = @BestuurderId AND rijksregisternummer = @Rijksregisternummer";
+                    SqlCommand deleteCommand = new(deleteSql, conn);
+
+                    deleteCommand.Parameters.AddWithValue("@BestuurderId", bestuurder.BestuurderId);
+                    deleteCommand.Parameters.AddWithValue("@Rijksregisternummer", bestuurder.Rijksregisternummer);
+
+                    deleteCommand.ExecuteNonQuery();
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new BestuurderException($"Er ging iets mis in de persitentielaag bij het retrieven van de bestuurder met ID: {bestuurder.BestuurderId}, {ex.Message}");
             }
         }
     }

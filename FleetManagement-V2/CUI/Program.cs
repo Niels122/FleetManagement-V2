@@ -31,17 +31,15 @@ namespace CUI
 
 
 
-            //bv.VulBestuurderTabel(1000);
-
-
             #region Vuller
 
             //Bestuurder test = new Bestuurder(bv.randomId(), bv.randomNaam(), bv.randomVoornaam(), bv.randomDatum(), bv.randomRijksregisternummer(), bv.randomRijbewijs());
             //bestuurderCon.CreateBestuurder(test);
 
+            //bv.VulBestuurderTabel(1000);
+
             #endregion
 
-            #region Bestuurder
 
             #region filter
 
@@ -56,18 +54,18 @@ namespace CUI
             //}
 
             //tankkaartfilterlijst
-            Console.Write("Zoekterm: ");
-            string zoekterm = Console.ReadLine();
-            Console.Write("Kolom ('all' voor elke kolom): ");
-            string kolom = Console.ReadLine();
-            foreach (Tankkaart tankkaart in dc.FilterLijstTankkaart(zoekterm, kolom))
-            {
-                Console.WriteLine(tankkaart.ToString());
-            }
+            //Console.Write("Zoekterm: ");
+            //string zoekterm = Console.ReadLine();
+            //Console.Write("Kolom ('all' voor elke kolom): ");
+            //string kolom = Console.ReadLine();
+            //foreach (Tankkaart tankkaart in dc.FilterLijstTankkaart(zoekterm, kolom))
+            //{
+            //    Console.WriteLine(tankkaart.ToString());
+            //}
 
             #endregion
 
-            #region CRUD
+            #region Bestuurder
 
             //Console.WriteLine("Dit zijn de bestuurders:");
             //foreach (Bestuurder bestuurder in dc.GeefBestuurders())
@@ -91,8 +89,6 @@ namespace CUI
 
             #endregion
 
-            #endregion
-
             #region Adressen
 
             //Console.WriteLine("Dit zijn de adressen:");
@@ -107,9 +103,9 @@ namespace CUI
             //    Console.WriteLine(adres.ToString());
             //}
 
-            //#endregion
+            #endregion
 
-            //#region Voertuigen
+            #region Voertuigen
 
             //Console.WriteLine("Dit zijn de voertuigen:");
             //foreach (Voertuig voertuig in voertuigCon.GeefVoertuigen())
@@ -117,15 +113,18 @@ namespace CUI
             //    Console.WriteLine(voertuig.ToString());
             //}
 
-            //#endregion
+            #endregion
 
-            //#region Tankkaarten
+            #region Tankkaarten
 
             //Console.WriteLine("Dit zijn de tankkaarten:");
             //foreach (Tankkaart tankkaart in tankkaartCon.GeefTankkaarten())
             //{
             //    Console.WriteLine(tankkaart.ToString());
             //}
+
+            Tankkaart test = new Tankkaart("7474747474", new DateTime(2028, 2, 22), false, 1956, Domein.Enums.Brandstoftype.diesel);
+            tankkaartCon.UpdateTankkaart(test);
 
             #endregion
         }
