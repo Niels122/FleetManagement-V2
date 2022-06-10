@@ -52,6 +52,29 @@ namespace WPF_GUI.MainPages
 
         private void btnVerwijderTankkaart_Click(object sender, RoutedEventArgs e)
         {
+            Tankkaart tankkaart = (Tankkaart)lvOverzichtTankkaarten.SelectedItem;
+            MessageBoxResult result = MessageBox.Show($"Bent u zeker dat u tankkaart met kaartnummer: {tankkaart.Kaartnummer} wilt verwijderen?", "Verwijder tankkaart", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _dc.DeleteTankkaart((Tankkaart)lvOverzichtTankkaarten.SelectedItem);
+
+                    MessageBox.Show("Tankkaart verwijderd");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Er liep iets mis bij het verwijderen: {ex.Message}", "Er liep iets mis", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    RefreshTankkaarten();
+                }
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                MessageBox.Show("Geen items verwijderd.");
+            }
 
         }
         private void lvOverzichtTankkaarten_SelectionChanged(object sender, SelectionChangedEventArgs e)

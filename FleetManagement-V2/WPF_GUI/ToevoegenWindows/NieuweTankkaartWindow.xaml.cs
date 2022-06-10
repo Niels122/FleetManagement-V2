@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Enums;
+using Domein.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,12 +38,40 @@ namespace WPF_GUI.ToevoegenWindows
 
         private void btnOpslaan_Click(object sender, RoutedEventArgs e)
         {
+            var kaartnummer = tbKaartnummer.Text;
+            var geldigheidsdatum = dpGeldigheidsdatum.SelectedDate.Value;
+            bool isGeblokkeerd = false;
+            if (cbGeblokkeerd.IsChecked == true)
+            {
+                isGeblokkeerd = true;
+            }
+            else
+            {
+                isGeblokkeerd = false;
+            }
 
+            Brandstoftype brandstoftype = (Brandstoftype)cmbBrandstoftype.SelectedItem; //https://stackoverflow.com/questions/6139429/how-to-retrieve-combobox-selected-value-as-enum-type
+
+
+            Int32.TryParse(tbPincode.Text, out int pincode);
+
+            Tankkaart nieuweTankkaart = new(kaartnummer, geldigheidsdatum, isGeblokkeerd, pincode, brandstoftype);
+
+            try
+            {
+                _dc.CreateTankkaart(nieuweTankkaart);
+                MessageBox.Show($"Nieuwe tankkaart met kaartnummer: {kaartnummer} is succesvol toegevoegd.", "Succes", MessageBoxButton.OK);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnAnnuleren_Click(object sender, RoutedEventArgs e)
         {
-
+           this.Close();
         }
     }
 }
