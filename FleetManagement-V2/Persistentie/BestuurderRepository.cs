@@ -24,8 +24,8 @@ namespace Persistentie
                 {
                     conn.Open();
 
-                    string insertSql = "INSERT INTO bestuurder (id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adresId)" +
-                        "VALUES (@BestuurderId, @Naam, @Voornaam, @Geboortedatum, @Rijksregisternummer, @Rijbewijs, @VoertuigId, @TankkaartId, @AdresId)";
+                    string insertSql = "INSERT INTO bestuurder (id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, chassisnummerVoertuig, tankkaartnummer, adresId)" +
+                        "VALUES (@BestuurderId, @Naam, @Voornaam, @Geboortedatum, @Rijksregisternummer, @Rijbewijs, @ChassisnummerVoertuig, @TankkaartNummer, @AdresId)";
                     SqlCommand insertCommand = new(insertSql, conn);
 
                     insertCommand.Parameters.AddWithValue("BestuurderId", bestuurder.BestuurderId);
@@ -36,19 +36,19 @@ namespace Persistentie
                     insertCommand.Parameters.AddWithValue("@Rijbewijs", bestuurder.Rijbewijs);
                     if (bestuurder.ChassisnummerVoertuig == null)
                     {
-                        insertCommand.Parameters.AddWithValue("@VoertuigId", DBNull.Value);
+                        insertCommand.Parameters.AddWithValue("@ChassisnummerVoertuig", DBNull.Value);
                     }
                     else
                     {
-                        insertCommand.Parameters.AddWithValue("@VoertuigId", bestuurder.ChassisnummerVoertuig);
+                        insertCommand.Parameters.AddWithValue("@ChassisnummerVoertuig", bestuurder.ChassisnummerVoertuig);
                     }
                     if (bestuurder.TankkaartNummer == null)
                     {
-                        insertCommand.Parameters.AddWithValue("@TankkaartId", DBNull.Value);
+                        insertCommand.Parameters.AddWithValue("@TankkaartNummer", DBNull.Value);
                     }
                     else
                     {
-                        insertCommand.Parameters.AddWithValue("@TankkaartId", bestuurder.TankkaartNummer);
+                        insertCommand.Parameters.AddWithValue("@TankkaartNummer", bestuurder.TankkaartNummer);
                     }
 
                     if (bestuurder.AdresId == null)
@@ -83,7 +83,7 @@ namespace Persistentie
                         "WHERE id = @BestuurderId AND rijksregisternummer = @Rijksregisternummer";
                     SqlCommand deleteCommand = new(deleteSql, conn);
 
-                    deleteCommand.Parameters.AddWithValue("BestuurderId", bestuurder.BestuurderId);
+                    deleteCommand.Parameters.AddWithValue("@BestuurderId", bestuurder.BestuurderId);
                     deleteCommand.Parameters.AddWithValue("@Rijksregisternummer", bestuurder.Rijksregisternummer);
 
                     deleteCommand.ExecuteNonQuery();
@@ -109,7 +109,7 @@ namespace Persistentie
                         "WHERE id = @BestuurderId AND rijksregisternummer = @Rijksregisternummer";
                     SqlCommand deleteCommand = new(deleteSql, conn);
 
-                    deleteCommand.Parameters.AddWithValue("BestuurderId", bestuurder.BestuurderId);
+                    deleteCommand.Parameters.AddWithValue("@BestuurderId", bestuurder.BestuurderId);
                     deleteCommand.Parameters.AddWithValue("@Rijksregisternummer", bestuurder.Rijksregisternummer);
 
                     deleteCommand.ExecuteNonQuery();
@@ -150,8 +150,8 @@ namespace Persistentie
                                 DateTime geboortedatum = (DateTime)dataReader["geboortedatum"]; //checken of het het het juiste date format is. DateTime.ParseExact((string)dataReader["geboortedatum"], "yyyy-MM-dd", null);
                                 string rijksregisternummer = (string)dataReader["rijksregisternummer"];
                                 string rijbewijs = (string)dataReader["rijbewijstype"];
-                                string chassisnummerVoertuig = (string)dataReader["chassisnummerVoertuig"];
-                                string tankkaartnummer = (string)dataReader["tankkaartnummer"];
+                                string chassisnummerVoertuig = Convert.IsDBNull(dataReader["chassisnummerVoertuig"]) ? null : (string)dataReader["chassisnummerVoertuig"];
+                                string tankkaartnummer = Convert.IsDBNull(dataReader["tankkaartnummer"]) ? null : (string)dataReader["tankkaartnummer"];
                                 int? adresId = Convert.IsDBNull(dataReader["adresId"]) ? null : (int?)dataReader["adresId"];
 
                                 #region setRijbewijs
@@ -203,8 +203,8 @@ namespace Persistentie
                     conn.Open();
 
                     string updateSql = "UPDATE bestuurder SET naam = @Naam, voornaam = @Voornaam, geboortedatum = @Geboortedatum, " +
-                        "rijksregisternummer = @Rijksregisternummer, rijbewijstype = @Rijbewijs, voertuigId = @VoertuigId, " +
-                        "tankkaartId = @TankkaartId, adresId = AdresId  WHERE id = @BestuurderId";
+                        "rijksregisternummer = @Rijksregisternummer, rijbewijstype = @Rijbewijs, chassisnummerVoertuig = @ChassisnummerVoertuig, " +
+                        "tankkaartnummer = @TankkaartNummer, adresId = AdresId  WHERE id = @BestuurderId";
                     SqlCommand updateCommand = new(updateSql, conn);
 
                     updateCommand.Parameters.AddWithValue("BestuurderId", bestuurder.BestuurderId);
@@ -215,19 +215,19 @@ namespace Persistentie
                     updateCommand.Parameters.AddWithValue("@Rijbewijs", bestuurder.Rijbewijs.ToString());
                     if (bestuurder.ChassisnummerVoertuig == null)
                     {
-                        updateCommand.Parameters.AddWithValue("@VoertuigId", DBNull.Value);
+                        updateCommand.Parameters.AddWithValue("@ChassisnummerVoertuig", DBNull.Value);
                     }
                     else
                     {
-                        updateCommand.Parameters.AddWithValue("@VoertuigId", bestuurder.ChassisnummerVoertuig);
+                        updateCommand.Parameters.AddWithValue("@ChassisnummerVoertuig", bestuurder.ChassisnummerVoertuig);
                     }
                     if (bestuurder.TankkaartNummer == null)
                     {
-                        updateCommand.Parameters.AddWithValue("@TankkaartId", DBNull.Value);
+                        updateCommand.Parameters.AddWithValue("@TankkaartNummer", DBNull.Value);
                     }
                     else
                     {
-                        updateCommand.Parameters.AddWithValue("@TankkaartId", bestuurder.TankkaartNummer);
+                        updateCommand.Parameters.AddWithValue("@TankkaartNummer", bestuurder.TankkaartNummer);
                     }
 
                     if (bestuurder.AdresId == null)
