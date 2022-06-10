@@ -32,8 +32,8 @@ namespace WPF_GUI.ReadWindows
             var voertuigen = _dc.GeefVoertuigen();
             var tankkaarten = _dc.GeefTankkaarten();
             Adres? adrs = adressen.Where(a => a.AdresId == bestuurder.AdresId).FirstOrDefault();
-            Voertuig? vrtg = voertuigen.Where(v => v.VoertuigId == bestuurder.VoertuigId).FirstOrDefault();
-            Tankkaart? tnkrt = tankkaarten.Where(t => t.TankkaartId == bestuurder.TankkaartId).FirstOrDefault();
+            Voertuig? vrtg = voertuigen.Where(v => v.Chassisnummer == bestuurder.ChassisnummerVoertuig).FirstOrDefault();
+            Tankkaart? tnkrt = tankkaarten.Where(t => t.Kaartnummer == bestuurder.TankkaartNummer).FirstOrDefault();
 
             naam.Text = bestuurder.Voornaam;
             achternaam.Text = bestuurder.Naam;

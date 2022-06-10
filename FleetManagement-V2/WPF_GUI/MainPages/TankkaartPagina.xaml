@@ -19,13 +19,12 @@
                 </DockPanel.Resources>
                     <Label DockPanel.Dock="Top"  Content="Overzicht tankkaarten:" FontWeight="Bold"/>
                 <DockPanel>
-                    <ListView x:Name="lvOverzichtTankkaarten" DockPanel.Dock="Bottom" Margin="0,0,10,0" SelectionChanged="lvOverzichtTankkaarten_SelectionChanged"
+                    <ListView x:Name="lvOverzichtTankkaarten" MinWidth="700" DockPanel.Dock="Bottom" Margin="0,0,10,0" SelectionChanged="lvOverzichtTankkaarten_SelectionChanged"
                       SelectionMode="Single">
                         <ListView.View>
                             <GridView>
                                 <!--De namen van de binding moeten exact hetzelfde zijn als de naam van de property-->
-                                <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding TankkaartId}" />
-                                <GridViewColumn Header="Kaartnummer" Width="100" DisplayMemberBinding="{Binding Kaartnummer}" />
+                                <GridViewColumn Header="Kaartnummer" Width="100" x:Name="Kaartnummer" DisplayMemberBinding="{Binding Kaartnummer}" />
                                 <GridViewColumn Header="Geldigheidsdatum" Width="100" DisplayMemberBinding="{Binding Geldigheidsdatum}" />
                                 <GridViewColumn Header="Brandstoftype" Width="100" DisplayMemberBinding="{Binding Brandstof}" />
                                 <GridViewColumn Header="Geblokkeerd" Width="100" DisplayMemberBinding="{Binding Geblokkeerd}" />

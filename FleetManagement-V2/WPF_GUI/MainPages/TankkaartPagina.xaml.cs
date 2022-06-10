@@ -35,11 +35,13 @@ namespace WPF_GUI.MainPages
 
         private void RefreshTankkaarten()
         {
+            lvOverzichtTankkaarten.Items.Clear();
             var tankkaarten = _dc.GeefTankkaarten();
 
             foreach (Tankkaart tankkaart in tankkaarten)
             {
-                lvOverzichtTankkaarten.Items.Add(tankkaart);
+                lvOverzichtTankkaarten.Items.Add(tankkaart);  
+              
             }
         }
         private void btnVoegTankkaartToe_Click(object sender, RoutedEventArgs e)

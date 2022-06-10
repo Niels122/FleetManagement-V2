@@ -70,8 +70,8 @@ namespace WPF_GUI.ToevoegenWindows
                 createAdres(); //adres moet worden toegevoegd aan database
                 //voertuigId gelijk zetten aan id van het voertuig met geselecteerde nummerplaat.
                 int? adresId = null;
-                int? voertuigId = null;
-                int? tankkaartId = null;
+                string? chassisnummerVoertuig = null;
+                string? tankkaartnummer = null;
 
 
                 Rijbewijs _rijbewijs;
@@ -101,7 +101,7 @@ namespace WPF_GUI.ToevoegenWindows
                 }
    
 
-                Bestuurder bestuurder = new(0, tbNaam.Text, tbAchternaam.Text, geboortedatum, tbRijksregisternummer.Text, _rijbewijs, adresId, voertuigId, tankkaartId);
+                Bestuurder bestuurder = new(tbBestuurderID.Text, tbNaam.Text, tbAchternaam.Text, geboortedatum, tbRijksregisternummer.Text, _rijbewijs, chassisnummerVoertuig, tankkaartnummer, adresId);
 
                 _dc.CreateBestuurder(bestuurder);
 
