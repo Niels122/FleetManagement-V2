@@ -50,6 +50,7 @@
 
                             <Label Content="Geldigheidsdatum"/>
                             <DatePicker x:Name="dpGeldig" Width="100"/>
+                            
                             <Label Content="Brandstoftype"/>
                             <ComboBox x:Name="cmbBrandstoftype" Width="100"/>
 
