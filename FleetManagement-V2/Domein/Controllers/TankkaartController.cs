@@ -26,13 +26,19 @@ namespace Domein.Controllers
             _tankkaartRepo.CreateTankkaart(tankkaart);
         }
 
+        public void UpdateTankkaart(Tankkaart tankkaart)
+        {
+            _tankkaartRepo.UpdateTankkaart(tankkaart);
+        }
+
         public void DeleteTankkaart(Tankkaart tankkaart)
         {
             _tankkaartRepo.DeleteTankkaart(tankkaart);
         }
-        public void UpdateTankkaart(Tankkaart tankkaart)
+
+        public void RetrieveTankkaart(Tankkaart tankkaart)
         {
-            _tankkaartRepo.UpdateTankkaart(tankkaart);
+            _tankkaartRepo.RetrieveTankkaart(tankkaart);
         }
     }
 }

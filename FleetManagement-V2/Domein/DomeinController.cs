@@ -73,14 +73,15 @@ namespace Domein
             _bestuurderCon.UpdateBestuurder(bestuurder);
         }
 
-        public void RetrieveBestuurder(Bestuurder bestuurder)
-        {
-            _bestuurderCon.RetrieveBestuurder(bestuurder);
-        }
 
         public void DeleteBestuurder(Bestuurder bestuurder)
         {
             _bestuurderCon.DeleteBestuurder(bestuurder);
+        }
+
+        public void RetrieveBestuurder(Bestuurder bestuurder)
+        {
+            _bestuurderCon.RetrieveBestuurder(bestuurder);
         }
 
         #endregion
@@ -95,16 +96,16 @@ namespace Domein
             return _adresCon.GeefAdressen();
         }
 
-        public List<Adres> GeefAdressenMetBestuurder()
-        {
-            List<Adres> adressen = new List<Adres>();
-            foreach (Adres adres in _adresCon.GeefAdressen())
-            {
-                adres.BestuurderId = _bestuurderCon.GeefBestuurderIdByAdresId(adres.AdresId);
-                adressen.Add(adres);
-            }
-            return adressen;
-        }
+        //public List<Adres> GeefAdressenMetBestuurder()
+        //{
+        //    List<Adres> adressen = new List<Adres>();
+        //    foreach (Adres adres in _adresCon.GeefAdressen())
+        //    {
+        //        adres.BestuurderId = _bestuurderCon.GeefBestuurderIdByAdresId(adres.AdresId);
+        //        adressen.Add(adres);
+        //    }
+        //    return adressen;
+        //}
 
         public void CreateAdres(Adres adres)
         {
@@ -172,6 +173,11 @@ namespace Domein
         public void UpdateTankkaart(Tankkaart tankkaart)
         {
             _tankkaartCon.UpdateTankkaart(tankkaart);
+        }
+
+        public void RetrieveTankkaart(Tankkaart tankkaart)
+        {
+            _tankkaartCon.RetrieveTankkaart(tankkaart);
         }
 
         #endregion

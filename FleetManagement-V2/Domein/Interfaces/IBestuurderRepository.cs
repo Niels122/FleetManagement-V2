@@ -12,12 +12,13 @@ namespace Domein.Interfaces
 
         List<Bestuurder> GeefBestuurders(string bestuurId = null);
 
-        #region CRUD operations
         void CreateBestuurder(Bestuurder bestuurder);
+
         void UpdateBestuurder(Bestuurder bestuurder);
+
+        void DeleteBestuurder(Bestuurder bestuurder);
+
         void RetrieveBestuurder(Bestuurder bestuurder);
-        void DeleteBestuurder(Bestuurder bestuurder); 
-        #endregion
     }
 
 }

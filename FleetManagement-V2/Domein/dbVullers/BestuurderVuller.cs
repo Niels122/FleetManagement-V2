@@ -29,13 +29,17 @@ namespace Domein.dbVullers
 
         Random random = new Random();
 
-        List<string> naamLijst = new List<string> { "De Wever", "Raes", "Van De Velde", "De Paepe", "Ketelaere", "Denoncker" };
+        List<string> naamLijst = new List<string> { "De Wever", "Van De Velde", "De Paepe", "Ketelaere", "Dendoncker", "Maes", "De Waele", 
+                                                    "Janssens", "Peters", "Braems", "Mees", "De Praetere", "De Jonckheere", "Vervaet", 
+                                                    "Van Den Berghe", "De Ridder", "Verhelst", "Verbrughe", "Van de Vyver", "De Smet" };
         public string randomNaam()
         {
             return naamLijst[random.Next(naamLijst.Count())];
         }
 
-        List<string> voornaamLijst = new List<string> { "Geert", "Els", "Lukas", "Daan", "Laura", "Thomas" };
+        List<string> voornaamLijst = new List<string> { "Geert", "Els", "Lukas", "Daan", "Laura", "Thomas", "Robbe", "Vicky", 
+                                                        "Steven" , "Eva", "Lisa", "Wouter", "Jens", "Pieter", "Brecht", "Michiel", 
+                                                        "Ewout", "Kobe", "Hanne", "Amelie", "Jolien", "Manon", "Olivia" };
         public string randomVoornaam()
         {
             return voornaamLijst[random.Next(voornaamLijst.Count())];
@@ -135,7 +139,6 @@ namespace Domein.dbVullers
             if (voor2000)
             {
                 nummer2 = nummer.Insert(0, "2");
-                Console.WriteLine("2 toegevoegd want voor2000 == true");
                 controlegetal = (97 - (int.Parse(nummer2) % 97)).ToString();
             }
             else
