@@ -31,9 +31,15 @@ namespace Domein.Controllers
         {
             _adresRepo.UpdateAdres(adres);
         }
+        
         public void DeleteAdres(Adres adres)
         {
             _adresRepo.DeleteAdres(adres);
+        }
+
+        public void RetrieveAdres(Adres adres)
+        {
+            _adresRepo.RetrieveAdres(adres);
         }
     }
 }

@@ -13,6 +13,9 @@ namespace Domein.Interfaces
 
         void CreateAdres(string straatnaam,string huisnummer, int postcode,string stad);
         void UpdateAdres(Adres adres);
-        void DeleteAdres(Adres adres); //Soft delete: implement column "IsDeleted"
+
+        void DeleteAdres(Adres adres);
+
+        void RetrieveAdres(Adres adres);
     }
 }
