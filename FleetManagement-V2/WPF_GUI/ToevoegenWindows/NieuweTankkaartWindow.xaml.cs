@@ -50,6 +50,7 @@ namespace WPF_GUI.ToevoegenWindows
                 isGeblokkeerd = false;
             }
 
+
             Brandstoftype brandstoftype = (Brandstoftype)cmbBrandstoftype.SelectedItem; //https://stackoverflow.com/questions/6139429/how-to-retrieve-combobox-selected-value-as-enum-type
 
 
@@ -67,6 +68,7 @@ namespace WPF_GUI.ToevoegenWindows
             {
                 MessageBox.Show(ex.Message);
             }
+          
         }
 
         private void btnAnnuleren_Click(object sender, RoutedEventArgs e)

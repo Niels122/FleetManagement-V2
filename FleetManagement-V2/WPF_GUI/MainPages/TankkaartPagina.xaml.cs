@@ -31,6 +31,10 @@ namespace WPF_GUI.MainPages
             InitializeComponent();
             _dc = dc;
             RefreshTankkaarten();
+
+            string[] filterMogelijkheden = { "Kaartnummer", "Geldigheidsdatum", "Brandstoftype", "Geblokkeerd" };
+
+            cmbFilter.ItemsSource = filterMogelijkheden;
         }
 
         private void RefreshTankkaarten()
@@ -40,14 +44,22 @@ namespace WPF_GUI.MainPages
 
             foreach (Tankkaart tankkaart in tankkaarten)
             {
-                lvOverzichtTankkaarten.Items.Add(tankkaart);  
-              
+                lvOverzichtTankkaarten.Items.Add(tankkaart);
+
             }
         }
         private void btnVoegTankkaartToe_Click(object sender, RoutedEventArgs e)
         {
             NieuweTankkaartWindow nieuweTankkaartWindow = new NieuweTankkaartWindow(_dc);
-            nieuweTankkaartWindow.Show();
+            try
+            {
+                nieuweTankkaartWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Er liep iets mis { ex.Message}");
+            }
+
         }
 
         private void btnVerwijderTankkaart_Click(object sender, RoutedEventArgs e)
@@ -96,12 +108,29 @@ namespace WPF_GUI.MainPages
 
         private void btnZoek_Click(object sender, RoutedEventArgs e)
         {
+            string zoekterm = tbFilter.Text;
+            string kolom = cmbFilter.Text;
 
+
+            var gefilterdeTankkaarten = _dc.FilterLijstTankkaart(zoekterm, kolom);
+            lvOverzichtTankkaarten.Items.Clear();
+
+            foreach (Tankkaart tankkaart in gefilterdeTankkaarten)
+            {
+                lvOverzichtTankkaarten.Items.Add(tankkaart);
+
+            }
         }
 
         private void btnWisFilters_Click(object sender, RoutedEventArgs e)
         {
+            tbFilter.Clear();
+            RefreshTankkaarten();
+        }
 
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshTankkaarten();
         }
     }
 }
