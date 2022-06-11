@@ -35,8 +35,9 @@ namespace CUI
 
             //Bestuurder test = new Bestuurder(bv.randomId(), bv.randomNaam(), bv.randomVoornaam(), bv.randomDatum(), bv.randomRijksregisternummer(), bv.randomRijbewijs());
             //bestuurderCon.CreateBestuurder(test);
-
-            //bv.VulBestuurderTabel(1000);
+            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
+            bv.VulBestuurderTabel(1000);
+            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
 
             #endregion
 
@@ -123,8 +124,8 @@ namespace CUI
             //    Console.WriteLine(tankkaart.ToString());
             //}
 
-            Tankkaart test = new Tankkaart("7474747474", new DateTime(2028, 2, 22), false, 1956, Domein.Enums.Brandstoftype.diesel);
-            tankkaartCon.UpdateTankkaart(test);
+            //Tankkaart test = new Tankkaart("7474747474", new DateTime(2028, 2, 22), false, 1956, Domein.Enums.Brandstoftype.diesel);
+            //tankkaartCon.UpdateTankkaart(test);
 
             #endregion
         }
