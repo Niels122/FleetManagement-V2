@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Enums;
+using Domein.Objects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,12 +56,41 @@ namespace WPF_GUI.ToevoegenWindows
 
         private void btnOpslaan_Click(object sender, RoutedEventArgs e)
         {
+            string _Merk = tbMerk.Text;
+            string _Model = tbModel.Text;
+            string _Chassisnummer = tbChassisnummer.Text;
+            string _Nummerplaat = tbNummerplaat.Text;
+            Brandstoftype _Brandstoftype = (Brandstoftype)cmbBrandstoftype.SelectedItem;
+            Wagentype _Wagentype = (Wagentype)cmbWagentype.SelectedItem;
+            string _Kleur = cmbKleur.Text;
+            int? _Deuren;
 
+            if (cmbAantalDeuren.SelectedItem != null)
+            {
+                _Deuren = int.Parse(cmbAantalDeuren.SelectedItem.ToString());
+            }
+            else
+            {
+                _Deuren = null;
+            }
+
+            Voertuig nieuwVoertuig = new(_Merk, _Model, _Chassisnummer, _Nummerplaat, _Brandstoftype, _Wagentype, _Kleur, _Deuren);
+
+            try
+            {
+                _dc.CreateVoertuig(nieuwVoertuig);
+                MessageBox.Show($"Nieuw voertuig met chassisnummer: {_Chassisnummer} is succesvol toegevoegd.", "Succes", MessageBoxButton.OK);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnAnnuleren_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close(); 
         }
     }
 }
