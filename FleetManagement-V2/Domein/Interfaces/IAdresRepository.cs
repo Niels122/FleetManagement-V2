@@ -11,7 +11,7 @@ namespace Domein.Interfaces
     {
         List<Adres> GeefAdressen();
 
-        void CreateAdres(Adres adres);
+        void CreateAdres(string straatnaam,string huisnummer, int postcode,string stad);
         void UpdateAdres(Adres adres);
         void DeleteAdres(Adres adres); //Soft delete: implement column "IsDeleted"
     }

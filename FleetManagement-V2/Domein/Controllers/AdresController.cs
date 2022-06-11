@@ -23,9 +23,9 @@ namespace Domein.Controllers
             return _adresRepo.GeefAdressen();
         }
 
-        public void CreateAdres(Adres adres)
+        public void CreateAdres(string straatnaam, string huisnummer, int postcode, string stad)
         {
-            _adresRepo.CreateAdres(adres);
+            _adresRepo.CreateAdres(straatnaam, huisnummer, postcode, stad);
         }
         public void UpdateAdres(Adres adres)
         {

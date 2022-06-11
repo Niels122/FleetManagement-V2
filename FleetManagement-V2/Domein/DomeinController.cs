@@ -106,9 +106,9 @@ namespace Domein
             return adressen;
         }
 
-        public void CreateAdres(Adres adres)
+        public void CreateAdres(string straatnaam, string huisnummer, int postcode, string stad)
         {
-            _adresCon.CreateAdres(adres);
+            _adresCon.CreateAdres(straatnaam, huisnummer, postcode, stad);
         }
         public void UpdateAdres(Adres adres)
         {
