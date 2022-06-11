@@ -27,47 +27,47 @@
                 
                 <StackPanel Orientation="Horizontal">
                     <Label   Content="Chassisnummer" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="chassisnummer" Text="" FontSize="15" VerticalAlignment="Center"/>
+                    <TextBox Name="tbChassisnummer" Text="" IsReadOnly="True" FontSize="15" VerticalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label   Content="Nummerplaat" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="nummerplaat" Text=" " FontSize="15"  VerticalAlignment="Center"/>
+                    <TextBox Name="tbNummerplaat" Text=" " FontSize="15"  VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Merk" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="merk" Text=" "  FontSize="15" VerticalAlignment="Center"/>
+                    <TextBox Name="tbMerk" Text=" "  FontSize="15" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Model" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="model" Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    <TextBox Name="tbModel" Text=" " FontSize="15" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Type wagen" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="typeWagen"  Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    <ComboBox Name="cmbWagentype"  Text=" " FontSize="15" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Brandstof type" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="brandstofType"  Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    <ComboBox Name="cmbBrandstoftype"  Text=" " FontSize="15" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Aantal deuren" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="deuren" Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    <ComboBox Name="cmbAantalDeuren" Text=" " FontSize="15" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Kleur" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="kleur"  Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    <ComboBox Name="cmbKleur"  Text=" " FontSize="15" VerticalAlignment="Center"/>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal">
+                <!--<StackPanel Orientation="Horizontal">
                     <Label  Content="Bestuurder" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="bestuurder"  Text=" " FontSize="15" VerticalAlignment="Center"/>
-                </StackPanel>
+                    <ComboBox Name="bestuurder"  Text=" " FontSize="15" VerticalAlignment="Center"/>
+                </StackPanel>-->
 
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
                     <Button x:Name="btnOpslaan" Content="Opslaan" Background="LawnGreen" BorderThickness="1" Click="btnOpslaan_Click"/>

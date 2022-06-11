@@ -16,16 +16,49 @@
                         <Setter Property="Margin" Value="5" />
                         <Setter Property="Padding" Value="2" />
                     </Style>
+                    <Style TargetType="Label">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="2" />
+                    </Style>
+                    <Style TargetType="DatePicker">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="2" />
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="2" />
+                        <Setter Property="Width" Value="150" />
+                    </Style>
+                    <Style TargetType="ComboBox">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="2" />
+                        <Setter Property="Width" Value="150" />
+                    </Style>
+                    <Style TargetType="CheckBox">
+                        <Setter Property="Margin" Value="5" />
+                        <Setter Property="Padding" Value="2" />
+                    </Style>
                 </DockPanel.Resources>
+                
+                
+               
                     <Label DockPanel.Dock="Top"  Content="Overzicht tankkaarten:" FontWeight="Bold"/>
                 <DockPanel>
-                    <ListView x:Name="lvOverzichtTankkaarten" DockPanel.Dock="Bottom" Margin="0,0,10,0" SelectionChanged="lvOverzichtTankkaarten_SelectionChanged"
+                    <StackPanel x:Name="Filter" DockPanel.Dock="Top" Orientation="Vertical">
+
+                        <StackPanel Orientation="Horizontal">
+                            <ComboBox x:Name="cmbFilter" />
+                            <TextBox x:Name="tbFilter"/>
+                            <Button x:Name="btnZoek" Content="Zoek" Width="75" Click="btnZoek_Click" />
+                            <Button x:Name="btnWisFilters" Content="Wis filter" Width="75" Click="btnWisFilters_Click" />
+                        </StackPanel>
+                    </StackPanel>
+                    <ListView x:Name="lvOverzichtTankkaarten" MinWidth="700" DockPanel.Dock="Bottom" Margin="0,0,10,0" SelectionChanged="lvOverzichtTankkaarten_SelectionChanged"
                       SelectionMode="Single">
                         <ListView.View>
                             <GridView>
                                 <!--De namen van de binding moeten exact hetzelfde zijn als de naam van de property-->
-                                <GridViewColumn Header="ID" Width="100" DisplayMemberBinding="{Binding TankkaartId}" />
-                                <GridViewColumn Header="Kaartnummer" Width="100" DisplayMemberBinding="{Binding Kaartnummer}" />
+                                <GridViewColumn Header="Kaartnummer" Width="100" x:Name="Kaartnummer" DisplayMemberBinding="{Binding Kaartnummer}" />
                                 <GridViewColumn Header="Geldigheidsdatum" Width="100" DisplayMemberBinding="{Binding Geldigheidsdatum}" />
                                 <GridViewColumn Header="Brandstoftype" Width="100" DisplayMemberBinding="{Binding Brandstof}" />
                                 <GridViewColumn Header="Geblokkeerd" Width="100" DisplayMemberBinding="{Binding Geblokkeerd}" />
@@ -39,6 +72,7 @@
                     <Button x:Name="btnVerwijderTankkaart" Content="Verwijder" Click="btnVerwijderTankkaart_Click" />
                     <Button x:Name="btnToonAlleInfo" Content="Toon info" Click="btnToonAlleInfo_Click" />
                     <Button x:Name="btnWijzigTankkaart" Content="Wijzig" Click="btnWijzigTankkaart_Click" />
+                    <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click" />
                 </StackPanel>
             </DockPanel>
         </Grid>

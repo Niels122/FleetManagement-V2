@@ -31,26 +31,26 @@
 
                 <StackPanel Orientation="Horizontal">
                     <Label   Content="Kaartnummer" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="kaartnummer" Text="" FontSize="15" VerticalAlignment="Center"/>
+                    <TextBox Name="tbKaartnummer" Text="" FontSize="15" VerticalAlignment="Center" IsReadOnly="True"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label   Content="Geldigheidsdatum" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <DatePicker Name="geldigheidsdatum"  FontSize="15"  VerticalAlignment="Center"/>
+                    <DatePicker Name="dpGeldigheidsdatum"  FontSize="15"  VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label Content="Geblokkeerd" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <CheckBox Name="geblokkeerd"  FontSize="15" VerticalAlignment="Center"/>
+                    <CheckBox Name="cbGeblokkeerd"  FontSize="15" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Brandstof type" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <ComboBox Name="brandstofType"  Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    <ComboBox Name="cmbBrandstoftype"  Text=" " FontSize="15" VerticalAlignment="Center"/>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Pincode" FontWeight="Bold" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                    <TextBox Name="pincode" Text=" " FontSize="15" VerticalAlignment="Center"/>
+                    <TextBox Name="tbPincode" Text=" " FontSize="15" VerticalAlignment="Center"/>
                 </StackPanel>
            
                 <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">

@@ -39,7 +39,7 @@
                         <Label    Content="Chassisnummer"/>
                         <TextBox  x:Name="tbChassisnummer" Text="" />
 
-                        <Label    Content="Nummerplaat"/>
+                        <Label    Content="Nummerplaat (Formaat: 1-AAA-111)"/>
                         <TextBox  x:Name="tbNummerplaat" Text="" />
 
                         <Label    Content="Brandstoftype"/>

@@ -15,7 +15,7 @@ namespace Persistentie
     {
         private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog = FleetmanagementDB; Integrated Security = True; TrustServerCertificate=True";
 
-        public void CreateAdres(Adres adres)
+        public void CreateAdres(string straatnaam, string huisnummer, int postcode, string stad)
         {
             throw new NotImplementedException();
         }

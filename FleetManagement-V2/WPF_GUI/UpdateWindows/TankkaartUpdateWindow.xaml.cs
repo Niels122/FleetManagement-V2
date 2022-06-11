@@ -29,27 +29,55 @@ namespace WPF_GUI.UpdateWindows
             InitializeComponent();
             FillBrandstofType();
 
-            kaartnummer.Text = tankkaart.Kaartnummer;
-            geldigheidsdatum.SelectedDate = tankkaart.Geldigheidsdatum;
-            geblokkeerd.IsChecked = tankkaart.Geblokkeerd;
-            pincode.Text = tankkaart.Pincode.ToString();
-            brandstofType.SelectedItem = tankkaart.Brandstof;
+            tbKaartnummer.Text = tankkaart.Kaartnummer;
+            dpGeldigheidsdatum.SelectedDate = tankkaart.Geldigheidsdatum;
+            cbGeblokkeerd.IsChecked = tankkaart.Geblokkeerd;
+            tbPincode.Text = tankkaart.Pincode.ToString();
+            cmbBrandstoftype.SelectedItem = tankkaart.Brandstof;
 
         }
         private void FillBrandstofType()
         {
             var brandstoftypes = Enum.GetValues(typeof(Brandstoftype)).Cast<Brandstoftype>().ToList().Distinct();
-            brandstofType.ItemsSource = brandstoftypes;
+            cmbBrandstoftype.ItemsSource = brandstoftypes;
         }
 
         private void btnOpslaan_Click(object sender, RoutedEventArgs e)
         {
+            var kaartnummer = tbKaartnummer.Text;
+            var geldigheidsdatum = dpGeldigheidsdatum.SelectedDate.Value;
+            bool isGeblokkeerd = false;
+            if (cbGeblokkeerd.IsChecked == true)
+            {
+                isGeblokkeerd = true;
+            }
+            else
+            {
+                isGeblokkeerd = false;
+            }
 
+            Brandstoftype brandstoftype = (Brandstoftype)cmbBrandstoftype.SelectedItem; //https://stackoverflow.com/questions/6139429/how-to-retrieve-combobox-selected-value-as-enum-type
+
+
+            Int32.TryParse(tbPincode.Text, out int pincode);
+
+            Tankkaart gewijzigdeTankkaart = new(kaartnummer, geldigheidsdatum, isGeblokkeerd, pincode, brandstoftype);
+
+            try
+            {
+                _dc.UpdateTankkaart(gewijzigdeTankkaart);
+                MessageBox.Show($"Tankkaart met kaartnummer: {kaartnummer} is succesvol gewijzigd.", "Succes", MessageBoxButton.OK);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnAnnuleren_Click(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

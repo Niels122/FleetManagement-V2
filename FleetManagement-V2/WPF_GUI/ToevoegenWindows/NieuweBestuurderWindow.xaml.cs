@@ -61,49 +61,41 @@ namespace WPF_GUI.ToevoegenWindows
         {
             try
             {
+                string _ID = tbBestuurderID.Text;
+                string _Voornaam = tbVoornaam.Text;
+                string _Achternaam = tbAchternaam.Text;
+                DateTime _Geboortedatum = dpGeboortedatum.SelectedDate.Value;
+                string _Rijksregisternummer = tbRijksregisternummer.Text;
+                Rijbewijs _Rijbewijs = (Rijbewijs)cmbRijbewijs.SelectedItem;
 
 
-                DateTime geboortedatum = dpGeboortedatum.SelectedDate.Value;
+                #region Adres
+                string _Straatnaam = tbStraatNaam.Text;
+                string _Huisnummer = tbHuisnummer.Text;
+                int _Postcode = int.Parse(tbPostcode.Text);
+                string _Stad = tbStad.Text;
+
+                _dc.CreateAdres(_Straatnaam, _Huisnummer, _Postcode, _Stad);
+                #endregion
                 //object maken van bestuurder, alles meegeven
                 //(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adressId)
                 //adres apart object => id van adres gelijk aan adresid in bestuurder, ook voor tankaart en voertuig
-                createAdres(); //adres moet worden toegevoegd aan database
+
+                //adres moet worden toegevoegd aan database
                 //voertuigId gelijk zetten aan id van het voertuig met geselecteerde nummerplaat.
-                int? adresId = null;
-                int? voertuigId = null;
-                int? tankkaartId = null;
+                Adres laatsteAdres = _dc.GeefAdressen().Last();
+                int? _AdresId = laatsteAdres.AdresId;
+                string? _ChassisnummerVoertuig = null;
+                string? _Tankkaartnummer = null;
 
+               
 
-                Rijbewijs _rijbewijs;
-                string rijbewijs = cmbRijbewijs.Text;
-
-                switch (rijbewijs.ToUpper())
-                {
-                    case "A":
-                        _rijbewijs = Rijbewijs.A;
-                        break;
-
-                    case "B":
-                        _rijbewijs = Rijbewijs.B;
-                        break;
-
-                    case "C":
-                        _rijbewijs = Rijbewijs.C;
-                        break;
-
-                    case "D":
-                        _rijbewijs = Rijbewijs.D;
-                        break;
-
-                    default:
-                        _rijbewijs = Rijbewijs.B;
-                        break;
-                }
+                
    
 
-                Bestuurder bestuurder = new(0, tbNaam.Text, tbAchternaam.Text, geboortedatum, tbRijksregisternummer.Text, _rijbewijs, adresId, voertuigId, tankkaartId);
+                Bestuurder nieuweBestuurder = new(_ID, _Voornaam, _Achternaam, _Geboortedatum, _Rijksregisternummer, _Rijbewijs, _ChassisnummerVoertuig, _Tankkaartnummer, _AdresId );
 
-                _dc.CreateBestuurder(bestuurder);
+                _dc.CreateBestuurder(nieuweBestuurder);
 
             }
             catch (Exception ex)
