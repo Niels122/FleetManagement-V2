@@ -12,7 +12,11 @@ namespace Domein.Interfaces
         List<Adres> GeefAdressen();
 
         void CreateAdres(Adres adres);
+
         void UpdateAdres(Adres adres);
-        void DeleteAdres(Adres adres); //Soft delete: implement column "IsDeleted"
+
+        void DeleteAdres(Adres adres);
+
+        void RetrieveAdres(Adres adres);
     }
 }

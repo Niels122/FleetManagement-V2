@@ -35,12 +35,11 @@ namespace CUI
 
             //Bestuurder test = new Bestuurder(bv.randomId(), bv.randomNaam(), bv.randomVoornaam(), bv.randomDatum(), bv.randomRijksregisternummer(), bv.randomRijbewijs());
             //bestuurderCon.CreateBestuurder(test);
-            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-            bv.VulBestuurderTabel(1000);
-            Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
+            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
+            //bv.VulBestuurderTabel(1000);
+            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
 
             #endregion
-
 
             #region filter
 
@@ -92,18 +91,12 @@ namespace CUI
 
             #region Adressen
 
-            //Console.WriteLine("Dit zijn de adressen:");
-            //foreach (Adres adres in adresCon.GeefAdressen())
-            //{
-            //    Console.WriteLine(adres.ToString());
-            //}
-
-            //Console.WriteLine("Dit zijn de adressen met bestuurders:");
-            //foreach (Adres adres in dc.GeefAdressenMetBestuurder())
-            //{
-            //    Console.WriteLine(adres.ToString());
-            //}
-
+            Console.WriteLine("Dit zijn de adressen:");
+            foreach (Adres adres in adresCon.GeefAdressen())
+            {
+                Console.WriteLine(adres.ToString());
+            }
+            
             #endregion
 
             #region Voertuigen

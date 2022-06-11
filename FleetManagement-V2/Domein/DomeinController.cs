@@ -111,13 +111,20 @@ namespace Domein
         {
             _adresCon.CreateAdres(adres);
         }
+
         public void UpdateAdres(Adres adres)
         {
             _adresCon.UpdateAdres(adres);
         }
+
         public void DeleteAdres(Adres adres)
         {
             _adresCon.DeleteAdres(adres);
+        }
+
+        public void RetrieveAdres(Adres adres)
+        {
+            _adresCon.RetrieveAdres(adres);
         }
 
         #endregion

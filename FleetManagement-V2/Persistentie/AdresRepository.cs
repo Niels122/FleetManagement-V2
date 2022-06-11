@@ -15,28 +15,18 @@ namespace Persistentie
     {
         private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog = FleetmanagementDB; Integrated Security = True; TrustServerCertificate=True";
 
-        public void CreateAdres(Adres adres)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteAdres(Adres adres)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Adres> GeefAdressen()
         {
             List<Adres> adressen = new List<Adres>();
 
             try
             {
-                using(SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
                     string readSql = "SELECT id, straat, huisnummer, postcode, stad FROM adres";
-                    SqlCommand cmd = new(readSql , conn);
+                    SqlCommand cmd = new(readSql, conn);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
                     {
@@ -66,7 +56,22 @@ namespace Persistentie
             return adressen;
         }
 
+        public void CreateAdres(Adres adres)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateAdres(Adres adres)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteAdres(Adres adres)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void RetrieveAdres(Adres adres)
         {
             throw new NotImplementedException();
         }
