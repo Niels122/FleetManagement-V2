@@ -28,16 +28,15 @@ namespace WPF_GUI.ReadWindows
             InitializeComponent();
 
             var bestuurders = _dc.GeefBestuurders();
-            Bestuurder? bstrdr = bestuurders.Where(b => b.TankkaartId == tankkaart.TankkaartId).FirstOrDefault();
+            Bestuurder? bstrdr = bestuurders.Where(b => b.TankkaartNummer == tankkaart.Kaartnummer).FirstOrDefault();
 
-
-            id.Text = tankkaart.TankkaartId.ToString();
+          
             kaartnummer.Text = tankkaart.Kaartnummer.ToString();
             geldigheidsdatum.Text = tankkaart.Geldigheidsdatum.ToString();
             geblokkeerd.IsChecked = tankkaart.Geblokkeerd;
             brandstoftype.Text = tankkaart.Brandstof.ToString();
             pincode.Text = tankkaart.Pincode.ToString();
-            bestuurder.Text = $"ID: {bstrdr?.BestuurderId} Naam {bstrdr?.Voornaam}";
+            bestuurder.Text = $"ID: {bstrdr?.BestuurderId}  Naam: {bstrdr?.Voornaam} {bstrdr?.Naam}";
         }
     }
 }

@@ -31,25 +31,62 @@ namespace WPF_GUI.MainPages
             InitializeComponent();
             _dc = dc;
             RefreshTankkaarten();
+
+            string[] filterMogelijkheden = { "Kaartnummer", "Geldigheidsdatum", "Brandstoftype", "Geblokkeerd" };
+
+            cmbFilter.ItemsSource = filterMogelijkheden;
         }
 
         private void RefreshTankkaarten()
         {
+            lvOverzichtTankkaarten.Items.Clear();
             var tankkaarten = _dc.GeefTankkaarten();
 
             foreach (Tankkaart tankkaart in tankkaarten)
             {
                 lvOverzichtTankkaarten.Items.Add(tankkaart);
+
             }
         }
         private void btnVoegTankkaartToe_Click(object sender, RoutedEventArgs e)
         {
             NieuweTankkaartWindow nieuweTankkaartWindow = new NieuweTankkaartWindow(_dc);
-            nieuweTankkaartWindow.Show();
+            try
+            {
+                nieuweTankkaartWindow.Show();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Er liep iets mis { ex.Message}");
+            }
+
         }
 
         private void btnVerwijderTankkaart_Click(object sender, RoutedEventArgs e)
         {
+            Tankkaart tankkaart = (Tankkaart)lvOverzichtTankkaarten.SelectedItem;
+            MessageBoxResult result = MessageBox.Show($"Bent u zeker dat u tankkaart met kaartnummer: {tankkaart.Kaartnummer} wilt verwijderen?", "Verwijder tankkaart", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _dc.DeleteTankkaart((Tankkaart)lvOverzichtTankkaarten.SelectedItem);
+
+                    MessageBox.Show("Tankkaart verwijderd");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Er liep iets mis bij het verwijderen: {ex.Message}", "Er liep iets mis", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    RefreshTankkaarten();
+                }
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                MessageBox.Show("Geen items verwijderd.");
+            }
 
         }
         private void lvOverzichtTankkaarten_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -67,6 +104,33 @@ namespace WPF_GUI.MainPages
         {
             TankkaartUpdateWindow tankkaartUpdate = new(_dc, (Tankkaart)lvOverzichtTankkaarten.SelectedItem);
             tankkaartUpdate.Show();
+        }
+
+        private void btnZoek_Click(object sender, RoutedEventArgs e)
+        {
+            string zoekterm = tbFilter.Text;
+            string kolom = cmbFilter.Text;
+
+
+            var gefilterdeTankkaarten = _dc.FilterLijstTankkaart(zoekterm, kolom);
+            lvOverzichtTankkaarten.Items.Clear();
+
+            foreach (Tankkaart tankkaart in gefilterdeTankkaarten)
+            {
+                lvOverzichtTankkaarten.Items.Add(tankkaart);
+
+            }
+        }
+
+        private void btnWisFilters_Click(object sender, RoutedEventArgs e)
+        {
+            tbFilter.Clear();
+            RefreshTankkaarten();
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshTankkaarten();
         }
     }
 }

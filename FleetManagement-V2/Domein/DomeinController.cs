@@ -26,7 +26,7 @@ namespace Domein
 
 
 
-        #region Bestuurder
+      #region Bestuurder
 
         public List<Bestuurder> FilterLijstBestuurder(string zoekterm, string kolom)
         {
@@ -107,9 +107,9 @@ namespace Domein
         //    return adressen;
         //}
 
-        public void CreateAdres(Adres adres)
+        public void CreateAdres(string straatnaam, string huisnummer, int postcode, string stad)
         {
-            _adresCon.CreateAdres(adres);
+            _adresCon.CreateAdres(straatnaam, huisnummer, postcode, stad);
         }
 
         public void UpdateAdres(Adres adres)
@@ -134,7 +134,8 @@ namespace Domein
 
 
         #region Tankkaart
-        public List<Tankkaart> FilterLijstTankkaart(string zoekterm, string kolom)
+        public List<Tankkaart> FilterLijstTankkaart(string zoekterm, string kolom) //filter is heel gevoelig aan verkeerde input
+                                                                                   //bijvoorbeeld kolomnaam is 'geblokkkeerd' maar hier staat 'isGeblokkeerd' dit zorgt ervoor dat filter niet werkt
         {
             List<Tankkaart> lijst = new List<Tankkaart>();
             string k = kolom.ToLower();
@@ -142,7 +143,7 @@ namespace Domein
             foreach (Tankkaart tankkaart in _tankkaartCon.GeefTankkaarten())
             {
                 List<string> paramater = new List<string>();
-                if (k == "tankkaartnummer" || k == "all") paramater.Add(tankkaart.Kaartnummer);
+                if (k == "kaartnummer" || k == "all") paramater.Add(tankkaart.Kaartnummer);
                 if (k == "geldigheidsdatum" || k == "all") paramater.Add(tankkaart.Geldigheidsdatum.ToString());
                 if (k == "brandstof" || k == "all") paramater.Add(tankkaart.Brandstof.ToString());
                 if (k == "pincode" || k == "all") paramater.Add(tankkaart.Pincode.ToString());

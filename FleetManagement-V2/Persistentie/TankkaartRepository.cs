@@ -142,7 +142,32 @@ namespace Persistentie
                     }
                     else
                     {
-                        updateCommand.Parameters.AddWithValue("@Brandstof", tankkaart.Brandstof);
+                        
+                        string brandstoftype;
+                        switch (tankkaart.Brandstof)
+                        {
+                            case Brandstoftype.benzine:
+                                brandstoftype = "benzine";
+                                break;
+                            case Brandstoftype.diesel:
+                                brandstoftype = "diesel";
+                                break;
+                            case Brandstoftype.elektrisch:
+                                brandstoftype = "elektrisch";
+                                break;
+                            case Brandstoftype.hybrideBenzine:
+                                brandstoftype = "hybrideBenzine";
+                                break;
+                            case Brandstoftype.hybrideDiesel:
+                                brandstoftype = "hybrideDiesel";
+                                break;
+                            default:
+                                brandstoftype = "benzine";
+                                break;
+                        }
+                        
+
+                        updateCommand.Parameters.AddWithValue("@Brandstof", brandstoftype);
                     }
                     if (tankkaart.Pincode == null)
                     {
