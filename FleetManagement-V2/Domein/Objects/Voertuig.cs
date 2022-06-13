@@ -19,61 +19,127 @@ namespace Domein.Objects
         public Wagentype Wagentype { get; private set; }
         public string Kleur { get; private set; }
         public int? AantalDeuren { get; private set; }
-        public int? BestuurderId { get; private set; }
+        public string BestuurderId { get; set; }
 
-        public Voertuig(string merk, string model, string chassisnummer, string nummerplaat, 
-            Brandstoftype brandstoftype, Wagentype wagentype, string kleur = null, int? aantalDeuren = null, int? bestuurderId = null)
+        public Voertuig(string merk, string model, string chassisnummer, string nummerplaat, Brandstoftype brandstoftype,
+            Wagentype wagentype, string kleur = null, int? aantalDeuren = null, string bestuurderId = null)
         {
             SetMerk(merk);
             SetModel(model);
             SetChassisnummer(chassisnummer);
             SetNummerplaat(nummerplaat);
-            Brandstoftype = brandstoftype;
-            Wagentype = wagentype;
-            Kleur = kleur;
-            AantalDeuren = aantalDeuren;
-            BestuurderId = bestuurderId;
+            SetBrandstoftype(brandstoftype);
+            SetWagentype(wagentype);
+            SetKleur(kleur);
+            SetAantalDeuren(aantalDeuren);
+            SetBestuurderId(bestuurderId);
         }
 
+        #region setters
         public void SetMerk(string merk)
         {
             if (string.IsNullOrWhiteSpace(merk))
             {
                 throw new VoertuigException("Merk moet ingevuld zijn!");
             }
-            this.Merk = merk;
+
+            Merk = merk;
         }
+
         public void SetModel(string model)
         {
-            if (string.IsNullOrEmpty(model))
+            if (string.IsNullOrWhiteSpace(model))
             {
                 throw new VoertuigException("Model moet ingevuld zijn!");
             }
-            this.Model = model;
+
+            Model = model;
         }
 
         public void SetChassisnummer(string chassisnummer)
         {
-            //foreach (string chassisnr in _voertuigRepo.GeefChassisnummers())
-            //{
-            //    if (chassisnr == chassisnummer)
-            //    {
-            //        throw new Exception("Deze wagen zit reeds in het systeem.");
-            //    }
-            //}
+            if (chassisnummer.Length != 17)
+            {
+                throw new VoertuigException("Chassisnummer moet 17 karakters lang zijn.");
+            }
+
+            string nummer = chassisnummer.ToUpper();
+            string letters = "ABCDEFGHJKLMNPRSTUVWXYZ0123456789";            
+            foreach(char c in nummer)
+            {
+                if (!letters.Contains(c))
+                {
+                    throw new VoertuigException("Chassisnummer bevat ongeldige karakters.");
+                }
+            }
 
             Chassisnummer = chassisnummer;
-
         }
 
         public void SetNummerplaat(string nummerplaat)
         {
-            if (string.IsNullOrEmpty(nummerplaat))
+            if (string.IsNullOrWhiteSpace(nummerplaat))
             {
                 throw new VoertuigException("Nummerplaat moet ingevuld zijn!");
             }
-            Nummerplaat = nummerplaat;
+
+            string nummer = nummerplaat.ToLower();
+            foreach(char c in nummer)
+            {
+                if (char.IsLetter(c) || char.IsDigit(c))
+                {
+                    nummer += c;
+                }
+            }
+
+            if (!(char.IsDigit(nummer[0]) && char.IsDigit(nummer[4]) && char.IsDigit(nummer[5]) && char.IsDigit(nummer[6]) &&
+                char.IsLetter(nummer[1]) && char.IsLetter(nummer[2]) && char.IsLetter(nummer[3])))
+            {
+                throw new VoertuigException("Nummerplaat is ongeldig.");
+            }
+
+            Nummerplaat = nummer;
         }
+
+        public void SetBrandstoftype(Brandstoftype brandstoftype)
+        {
+            if (Enum.IsDefined(typeof(Brandstoftype), brandstoftype))
+            {
+                Brandstoftype = brandstoftype;
+            }
+            else
+            {
+                throw new VoertuigException("Ongeldig brandstoftype");
+            }
+        }
+
+        public void SetWagentype(Wagentype wagentype)
+        {
+            if (Enum.IsDefined(typeof(Wagentype), wagentype))
+            {
+                Wagentype = wagentype;
+            }
+            else
+            {
+                throw new VoertuigException("Ongeldig wagentype");
+            }
+        }
+
+        public void SetKleur(string kleur)
+        {
+            Kleur = kleur;
+        }
+
+        public void SetAantalDeuren(int? aantalDeuren)
+        {
+            AantalDeuren = aantalDeuren;
+        }
+
+        public void SetBestuurderId(string bestuurderId)
+        {
+            BestuurderId = bestuurderId;
+        }
+        #endregion
 
         public override bool Equals(object obj)
         {

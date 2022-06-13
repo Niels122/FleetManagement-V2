@@ -14,9 +14,9 @@ namespace Domein.Objects
         public string Nummer { get; private set; }
         public int Postcode { get; private set; }
         public string Stad { get; private set; }
-        public int? BestuurderId { get; set; }
+        public string BestuurderId { get; set; }
 
-        public Adres(int adresId, string straat, string huisnummer, int postcode, string stad, int? bestuurderId = null)
+        public Adres(int adresId, string straat, string huisnummer, int postcode, string stad, string bestuurderId = null)
         {
             AdresId = adresId;
             SetStraat(straat);
@@ -33,6 +33,7 @@ namespace Domein.Objects
             {
                 throw new AdresException("Straatnaam moet ingevuld zijn.");
             }
+
             Straat = straat;
         }
 
@@ -42,6 +43,7 @@ namespace Domein.Objects
             {
                 throw new AdresException("Huisnummer moet ingevuld zijn.");
             }
+
             Nummer = huisnummer;
         }
 
@@ -51,6 +53,7 @@ namespace Domein.Objects
             {
                 throw new AdresException("Postcode is ongdeldig.");
             }
+
             Postcode = postcode;
         }
 
@@ -60,10 +63,11 @@ namespace Domein.Objects
             {
                 throw new AdresException("Stad moet ingevuld zijn.");
             }
+
             Stad = stad;
         }
 
-        public void SetBestuurderId(int? bestuurderId)
+        public void SetBestuurderId(string bestuurderId)
         {
             BestuurderId = bestuurderId;
         }
