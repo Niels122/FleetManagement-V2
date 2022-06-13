@@ -17,14 +17,14 @@ namespace Domein.Objects
         public DateTime Geboortedatum { get; private set; } 
         public string Rijksregisternummer { get; private set; }
         public Rijbewijs Rijbewijs { get; private set; }
-        public string ChassisnummerVoertuig { get; private set; }
-        public string TankkaartNummer { get; private set; }
-        public int? AdresId { get; private set; }
+        public string ChassisnummerVoertuig { get; set; }
+        public string TankkaartNummer { get; set; }
+        public int? AdresId { get; set; }
 
         public Bestuurder(string bestuurderId, string naam, string voornaam, DateTime geboortedatum, string rijksregisternummer,
             Rijbewijs rijbewijs, string chassisnummerVoertuig = null, string tankkaartnummer = null, int? adresId = null)
         {
-            BestuurderId = bestuurderId;
+            setBestuurderId(bestuurderId);
             SetNaam(naam);
             SetVoornaam(voornaam);
             SetGeboortedatum(geboortedatum);
@@ -36,32 +36,71 @@ namespace Domein.Objects
         }
 
         #region setters
+        public void setBestuurderId(string bestuurderId)
+        {
+            if (bestuurderId.Length != 8)
+            {
+                throw new BestuurderException("BestuurderId moet uit 8 tekens bestaan.");
+            }
+
+            string cijfers = bestuurderId.Substring(0, 6);
+            string letters = bestuurderId.Substring(6, 2);
+
+            foreach (char c in cijfers)
+            {
+                if (!char.IsDigit(c))
+                {
+                    throw new BestuurderException("De eerste 6 karakters van bestuurderId moeten cijfers zijn.");
+                }
+            }
+
+            foreach(char c in letters)
+            {
+                if (!char.IsLetter(c))
+                {
+                    throw new BestuurderException("De laatste 2 karakters van bestuurderId moeten letters zijn.");
+                }
+            }
+
+            BestuurderId = bestuurderId;
+        }
+
         public void SetNaam(string naam)
         {
             if (string.IsNullOrWhiteSpace(naam))
             {
                 throw new BestuurderException("Naam van de bestuurder moet ingevuld zijn.");
             }
+
             Naam = naam;
         }
+
         public void SetVoornaam(string voornaam)
         {
             if (string.IsNullOrWhiteSpace(voornaam))
             {
                 throw new BestuurderException("Voornaam van de bestuurder moet ingevuld zijn.");
             }
+
             Voornaam = voornaam;
         }
 
         //https://stackoverflow.com/questions/371987/how-to-validate-a-datetime-in-c
         //https://stackoverflow.com/questions/2193012/string-was-not-recognized-as-a-valid-datetime-format-dd-mm-yyyy
         //https://stackoverflow.com/questions/33807694/how-to-check-if-date-is-in-correct-format-i-e-yyyy-mmm-dd
-        public void SetGeboortedatum(DateTime geboortedatum) //TODO: CUI geeft ook uur min en sec na geboortedatum
+        public void SetGeboortedatum(DateTime geboortedatum) 
         {
             DateTime datum;
             if (DateTime.TryParseExact(geboortedatum.ToString("yyyy-MM-dd"), "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out datum))
             {
-                Geboortedatum = datum;
+                if (DateTime.Today.AddYears(-18) >= datum)
+                {
+                    Geboortedatum = datum;
+                }
+                else
+                {
+                    throw new BestuurderException("Bestuurder moet ouder zijn dan 18 jaar.");
+                }
             }
             else
             {
@@ -75,7 +114,11 @@ namespace Domein.Objects
             {
                 throw new BestuurderException("Rijksregister mag niet leeg zijn.");
             }
-            ValideerRijksregisternummer(rijksnummer);
+            
+            if (ValideerRijksregisternummer(rijksnummer))
+            {
+                Rijksregisternummer = rijksnummer;
+            }
         }
 
         public void SetRijbewijs(Rijbewijs rijbewijs)
@@ -106,7 +149,7 @@ namespace Domein.Objects
         }
         #endregion
 
-        public void ValideerRijksregisternummer(string rijksregisternummer)
+        public bool ValideerRijksregisternummer(string rijksregisternummer)
         {
             string rijksnummer = "";
 
@@ -120,31 +163,35 @@ namespace Domein.Objects
 
             if (rijksnummer.Length == 11)
             {
-                if (-1 < int.Parse(rijksnummer.Substring(0, 2)) && int.Parse(rijksnummer.Substring(0, 2)) < 100) //geboortedag check
+                string eerste9 = rijksnummer.Substring(0, 9);
+                string controlegetal = rijksnummer.Substring(9, 2);
+
+                if (-1 < int.Parse(rijksnummer.Substring(0, 2)) && int.Parse(rijksnummer.Substring(0, 2)) < 100) //geboortejaar check
                 {
                     if (0 < int.Parse(rijksnummer.Substring(2, 2)) && int.Parse(rijksnummer.Substring(2, 2)) < 13) // geboortemaand check
                     {
-                        if (0 < int.Parse(rijksnummer.Substring(4, 2)) && int.Parse(rijksnummer.Substring(4, 2)) < 32) //geboortejaar chek
+                        if (0 < int.Parse(rijksnummer.Substring(4, 2)) && int.Parse(rijksnummer.Substring(4, 2)) < 32) //geboortejaar check
                         {
                             if (0 < int.Parse(rijksnummer.Substring(6, 3)) && int.Parse(rijksnummer.Substring(6, 3)) < 999) //herkenningsgetal check
                             {
-                                if (-1 < int.Parse(rijksnummer.Substring(0, 9)) % 97 && int.Parse(rijksnummer.Substring(0, 9)) % 97 < 97) //controlegetal check
+                                if ((97 - (int.Parse(eerste9) % 97)) == int.Parse(controlegetal)) //controlegetal check
                                 {
-                                    Rijksregisternummer = rijksnummer;
+                                    return true;
                                 }
-                                else if (-1 < int.Parse(rijksnummer.Insert(0, "2").Substring(0, 10)) % 97 && int.Parse(rijksnummer.Insert(0, "2").Substring(0, 10)) % 97 < 97)
+                                else if (int.Parse(rijksnummer.Substring(0, 2)) < int.Parse(DateTime.Today.AddYears(-80).Year.ToString().Substring(2))
+                                    && (97 - (int.Parse(eerste9.Insert(0, "2")) % 97)) == int.Parse(controlegetal)) //geboren na het jaar 2000                                    
                                 {
-                                    Rijksregisternummer = rijksnummer;
+                                    return true;
                                 }
-                                else { throw new RijksregisternummerException("De laatste twee cijfers zijn ongeldig."); }
+                                else { throw new RijksregisternummerException("Het controlegetal (laatste twee cijfers) in het rijksregisternummer is ongeldig."); }
                             }
-                            else { throw new RijksregisternummerException("Cijfers 7, 8 en 9 moeten een getal tussen 0 en 999 vormen."); }
+                            else { throw new RijksregisternummerException("Cijfers 7, 8 en 9 in het rijksregisternummer moeten een getal tussen 0 en 999 vormen."); }
                         }
-                        else { throw new RijksregisternummerException("Geboortejaar in rijksregisternummer is ongeldig"); }
+                        else { throw new RijksregisternummerException("Geboortejaar in het rijksregisternummer is ongeldig"); }
                     }
-                    else { throw new RijksregisternummerException("Geboortemaand in rijksregisternummer is ongeldig."); }
+                    else { throw new RijksregisternummerException("Geboortemaand in het rijksregisternummer is ongeldig."); }
                 }
-                else { throw new RijksregisternummerException("Geboortedag in rijksregisternummer is ongeldig."); }
+                else { throw new RijksregisternummerException("Geboortedag in het rijksregisternummer is ongeldig."); }
             }
             else { throw new RijksregisternummerException("Lengte rijksregisternummer is verkeerd."); }
         }

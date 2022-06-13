@@ -17,17 +17,9 @@ namespace Domein.Controllers
             _bestuurderRepo = bestuurderRepo;
         }
 
-
-        //public int? GeefBestuurderIdByAdresId(int adresId) //List<int> teruggeven voor als er meerdere bestuurders op 1 adres zijn
-        //{
-        //    Bestuurder bestuurder = _bestuurderRepo.GeefBestuurders().Where(a => a.AdresId == adresId).FirstOrDefault();
-        //    int? result = bestuurder.AdresId;
-        //    return result;  
-        //}
-
-        public List<Bestuurder> GeefBestuurders(string bestuurId = null)
+        public List<Bestuurder> GeefBestuurders()
         {
-            return _bestuurderRepo.GeefBestuurders(bestuurId);
+            return _bestuurderRepo.GeefBestuurders();
         }
 
         public void CreateBestuurder(Bestuurder bestuurder)
@@ -49,5 +41,12 @@ namespace Domein.Controllers
         {
             _bestuurderRepo.RetrieveBestuurder(bestuurder);
         }
+
+        //public int? GeefBestuurderIdByAdresId(int adresId) //List<int> teruggeven voor als er meerdere bestuurders op 1 adres zijn
+        //{
+        //    Bestuurder bestuurder = _bestuurderRepo.GeefBestuurders().Where(a => a.AdresId == adresId).FirstOrDefault();
+        //    int? result = bestuurder.AdresId;
+        //    return result;  
+        //}
     }
 }

@@ -22,8 +22,18 @@ namespace Domein.dbVullers
         {
             for(int i = 0; i < aantal; i++)
             {
-                bc.CreateBestuurder(new Bestuurder(randomId(), randomNaam(), randomVoornaam(), randomDatum(), 
-                                                    randomRijksregisternummer(), randomRijbewijs()));
+                try
+                {
+                    bc.CreateBestuurder(new Bestuurder(randomId(), randomNaam(), randomVoornaam(), randomDatum(),
+                                                        randomRijksregisternummer(), randomRijbewijs()));
+                    //bij Adres, Voertuig en Tankkaart unieke ID meteen in bestuurder stekens
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("Dubbel rijksregisternummer");
+                    i--;
+                    continue;
+                }
             }
         }
 
@@ -69,8 +79,8 @@ namespace Domein.dbVullers
             return id;
         }
 
-        DateTime start = new DateTime(1990, 1, 1);
-        int verschil = (new DateTime(1999, 12, 31) - new DateTime(1990, 1, 1)).Days;
+        DateTime start = DateTime.Today.AddYears(-80);
+        int verschil = (DateTime.Today.AddYears(-18) - DateTime.Today.AddYears(-80)).Days;
         public DateTime randomDatum()
         {
             return start.AddDays(random.Next(verschil));

@@ -16,7 +16,7 @@ namespace Persistentie
     {
         private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog = FleetmanagementDB; Integrated Security = True; TrustServerCertificate=True";
         
-        public List<Bestuurder> GeefBestuurders(string bestuurId = null)
+        public List<Bestuurder> GeefBestuurders()
         {
             List<Bestuurder> bestuurders = new List<Bestuurder>();
 
@@ -28,7 +28,6 @@ namespace Persistentie
 
                     string readSql = "SELECT id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, " +
                         "chassisnummerVoertuig, tankkaartnummer, adresId FROM bestuurder WHERE isDeleted = 0";
-                    if (bestuurId != null) readSql += " AND id = bestuurId";
                     SqlCommand cmd = new(readSql, conn);
 
                     using (SqlDataReader dataReader = cmd.ExecuteReader())
@@ -42,39 +41,12 @@ namespace Persistentie
                                 string voornaam = (string)dataReader["voornaam"];
                                 DateTime geboortedatum = (DateTime)dataReader["geboortedatum"]; //checken of het het het juiste date format is. DateTime.ParseExact((string)dataReader["geboortedatum"], "yyyy-MM-dd", null);
                                 string rijksregisternummer = (string)dataReader["rijksregisternummer"];
-                                string rijbewijs = (string)dataReader["rijbewijstype"];
+                                Rijbewijs rijbewijs = (Rijbewijs)Enum.Parse(typeof(Rijbewijs), (string)dataReader["rijbewijstype"]);
                                 string chassisnummerVoertuig = Convert.IsDBNull(dataReader["chassisnummerVoertuig"]) ? null : (string)dataReader["chassisnummerVoertuig"];
                                 string tankkaartnummer = Convert.IsDBNull(dataReader["tankkaartnummer"]) ? null : (string)dataReader["tankkaartnummer"];
                                 int? adresId = Convert.IsDBNull(dataReader["adresId"]) ? null : (int?)dataReader["adresId"];
 
-                                #region setRijbewijs
-                                //van string naar enum.
-                                Rijbewijs _rijbewijs;
-                                if (rijbewijs.ToUpper() == "A") //moet else if zijn om dit juist te doen werken, later veranderen naar switch case
-                                {
-                                    _rijbewijs = Rijbewijs.A;
-                                }
-                                else
-                                if (rijbewijs.ToUpper() == "B")
-                                {
-                                    _rijbewijs = Rijbewijs.B;
-                                }
-                                else
-                                if (rijbewijs.ToUpper() == "C")
-                                {
-                                    _rijbewijs = Rijbewijs.C;
-                                }
-                                else
-                                if (rijbewijs.ToUpper() == "D")
-                                {
-                                    _rijbewijs = Rijbewijs.D;
-                                }
-                                else
-                                {
-                                    _rijbewijs = Rijbewijs.B;
-                                }
-                                #endregion
-                                bestuurders.Add(new Bestuurder(bestuurderId, naam, voornaam, geboortedatum, rijksregisternummer, _rijbewijs, chassisnummerVoertuig, tankkaartnummer, adresId));
+                                bestuurders.Add(new Bestuurder(bestuurderId, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs, chassisnummerVoertuig, tankkaartnummer, adresId));
                             }
                         }
                     }
@@ -107,7 +79,7 @@ namespace Persistentie
                     insertCommand.Parameters.AddWithValue("@Voornaam", bestuurder.Voornaam);
                     insertCommand.Parameters.AddWithValue("@Geboortedatum", bestuurder.Geboortedatum);
                     insertCommand.Parameters.AddWithValue("@Rijksregisternummer", bestuurder.Rijksregisternummer);
-                    insertCommand.Parameters.AddWithValue("@Rijbewijs", bestuurder.Rijbewijs);
+                    insertCommand.Parameters.AddWithValue("@Rijbewijs", bestuurder.Rijbewijs.ToString());
                     if (bestuurder.ChassisnummerVoertuig == null)
                     {
                         insertCommand.Parameters.AddWithValue("@ChassisnummerVoertuig", DBNull.Value);
@@ -155,7 +127,7 @@ namespace Persistentie
 
                     string updateSql = "UPDATE bestuurder SET naam = @Naam, voornaam = @Voornaam, geboortedatum = @Geboortedatum, " +
                         "rijksregisternummer = @Rijksregisternummer, rijbewijstype = @Rijbewijs, chassisnummerVoertuig = @ChassisnummerVoertuig, " +
-                        "tankkaartnummer = @TankkaartNummer, adresId = AdresId  WHERE id = @BestuurderId";
+                        "tankkaartnummer = @TankkaartNummer, adresId = @AdresId  WHERE id = @BestuurderId";
                     SqlCommand updateCommand = new(updateSql, conn);
 
                     updateCommand.Parameters.AddWithValue("BestuurderId", bestuurder.BestuurderId);
@@ -209,7 +181,7 @@ namespace Persistentie
                 {
                     conn.Open();
 
-                    string deleteSql = $"UPDATE bestuurder SET isDeleted= 1 " +
+                    string deleteSql = $"UPDATE bestuurder SET isDeleted = 1 " +
                         "WHERE id = @BestuurderId AND rijksregisternummer = @Rijksregisternummer";
                     SqlCommand deleteCommand = new(deleteSql, conn);
 

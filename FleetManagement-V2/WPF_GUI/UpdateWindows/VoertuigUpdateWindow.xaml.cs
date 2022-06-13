@@ -55,7 +55,8 @@ namespace WPF_GUI.UpdateWindows
 
         private void FillDeuren()
         {
-            var aantalDeuren = Enum.GetValues(typeof(Deuren)).Cast<Deuren>().ToList().Distinct();
+            //var aantalDeuren = Enum.GetValues(typeof(Deuren)).Cast<Deuren>().ToList().Distinct();
+            string[] aantalDeuren = { "3", "5" };
             cmbAantalDeuren.ItemsSource = aantalDeuren;
         }
 

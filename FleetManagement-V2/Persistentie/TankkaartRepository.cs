@@ -35,35 +35,20 @@ namespace Persistentie
                         {
                             while (dataReader.Read())
                             {
-                                string tankkaartnummer = (string)dataReader["tankkaartnummer"];
-                                DateTime geldigheidsdatum = (DateTime)dataReader["geldigheidsdatum"];
-                                bool isGeblokkeerd = (bool)dataReader["isGeblokkeerd"];
-                                string brandstoftype = (string)dataReader["brandstof"];
-                                int? pincode = (int?)dataReader["pincode"];
+                                Brandstoftype? brandstof;
 
-                                #region setBrandstoftype
-                                Brandstoftype brandstof;
-                                if (brandstoftype == "elektrisch")
+                                string tankkaartnummer = (string)dataReader["tankkaartnummer"];
+                                DateTime geldigheidsdatum = (DateTime)dataReader["geldigheidsDatum"];
+                                bool isGeblokkeerd = (bool)dataReader["isGeblokkeerd"];
+                                int? pincode = Convert.IsDBNull(dataReader["pincode"]) ? null : (int?)dataReader["pincode"];
+                                if (Convert.IsDBNull(dataReader["brandstof"]))
                                 {
-                                    brandstof = Brandstoftype.elektrisch;
-                                }
-                                else if (brandstoftype == "diesel")
-                                {
-                                    brandstof = Brandstoftype.diesel;
-                                }
-                                else if (brandstoftype == "hybridebenzine")
-                                {
-                                    brandstof = Brandstoftype.hybrideBenzine;
-                                }
-                                else if (brandstoftype == "hybridediesel")
-                                {
-                                    brandstof = Brandstoftype.hybrideDiesel;
+                                    brandstof = null;
                                 }
                                 else
                                 {
-                                    brandstof = Brandstoftype.benzine;
+                                    brandstof = (Brandstoftype)Enum.Parse(typeof(Brandstoftype), (string)dataReader["brandstof"]);
                                 }
-                                #endregion
 
                                 tankkaarten.Add(new Tankkaart(tankkaartnummer, geldigheidsdatum, isGeblokkeerd, pincode, brandstof, null));
                             }
@@ -100,7 +85,7 @@ namespace Persistentie
                     }
                     else
                     {
-                        insertCommand.Parameters.AddWithValue("@Brandstof", tankkaart.Brandstof);
+                        insertCommand.Parameters.AddWithValue("@Brandstof", tankkaart.Brandstof.ToString());
                     }
                     if (tankkaart.Pincode == null)
                     {
@@ -121,6 +106,7 @@ namespace Persistentie
                 throw new TankkaartException($"Er ging iets mis in de persitentielaag bij het creeren van de tankkaart, {ex.Message}");
             }
         }
+
         public void UpdateTankkaart(Tankkaart tankkaart)
         {
             try
@@ -142,32 +128,7 @@ namespace Persistentie
                     }
                     else
                     {
-                        
-                        string brandstoftype;
-                        switch (tankkaart.Brandstof)
-                        {
-                            case Brandstoftype.benzine:
-                                brandstoftype = "benzine";
-                                break;
-                            case Brandstoftype.diesel:
-                                brandstoftype = "diesel";
-                                break;
-                            case Brandstoftype.elektrisch:
-                                brandstoftype = "elektrisch";
-                                break;
-                            case Brandstoftype.hybrideBenzine:
-                                brandstoftype = "hybrideBenzine";
-                                break;
-                            case Brandstoftype.hybrideDiesel:
-                                brandstoftype = "hybrideDiesel";
-                                break;
-                            default:
-                                brandstoftype = "benzine";
-                                break;
-                        }
-                        
-
-                        updateCommand.Parameters.AddWithValue("@Brandstof", brandstoftype);
+                        updateCommand.Parameters.AddWithValue("@Brandstof", tankkaart.Brandstof.ToString());
                     }
                     if (tankkaart.Pincode == null)
                     {

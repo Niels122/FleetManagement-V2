@@ -10,7 +10,7 @@ namespace Domein.Interfaces
     public interface IBestuurderRepository
     {
 
-        List<Bestuurder> GeefBestuurders(string bestuurId = null);
+        List<Bestuurder> GeefBestuurders();
 
         void CreateBestuurder(Bestuurder bestuurder);
 

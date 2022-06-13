@@ -12,6 +12,7 @@ namespace Domein.Interfaces
         List<Adres> GeefAdressen();
 
         void CreateAdres(string straatnaam,string huisnummer, int postcode,string stad);
+
         void UpdateAdres(Adres adres);
 
         void DeleteAdres(Adres adres);

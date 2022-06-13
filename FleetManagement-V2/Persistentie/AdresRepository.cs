@@ -15,16 +15,6 @@ namespace Persistentie
     {
         private const string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog = FleetmanagementDB; Integrated Security = True; TrustServerCertificate=True";
 
-        public void CreateAdres(string straatnaam, string huisnummer, int postcode, string stad)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DeleteAdres(Adres adres)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Adres> GeefAdressen()
         {
             List<Adres> adressen = new List<Adres>();
@@ -66,14 +56,61 @@ namespace Persistentie
             return adressen;
         }
 
-        public void CreateAdres(Adres adres)
+        public void CreateAdres(string straatnaam, string huisnummer, int postcode, string stad)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string insertSql = "INSERT INTO adres (straat, huisnummer, postcode, stad)" +
+                                        "VALUES (@Straat, @Huisnummer, @Postcode, @Stad)";
+                    SqlCommand insertCommand = new(insertSql, conn);
+
+                    insertCommand.Parameters.AddWithValue("@Straat", straatnaam);
+                    insertCommand.Parameters.AddWithValue("@Huisnummer", huisnummer);
+                    insertCommand.Parameters.AddWithValue("@Postcode", postcode);
+                    insertCommand.Parameters.AddWithValue("@Stad", stad);
+
+                    insertCommand.ExecuteNonQuery();
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new AdresException($"Er ging iets mis in de persitentielaag bij het creeren van het adres, { ex.Message }");
+            }
         }
 
         public void UpdateAdres(Adres adres)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string updateSql = "UPDATE adres SET straat = @Straat, huisnummer = @Huisnummer, " +
+                        "postcode = @Postcode, stad = @Stad WHERE id = @AdresId";
+                    SqlCommand updateCommand = new(updateSql, conn);
+
+                    updateCommand.Parameters.AddWithValue("@AdresId", adres.AdresId);
+                    updateCommand.Parameters.AddWithValue("@Straat", adres.Straat);
+                    updateCommand.Parameters.AddWithValue("@Huisnummer", adres.Nummer);
+                    updateCommand.Parameters.AddWithValue("@Postcode", adres.Postcode);
+                    updateCommand.Parameters.AddWithValue("@Stad", adres.Stad);
+
+                    updateCommand.ExecuteNonQuery();
+
+                    conn.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new BestuurderException($"Er ging iets mis in de persitentielaag bij het updaten van het adres, { ex.Message}");
+            }
         }
 
         public void DeleteAdres(Adres adres)
