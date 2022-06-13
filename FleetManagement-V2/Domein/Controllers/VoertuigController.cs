@@ -21,6 +21,7 @@ namespace Domein.Controllers
         {            
             return _voertuigRepo.GeefVoertuigen();
         }
+
         public void CreateVoertuig(Voertuig voertuig)
         {
             _voertuigRepo.CreateVoertuig(voertuig);
@@ -29,12 +30,16 @@ namespace Domein.Controllers
         public void DeleteVoertuig(Voertuig voertuig)
         {
             _voertuigRepo.DeleteVoertuig(voertuig);
-
         }
-        public void UpdateVoertuig(Voertuig oudVoertuig, Voertuig nieuwVoertuig)
-        {
-            _voertuigRepo.UpdateVoertuig(oudVoertuig, nieuwVoertuig);
 
+        public void UpdateVoertuig(Voertuig voertuig)
+        {
+            _voertuigRepo.UpdateVoertuig(voertuig);
+        }
+
+        public void RetrieveVoertuig(Voertuig voertuig)
+        {
+            _voertuigRepo.RetrieveVoertuig(voertuig);
         }
     }
 }

@@ -25,18 +25,18 @@ namespace Domein
 
 
 
-
-      #region Bestuurder
+        #region Bestuurder
 
         public List<Bestuurder> FilterLijstBestuurder(string zoekterm, string kolom)
         {
             List<Bestuurder> lijst = new List<Bestuurder>();
             string k = kolom.ToLower();
+            string z = zoekterm.ToLower();
 
-            foreach (Bestuurder bestuurder in _bestuurderCon.GeefBestuurders())
+            foreach(Bestuurder bestuurder in _bestuurderCon.GeefBestuurders())
             {
                 List<string> paramater = new List<string>();
-                if (k == "bestuurderid" || k == "all") paramater.Add(bestuurder.BestuurderId.ToString());
+                if (k == "bestuurderid" || k == "all") paramater.Add(bestuurder.BestuurderId);
                 if (k == "naam" || k == "all") paramater.Add(bestuurder.Naam);
                 if (k == "voornaam" || k == "all") paramater.Add(bestuurder.Voornaam);
                 if (k == "geboortedatum" || k == "all") paramater.Add(bestuurder.Geboortedatum.ToString());
@@ -45,7 +45,7 @@ namespace Domein
 
                 foreach (string p in paramater)
                 {
-                    if (p.ToLower().Contains(zoekterm))
+                    if (p.ToLower().Contains(z))
                     {
                         if (!lijst.Contains(bestuurder))
                         {
@@ -58,9 +58,9 @@ namespace Domein
             return lijst;
         }
 
-        public List<Bestuurder> GeefBestuurders(string bestuurId = null)
+        public List<Bestuurder> GeefBestuurders()
         {
-            return _bestuurderCon.GeefBestuurders(bestuurId);
+            return _bestuurderCon.GeefBestuurders();
         }
 
         public void CreateBestuurder(Bestuurder bestuurder)
@@ -88,24 +88,12 @@ namespace Domein
 
 
 
-
         #region Adres
 
         public List<Adres> GeefAdressen()
         {
             return _adresCon.GeefAdressen();
         }
-
-        //public List<Adres> GeefAdressenMetBestuurder()
-        //{
-        //    List<Adres> adressen = new List<Adres>();
-        //    foreach (Adres adres in _adresCon.GeefAdressen())
-        //    {
-        //        adres.BestuurderId = _bestuurderCon.GeefBestuurderIdByAdresId(adres.AdresId);
-        //        adressen.Add(adres);
-        //    }
-        //    return adressen;
-        //}
 
         public void CreateAdres(string straatnaam, string huisnummer, int postcode, string stad)
         {
@@ -127,18 +115,29 @@ namespace Domein
             _adresCon.RetrieveAdres(adres);
         }
 
+        //public List<Adres> GeefAdressenMetBestuurder()
+        //{
+        //    List<Adres> adressen = new List<Adres>();
+        //    foreach (Adres adres in _adresCon.GeefAdressen())
+        //    {
+        //        adres.BestuurderId = _bestuurderCon.GeefBestuurderIdByAdresId(adres.AdresId);
+        //        adressen.Add(adres);
+        //    }
+        //    return adressen;
+        //}
+
         #endregion
 
 
 
-
-
         #region Tankkaart
+
         public List<Tankkaart> FilterLijstTankkaart(string zoekterm, string kolom) //filter is heel gevoelig aan verkeerde input
                                                                                    //bijvoorbeeld kolomnaam is 'geblokkkeerd' maar hier staat 'isGeblokkeerd' dit zorgt ervoor dat filter niet werkt
         {
             List<Tankkaart> lijst = new List<Tankkaart>();
             string k = kolom.ToLower();
+            string z = zoekterm.ToLower();
 
             foreach (Tankkaart tankkaart in _tankkaartCon.GeefTankkaarten())
             {
@@ -151,7 +150,7 @@ namespace Domein
 
                 foreach (string p in paramater)
                 {
-                    if (p.ToLower().Contains(zoekterm))
+                    if (p.ToLower().Contains(z))
                     {
                         if (!lijst.Contains(tankkaart))
                         {
@@ -167,6 +166,20 @@ namespace Domein
         public List<Tankkaart> GeefTankkaarten()
         {
             return _tankkaartCon.GeefTankkaarten();
+        }
+
+        public List<Tankkaart> GeefTankkaartenMetBestuurderId()
+        {
+            List<Tankkaart> tankkaarten = _tankkaartCon.GeefTankkaarten();
+            List<Bestuurder> bestuurders = _bestuurderCon.GeefBestuurders();
+
+            foreach(Bestuurder bestuurder in bestuurders)
+            {
+                Tankkaart tankkaart = tankkaarten.Where(t => t.Kaartnummer == bestuurder.TankkaartNummer).FirstOrDefault();
+                tankkaart.BestuurderId = bestuurder.BestuurderId;
+            }
+
+            return tankkaarten;
         }
 
         public void CreateTankkaart(Tankkaart tankkaart)
@@ -192,16 +205,75 @@ namespace Domein
 
 
 
-
-
         #region Voertuig
+
+        public List<Voertuig> FilterLijstVoertuig(string zoekterm, string kolom)
+        {
+            List<Voertuig> lijst = new List<Voertuig>();
+            string k = kolom.ToLower();
+            string z = zoekterm.ToLower();
+
+            foreach (Voertuig voertuig in _voertuigCon.GeefVoertuigen())
+            {
+                List<string> paramater = new List<string>();
+                if (k == "chassisnummer" || k == "all") paramater.Add(voertuig.Chassisnummer);
+                if (k == "nummerplaat" || k == "all") paramater.Add(voertuig.Nummerplaat);
+                if (k == "merk" || k == "all") paramater.Add(voertuig.Merk);
+                if (k == "model" || k == "all") paramater.Add(voertuig.Model);
+                if (k == "typevoertuig" || k == "all") paramater.Add(voertuig.Wagentype.ToString());
+                if (k == "brandstof" || k == "all") paramater.Add(voertuig.Brandstoftype.ToString());
+                if (k == "kleur" || k == "all") paramater.Add(voertuig.Kleur);
+                if (k == "aantalDeuren" || k == "all") paramater.Add(voertuig.AantalDeuren.ToString());
+
+                foreach (string p in paramater)
+                {
+                    if (p.ToLower().Contains(z))
+                    {
+                        if (!lijst.Contains(voertuig))
+                        {
+                            lijst.Add(voertuig);
+                        }
+                    }
+                }
+            }
+
+            return lijst;
+        }
+
         public List<Voertuig> GeefVoertuigen()
         {
             return _voertuigCon.GeefVoertuigen();
         }
+
+        public List<Voertuig> GeefVoertuigenMetBestuurderId()
+        {
+            List<Voertuig> voertuigen = _voertuigCon.GeefVoertuigen();
+            List<Bestuurder> bestuurders = _bestuurderCon.GeefBestuurders();
+
+            foreach (Bestuurder bestuurder in bestuurders)
+            {
+                Voertuig voertuig = voertuigen.Where(v => v.Chassisnummer == bestuurder.ChassisnummerVoertuig).FirstOrDefault();
+                voertuig.BestuurderId = bestuurder.BestuurderId;
+            }
+
+            //foreach (Voertuig voertuig in voertuigen) //op deze manier exception "Object reference not set to an instance of an object" wanneer er geen bestuurder is
+            //{
+            //    Bestuurder bestuurder = bestuurders.Where(b => b.ChassisnummerVoertuig == voertuig.Chassisnummer).FirstOrDefault();
+            //    voertuig.BestuurderId = bestuurder.BestuurderId;
+            //}
+
+            return voertuigen;
+        }
+
         public void CreateVoertuig(Voertuig voertuig)
         {
             _voertuigCon.CreateVoertuig(voertuig);
+        }
+
+        public void UpdateVoertuig(Voertuig voertuig)
+        {
+            _voertuigCon.UpdateVoertuig(voertuig);
+
         }
 
         public void DeleteVoertuig(Voertuig voertuig)
@@ -209,28 +281,16 @@ namespace Domein
             _voertuigCon.DeleteVoertuig(voertuig);
 
         }
-        public void UpdateVoertuig(Voertuig oudVoertuig, Voertuig nieuwVoertuig)
+
+        public void RetrieveVoertuig(Voertuig voertuig)
         {
-            _voertuigCon.UpdateVoertuig(oudVoertuig, nieuwVoertuig);
+            _voertuigCon.RetrieveVoertuig(voertuig);
 
         }
+
         #endregion
 
-        //public List<Voertuig> GeefVoertuigen(bool metBestuurder = true) //linken van voertuig aan bestuurder
-        //{
-        //    var result = _voertuigCon.GeefVoertuigen();
-        //    if (metBestuurder)
-        //    {
-        //        var bestuurders = _bestuurderCon.GeefBestuurders();
-        //        foreach (var bestuurder in bestuurders)
-        //        {
-        //            var voertuig = result.Where(v => v.VoertuigId == bestuurder.VoertuigId).FirstOrDefault();
-        //            voertuig.BestuurderId = bestuurder.BestuurderId;
+        
 
-        //        }
-
-        //    }
-        //    return result;
-        //}
     }
 }
