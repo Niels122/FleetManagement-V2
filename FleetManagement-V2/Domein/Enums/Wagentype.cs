@@ -8,6 +8,6 @@ namespace Domein.Enums
 {
     public enum Wagentype
     {
-        personenauto, bestelwagen
+        Personenauto, Bestelwagen
     }
 }

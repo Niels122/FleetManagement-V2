@@ -50,8 +50,8 @@ namespace WPF_GUI.ToevoegenWindows
         }
         private void FillAantalDeuren()
         {
-            var aantalDeuren = Enum.GetValues(typeof(Deuren)).Cast<Deuren>().ToList().Distinct();
-            cmbAantalDeuren.ItemsSource = aantalDeuren;
+            //var aantalDeuren = Enum.GetValues(typeof(Deuren)).Cast<Deuren>().ToList().Distinct();
+            //cmbAantalDeuren.ItemsSource = aantalDeuren;
         }
 
         private void btnOpslaan_Click(object sender, RoutedEventArgs e)
