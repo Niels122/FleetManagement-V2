@@ -92,13 +92,13 @@ namespace Domein.Objects
                 }
             }
 
-            if (!(char.IsDigit(nummer[0]) && char.IsDigit(nummer[4]) && char.IsDigit(nummer[5]) && char.IsDigit(nummer[6]) &&
-                char.IsLetter(nummer[1]) && char.IsLetter(nummer[2]) && char.IsLetter(nummer[3])))
-            {
-                throw new VoertuigException("Nummerplaat is ongeldig.");
-            }
+            //if (!(char.IsDigit(nummer[0]) && char.IsDigit(nummer[4]) && char.IsDigit(nummer[5]) && char.IsDigit(nummer[6]) && //TODO dit werkt niet correct
+            //    char.IsLetter(nummer[1]) && char.IsLetter(nummer[2]) && char.IsLetter(nummer[3])))
+            //{
+            //    throw new VoertuigException("Nummerplaat is ongeldig.");
+            //}
 
-            Nummerplaat = nummer;
+            Nummerplaat = nummerplaat;
         }
 
         public void SetBrandstoftype(Brandstoftype brandstoftype)

@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Enums;
+using Domein.Exceptions;
 using Domein.Objects;
 using System;
 using System.Collections.Generic;
@@ -39,14 +40,14 @@ namespace WPF_GUI.ToevoegenWindows
         }
         private void FillVoertuigen()
         {
-            var voertuigen = _dc.GeefVoertuigen();
+            var voertuigen = _dc.GeefVoertuigenMetBestuurderId();
             var beschikbareVoertuigenNummerplaat = voertuigen.Where(v => v.BestuurderId == null).Select(v => v.Nummerplaat);
 
             cmbNummerplaat.ItemsSource = beschikbareVoertuigenNummerplaat;
         }
         private void FillTankkaarten()
         {
-            var tankkaarten = _dc.GeefTankkaarten();
+            var tankkaarten = _dc.GeefTankkaartenMetBestuurderId();
             var beschikbareTankkaarten = tankkaarten.Where(t => t.BestuurderId == null).Select(t => t.Kaartnummer);
 
             cmbTankkaart.ItemsSource = beschikbareTankkaarten;
@@ -68,14 +69,50 @@ namespace WPF_GUI.ToevoegenWindows
                 string _Rijksregisternummer = tbRijksregisternummer.Text;
                 Rijbewijs _Rijbewijs = (Rijbewijs)cmbRijbewijs.SelectedItem;
 
+                int? _AdresId = null;
+                string? _ChassisnummerVoertuig = null;
+                string? _Tankkaartnummer = null;
 
-                #region Adres
-                string _Straatnaam = tbStraatNaam.Text;
-                string _Huisnummer = tbHuisnummer.Text;
-                int _Postcode = int.Parse(tbPostcode.Text);
-                string _Stad = tbStad.Text;
+                #region Tankkaart
+                string selectedTankkaart = cmbTankkaart.Text;
+                string tankkaartnummer = _dc.GeefTankkaarten().Where(t => t.Kaartnummer == selectedTankkaart).Select(t => t.Kaartnummer).FirstOrDefault();
+                if(tankkaartnummer != null)
+                {
+                    _Tankkaartnummer = tankkaartnummer;
+                }
+                #endregion
 
-                _dc.CreateAdres(_Straatnaam, _Huisnummer, _Postcode, _Stad);
+                #region Voertuig
+                string selectedNummerplaat = cmbNummerplaat.Text;
+                string chassisnummer = _dc.GeefVoertuigen().Where(v => v.Nummerplaat == selectedNummerplaat).Select(v => v.Chassisnummer).FirstOrDefault();
+                if (chassisnummer != null)
+                {
+                    _ChassisnummerVoertuig = chassisnummer.Trim();
+                }
+                #endregion
+
+                #region Adres 
+                string _Straatnaam = tbStraatNaam.Text; ; //als niet is ingevuld geen adresID meegeven
+                    string _Huisnummer = tbHuisnummer.Text;
+                    int? _Postcode = int.Parse(tbPostcode.Text);
+                    string _Stad = tbStad.Text;
+                if (_Straatnaam.Length != 0 && _Huisnummer.Length != 0 && _Stad.Length != 0)
+                {
+                    if (_Postcode < 1000 || _Postcode > 9999)
+                    {
+                        throw new AdresException("Postcode is ongdeldig.");
+                    }
+                    _dc.CreateAdres(_Straatnaam, _Huisnummer, (int)_Postcode, _Stad);
+                    Adres laatsteAdres = _dc.GeefAdressen().Last(); //een tweede methode is om de laatste uit de lijst te selecteren
+                    _AdresId = laatsteAdres.AdresId;
+                }
+                else
+                {
+                    throw new AdresException("Niet alle velden zijn ingevuld");
+                }
+
+                //Adres nieuwAdres = _dc.GetNewAdress(_Straatnaam, _Huisnummer, _Postcode, _Stad); //TODO: nieuw adress aanmaken en dit adres terug geven, nu heeft het ook een ID
+                //en dit kan dus aan een bestuurder gekoppeld worden
                 #endregion
                 //object maken van bestuurder, alles meegeven
                 //(naam, voornaam, geboortedatum, rijksregisternummer, rijbewijstype, voertuigId, tankkaartId, adressId)
@@ -83,19 +120,18 @@ namespace WPF_GUI.ToevoegenWindows
 
                 //adres moet worden toegevoegd aan database
                 //voertuigId gelijk zetten aan id van het voertuig met geselecteerde nummerplaat.
-                Adres laatsteAdres = _dc.GeefAdressen().Last();
-                int? _AdresId = laatsteAdres.AdresId;
-                string? _ChassisnummerVoertuig = null;
-                string? _Tankkaartnummer = null;
 
-               
 
-                
-   
 
-                Bestuurder nieuweBestuurder = new(_ID, _Voornaam, _Achternaam, _Geboortedatum, _Rijksregisternummer, _Rijbewijs, _ChassisnummerVoertuig, _Tankkaartnummer, _AdresId );
+
+
+
+                Bestuurder nieuweBestuurder = new(_ID, _Voornaam, _Achternaam, _Geboortedatum, _Rijksregisternummer, _Rijbewijs, _ChassisnummerVoertuig, _Tankkaartnummer, _AdresId);
 
                 _dc.CreateBestuurder(nieuweBestuurder);
+
+                MessageBox.Show($"Bestuurder met id {_ID} is succesvol toegevoegd");
+                this.Close();
 
             }
             catch (Exception ex)
@@ -105,11 +141,6 @@ namespace WPF_GUI.ToevoegenWindows
 
 
 
-        }
-        private void createAdres()
-        {
-            //straat,huisnummer,postcode,stad
-            //Moet nog in persistentie geïmplementeerd wordern
         }
     }
 }
