@@ -62,6 +62,7 @@
                                 <GridViewColumn Header="Geldigheidsdatum" Width="100" DisplayMemberBinding="{Binding Geldigheidsdatum}" />
                                 <GridViewColumn Header="Brandstoftype" Width="100" DisplayMemberBinding="{Binding Brandstof}" />
                                 <GridViewColumn Header="Geblokkeerd" Width="100" DisplayMemberBinding="{Binding Geblokkeerd}" />
+                                <GridViewColumn Header="Pincode" Width="100" DisplayMemberBinding="{Binding Pincode}" />
                             </GridView>
                         </ListView.View>
                     </ListView>

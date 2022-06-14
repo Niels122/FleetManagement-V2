@@ -10,7 +10,7 @@ namespace Domein
 {
     public class DomeinController
     {
-        private VoertuigController _voertuigCon;  
+        private VoertuigController _voertuigCon;
         private TankkaartController _tankkaartCon;
         private BestuurderController _bestuurderCon;
         private AdresController _adresCon;
@@ -33,7 +33,7 @@ namespace Domein
             string k = kolom.ToLower();
             string z = zoekterm.ToLower();
 
-            foreach(Bestuurder bestuurder in _bestuurderCon.GeefBestuurders())
+            foreach (Bestuurder bestuurder in _bestuurderCon.GeefBestuurders())
             {
                 List<string> paramater = new List<string>();
                 if (k == "bestuurderid" || k == "all") paramater.Add(bestuurder.BestuurderId);
@@ -173,10 +173,15 @@ namespace Domein
             List<Tankkaart> tankkaarten = _tankkaartCon.GeefTankkaarten();
             List<Bestuurder> bestuurders = _bestuurderCon.GeefBestuurders();
 
-            foreach(Bestuurder bestuurder in bestuurders)
+            foreach (Bestuurder bestuurder in bestuurders)
             {
-                Tankkaart tankkaart = tankkaarten.Where(t => t.Kaartnummer == bestuurder.TankkaartNummer).FirstOrDefault();
-                tankkaart.BestuurderId = bestuurder.BestuurderId;
+                Tankkaart tankkaart = tankkaarten.Where(t => t.Kaartnummer == bestuurder.TankkaartNummer).FirstOrDefault(); //TODO: deze methode moet over alle tankkaarten lopen (ook deleted)
+                if (tankkaart != null)
+                {
+                    tankkaart.BestuurderId = bestuurder.BestuurderId;
+
+                }
+                else { continue; }                                                                                                            //of moet gewoon skippen als er een tankkaart nie wordt gevonden
             }
 
             return tankkaarten;
@@ -253,7 +258,16 @@ namespace Domein
             foreach (Bestuurder bestuurder in bestuurders)
             {
                 Voertuig voertuig = voertuigen.Where(v => v.Chassisnummer == bestuurder.ChassisnummerVoertuig).FirstOrDefault();
-                voertuig.BestuurderId = bestuurder.BestuurderId;
+
+                if (voertuig != null)
+                {
+                    voertuig.BestuurderId = bestuurder.BestuurderId;
+
+                }
+                else
+                {
+                    continue;
+                }
             }
 
             //foreach (Voertuig voertuig in voertuigen) //op deze manier exception "Object reference not set to an instance of an object" wanneer er geen bestuurder is
@@ -290,7 +304,7 @@ namespace Domein
 
         #endregion
 
-        
+
 
     }
 }
