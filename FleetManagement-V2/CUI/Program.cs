@@ -35,7 +35,6 @@ namespace CUI
 
 
 
-
             //Random random = new Random();
             //public void Tabelvuller(int aantal)
             //{
@@ -58,8 +57,7 @@ namespace CUI
             //    }
             //}
 
-
-
+            
 
             #region Vuller
 
@@ -104,7 +102,8 @@ namespace CUI
             //}
             //Console.WriteLine("-----------------------------------------------");
 
-            //Bestuurder testBestuurder = new Bestuurder("519462jv", "Baele", "Joerie", new DateTime(1977, 7, 18), "30092408879", Domein.Enums.Rijbewijs.B, "5TDZK22C39S270189", "321456987", 3);
+            //Bestuurder testBestuurder = new Bestuurder("208476xf", "Baele", "Joerie", new DateTime(1977, 7, 18), "30092408879", 
+                                                            Domein.Enums.Rijbewijs.B, "ADMLFKSDFJ498PSPW", "111111111111111111", 7);
             //bestuurderCon.CreateBestuurder(testBestuurder);
             //bestuurderCon.UpdateBestuurder(testBestuurder);   //getest op normale input, foute input (exception persistentie) en onbestaande input (exception persistentie)
             //bestuurderCon.DeleteBestuurder(testBestuurder);   //getest op normale input, foute input en onbestaande input
@@ -128,7 +127,7 @@ namespace CUI
             //}
             //Console.WriteLine("-----------------------------------------------");
 
-            ////adresCon.CreateAdres("Langesteenweg", "347", 9020, "Drongen");
+            //adresCon.CreateAdres("Langesteenweg", "347", 9020, "Drongen");
             //adresCon.UpdateAdres(new Adres(6, "Antwerpsesteenweg", "77", 4000, "Hasselt"));
 
             //Console.WriteLine("-----------------------------------------------");
@@ -149,7 +148,7 @@ namespace CUI
             //}
             //Console.WriteLine("-----------------------------------------------");
 
-            //voertuigCon.RetrieveVoertuig(new Voertuig("Mercedes", "CLA", "ADMLFISDFJ498P", "1-ZZZ-999", Brandstoftype.diesel, Wagentype.bestelwagen, "geel", 33));
+            //voertuigCon.UpdateVoertuig(new Voertuig("Mercedes", "CLA", "ADMLFkSDFJ498PSPW", "1-kzo-999", Brandstoftype.Diesel, Wagentype.Bestelwagen, "geel", 33));
 
             //Console.WriteLine("-----------------------------------------------");
             //Console.WriteLine("Dit zijn de voertuigen met BestuurderId:");
@@ -170,7 +169,7 @@ namespace CUI
             //Console.WriteLine("-----------------------------------------------");
 
             //Tankkaart test = new Tankkaart("111111111111111111", new DateTime(2040, 11, 15), false, 7777, Brandstoftype.diesel);
-            //TankkaartCon.UpdateTankkaart(test);
+            //tankkaartCon.CreateTankkaart(test);
 
             //Console.WriteLine("-----------------------------------------------");
             //Console.WriteLine("Dit zijn de tankkaarten:");

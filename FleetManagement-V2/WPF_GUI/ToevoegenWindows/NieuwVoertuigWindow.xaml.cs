@@ -52,6 +52,7 @@ namespace WPF_GUI.ToevoegenWindows
         {
             int[] aantalDeuren = {3, 5};
             cmbAantalDeuren.ItemsSource = aantalDeuren;
+
         }
 
         private void btnOpslaan_Click(object sender, RoutedEventArgs e)

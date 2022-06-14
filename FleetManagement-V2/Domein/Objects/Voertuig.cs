@@ -73,18 +73,18 @@ namespace Domein.Objects
                 }
             }
 
-            Chassisnummer = chassisnummer;
+            Chassisnummer = nummer;
         }
 
         public void SetNummerplaat(string nummerplaat)
         {
             if (string.IsNullOrWhiteSpace(nummerplaat))
             {
-                throw new VoertuigException("Nummerplaat moet ingevuld zijn!");
+                throw new VoertuigException("Nummerplaat moet ingevuld zijn.");
             }
 
-            string nummer = nummerplaat.ToLower();
-            foreach(char c in nummer)
+            string nummer = "";
+            foreach(char c in nummerplaat)
             {
                 if (char.IsLetter(c) || char.IsDigit(c))
                 {
@@ -92,13 +92,23 @@ namespace Domein.Objects
                 }
             }
 
-            //if (!(char.IsDigit(nummer[0]) && char.IsDigit(nummer[4]) && char.IsDigit(nummer[5]) && char.IsDigit(nummer[6]) && //TODO dit werkt niet correct
-            //    char.IsLetter(nummer[1]) && char.IsLetter(nummer[2]) && char.IsLetter(nummer[3])))
-            //{
-            //    throw new VoertuigException("Nummerplaat is ongeldig.");
-            //}
 
-            Nummerplaat = nummerplaat;
+            if (nummer.Length != 7)
+            {
+                throw new VoertuigException("Lengte nummerplaat is verkeerd.");
+            }
+
+            if (!(char.IsDigit(nummer[0]) && char.IsDigit(nummer[4]) && char.IsDigit(nummer[5]) && char.IsDigit(nummer[6]) &&
+                char.IsLetter(nummer[1]) && char.IsLetter(nummer[2]) && char.IsLetter(nummer[3])))
+            {
+                throw new VoertuigException("Nummerplaat is ongeldig.");
+            }
+
+            string plaat = nummer.Insert(1, "-");
+            string plaat2 = plaat.Insert(5, "-");
+
+            Nummerplaat = plaat2.ToUpper();
+
         }
 
         public void SetBrandstoftype(Brandstoftype brandstoftype)
