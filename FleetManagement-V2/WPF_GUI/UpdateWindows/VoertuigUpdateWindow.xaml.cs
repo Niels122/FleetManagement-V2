@@ -106,7 +106,7 @@ namespace WPF_GUI.UpdateWindows
 
             try
             {
-                _dc.CreateVoertuig(nieuwVoertuig);
+                _dc.UpdateVoertuig(nieuwVoertuig);
                 MessageBox.Show($"Voertuig met chassisnummer: {_Chassisnummer} is succesvol gewijzigd.", "Succes", MessageBoxButton.OK);
                 this.Close();
             }

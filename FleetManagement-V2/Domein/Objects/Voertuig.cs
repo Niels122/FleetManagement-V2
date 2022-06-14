@@ -92,6 +92,7 @@ namespace Domein.Objects
                 }
             }
 
+
             if (nummer.Length != 7)
             {
                 throw new VoertuigException("Lengte nummerplaat is verkeerd.");
@@ -107,6 +108,7 @@ namespace Domein.Objects
             string plaat2 = plaat.Insert(5, "-");
 
             Nummerplaat = plaat2.ToUpper();
+
         }
 
         public void SetBrandstoftype(Brandstoftype brandstoftype)

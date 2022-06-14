@@ -96,14 +96,28 @@ namespace WPF_GUI.MainPages
 
         private void btnToonAlleInfo_Click(object sender, RoutedEventArgs e)
         {
-            TankkaartInfoWindow tankkaartInfo = new(_dc, (Tankkaart)lvOverzichtTankkaarten.SelectedItem);
+            if (lvOverzichtTankkaarten.SelectedItem != null)
+            {
+                TankkaartInfoWindow tankkaartInfo = new(_dc, (Tankkaart)lvOverzichtTankkaarten.SelectedItem);
             tankkaartInfo.Show();
+            }
+            else
+            {
+                MessageBox.Show("Geen item geslecteerd", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void btnWijzigTankkaart_Click(object sender, RoutedEventArgs e)
         {
-            TankkaartUpdateWindow tankkaartUpdate = new(_dc, (Tankkaart)lvOverzichtTankkaarten.SelectedItem);
+            if (lvOverzichtTankkaarten.SelectedItem != null)
+            {
+                TankkaartUpdateWindow tankkaartUpdate = new(_dc, (Tankkaart)lvOverzichtTankkaarten.SelectedItem);
             tankkaartUpdate.Show();
+            }
+            else
+            {
+                MessageBox.Show("Geen item geslecteerd", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void btnZoek_Click(object sender, RoutedEventArgs e)
@@ -111,20 +125,26 @@ namespace WPF_GUI.MainPages
             string zoekterm = tbFilter.Text;
             string kolom = cmbFilter.Text;
 
-
-            var gefilterdeTankkaarten = _dc.FilterLijstTankkaart(zoekterm, kolom);
-            lvOverzichtTankkaarten.Items.Clear();
-
-            foreach (Tankkaart tankkaart in gefilterdeTankkaarten)
+            try
             {
-                lvOverzichtTankkaarten.Items.Add(tankkaart);
+                var gefilterdeTankkaarten = _dc.FilterLijstTankkaart(zoekterm, kolom);
+                lvOverzichtTankkaarten.Items.Clear();
 
+                foreach (Tankkaart tankkaart in gefilterdeTankkaarten)
+                {
+                    lvOverzichtTankkaarten.Items.Add(tankkaart);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void btnWisFilters_Click(object sender, RoutedEventArgs e)
         {
             tbFilter.Clear();
+            cmbFilter.SelectedIndex = -1;
             RefreshTankkaarten();
         }
 

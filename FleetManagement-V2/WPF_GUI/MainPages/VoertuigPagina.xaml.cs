@@ -31,18 +31,30 @@ namespace WPF_GUI.MainPages
             _dc = dc;
             InitializeComponent();
             RefreshVoertuigen();
+
+            string[] filterMogelijkheden = { "Merk", "Chassisnummer", "Nummerplaat", "Brandstof" };
+
+            cmbFilter.ItemsSource = filterMogelijkheden;
         }
 
         private void RefreshVoertuigen()
         {
-            var bestuurders = _dc.GeefBestuurders();
-
-            List<Voertuig> voertuigen = _dc.GeefVoertuigen();
-            foreach (Voertuig voertuig in voertuigen)
+            try
             {
-                lvOverzichtVoertuigen.Items.Add(voertuig);
-                Bestuurder? bstrdr = bestuurders.Where(b => b.ChassisnummerVoertuig == voertuig.Chassisnummer).FirstOrDefault();
-  
+                lvOverzichtVoertuigen.Items.Clear();
+                var bestuurders = _dc.GeefBestuurders();
+
+                List<Voertuig> voertuigen = _dc.GeefVoertuigen();
+                foreach (Voertuig voertuig in voertuigen)
+                {
+                    lvOverzichtVoertuigen.Items.Add(voertuig);
+                    Bestuurder? bstrdr = bestuurders.Where(b => b.ChassisnummerVoertuig == voertuig.Chassisnummer).FirstOrDefault();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Er liep iets mis bij het laden van voertuigen: {ex.Message}");
             }
         }
         private void btnWijzigVoertuig_Click(object sender, RoutedEventArgs e)
@@ -59,7 +71,29 @@ namespace WPF_GUI.MainPages
 
         private void btnVerwijderVoertuig_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: implementeren
+            Voertuig voertuig = (Voertuig)lvOverzichtVoertuigen.SelectedItem;
+            MessageBoxResult result = MessageBox.Show($"Bent u zeker dat u voertuig met chassisnummer: {voertuig.Chassisnummer} wilt verwijderen?", "Verwijder voertuig", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    _dc.DeleteVoertuig(voertuig);
+
+                    MessageBox.Show("Voertuig verwijderd");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Er liep iets mis bij het verwijderen: {ex.Message}", "Er liep iets mis", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                finally
+                {
+                    RefreshVoertuigen();
+                }
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                MessageBox.Show("Geen items verwijderd.");
+            }
         }
 
         private void btnToonAlleInfo_Click(object sender, RoutedEventArgs e)
@@ -79,7 +113,7 @@ namespace WPF_GUI.MainPages
         {
 
         }
-        private void lvOverzichtBestuurders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void lvOverzichtVoertuigen_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             VoertuigInfoWindow voertuigInfo = new(_dc, (Voertuig)lvOverzichtVoertuigen.SelectedItem);
             voertuigInfo.Show();
@@ -87,12 +121,31 @@ namespace WPF_GUI.MainPages
 
         private void btnZoek_Click(object sender, RoutedEventArgs e)
         {
+            string zoekterm = tbFilter.Text;
+            string kolom = cmbFilter.Text;
 
+            try
+            {
+                var gefilterdeVoertuigen = _dc.FilterLijstVoertuig(zoekterm, kolom);
+                lvOverzichtVoertuigen.Items.Clear();
+
+                foreach(Voertuig voertuig in gefilterdeVoertuigen)
+                {
+                    lvOverzichtVoertuigen.Items.Add(voertuig);
+                }
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnWisFilters_Click(object sender, RoutedEventArgs e)
         {
-
+            tbFilter.Clear();
+            cmbFilter.SelectedIndex = -1;
+            RefreshVoertuigen();
         }
+
+      
     }
 }

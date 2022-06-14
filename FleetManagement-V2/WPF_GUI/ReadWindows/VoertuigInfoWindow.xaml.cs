@@ -40,7 +40,7 @@ namespace WPF_GUI.ReadWindows
             wagenType.Text = voertuig.Wagentype.ToString();
             kleur.Text = voertuig.Kleur;
             aantalDeuren.Text = voertuig.AantalDeuren.ToString();
-            bestuurder.Text = $"ID: {bstrdr?.BestuurderId} Naam: {bstrdr?.Voornaam + bstrdr?.Naam}";
+            bestuurder.Text = $"ID: {bstrdr?.BestuurderId} Naam: {bstrdr?.Voornaam} {bstrdr?.Naam}";
 
         }
     }
