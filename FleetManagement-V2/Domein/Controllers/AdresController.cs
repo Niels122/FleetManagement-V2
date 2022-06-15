@@ -23,6 +23,11 @@ namespace Domein.Controllers
             return _adresRepo.GeefAdressen();
         }
 
+        public Adres GeefLaatsteAdres()
+        {
+            return _adresRepo.GeefLaatsteAdres();
+        }
+
         public void CreateAdres(string straatnaam, string huisnummer, int postcode, string stad)
         {
             _adresRepo.CreateAdres(straatnaam, huisnummer, postcode, stad);

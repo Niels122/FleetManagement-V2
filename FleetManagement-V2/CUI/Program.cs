@@ -26,54 +26,34 @@ namespace CUI
             VoertuigController voertuigCon = new VoertuigController(voertuigRepo);
             TankkaartController tankkaartCon = new TankkaartController(tankkaartRepo);
 
-            DomeinController dc = new DomeinController(voertuigCon, tankkaartCon, bestuurderCon, adresCon);
-
             BestuurderVuller bv = new BestuurderVuller(bestuurderCon);
-            TankkaartVuller tc = new TankkaartVuller(tankkaartCon);
-            VoertuigVuller vc = new VoertuigVuller(voertuigCon);
-            AdresVuller ac = new AdresVuller(adresCon);
+            AdresVuller av = new AdresVuller(adresCon);
+            VoertuigVuller vv = new VoertuigVuller(voertuigCon);
+            TankkaartVuller tv = new TankkaartVuller(tankkaartCon);
+
+            DomeinController dc = new DomeinController(voertuigCon, tankkaartCon, bestuurderCon, adresCon, bv, av, vv, tv);
+
 
             Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
 
 
-
             #region Vuller
+
+            dc.DatabankVuller(10);
 
             //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
             //bv.VulBestuurderTabel(100); //4 seconden voor 1000
             //Console.Write("Bestuurder: ");
             //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-            //tc.VulTankkaarTabel(100); // 1 seconde voor 1000
+            //tv.VulTankkaarTabel(100); // 1 seconde voor 1000
             //Console.Write("Tankkaart: ");
             //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-            //vc.VulVoertuigTabel(100); // 17 seconden voor 1000
+            //vv.VulVoertuigTabel(100); // 17 seconden voor 1000
             //Console.Write("Voertuig: ");
             //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-            //ac.VulAdresTabel(100); // 2 seconden voor 1000
+            //av.VulAdresTabel(1000); // 2 seconden voor 1000
             //Console.Write("Adres: "); //totaal voor 1000 = 24 seconden|5 seconden voor 100
             //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-
-            //Random random = new Random();
-            //public void Tabelvuller(int aantal)
-            //{
-            //    bv.VulBestuurderTabel(aantal);
-            //    List<Bestuurder> bestuurders = bestuurderCon.GeefBestuurders();
-            //    Bestuurder bestuurder;
-            //    Adres adres;
-            //    Voertuig voertuig;
-            //    Tankkaart tankkaart;
-
-            //    for (int i = 0; i < aantal; i++) //KANSEN NOG IMPLEMENTEREN
-            //    {
-            //        bestuurder = bestuurders[random.Next(bestuurders.Count())]; //OF bestuurder = bv.MaakBestuur() met retur het gecreerde object
-            //        adres = adresCon.CreateAdres(); //moet wss nog een return Adres erbij zodat het in adres kan gestoken worden
-            //        voertuig = voertuigCon.CreateVoertuig();
-            //        tankkaart = tankkaartCon.CreateTankkaart();
-            //        bestuurderCon.UpdateBestuurder(new Bestuurder(bestuurder.BestuurderId, bestuurder.Naam, bestuurder.Voornaam, bestuurder.Geboortedatum,
-            //                              bestuurder.Rijksregisternummer, bestuurder.Rijbewijs, voertuig.Chassisnummer, tankkaart.Kaartnummer, adres.AdresId))
-            //        bestuurders.Remove(bestuurder);
-            //    }
-            //}
 
             #endregion
 
@@ -135,8 +115,11 @@ namespace CUI
             //}
             //Console.WriteLine("-----------------------------------------------");
 
-            //adresCon.CreateAdres("Langesteenweg", "347", 9020, "Drongen");
+
+            //Console.WriteLine(dc.GeefLaatsteAdres().ToString());
+            //adresCon.CreateAdres("Bladerdeeglaan", "47", 9040, "Gent");
             //adresCon.UpdateAdres(new Adres(6, "Antwerpsesteenweg", "77", 4000, "Hasselt"));
+            //Console.WriteLine(dc.GeefLaatsteAdres().ToString());
 
             //Console.WriteLine("-----------------------------------------------");
             //Console.WriteLine("Dit zijn de adressen:");

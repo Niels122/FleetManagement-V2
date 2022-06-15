@@ -11,6 +11,8 @@ namespace Domein.Interfaces
     {
         List<Adres> GeefAdressen();
 
+        Adres GeefLaatsteAdres();
+
         void CreateAdres(string straatnaam,string huisnummer, int postcode,string stad);
 
         void UpdateAdres(Adres adres);
