@@ -104,18 +104,22 @@ namespace Domein
         #region Bestuurder
 
         public List<Bestuurder> FilterLijstBestuurderV2(string bestuurderId, string naam, string voornaam, 
-                                                        string geboortedatum, string rijksnummer, string rijbewijs )
+                                                        string geboortedatum, string rijksnummer, string rijbewijs
+                                                        //,string chassisnummer, string tankkaartnummer
+                                                        )
         {
             List<Bestuurder> lijst = new List<Bestuurder>();
 
             foreach (Bestuurder bestuurder in _bestuurderCon.GeefBestuurders())
             {
-                if ((bestuurder.BestuurderId.ToLower().Contains(bestuurderId.ToLower()) || bestuurderId == "")
-                    && (bestuurder.Naam.ToLower().Contains(naam.ToLower()) || naam == "")
-                    && (bestuurder.Voornaam.ToLower().Contains(voornaam.ToLower()) || voornaam == "")
-                    && (bestuurder.Geboortedatum.ToString().Contains(geboortedatum) || geboortedatum == "")
-                    && (bestuurder.Rijksregisternummer.Contains(rijksnummer) || rijksnummer == "")
-                    && (bestuurder.Rijbewijs.ToString().ToLower().Contains(rijbewijs.ToLower()) || rijbewijs == ""))
+                if ((bestuurder.BestuurderId.ToLower().Contains(bestuurderId.ToLower()) || bestuurderId == null)
+                    && (bestuurder.Naam.ToLower().Contains(naam.ToLower()) || naam == null)
+                    && (bestuurder.Voornaam.ToLower().Contains(voornaam.ToLower()) || voornaam == null)
+                    && (bestuurder.Geboortedatum.ToString().Contains(geboortedatum) || geboortedatum == null)
+                    && (bestuurder.Rijksregisternummer.Contains(rijksnummer) || rijksnummer == null)
+                    && (bestuurder.Rijbewijs.ToString().ToLower().Contains(rijbewijs.ToLower()) || rijbewijs == null))
+                    //&& (bestuurder.ChassisnummerVoertuig.ToLower().Contains(chassisnummer.ToLower()) || chassisnummer == null)
+                    //&& (bestuurder.TankkaartNummer.ToLower().Contains(tankkaartnummer.ToLower()) || tankkaartnummer == null)
                 {
                     lijst.Add(bestuurder);
                 }
@@ -234,18 +238,16 @@ namespace Domein
 
         #region Tankkaart
 
-        public List<Tankkaart> FilterLijstTankkaartV2(string kaartnummer, string geldigheidsdatum, bool geblokkeerd,
-                                                        string pincode, string brandstof)
+        public List<Tankkaart> FilterLijstTankkaartV2(string kaartnummer, string geldigheidsdatum, bool geblokkeerd, string brandstof)
         {
             List<Tankkaart> lijst = new List<Tankkaart>();
 
             foreach (Tankkaart tankkaart in _tankkaartCon.GeefTankkaarten())
             {
-                if ((tankkaart.Kaartnummer.ToLower().Contains(kaartnummer.ToLower()) || kaartnummer == "")
-                    && (tankkaart.Geldigheidsdatum.ToString().Contains(geldigheidsdatum) || geldigheidsdatum == "")
+                if ((tankkaart.Kaartnummer.ToLower().Contains(kaartnummer.ToLower()) || kaartnummer == null)
+                    && (tankkaart.Geldigheidsdatum.ToString().Contains(geldigheidsdatum) || geldigheidsdatum == null)
                     && (tankkaart.Geblokkeerd == geblokkeerd)
-                    && (tankkaart.Pincode.ToString().Contains(pincode) || pincode == "")
-                    && (tankkaart.Brandstof.ToString().ToLower().Contains(brandstof.ToLower()) || brandstof == ""))
+                    && (tankkaart.Brandstof.ToString().ToLower().Contains(brandstof.ToLower()) || brandstof == null))
                 {
                     lijst.Add(tankkaart);
                 }
@@ -334,21 +336,20 @@ namespace Domein
         #region Voertuig
 
         public List<Voertuig> FilterLijstVoertuigV2(string merk, string model, string chassisnummer, string nummerplaat,
-                                                        string brandstoftype, string wagentype, string kleur, string aantalDeuren)
+                                        string brandstoftype, string wagentype, string kleur, string aantalDeuren)
         {
             List<Voertuig> lijst = new List<Voertuig>();
 
             foreach (Voertuig voertuig in _voertuigCon.GeefVoertuigen())
             {
-                if ((voertuig.Merk.ToLower().Contains(merk.ToLower()) || merk == "")
-                    && (voertuig.Model.ToLower().Contains(model.ToLower()) || model == "")
-                    && (voertuig.Chassisnummer.ToUpper().Contains(chassisnummer.ToUpper()) || chassisnummer == "")
-                    && (voertuig.Nummerplaat.ToUpper().Contains(nummerplaat.ToUpper()) || nummerplaat == "")
-                    && (voertuig.Brandstoftype.ToString().ToLower().Contains(brandstoftype.ToLower()) || brandstoftype == "")
-                    && (voertuig.Wagentype.ToString().ToLower().Contains(wagentype.ToLower()) || wagentype == "")
-                    && (voertuig.Kleur.ToLower().Contains(kleur.ToLower()) || kleur == "")
-                    && (voertuig.AantalDeuren.ToString().Contains(aantalDeuren) || aantalDeuren == "")
-                    )
+                if ((voertuig.Merk.ToLower().Contains(merk.ToLower()) || merk == null)
+                    && (voertuig.Model.ToLower().Contains(model.ToLower()) || model == null)
+                    && (voertuig.Chassisnummer.ToUpper().Contains(chassisnummer.ToUpper()) || chassisnummer == null)
+                    && (voertuig.Nummerplaat.ToUpper().Contains(nummerplaat.ToUpper()) || nummerplaat == null)
+                    && (voertuig.Brandstoftype.ToString().ToLower().Contains(brandstoftype.ToLower()) || brandstoftype == null)
+                    && (voertuig.Wagentype.ToString().ToLower().Contains(wagentype.ToLower()) || wagentype == null)
+                    && (voertuig.Kleur.ToLower().Contains(kleur.ToLower()) || kleur == null)
+                    && (voertuig.AantalDeuren.ToString().Contains(aantalDeuren) || aantalDeuren == null))
                 {
                     lijst.Add(voertuig);
                 }
