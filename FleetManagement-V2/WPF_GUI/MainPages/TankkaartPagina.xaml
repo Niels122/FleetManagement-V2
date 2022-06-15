@@ -47,22 +47,35 @@
                     <StackPanel x:Name="Filter" DockPanel.Dock="Top" Orientation="Vertical">
 
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox x:Name="cmbFilter" />
-                            <TextBox x:Name="tbFilter"/>
+                            <Label Name="kaartnummer" Content="Kaartnummer"/>
+                            <TextBox x:Name="tbKaartnummer" Width="100"/>
+
+                            <Label Name="Geldigheidsdatum" Content="Geldigheidsdatum"/>
+                            <TextBox x:Name="tbGeldigheidsdatum" Width="100"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Brandstoftype"/>
+                            <ComboBox x:Name="cmbBrandstoftype" Width="100"/>
+
+                            <Label Content="Geblokkeerd"/>
+                            <CheckBox x:Name="cbGeblokkeerd" />
+
                             <Button x:Name="btnZoek" Content="Zoek" Width="75" Click="btnZoek_Click" />
                             <Button x:Name="btnWisFilters" Content="Wis filter" Width="75" Click="btnWisFilters_Click" />
                         </StackPanel>
+
                     </StackPanel>
                     <ListView x:Name="lvOverzichtTankkaarten" MinWidth="700" DockPanel.Dock="Bottom" Margin="0,0,10,0" SelectionChanged="lvOverzichtTankkaarten_SelectionChanged"
                       SelectionMode="Single" MouseDoubleClick="lvOverzichtTankkaarten_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
                                 <!--De namen van de binding moeten exact hetzelfde zijn als de naam van de property-->
-                                <GridViewColumn Header="Kaartnummer" Width="100" x:Name="Kaartnummer" DisplayMemberBinding="{Binding Kaartnummer}" />
-                                <GridViewColumn Header="Geldigheidsdatum" Width="100" DisplayMemberBinding="{Binding Geldigheidsdatum}" />
+                                <GridViewColumn Header="Kaartnummer" Width="150" x:Name="Kaartnummer" DisplayMemberBinding="{Binding Kaartnummer}" />
+                                <GridViewColumn Header="Geldigheidsdatum" Width="105" DisplayMemberBinding="{Binding Geldigheidsdatum, StringFormat='dd/MM/yyyy'}" />
                                 <GridViewColumn Header="Brandstoftype" Width="100" DisplayMemberBinding="{Binding Brandstof}" />
-                                <GridViewColumn Header="Geblokkeerd" Width="100" DisplayMemberBinding="{Binding Geblokkeerd}" />
-                                <GridViewColumn Header="Pincode" Width="100" DisplayMemberBinding="{Binding Pincode}" />
+                                <GridViewColumn Header="Geblokkeerd" Width="90" DisplayMemberBinding="{Binding Geblokkeerd}" />
+                                <GridViewColumn Header="Pincode" Width="70" DisplayMemberBinding="{Binding Pincode}" />
                                 <GridViewColumn Header="BestuurderID" Width="100" DisplayMemberBinding="{Binding BestuurderId}" />
 
                             </GridView>

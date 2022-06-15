@@ -31,9 +31,6 @@ namespace WPF_GUI.MainPages
             InitializeComponent();
             _dc = dc;
             RefreshBestuurders();
-
-            string[] filterMogelijkheden = { "BestuurderId", "Naam", "Voornaam", "Rijbewijs", "Rijksregisternummer", "Geboortedatum", "All" };
-            cmbFilter.ItemsSource = filterMogelijkheden;
         }
 
         private void RefreshBestuurders()
@@ -118,12 +115,20 @@ namespace WPF_GUI.MainPages
 
         private void btnZoek_Click(object sender, RoutedEventArgs e)
         {
-            string zoekterm = tbFilter.Text;
-            string kolom = cmbFilter.Text;
+            string id = tbID.Text;
+            string naam = cmbNaam.Text;
+            string voornaam = tbVoornaam.Text;
+            string geboortedatum = tbGeboortedatum.Text;
+            string rijksregisternummer = tbRijksregisternummer.Text;
+            string rijbewijs = tbRijbewijs.Text;
+            //string chassisnummer = tbVoertuig.Text;
+            //string kaartnummer = tbTankkaart.Text;
 
             try
             {
-                var gefilterdeBestuurders = _dc.FilterLijstBestuurder(zoekterm, kolom);
+                var gefilterdeBestuurders = _dc.FilterLijstBestuurderV2(id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs
+                                                             //, chassisnummer, kaartnummer
+                                                             );
                 lvOverzichtBestuurders.Items.Clear();
 
                 foreach (Bestuurder bestuurder in gefilterdeBestuurders)
@@ -139,8 +144,14 @@ namespace WPF_GUI.MainPages
 
         private void btnWisFilters_Click(object sender, RoutedEventArgs e)
         {
-            tbFilter.Clear();
-            cmbFilter.SelectedIndex = -1;
+            tbID.Clear();
+            cmbNaam.Clear();
+            tbVoornaam.Clear();
+            tbGeboortedatum.Clear();
+            tbRijksregisternummer.Clear();
+            tbRijbewijs.Clear();
+            //tbVoertuig.Clear();
+            //tbTankkaart.Clear();
             RefreshBestuurders();
         }
         private void btnRefresh_Click(object sender, RoutedEventArgs e)

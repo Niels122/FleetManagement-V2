@@ -46,8 +46,34 @@
                     <StackPanel x:Name="Filter" DockPanel.Dock="Top" Orientation="Vertical">
 
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox x:Name="cmbFilter" />
-                            <TextBox x:Name="tbFilter"/>
+                            <Label Content="Merk"/>
+                            <TextBox x:Name="tbMerk" Width="100"/>
+
+                            <Label Content="Chassisnummer"/>
+                            <TextBox x:Name="tbChassisnummer" Width="100"/>
+
+                            <Label Content="Kleur"/>
+                            <TextBox x:Name="tbKleur" Width="100"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Model"/>
+                            <TextBox x:Name="tbModel" Width="100"/>
+                            
+                            <Label Content="Nummerplaat"/>
+                            <TextBox x:Name="tbNummerplaat" Width="100"/>
+
+                            <Label Content="AantalDeuren"/>
+                            <TextBox x:Name="tbAantalDeuren" Width="100"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Brandstof"/>
+                            <ComboBox x:Name="cmbBrandstoftype" Width="100"/>
+
+                            <Label Content="Wagentype"/>
+                            <ComboBox x:Name="cmbWagentype" Width="100"/>
+
                             <Button x:Name="btnZoek" Content="Zoek" Width="75" Click="btnZoek_Click" />
                             <Button x:Name="btnWisFilters" Content="Wis filter" Width="75" Click="btnWisFilters_Click" />
                         </StackPanel>
@@ -58,12 +84,15 @@
                         <ListView.View>
                             <GridView>
                                 <!--De namen van de binding moeten exact hetzelfde zijn als de naam van de property-->
-                                <GridViewColumn Header="Merk"           Width="100" DisplayMemberBinding="{Binding Merk}" />
-                                <GridViewColumn Header="Model"           Width="100" DisplayMemberBinding="{Binding Model}" />
-                                <GridViewColumn Header="Chassisnummer"  Width="100" DisplayMemberBinding="{Binding Chassisnummer}" />
-                                <GridViewColumn Header="Nummerplaat"    Width="100" DisplayMemberBinding="{Binding Nummerplaat}" />
+                                <GridViewColumn Header="Merk"           Width="80" DisplayMemberBinding="{Binding Merk}" />
+                                <GridViewColumn Header="Model"           Width="75" DisplayMemberBinding="{Binding Model}" />
+                                <GridViewColumn Header="Chassisnummer"  Width="145" DisplayMemberBinding="{Binding Chassisnummer}" />
+                                <GridViewColumn Header="Nummerplaat"    Width="80" DisplayMemberBinding="{Binding Nummerplaat}" />
                                 <GridViewColumn Header="Brandstof"      Width="100" DisplayMemberBinding="{Binding Brandstoftype}" />
-                                <GridViewColumn Header="Bestuurder"     Width="100" DisplayMemberBinding="{Binding BestuurderId}" />
+                                <GridViewColumn Header="Wagentype"      Width="100" DisplayMemberBinding="{Binding Wagentype}" />
+                                <GridViewColumn Header="Kleur"      Width="50" DisplayMemberBinding="{Binding Kleur}" />
+                                <GridViewColumn Header="AantalDeuren"      Width="80" DisplayMemberBinding="{Binding AantalDeuren}" />
+                                <GridViewColumn Header="Bestuurder"     Width="80" DisplayMemberBinding="{Binding BestuurderId}" />
                             </GridView>
                         </ListView.View>
                     </ListView>

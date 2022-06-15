@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Objects;
+using Domein.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,11 @@ namespace WPF_GUI.MainPages
             InitializeComponent();
             RefreshVoertuigen();
 
-            string[] filterMogelijkheden = { "Merk", "Chassisnummer", "Nummerplaat", "Brandstof" };
+            Array brandstoftypes = Enum.GetValues(typeof(Brandstoftype));
+            cmbBrandstoftype.ItemsSource = brandstoftypes;
 
-            cmbFilter.ItemsSource = filterMogelijkheden;
+            Array wagentypes = Enum.GetValues(typeof(Wagentype));
+            cmbBrandstoftype.ItemsSource = wagentypes;
         }
 
         private void RefreshVoertuigen()
@@ -122,12 +125,19 @@ namespace WPF_GUI.MainPages
 
         private void btnZoek_Click(object sender, RoutedEventArgs e)
         {
-            string zoekterm = tbFilter.Text;
-            string kolom = cmbFilter.Text;
+            string merk = tbMerk.Text;
+            string model = tbModel.Text;
+            string chassisnummer = tbChassisnummer.Text;
+            string nummerplaat = tbNummerplaat.Text;
+            string brandstoftype = cmbBrandstoftype.Text;
+            string wagentype = cmbWagentype.Text;
+            string kleur = tbKleur.Text;
+            string aantalDeuren = tbAantalDeuren.Text;
 
             try
             {
-                var gefilterdeVoertuigen = _dc.FilterLijstVoertuig(zoekterm, kolom);
+                var gefilterdeVoertuigen = _dc.FilterLijstVoertuigV2(merk, model, chassisnummer, nummerplaat, 
+                                                            brandstoftype, wagentype, kleur, aantalDeuren);
                 lvOverzichtVoertuigen.Items.Clear();
 
                 foreach(Voertuig voertuig in gefilterdeVoertuigen)
@@ -142,8 +152,15 @@ namespace WPF_GUI.MainPages
 
         private void btnWisFilters_Click(object sender, RoutedEventArgs e)
         {
-            tbFilter.Clear();
-            cmbFilter.SelectedIndex = -1;
+            tbMerk.Clear();
+            tbModel.Clear();
+            tbChassisnummer.Clear();
+            tbNummerplaat.Clear();
+            tbAantalDeuren.Clear();
+            tbKleur.Clear();
+            cmbBrandstoftype.SelectedIndex = -1;
+            cmbWagentype.SelectedIndex = -1;
+            
             RefreshVoertuigen();
         }
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
