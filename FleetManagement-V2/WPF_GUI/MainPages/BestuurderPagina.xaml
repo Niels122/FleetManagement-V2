@@ -46,11 +46,30 @@
                     <StackPanel x:Name="Filter" DockPanel.Dock="Top" Orientation="Vertical">
 
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox x:Name="cmbFilter" />
-                            <TextBox x:Name="tbFilter"/>
+                            <Label Content="ID"/>
+                            <TextBox x:Name="tbID" Width="100"/>
+                            
+                            <Label Content="Rijksregisternummer"/>
+                            <TextBox x:Name="tbRijksregisternummer" Width="100" />
+
+                            <Label Content="Rijbewijs"/>
+                            <TextBox x:Name="tbRijbewijs" Width="100" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Naam"/>
+                            <TextBox x:Name="cmbNaam" Width="100"/>
+
+                            <Label Content="Voornaam"/>
+                            <TextBox x:Name="tbVoornaam" Width="100" />
+
+                            <Label Content="Geboortedatum"/>
+                            <TextBox x:Name="tbGeboortedatum" Width="100" />
+                            
                             <Button x:Name="btnZoek" Content="Zoek" Width="75" Click="btnZoek_Click" />
                             <Button x:Name="btnWisFilters" Content="Wis filter" Width="75" Click="btnWisFilters_Click" />
                         </StackPanel>
+
                     </StackPanel>
 
                     <ListView x:Name="lvOverzichtBestuurders" MinWidth="700" DockPanel.Dock="Bottom" Margin="0,0,10,0"  
@@ -58,14 +77,12 @@
                         <ListView.View>
                             <GridView>
                                 <!--De namen van de binding moeten exact hetzelfde zijn als de naam van de property-->
-                                <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding BestuurderId}" />
-                                <GridViewColumn Header="Naam" Width="100" DisplayMemberBinding="{Binding Naam}" />
-                                <GridViewColumn Header="Voornaam" Width="100" DisplayMemberBinding="{Binding Voornaam}" />
-                                <GridViewColumn Header="Rijksregisternummer" Width="100" DisplayMemberBinding="{Binding Rijksregisternummer}" />
-                                <GridViewColumn Header="Rijbewijs" Width="50" DisplayMemberBinding="{Binding Rijbewijs}" />
-                                <GridViewColumn Header="Geboortedatum" Width="100" DisplayMemberBinding="{Binding Geboortedatum}" />
-                                <GridViewColumn Header="Voertuig" Width="100" DisplayMemberBinding="{Binding ChassisnummerVoertuig}" />
-                                <GridViewColumn Header="Tankkaart" Width="130" DisplayMemberBinding="{Binding TankkaartNummer}" />
+                                <GridViewColumn Header="Id" Width="70" DisplayMemberBinding="{Binding BestuurderId}" />
+                                <GridViewColumn Header="Naam" Width="90" DisplayMemberBinding="{Binding Naam}" />
+                                <GridViewColumn Header="Voornaam" Width="70" DisplayMemberBinding="{Binding Voornaam}" />
+                                <GridViewColumn Header="Rijksregisternummer" Width="120" DisplayMemberBinding="{Binding Rijksregisternummer}" />
+                                <GridViewColumn Header="Rijbewijs" Width="55" DisplayMemberBinding="{Binding Rijbewijs}" />
+                                <GridViewColumn Header="Geboortedatum" Width="100" DisplayMemberBinding="{Binding Geboortedatum, StringFormat='dd/MM/yyyy'}" />
                             </GridView>
                         </ListView.View>
 
