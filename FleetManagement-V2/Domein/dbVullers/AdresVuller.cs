@@ -11,19 +11,9 @@ namespace Domein.dbVullers
 {
     public class AdresVuller
     {
-        AdresController _ac;
-
-        public AdresVuller(AdresController ac)
+        public AdresVuller()
         {
-            _ac = ac;
-        }
 
-        public void VulAdresTabel(int aantal)
-        {
-            for(int i = 0; i < aantal; i++)
-            {
-                _ac.CreateAdres(randomStraatnaam(), randomNummer(), randomPostcode(), randomStad());
-            }
         }
 
         Random random = new Random();

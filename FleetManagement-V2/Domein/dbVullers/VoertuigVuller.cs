@@ -11,38 +11,10 @@ namespace Domein.dbVullers
 {
     public class VoertuigVuller
     {
-        VoertuigController _vc;
-
-        public VoertuigVuller(VoertuigController vc)
+        public VoertuigVuller()
         {
-            _vc = vc;
+            
         }
-
-        public void VulVoertuigTabel(int aantal)
-        {
-            string merk;
-            string model;
-            string[] merkModel = new string[2];
-
-            for (int i = 0; i < aantal; i++)
-            {
-                try
-                {
-                    merkModel = randomMerkModelArray();
-                    merk = merkModel[0];
-                    model = merkModel[1];
-
-                    _vc.CreateVoertuig(new Voertuig(merk, model, randomChassisnummer(), randomNummerplaat(), randomBrandstoftype(),
-                                                        randomWagentype(), randomKleur(), randomAantalDeuren()));
-                }
-                catch
-                {
-                    i--;
-                }
-            }
-        }
-        //public Voertuig(string merk, string model, string chassisnummer, string nummerplaat, Brandstoftype brandstoftype,
-        // Wagentype wagentype, string kleur = null, int? aantalDeuren = null, string bestuurderId = null)
 
         Random random = new Random();
 

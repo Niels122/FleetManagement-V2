@@ -16,10 +16,10 @@ namespace Domein
         private BestuurderController _bestuurderCon;
         private AdresController _adresCon;
 
-        BestuurderVuller _bv;
-        AdresVuller _av;
-        VoertuigVuller _vv;
-        TankkaartVuller _tv;
+        private BestuurderVuller _bv;
+        private AdresVuller _av;
+        private VoertuigVuller _vv;
+        private TankkaartVuller _tv;
 
         public DomeinController(VoertuigController vc, TankkaartController tc, BestuurderController bc, AdresController ac,
                                     BestuurderVuller bv, AdresVuller av, VoertuigVuller vv, TankkaartVuller tv)
@@ -43,40 +43,47 @@ namespace Domein
             
             for (int i = 0; i < aantal; i++)
             {
-                string straatnaam = _av.randomStraatnaam();
-                string huisnummer = _av.randomNummer();
-                int postcode = _av.randomPostcode();
-                string stad = _av.randomStad();
-                _adresCon.CreateAdres(straatnaam, huisnummer, postcode, stad);
-                merkModel = _vv.randomMerkModelArray();
-                merk = merkModel[0];
-                model = merkModel[1];
-                Voertuig voertuig = new Voertuig(merk, model, _vv.randomChassisnummer(), _vv.randomNummerplaat(), _vv.randomBrandstoftype(), 
-                                                    _vv.randomWagentype(), _vv.randomKleur(), _vv.randomAantalDeuren());
-                Tankkaart tankkaart = new Tankkaart(_tv.randomKaartnummer(), _tv.randomGeldigheidsdatum(), _tv.randomGeblokkeerd(), 
-                                                        _tv.randomPincode(), _tv.randomBrandstoftype());
+                try
+                {
+                    string straatnaam = _av.randomStraatnaam();
+                    string huisnummer = _av.randomNummer();
+                    int postcode = _av.randomPostcode();
+                    string stad = _av.randomStad();
+                    _adresCon.CreateAdres(straatnaam, huisnummer, postcode, stad);
+                    merkModel = _vv.randomMerkModelArray();
+                    merk = merkModel[0];
+                    model = merkModel[1];
+                    Voertuig voertuig = new Voertuig(merk, model, _vv.randomChassisnummer(), _vv.randomNummerplaat(), _vv.randomBrandstoftype(),
+                                                        _vv.randomWagentype(), _vv.randomKleur(), _vv.randomAantalDeuren());
+                    Tankkaart tankkaart = new Tankkaart(_tv.randomKaartnummer(), _tv.randomGeldigheidsdatum(), _tv.randomGeblokkeerd(),
+                                                            _tv.randomPincode(), _tv.randomBrandstoftype());
 
-                string chassisnummer = null;
-                string kaartnummer = null;
-                int? adresId = null;
-                if (random.Next(10) < 6)
-                {
-                    chassisnummer = voertuig.Chassisnummer;
-                }
-                if (random.Next(10) < 6)
-                {
-                    kaartnummer = tankkaart.Kaartnummer;
-                }
-                if (random.Next(10) < 6)
-                {
-                    adresId = _adresCon.GeefLaatsteAdres().AdresId;
-                }
-                Bestuurder bestuurder = new Bestuurder(_bv.randomId(), _bv.randomNaam(), _bv.randomVoornaam(), _bv.randomDatum(), _bv.randomRijksregisternummer(), 
-                                                        _bv.randomRijbewijs(), chassisnummer, kaartnummer, adresId);
+                    string chassisnummer = null;
+                    string kaartnummer = null;
+                    int? adresId = null;
+                    if (random.Next(10) < 6)
+                    {
+                        chassisnummer = voertuig.Chassisnummer;
+                    }
+                    if (random.Next(10) < 6)
+                    {
+                        kaartnummer = tankkaart.Kaartnummer;
+                    }
+                    if (random.Next(10) < 6)
+                    {
+                        adresId = _adresCon.GeefLaatsteAdres().AdresId;
+                    }
+                    Bestuurder bestuurder = new Bestuurder(_bv.randomId(), _bv.randomNaam(), _bv.randomVoornaam(), _bv.randomDatum(), _bv.randomRijksregisternummer(),
+                                                            _bv.randomRijbewijs(), chassisnummer, kaartnummer, adresId);
 
-                _voertuigCon.CreateVoertuig(voertuig);
-                _tankkaartCon.CreateTankkaart(tankkaart);
-                _bestuurderCon.CreateBestuurder(bestuurder);
+                    _voertuigCon.CreateVoertuig(voertuig);
+                    _tankkaartCon.CreateTankkaart(tankkaart);
+                    _bestuurderCon.CreateBestuurder(bestuurder);
+                }
+                catch
+                {
+                    i--;
+                }
             }
         }
 

@@ -11,26 +11,9 @@ namespace Domein.dbVullers
 {
     public class TankkaartVuller
     {
-        TankkaartController _tc;
-
-        public TankkaartVuller(TankkaartController tc)
+        public TankkaartVuller()
         {
-            _tc = tc;
-        }
 
-        public void VulTankkaarTabel(int aantal)
-        {
-            for(int i = 0; i < aantal; i++)
-            {
-                try
-                {
-                    _tc.CreateTankkaart(new Tankkaart(randomKaartnummer(), randomGeldigheidsdatum(), randomGeblokkeerd(), randomPincode(), randomBrandstoftype()));
-                }
-                catch
-                {
-                    i--;
-                }
-            }
         }
 
         Random random = new Random();

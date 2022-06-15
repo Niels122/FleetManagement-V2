@@ -29,10 +29,10 @@ namespace WPF_GUI
             VoertuigController voertuigCon = new VoertuigController(voertuigRepo);
             TankkaartController tankkaartCon = new TankkaartController(tankkaartRepo);
 
-            BestuurderVuller bv = new BestuurderVuller(bestuurderCon);
-            AdresVuller av = new AdresVuller(adresCon);
-            VoertuigVuller vv = new VoertuigVuller(voertuigCon);
-            TankkaartVuller tv = new TankkaartVuller(tankkaartCon);
+            BestuurderVuller bv = new BestuurderVuller();
+            AdresVuller av = new AdresVuller();
+            VoertuigVuller vv = new VoertuigVuller();
+            TankkaartVuller tv = new TankkaartVuller();
 
             DomeinController dc = new DomeinController(voertuigCon, tankkaartCon, bestuurderCon, adresCon, bv, av, vv, tv);
             
