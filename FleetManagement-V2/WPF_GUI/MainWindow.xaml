@@ -21,6 +21,8 @@
                 <Button x:Name="btnBestuurders" Content="Bestuurders" Margin="10" Click="btnBestuurders_Click"/>
                 <Button x:Name="btnVoertuigen"  Content="Voertuigen"  Margin="10" Click="btnVoertuigen_Click"/>
                 <Button x:Name="btnTankkaarten" Content="Tankkaarten" Margin="10" Click="btnTankkaarten_Click"/>
+                <Button x:Name="btnDbVuller" Content="Databank vullen" Margin="10" Click="btnDbVuller_Click" />
+
             </StackPanel>
 
         </Border>
