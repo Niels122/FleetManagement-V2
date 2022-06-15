@@ -115,8 +115,8 @@ namespace WPF_GUI.UpdateWindows
                 try
                 {
 
-                    int _AdresId = (int)_bestuurder.AdresId;
-                    string _Straatnaam = straatnaam.Text; ; //als niet is ingevuld geen adresID meegeven
+                    int? _AdresId = _bestuurder.AdresId;
+                    string _Straatnaam = straatnaam.Text;  //als niet is ingevuld geen adresID meegeven
                     string _Huisnummer = huisnummer.Text;
                     int? _Postcode = int.Parse(postcode.Text);
                     string _Stad = stad.Text;
@@ -126,8 +126,14 @@ namespace WPF_GUI.UpdateWindows
                         {
                             throw new AdresException("Postcode is ongdeldig.");
                         }
-
-                        Adres updatedAdres = new(_AdresId, _Straatnaam, _Huisnummer, (int)_Postcode, _Stad);
+                        if(_bestuurder.AdresId == null)
+                        {
+                            _dc.CreateAdres(_Straatnaam, _Huisnummer, (int)_Postcode, _Stad);
+                            Adres laatsteAdres = _dc.GeefAdressen().Last();
+                            _AdresId = laatsteAdres.AdresId;
+                        }
+                        
+                        Adres updatedAdres = new((int)_AdresId, _Straatnaam, _Huisnummer, (int)_Postcode, _Stad);
                         _dc.UpdateAdres(updatedAdres);
 
                     }
@@ -135,6 +141,8 @@ namespace WPF_GUI.UpdateWindows
                     {
                         throw new AdresException("Alle velden van adres moeten ingevuld worden");
                     }
+                Bestuurder updatedBestuurder = new(_BestuurderId, _Voornaam, _Achternaam, _Geboortedatum, _Rijksregisternummer, _Rijbewijs, _ChassisnummerVoertuig, _Tankkaartnummer, _AdresId );
+                _dc.UpdateBestuurder(updatedBestuurder);
 
                 }
                 catch (Exception ex)
@@ -142,9 +150,7 @@ namespace WPF_GUI.UpdateWindows
                     MessageBox.Show(ex.Message);
                 }
 
-                Bestuurder updatedBestuurder = new(_BestuurderId, _Voornaam, _Achternaam, _Geboortedatum, _Rijksregisternummer, _Rijbewijs, _ChassisnummerVoertuig, _Tankkaartnummer);
 
-                _dc.UpdateBestuurder(updatedBestuurder);
                 MessageBox.Show($"Wijzigingen zijn aangebracht", "Voltooid", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 this.Close();
             }
