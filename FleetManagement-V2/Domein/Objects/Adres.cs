@@ -34,7 +34,8 @@ namespace Domein.Objects
                 throw new AdresException("Straatnaam moet ingevuld zijn.");
             }
 
-            Straat = straat;
+            string output = char.ToUpper(straat[0]) + straat.Substring(1);
+            Straat = output;
         }
 
         public void SetHuisnummer(string huisnummer)
@@ -64,7 +65,8 @@ namespace Domein.Objects
                 throw new AdresException("Stad moet ingevuld zijn.");
             }
 
-            Stad = stad;
+            string output = char.ToUpper(stad[0]) + stad.Substring(1);
+            Stad = output;
         }
 
         public void SetBestuurderId(string bestuurderId)

@@ -44,7 +44,7 @@ namespace Domein.Objects
                     throw new TankkaartException("Een tankkaartnummer mag enkel uit cijfers bestaan.");
                 }
             }
-
+            
             Kaartnummer = kaartnummer;
         }
 

@@ -62,7 +62,7 @@ namespace Domein.Objects
                 }
             }
 
-            BestuurderId = bestuurderId;
+            BestuurderId = bestuurderId.ToLower();
         }
 
         public void SetNaam(string naam)
@@ -72,7 +72,8 @@ namespace Domein.Objects
                 throw new BestuurderException("Naam van de bestuurder moet ingevuld zijn.");
             }
 
-            Naam = naam;
+            string output = char.ToUpper(naam[0]) + naam.Substring(1);
+            Naam = output;
         }
 
         public void SetVoornaam(string voornaam)
@@ -82,7 +83,8 @@ namespace Domein.Objects
                 throw new BestuurderException("Voornaam van de bestuurder moet ingevuld zijn.");
             }
 
-            Voornaam = voornaam;
+            string output = char.ToUpper(voornaam[0]) + voornaam.Substring(1).ToLower();
+            Voornaam = output;
         }
 
         //https://stackoverflow.com/questions/371987/how-to-validate-a-datetime-in-c

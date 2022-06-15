@@ -36,10 +36,9 @@ namespace CUI
 
             Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
 
-
             #region Vuller
 
-            dc.DatabankVuller(10);
+            //dc.DatabankVuller(10000);
 
             //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
             //bv.VulBestuurderTabel(100); //4 seconden voor 1000

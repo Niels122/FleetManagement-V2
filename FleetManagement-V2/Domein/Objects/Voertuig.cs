@@ -43,7 +43,8 @@ namespace Domein.Objects
                 throw new VoertuigException("Merk moet ingevuld zijn!");
             }
 
-            Merk = merk;
+            string output = char.ToUpper(merk[0]) + merk.Substring(1).ToLower();
+            Merk = output;
         }
 
         public void SetModel(string model)
@@ -53,7 +54,8 @@ namespace Domein.Objects
                 throw new VoertuigException("Model moet ingevuld zijn!");
             }
 
-            Model = model;
+            string output = char.ToUpper(model[0]) + model.Substring(1).ToLower();
+            Model = output;
         }
 
         public void SetChassisnummer(string chassisnummer)
@@ -69,7 +71,7 @@ namespace Domein.Objects
             {
                 if (!letters.Contains(c))
                 {
-                    throw new VoertuigException("Chassisnummer bevat ongeldige karakters (o, i of q).");
+                    throw new VoertuigException("Chassisnummer bevat ongeldige karakters (o, i of q zijn ongeldig).");
                 }
             }
 
@@ -91,7 +93,6 @@ namespace Domein.Objects
                     nummer += c;
                 }
             }
-
 
             if (nummer.Length != 7)
             {
@@ -137,7 +138,13 @@ namespace Domein.Objects
 
         public void SetKleur(string kleur)
         {
-            Kleur = kleur;
+            string output = kleur;
+            if (kleur != null)
+            {
+                output = char.ToUpper(kleur[0]) + kleur.Substring(1).ToLower();
+            }
+
+            Kleur = output;
         }
 
         public void SetAantalDeuren(int? aantalDeuren)
@@ -150,16 +157,6 @@ namespace Domein.Objects
             BestuurderId = bestuurderId;
         }
         #endregion
-
-        public override bool Equals(object obj)
-        {
-            return base.Equals(obj);
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
 
         public override string ToString()
         {
