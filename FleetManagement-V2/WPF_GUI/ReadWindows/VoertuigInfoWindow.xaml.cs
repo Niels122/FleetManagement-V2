@@ -31,7 +31,7 @@ namespace WPF_GUI.ReadWindows
             var bestuurders = _dc.GeefBestuurders();
             Bestuurder? bstrdr = bestuurders.Where(b => b.ChassisnummerVoertuig == voertuig.Chassisnummer).FirstOrDefault();
 
-            id.Text = voertuig.Chassisnummer.ToString();
+           
             merk.Text = voertuig.Merk;
             model.Text = voertuig.Model;
             chassisnummer.Text = voertuig.Chassisnummer;

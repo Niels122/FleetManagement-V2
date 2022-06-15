@@ -31,6 +31,9 @@ namespace WPF_GUI.MainPages
             InitializeComponent();
             _dc = dc;
             RefreshBestuurders();
+
+            string[] filterMogelijkheden = { "BestuurderId", "Naam", "Voornaam", "Rijbewijs", "Rijksregisternummer", "Geboortedatum", "All" };
+            cmbFilter.ItemsSource = filterMogelijkheden;
         }
 
         private void RefreshBestuurders()
@@ -42,10 +45,7 @@ namespace WPF_GUI.MainPages
                 lvOverzichtBestuurders.Items.Add(bestuurder);
             }
         }
-        private void lvOverzichtBestuurders_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+    
 
         private void btnVoegBestuurderToe_Click(object sender, RoutedEventArgs e)
         {
@@ -106,18 +106,46 @@ namespace WPF_GUI.MainPages
 
         private void lvOverzichtBestuurders_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
+            try
+            {
             BestuurderInfoWindow bestuurderInfoWindow = new(_dc, (Bestuurder)lvOverzichtBestuurders.SelectedItem);
             bestuurderInfoWindow.Show();
+            }catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnZoek_Click(object sender, RoutedEventArgs e)
         {
+            string zoekterm = tbFilter.Text;
+            string kolom = cmbFilter.Text;
 
+            try
+            {
+                var gefilterdeBestuurders = _dc.FilterLijstBestuurder(zoekterm, kolom);
+                lvOverzichtBestuurders.Items.Clear();
+
+                foreach (Bestuurder bestuurder in gefilterdeBestuurders)
+                {
+                    lvOverzichtBestuurders.Items.Add(bestuurder);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnWisFilters_Click(object sender, RoutedEventArgs e)
         {
-
+            tbFilter.Clear();
+            cmbFilter.SelectedIndex = -1;
+            RefreshBestuurders();
+        }
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshBestuurders();
         }
     }
 }

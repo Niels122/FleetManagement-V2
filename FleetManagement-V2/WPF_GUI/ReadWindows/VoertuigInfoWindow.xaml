@@ -29,9 +29,10 @@
             <StackPanel Orientation="Vertical">
 
                 <StackPanel Orientation="Horizontal">
-                    <Label   Content="ID" />
-                    <TextBox Name="id" />
+                    <Label   Content="Chassisnummer" />
+                    <TextBox Name="chassisnummer" />
                 </StackPanel>
+                
                 <StackPanel Orientation="Horizontal">
                     <Label  Content="Merk" />
                     <TextBox Name="merk"  />
@@ -41,12 +42,7 @@
                     <Label   Content="Model" />
                     <TextBox Name="model"    />
                 </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label   Content="Chassisnummer" />
-                    <TextBox Name="chassisnummer" />
-                </StackPanel>
-
+     
                 <StackPanel Orientation="Horizontal">
                     <Label   Content="Nummerplaat" />
                     <TextBox Name="nummerplaat"/>

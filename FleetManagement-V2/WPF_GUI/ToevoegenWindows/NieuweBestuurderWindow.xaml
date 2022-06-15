@@ -64,7 +64,7 @@
 
                         <StackPanel Orientation="Horizontal">
                             <Button Grid.Column="0"  x:Name="btnOpslaan"    Content="Opslaan"   Background="LawnGreen" Width="100" Click="btnOpslaan_Click"/>
-                            <Button Grid.Column="1"  x:Name="btnAnnuleren"  Content="Annuleren" Background="Red" Width="100"/>
+                            <Button Grid.Column="1"  x:Name="btnAnnuleren"  Content="Annuleren" Background="Red" Width="100" Click="btnAnnuleren_Click"/>
                         </StackPanel>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Vertical">

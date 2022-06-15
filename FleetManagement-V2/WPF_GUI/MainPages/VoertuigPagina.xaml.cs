@@ -42,13 +42,13 @@ namespace WPF_GUI.MainPages
             try
             {
                 lvOverzichtVoertuigen.Items.Clear();
-                var bestuurders = _dc.GeefBestuurders();
+            
 
-                List<Voertuig> voertuigen = _dc.GeefVoertuigen();
+                List<Voertuig> voertuigen = _dc.GeefVoertuigenMetBestuurderId();
                 foreach (Voertuig voertuig in voertuigen)
                 {
                     lvOverzichtVoertuigen.Items.Add(voertuig);
-                    Bestuurder? bstrdr = bestuurders.Where(b => b.ChassisnummerVoertuig == voertuig.Chassisnummer).FirstOrDefault();
+                    
 
                 }
             }
@@ -145,7 +145,10 @@ namespace WPF_GUI.MainPages
             cmbFilter.SelectedIndex = -1;
             RefreshVoertuigen();
         }
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshVoertuigen();
+        }
 
-      
     }
 }

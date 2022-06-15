@@ -40,7 +40,7 @@ namespace WPF_GUI.MainPages
         private void RefreshTankkaarten()
         {
             lvOverzichtTankkaarten.Items.Clear();
-            var tankkaarten = _dc.GeefTankkaarten();
+            var tankkaarten = _dc.GeefTankkaartenMetBestuurderId();
 
             foreach (Tankkaart tankkaart in tankkaarten)
             {

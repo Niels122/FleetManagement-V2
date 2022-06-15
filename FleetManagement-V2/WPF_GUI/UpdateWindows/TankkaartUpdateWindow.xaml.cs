@@ -44,7 +44,10 @@ namespace WPF_GUI.UpdateWindows
 
         private void btnOpslaan_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
             var kaartnummer = tbKaartnummer.Text;
+
             var geldigheidsdatum = dpGeldigheidsdatum.SelectedDate.Value;
             bool isGeblokkeerd = false;
             if (cbGeblokkeerd.IsChecked == true)
@@ -70,6 +73,10 @@ namespace WPF_GUI.UpdateWindows
                 this.Close();
             }
             catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            }catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

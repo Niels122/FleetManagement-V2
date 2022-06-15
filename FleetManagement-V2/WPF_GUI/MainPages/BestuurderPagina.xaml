@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPF_GUI.MainPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1000"
       Title="BestuurderPagina">
 
-    <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+    <Border BorderBrush="Black" BorderThickness="1" Margin="5" Width="1000">
         <Grid Background="White">
             <DockPanel Margin="10">
                 <DockPanel.Resources>
@@ -27,10 +27,12 @@
                     <Style TargetType="TextBox">
                         <Setter Property="Margin" Value="5" />
                         <Setter Property="Padding" Value="2" />
+                        <Setter Property="Width" Value="150" />
                     </Style>
                     <Style TargetType="ComboBox">
                         <Setter Property="Margin" Value="5" />
                         <Setter Property="Padding" Value="2" />
+                        <Setter Property="Width" Value="150" />
                     </Style>
                     <Style TargetType="CheckBox">
                         <Setter Property="Margin" Value="5" />
@@ -44,29 +46,14 @@
                     <StackPanel x:Name="Filter" DockPanel.Dock="Top" Orientation="Vertical">
 
                         <StackPanel Orientation="Horizontal">
-                            <Label Content="ID"/>
-                            <TextBox x:Name="tbID" Width="100"/>
-
-                            <Label Content="Naam"/>
-                            <TextBox x:Name="cmbNaam" Width="100"/>
-
-                            <Label Content="Voornaam"/>
-                            <TextBox x:Name="tbVoornaam" Width="100" />
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Rijksregisternummer"/>
-                            <TextBox x:Name="tbRijksregisternummer" Width="100" />
-                            
-                            <Label Content="Rijbewijs"/>
-                            <TextBox x:Name="tbRijbewijs" Width="100" />
-                            
+                            <ComboBox x:Name="cmbFilter" />
+                            <TextBox x:Name="tbFilter"/>
                             <Button x:Name="btnZoek" Content="Zoek" Width="75" Click="btnZoek_Click" />
                             <Button x:Name="btnWisFilters" Content="Wis filter" Width="75" Click="btnWisFilters_Click" />
                         </StackPanel>
                     </StackPanel>
 
-                    <ListView x:Name="lvOverzichtBestuurders" MinWidth="700" DockPanel.Dock="Bottom" Margin="0,0,10,0" SelectionChanged="lvOverzichtBestuurders_SelectionChanged" 
+                    <ListView x:Name="lvOverzichtBestuurders" MinWidth="700" DockPanel.Dock="Bottom" Margin="0,0,10,0"  
                       SelectionMode="Single" MouseDoubleClick="lvOverzichtBestuurders_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
@@ -75,8 +62,10 @@
                                 <GridViewColumn Header="Naam" Width="100" DisplayMemberBinding="{Binding Naam}" />
                                 <GridViewColumn Header="Voornaam" Width="100" DisplayMemberBinding="{Binding Voornaam}" />
                                 <GridViewColumn Header="Rijksregisternummer" Width="100" DisplayMemberBinding="{Binding Rijksregisternummer}" />
-                                <GridViewColumn Header="Rijbewijs" Width="100" DisplayMemberBinding="{Binding Rijbewijs}" />
+                                <GridViewColumn Header="Rijbewijs" Width="50" DisplayMemberBinding="{Binding Rijbewijs}" />
                                 <GridViewColumn Header="Geboortedatum" Width="100" DisplayMemberBinding="{Binding Geboortedatum}" />
+                                <GridViewColumn Header="Voertuig" Width="100" DisplayMemberBinding="{Binding ChassisnummerVoertuig}" />
+                                <GridViewColumn Header="Tankkaart" Width="130" DisplayMemberBinding="{Binding TankkaartNummer}" />
                             </GridView>
                         </ListView.View>
 
@@ -94,6 +83,7 @@
                     <Button x:Name="btnVerwijderBestuurder" Content="Verwijder" Click="btnVerwijderBestuurder_Click" />
                     <Button x:Name="btnToonAlleInfo" Content="Toon info" Click="btnToonAlleInfo_Click" />
                     <Button x:Name="btnWijzigBestuurder" Content="Wijzig" Click="btnWijzigBestuurder_Click" />
+                    <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click" />
                 </StackPanel>
             </DockPanel>
         </Grid>

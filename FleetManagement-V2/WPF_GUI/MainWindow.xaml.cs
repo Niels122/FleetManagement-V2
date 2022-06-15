@@ -31,7 +31,7 @@ namespace WPF_GUI
             _dc = dc;
             InitializeComponent();
 
-            ZetActief("bestuurderPagina");
+            ZetActief("dbVullerPagina");
 
         }
         private void ZetActief(string pagina)
