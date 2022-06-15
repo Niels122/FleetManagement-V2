@@ -17,7 +17,6 @@
                 <TextBox x:Name="tbAantalRecords" Width="100" Padding="10" Margin="10"/>
                 <Button x:Name="btnToevoegen" Content="Toevoegen" Width="100" Padding="10" Margin="10" Click="btnToevoegen_Click"/>
             </StackPanel>
-                <Label Content="Mogelijk gemaakt door Benedek Sajgo" HorizontalAlignment="Center" FontSize="10" Padding="10" Margin="10"/>
         </StackPanel>
     </Grid>
 </Page>
