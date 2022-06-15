@@ -50,6 +50,9 @@ namespace WPF_GUI
                 case "tankkaartPagina":
                     MainWnd.Content = new TankkaartPagina(_dc);
                     break;
+                case "dbVullerPagina":
+                    MainWnd.Content = new DatabaseVullerPagina(_dc);
+                    break;
             }    
         }
 
@@ -66,6 +69,11 @@ namespace WPF_GUI
         private void btnTankkaarten_Click(object sender, RoutedEventArgs e)
         {
             ZetActief("tankkaartPagina");
+        }
+
+        private void btnDbVuller_Click(object sender, RoutedEventArgs e)
+        {
+            ZetActief("dbVullerPagina");
         }
     }
 }
