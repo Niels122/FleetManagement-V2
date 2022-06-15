@@ -38,7 +38,7 @@ namespace WPF_GUI.UpdateWindows
         }
         private void FillBrandstofType()
         {
-            var brandstoftypes = Enum.GetValues(typeof(Brandstoftype)).Cast<Brandstoftype>().ToList().Distinct();
+            List<Brandstoftype?> brandstoftypes = new List<Brandstoftype?> { null, Brandstoftype.Benzine, Brandstoftype.Diesel };
             cmbBrandstoftype.ItemsSource = brandstoftypes;
         }
 
@@ -46,37 +46,45 @@ namespace WPF_GUI.UpdateWindows
         {
             try
             {
-            var kaartnummer = tbKaartnummer.Text;
+                var kaartnummer = tbKaartnummer.Text;
 
-            var geldigheidsdatum = dpGeldigheidsdatum.SelectedDate.Value;
-            bool isGeblokkeerd = false;
-            if (cbGeblokkeerd.IsChecked == true)
-            {
-                isGeblokkeerd = true;
+                var geldigheidsdatum = dpGeldigheidsdatum.SelectedDate.Value;
+                bool isGeblokkeerd = false;
+                if (cbGeblokkeerd.IsChecked == true)
+                {
+                    isGeblokkeerd = true;
+                }
+                else
+                {
+                    isGeblokkeerd = false;
+                }
+
+                Brandstoftype? brandstoftype = (Brandstoftype?)cmbBrandstoftype.SelectedItem; //https://stackoverflow.com/questions/6139429/how-to-retrieve-combobox-selected-value-as-enum-type
+
+                int? pincode;
+                if (int.TryParse(tbPincode.Text, out int i))
+                {
+                    pincode = i;
+                }
+                else
+                {
+                    pincode = null;
+                }
+
+                Tankkaart gewijzigdeTankkaart = new(kaartnummer, geldigheidsdatum, isGeblokkeerd, pincode, brandstoftype);
+
+                try
+                {
+                    _dc.UpdateTankkaart(gewijzigdeTankkaart);
+                    MessageBox.Show($"Tankkaart met kaartnummer: {kaartnummer} is succesvol gewijzigd.", "Succes", MessageBoxButton.OK);
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            else
-            {
-                isGeblokkeerd = false;
-            }
-
-            Brandstoftype brandstoftype = (Brandstoftype)cmbBrandstoftype.SelectedItem; //https://stackoverflow.com/questions/6139429/how-to-retrieve-combobox-selected-value-as-enum-type
-
-
-            Int32.TryParse(tbPincode.Text, out int pincode);
-
-            Tankkaart gewijzigdeTankkaart = new(kaartnummer, geldigheidsdatum, isGeblokkeerd, pincode, brandstoftype);
-
-            try
-            {
-                _dc.UpdateTankkaart(gewijzigdeTankkaart);
-                MessageBox.Show($"Tankkaart met kaartnummer: {kaartnummer} is succesvol gewijzigd.", "Succes", MessageBoxButton.OK);
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            }catch(Exception ex)
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }

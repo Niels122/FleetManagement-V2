@@ -94,6 +94,12 @@ namespace WPF_GUI.MainPages
 
         }
 
+        private void lvOverzichtTankkaarten_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            TankkaartInfoWindow tankkaartInfo = new(_dc, (Tankkaart)lvOverzichtTankkaarten.SelectedItem);
+            tankkaartInfo.Show();
+        }
+
         private void btnToonAlleInfo_Click(object sender, RoutedEventArgs e)
         {
             if (lvOverzichtTankkaarten.SelectedItem != null)

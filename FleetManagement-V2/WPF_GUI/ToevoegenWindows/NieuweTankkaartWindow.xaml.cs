@@ -32,7 +32,7 @@ namespace WPF_GUI.ToevoegenWindows
         }
         private void FillBrandstofType()
         {
-            var brandstoftypes = Enum.GetValues(typeof(Brandstoftype)).Cast<Brandstoftype>().ToList().Distinct();
+            List<Brandstoftype?> brandstoftypes = new List<Brandstoftype?> { null, Brandstoftype.Benzine, Brandstoftype.Diesel };
             cmbBrandstoftype.ItemsSource = brandstoftypes;
         }
 
@@ -53,10 +53,17 @@ namespace WPF_GUI.ToevoegenWindows
                 }
 
 
-                Brandstoftype brandstoftype = (Brandstoftype)cmbBrandstoftype.SelectedItem; //https://stackoverflow.com/questions/6139429/how-to-retrieve-combobox-selected-value-as-enum-type
+                Brandstoftype? brandstoftype = (Brandstoftype?)cmbBrandstoftype.SelectedItem; //https://stackoverflow.com/questions/6139429/how-to-retrieve-combobox-selected-value-as-enum-type
 
-
-                Int32.TryParse(tbPincode.Text, out int pincode);
+                int? pincode;
+                if (int.TryParse(tbPincode.Text, out int i))
+                {
+                    pincode = i;
+                }
+                else
+                {
+                    pincode = null;
+                }
 
                 Tankkaart nieuweTankkaart = new(kaartnummer, geldigheidsdatum, isGeblokkeerd, pincode, brandstoftype);
 

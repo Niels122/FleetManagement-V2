@@ -9,14 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CUI", "CUI\CUI.csproj", "{6
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistentie", "Persistentie\Persistentie.csproj", "{10DE7415-38A6-46DA-A229-A05EFCA104A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{EF904EA4-2105-4314-AB21-791A782A2C43}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{EF904EA4-2105-4314-AB21-791A782A2C43}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPF_GUI", "WPF_GUI\WPF_GUI.csproj", "{030BC766-9CC2-482E-A393-59AB460CD31C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL querries", "SQL querries", "{2CD29E10-5EB7-435F-9888-144BA553D140}"
 	ProjectSection(SolutionItems) = preProject
 		SQL querries\DatabaseCreationScheme.sql = SQL querries\DatabaseCreationScheme.sql
-		SQL querries\DatabaseFill.sql = SQL querries\DatabaseFill.sql
 	EndProjectSection
 EndProject
 Global

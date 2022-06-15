@@ -113,6 +113,7 @@ namespace WPF_GUI.MainPages
         {
 
         }
+
         private void lvOverzichtVoertuigen_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             VoertuigInfoWindow voertuigInfo = new(_dc, (Voertuig)lvOverzichtVoertuigen.SelectedItem);
