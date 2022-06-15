@@ -91,31 +91,21 @@ namespace Domein
 
         #region Bestuurder
 
-        public List<Bestuurder> FilterLijstBestuurder(string zoekterm, string kolom)
+        public List<Bestuurder> FilterLijstBestuurderV2(string bestuurderId, string naam, string voornaam, 
+                                                        string geboortedatum, string rijksnummer, string rijbewijs )
         {
             List<Bestuurder> lijst = new List<Bestuurder>();
-            string k = kolom.ToLower();
-            string z = zoekterm.ToLower();
 
             foreach (Bestuurder bestuurder in _bestuurderCon.GeefBestuurders())
             {
-                List<string> paramater = new List<string>();
-                if (k == "bestuurderid" || k == "all") paramater.Add(bestuurder.BestuurderId);
-                if (k == "naam" || k == "all") paramater.Add(bestuurder.Naam);
-                if (k == "voornaam" || k == "all") paramater.Add(bestuurder.Voornaam);
-                if (k == "geboortedatum" || k == "all") paramater.Add(bestuurder.Geboortedatum.ToString());
-                if (k == "rijksregisternummer" || k == "all") paramater.Add(bestuurder.Rijksregisternummer);
-                if (k == "rijbewijs" || k == "all") paramater.Add(bestuurder.Rijbewijs.ToString());
-
-                foreach (string p in paramater)
+                if ((bestuurder.BestuurderId.ToLower().Contains(bestuurderId.ToLower()) || bestuurderId == "")
+                    && (bestuurder.Naam.ToLower().Contains(naam.ToLower()) || naam == "")
+                    && (bestuurder.Voornaam.ToLower().Contains(voornaam.ToLower()) || voornaam == "")
+                    && (bestuurder.Geboortedatum.ToString().Contains(geboortedatum) || geboortedatum == "")
+                    && (bestuurder.Rijksregisternummer.Contains(rijksnummer) || rijksnummer == "")
+                    && (bestuurder.Rijbewijs.ToString().ToLower().Contains(rijbewijs.ToLower()) || rijbewijs == ""))
                 {
-                    if (p.ToLower().Contains(z))
-                    {
-                        if (!lijst.Contains(bestuurder))
-                        {
-                            lijst.Add(bestuurder);
-                        }
-                    }
+                    lijst.Add(bestuurder);
                 }
             }
 
@@ -146,6 +136,37 @@ namespace Domein
         public void RetrieveBestuurder(Bestuurder bestuurder)
         {
             _bestuurderCon.RetrieveBestuurder(bestuurder);
+        }
+
+        public List<Bestuurder> FilterLijstBestuurder(string zoekterm, string kolom)
+        {
+            List<Bestuurder> lijst = new List<Bestuurder>();
+            string k = kolom.ToLower();
+            string z = zoekterm.ToLower();
+
+            foreach (Bestuurder bestuurder in _bestuurderCon.GeefBestuurders())
+            {
+                List<string> paramater = new List<string>();
+                if (k == "bestuurderid" || k == "all") paramater.Add(bestuurder.BestuurderId);
+                if (k == "naam" || k == "all") paramater.Add(bestuurder.Naam);
+                if (k == "voornaam" || k == "all") paramater.Add(bestuurder.Voornaam);
+                if (k == "geboortedatum" || k == "all") paramater.Add(bestuurder.Geboortedatum.ToString());
+                if (k == "rijksregisternummer" || k == "all") paramater.Add(bestuurder.Rijksregisternummer);
+                if (k == "rijbewijs" || k == "all") paramater.Add(bestuurder.Rijbewijs.ToString());
+
+                foreach (string p in paramater)
+                {
+                    if (p.ToLower().Contains(z))
+                    {
+                        if (!lijst.Contains(bestuurder))
+                        {
+                            lijst.Add(bestuurder);
+                        }
+                    }
+                }
+            }
+
+            return lijst;
         }
 
         #endregion
@@ -201,35 +222,24 @@ namespace Domein
 
         #region Tankkaart
 
-        public List<Tankkaart> FilterLijstTankkaart(string zoekterm, string kolom) //filter is heel gevoelig aan verkeerde input
-                                                                                   //bijvoorbeeld kolomnaam is 'geblokkkeerd' maar hier staat 'isGeblokkeerd' dit zorgt ervoor dat filter niet werkt
+        public List<Tankkaart> FilterLijstTankkaartV2(string kaartnummer, string geldigheidsdatum, bool geblokkeerd,
+                                                        string pincode, string brandstof)
         {
             List<Tankkaart> lijst = new List<Tankkaart>();
-            string k = kolom.ToLower();
-            string z = zoekterm.ToLower();
 
             foreach (Tankkaart tankkaart in _tankkaartCon.GeefTankkaarten())
             {
-                List<string> paramater = new List<string>();
-                if (k == "kaartnummer" || k == "all") paramater.Add(tankkaart.Kaartnummer);
-                if (k == "geldigheidsdatum" || k == "all") paramater.Add(tankkaart.Geldigheidsdatum.ToString());
-                if (k == "brandstof" || k == "all") paramater.Add(tankkaart.Brandstof.ToString());
-                if (k == "pincode" || k == "all") paramater.Add(tankkaart.Pincode.ToString());
-                if (k == "isGeblokkeerd" || k == "all") paramater.Add(tankkaart.Geblokkeerd.ToString());
-
-                foreach (string p in paramater)
+                if ((tankkaart.Kaartnummer.ToLower().Contains(kaartnummer.ToLower()) || kaartnummer == "")
+                    && (tankkaart.Geldigheidsdatum.ToString().Contains(geldigheidsdatum) || geldigheidsdatum == "")
+                    && (tankkaart.Geblokkeerd == geblokkeerd)
+                    && (tankkaart.Pincode.ToString().Contains(pincode) || pincode == "")
+                    && (tankkaart.Brandstof.ToString().ToLower().Contains(brandstof.ToLower()) || brandstof == ""))
                 {
-                    if (p.ToLower().Contains(z))
-                    {
-                        if (!lijst.Contains(tankkaart))
-                        {
-                            lijst.Add(tankkaart);
-                        }
-                    }
+                    lijst.Add(tankkaart);
                 }
             }
 
-            return lijst;
+            return lijst ;
         }
 
         public List<Tankkaart> GeefTankkaarten()
@@ -275,11 +285,116 @@ namespace Domein
             _tankkaartCon.RetrieveTankkaart(tankkaart);
         }
 
+        public List<Tankkaart> FilterLijstTankkaart(string zoekterm, string kolom) 
+        {
+            List<Tankkaart> lijst = new List<Tankkaart>();
+            string k = kolom.ToLower();
+            string z = zoekterm.ToLower();
+
+            foreach (Tankkaart tankkaart in _tankkaartCon.GeefTankkaarten())
+            {
+                List<string> paramater = new List<string>();
+                if (k == "kaartnummer" || k == "all") paramater.Add(tankkaart.Kaartnummer);
+                if (k == "geldigheidsdatum" || k == "all") paramater.Add(tankkaart.Geldigheidsdatum.ToString());
+                if (k == "brandstof" || k == "all") paramater.Add(tankkaart.Brandstof.ToString());
+                if (k == "pincode" || k == "all") paramater.Add(tankkaart.Pincode.ToString());
+                if (k == "isGeblokkeerd" || k == "all") paramater.Add(tankkaart.Geblokkeerd.ToString());
+
+                foreach (string p in paramater)
+                {
+                    if (p.ToLower().Contains(z))
+                    {
+                        if (!lijst.Contains(tankkaart))
+                        {
+                            lijst.Add(tankkaart);
+                        }
+                    }
+                }
+            }
+
+            return lijst;
+        }
+
         #endregion
 
 
 
         #region Voertuig
+
+        public List<Voertuig> FilterLijstVoertuigV2(string merk, string model, string chassisnummer, string nummerplaat,
+                                                        string brandstoftype, string wagentype, string kleur, string aantalDeuren)
+        {
+            List<Voertuig> lijst = new List<Voertuig>();
+
+            foreach (Voertuig voertuig in _voertuigCon.GeefVoertuigen())
+            {
+                if ((voertuig.Merk.ToLower().Contains(merk.ToLower()) || merk == "")
+                    && (voertuig.Model.ToLower().Contains(model.ToLower()) || model == "")
+                    && (voertuig.Chassisnummer.ToUpper().Contains(chassisnummer.ToUpper()) || chassisnummer == "")
+                    && (voertuig.Nummerplaat.ToUpper().Contains(nummerplaat.ToUpper()) || nummerplaat == "")
+                    && (voertuig.Brandstoftype.ToString().ToLower().Contains(brandstoftype.ToLower()) || brandstoftype == "")
+                    && (voertuig.Wagentype.ToString().ToLower().Contains(wagentype.ToLower()) || wagentype == "")
+                    && (voertuig.Kleur.ToLower().Contains(kleur.ToLower()) || kleur == "")
+                    && (voertuig.AantalDeuren.ToString().Contains(aantalDeuren) || aantalDeuren == "")
+                    )
+                {
+                    lijst.Add(voertuig);
+                }
+            }
+
+            return lijst;
+        }
+
+        public List<Voertuig> GeefVoertuigen()
+        {
+            return _voertuigCon.GeefVoertuigen();
+        }
+
+        public List<Voertuig> GeefVoertuigenMetBestuurderId()
+        {
+            List<Voertuig> voertuigen = _voertuigCon.GeefVoertuigen();
+            List<Bestuurder> bestuurders = _bestuurderCon.GeefBestuurders();
+
+            foreach (Bestuurder bestuurder in bestuurders)
+            {
+                Voertuig voertuig = voertuigen.Where(v => v.Chassisnummer == bestuurder.ChassisnummerVoertuig).FirstOrDefault();
+
+                if (voertuig != null)
+                {
+                    voertuig.BestuurderId = bestuurder.BestuurderId;
+
+                }
+                else
+                {
+                    continue;
+                }
+            }
+
+            return voertuigen;
+        }
+
+        public void CreateVoertuig(Voertuig voertuig)
+        {
+            _voertuigCon.CreateVoertuig(voertuig);
+        }
+
+        public void UpdateVoertuig(Voertuig voertuig)
+        {
+            _voertuigCon.UpdateVoertuig(voertuig);
+
+        }
+
+        public void DeleteVoertuig(Voertuig voertuig)
+        {
+            _voertuigCon.DeleteVoertuig(voertuig);
+
+        }
+
+        public void RetrieveVoertuig(Voertuig voertuig)
+        {
+            _voertuigCon.RetrieveVoertuig(voertuig);
+
+        }
 
         public List<Voertuig> FilterLijstVoertuig(string zoekterm, string kolom)
         {
@@ -312,63 +427,6 @@ namespace Domein
             }
 
             return lijst;
-        }
-
-        public List<Voertuig> GeefVoertuigen()
-        {
-            return _voertuigCon.GeefVoertuigen();
-        }
-
-        public List<Voertuig> GeefVoertuigenMetBestuurderId()
-        {
-            List<Voertuig> voertuigen = _voertuigCon.GeefVoertuigen();
-            List<Bestuurder> bestuurders = _bestuurderCon.GeefBestuurders();
-
-            foreach (Bestuurder bestuurder in bestuurders)
-            {
-                Voertuig voertuig = voertuigen.Where(v => v.Chassisnummer == bestuurder.ChassisnummerVoertuig).FirstOrDefault();
-
-                if (voertuig != null)
-                {
-                    voertuig.BestuurderId = bestuurder.BestuurderId;
-
-                }
-                else
-                {
-                    continue;
-                }
-            }
-
-            //foreach (Voertuig voertuig in voertuigen) //op deze manier exception "Object reference not set to an instance of an object" wanneer er geen bestuurder is
-            //{
-            //    Bestuurder bestuurder = bestuurders.Where(b => b.ChassisnummerVoertuig == voertuig.Chassisnummer).FirstOrDefault();
-            //    voertuig.BestuurderId = bestuurder.BestuurderId;
-            //}
-
-            return voertuigen;
-        }
-
-        public void CreateVoertuig(Voertuig voertuig)
-        {
-            _voertuigCon.CreateVoertuig(voertuig);
-        }
-
-        public void UpdateVoertuig(Voertuig voertuig)
-        {
-            _voertuigCon.UpdateVoertuig(voertuig);
-
-        }
-
-        public void DeleteVoertuig(Voertuig voertuig)
-        {
-            _voertuigCon.DeleteVoertuig(voertuig);
-
-        }
-
-        public void RetrieveVoertuig(Voertuig voertuig)
-        {
-            _voertuigCon.RetrieveVoertuig(voertuig);
-
         }
 
         #endregion

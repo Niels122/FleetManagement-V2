@@ -40,43 +40,67 @@ namespace CUI
 
             //dc.DatabankVuller(10000);
 
-            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-            //bv.VulBestuurderTabel(100); //4 seconden voor 1000
-            //Console.Write("Bestuurder: ");
-            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-            //tv.VulTankkaarTabel(100); // 1 seconde voor 1000
-            //Console.Write("Tankkaart: ");
-            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-            //vv.VulVoertuigTabel(100); // 17 seconden voor 1000
-            //Console.Write("Voertuig: ");
-            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-            //av.VulAdresTabel(1000); // 2 seconden voor 1000
-            //Console.Write("Adres: "); //totaal voor 1000 = 24 seconden|5 seconden voor 100
-            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-
             #endregion
 
             #region filter
-            //bestuurderfilter
+
+            //Console.WriteLine("Bestuurderfilter: ");
+            //Console.Write("BestuurderId: ");
+            //string bestuurderId = Console.ReadLine();
+            //Console.Write("Naam: ");
+            //string naam = Console.ReadLine();
+            //Console.Write("Voornaam: ");
+            //string voornaam = Console.ReadLine();
+            //Console.Write("Geboortedatum: ");
+            //string geboortedatum = Console.ReadLine();
+            //Console.Write("Rijksregisternummer: ");
+            //string rijksnummer = Console.ReadLine();
+            //Console.Write("Rijbewijs: ");
+            //string rijbewijstype = Console.ReadLine();
             //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-            //Console.Write("Zoekterm: ");
-            //string zoekterm = Console.ReadLine();
-            //Console.Write("Kolom ('all' voor elke kolom): ");
-            //string kolom = Console.ReadLine();
-            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
-            //foreach (Bestuurder bestuurder in dc.FilterLijstBestuurder(zoekterm, kolom))
+            //foreach (Bestuurder bestuurder in dc.FilterLijstBestuurderV2(bestuurderId, naam, voornaam, geboortedatum, rijksnummer, rijbewijstype))
             //{
             //    Console.WriteLine(bestuurder.ToString());
             //}
 
-            //tankkaartfilter
-            //Console.Write("Zoekterm: ");
-            //string zoekterm = Console.ReadLine();
-            //Console.Write("Kolom ('all' voor elke kolom): ");
-            //string kolom = Console.ReadLine();
-            //foreach (Tankkaart tankkaart in dc.FilterLijstTankkaart(zoekterm, kolom))
+            //Console.WriteLine("Tankaartfilter: ");
+            //Console.Write("kaartnummer: ");
+            //string kaartnummer = Console.ReadLine();
+            //Console.Write("geldigheidsdatum: ");
+            //string geldigheidsdatum = Console.ReadLine();
+            //Console.Write("geblokkeerd: ");
+            //bool geblokkeerd = Convert.ToBoolean(Console.ReadLine());
+            //Console.Write("pincode: ");
+            //string pincode = Console.ReadLine();
+            //Console.Write("brandstof: ");
+            //string brandstof = Console.ReadLine();
+            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
+            //foreach (Tankkaart tankkaart in dc.FilterLijstTankkaartV2(kaartnummer, geldigheidsdatum, geblokkeerd, pincode, brandstof))
             //{
             //    Console.WriteLine(tankkaart.ToString());
+            //}
+
+            //Console.WriteLine("Voertuigfilter: ");
+            //Console.Write("merk: ");
+            //string merk = Console.ReadLine();
+            //Console.Write("model: ");
+            //string model = Console.ReadLine();
+            //Console.Write("chassisnummer: ");
+            //string chassisnummer = Console.ReadLine();
+            //Console.Write("nummerplaat: ");
+            //string nummerplaat = Console.ReadLine();
+            //Console.Write("brandstoftype: ");
+            //string brandstoftype = Console.ReadLine();
+            //Console.Write("wagentype: ");
+            //string wagentype = Console.ReadLine();
+            //Console.Write("kleur: ");
+            //string kleur = Console.ReadLine();
+            //Console.Write("aantaldeuren: ");
+            //string aantaldeuren = Console.ReadLine();
+            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
+            //foreach (Voertuig voertuig in dc.FilterLijstVoertuigV2(merk, model, chassisnummer, nummerplaat, brandstoftype, wagentype, kleur, aantaldeuren))
+            //{
+            //    Console.WriteLine(voertuig.ToString());
             //}
 
             #endregion
