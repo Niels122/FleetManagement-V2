@@ -27,25 +27,32 @@ namespace WPF_GUI.ReadWindows
         {        
             _dc = dc;
             InitializeComponent();
+            try
+            {
 
-            var adressen = _dc.GeefAdressen();
-            var voertuigen = _dc.GeefVoertuigen();
-            var tankkaarten = _dc.GeefTankkaarten();
-            Adres? adrs = adressen.Where(a => a.AdresId == bestuurder.AdresId).FirstOrDefault();
-            Voertuig? vrtg = voertuigen.Where(v => v.Chassisnummer == bestuurder.ChassisnummerVoertuig).FirstOrDefault();
-            Tankkaart? tnkrt = tankkaarten.Where(t => t.Kaartnummer == bestuurder.TankkaartNummer).FirstOrDefault();
+                var adressen = _dc.GeefAdressen();
+                var voertuigen = _dc.GeefVoertuigen();
+                var tankkaarten = _dc.GeefTankkaarten();
+                Adres? adrs = adressen.Where(a => a.AdresId == bestuurder.AdresId).FirstOrDefault();
+                Voertuig? vrtg = voertuigen.Where(v => v.Chassisnummer == bestuurder.ChassisnummerVoertuig).FirstOrDefault();
+                Tankkaart? tnkrt = tankkaarten.Where(t => t.Kaartnummer == bestuurder.TankkaartNummer).FirstOrDefault();
 
-            naam.Text = bestuurder.Voornaam;
-            achternaam.Text = bestuurder.Naam;
-            geboortedatum.Text = bestuurder.Geboortedatum.ToString();
-            rijksregisternummer.Text = bestuurder.Rijksregisternummer;
-            rijbewijs.Text = bestuurder.Rijbewijs.ToString();  
-            voertuig.Text = vrtg?.Nummerplaat.ToString();
-            tankkaart.Text = tnkrt?.Kaartnummer;
-            straatnaam.Text = adrs?.Straat;
-            huisnummer.Text = adrs?.Nummer;
-            postcode.Text = adrs?.Postcode.ToString();
-            stad.Text = adrs?.Stad.ToString();
+                naam.Text = bestuurder.Voornaam;
+                achternaam.Text = bestuurder.Naam;
+                geboortedatum.Text = bestuurder.Geboortedatum.ToString();
+                rijksregisternummer.Text = bestuurder.Rijksregisternummer;
+                rijbewijs.Text = bestuurder.Rijbewijs.ToString();
+                voertuig.Text = vrtg?.Nummerplaat.ToString();
+                tankkaart.Text = tnkrt?.Kaartnummer;
+                straatnaam.Text = adrs?.Straat;
+                huisnummer.Text = adrs?.Nummer;
+                postcode.Text = adrs?.Postcode.ToString();
+                stad.Text = adrs?.Stad.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message); 
+            }
 
         }
     }

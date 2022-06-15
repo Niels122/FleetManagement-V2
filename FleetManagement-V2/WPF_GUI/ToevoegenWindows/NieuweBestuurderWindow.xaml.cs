@@ -142,5 +142,10 @@ namespace WPF_GUI.ToevoegenWindows
 
 
         }
+
+        private void btnAnnuleren_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

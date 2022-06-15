@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPF_GUI.MainPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1000"
       Title="VoertuigPagina">
 
-    <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+    <Border BorderBrush="Black" BorderThickness="1" Margin="5" Width="1000">
         <Grid Background="White">
             <DockPanel Margin="10">
                 <DockPanel.Resources>
@@ -59,6 +59,7 @@
                             <GridView>
                                 <!--De namen van de binding moeten exact hetzelfde zijn als de naam van de property-->
                                 <GridViewColumn Header="Merk"           Width="100" DisplayMemberBinding="{Binding Merk}" />
+                                <GridViewColumn Header="Model"           Width="100" DisplayMemberBinding="{Binding Model}" />
                                 <GridViewColumn Header="Chassisnummer"  Width="100" DisplayMemberBinding="{Binding Chassisnummer}" />
                                 <GridViewColumn Header="Nummerplaat"    Width="100" DisplayMemberBinding="{Binding Nummerplaat}" />
                                 <GridViewColumn Header="Brandstof"      Width="100" DisplayMemberBinding="{Binding Brandstoftype}" />
@@ -73,6 +74,7 @@
                     <Button x:Name="btnVerwijderVoertuig"   Content="Verwijder" Click="btnVerwijderVoertuig_Click" />
                     <Button x:Name="btnToonAlleInfo"        Content="Toon info" Click="btnToonAlleInfo_Click" />
                     <Button x:Name="btnWijzigVoertuig"      Content="Wijzig"    Click="btnWijzigVoertuig_Click" />
+                    <Button x:Name="btnRefresh" Content="Refresh" Click="btnRefresh_Click" />
                 </StackPanel>
             </DockPanel>
         </Grid>

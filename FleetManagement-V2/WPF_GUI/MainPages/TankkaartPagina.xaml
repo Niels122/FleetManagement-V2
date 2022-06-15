@@ -5,10 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPF_GUI.MainPages"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="450" d:DesignWidth="1000"
       Title="TankkaartPagina">
 
-    <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+    <Border BorderBrush="Black" BorderThickness="1" Margin="5" Width="1000">
         <Grid Background="White">
             <DockPanel Margin="10">
                 <DockPanel.Resources>
@@ -63,6 +63,8 @@
                                 <GridViewColumn Header="Brandstoftype" Width="100" DisplayMemberBinding="{Binding Brandstof}" />
                                 <GridViewColumn Header="Geblokkeerd" Width="100" DisplayMemberBinding="{Binding Geblokkeerd}" />
                                 <GridViewColumn Header="Pincode" Width="100" DisplayMemberBinding="{Binding Pincode}" />
+                                <GridViewColumn Header="BestuurderID" Width="100" DisplayMemberBinding="{Binding BestuurderId}" />
+
                             </GridView>
                         </ListView.View>
                     </ListView>
