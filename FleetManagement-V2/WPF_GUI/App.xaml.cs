@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Controllers;
+using Domein.dbVullers;
 using Persistentie;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,12 @@ namespace WPF_GUI
             VoertuigController voertuigCon = new VoertuigController(voertuigRepo);
             TankkaartController tankkaartCon = new TankkaartController(tankkaartRepo);
 
-            DomeinController dc = new DomeinController(voertuigCon, tankkaartCon, bestuurderCon, adresCon);
+            BestuurderVuller bv = new BestuurderVuller(bestuurderCon);
+            AdresVuller av = new AdresVuller(adresCon);
+            VoertuigVuller vv = new VoertuigVuller(voertuigCon);
+            TankkaartVuller tv = new TankkaartVuller(tankkaartCon);
+
+            DomeinController dc = new DomeinController(voertuigCon, tankkaartCon, bestuurderCon, adresCon, bv, av, vv, tv);
             
             MainWindow MainWnd = new MainWindow(dc);
             MainWnd.Title = "Fleet management app";

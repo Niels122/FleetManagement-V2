@@ -1,5 +1,6 @@
 ﻿using Domein.Objects;
 using Domein.Controllers;
+using Domein.dbVullers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,68 @@ namespace Domein
         private BestuurderController _bestuurderCon;
         private AdresController _adresCon;
 
-        public DomeinController(VoertuigController vc, TankkaartController tc, BestuurderController bc, AdresController ac)
+        BestuurderVuller _bv;
+        AdresVuller _av;
+        VoertuigVuller _vv;
+        TankkaartVuller _tv;
+
+        public DomeinController(VoertuigController vc, TankkaartController tc, BestuurderController bc, AdresController ac,
+                                    BestuurderVuller bv, AdresVuller av, VoertuigVuller vv, TankkaartVuller tv)
         {
             _voertuigCon = vc;
             _tankkaartCon = tc;
             _bestuurderCon = bc;
             _adresCon = ac;
+            _bv = bv;
+            _av = av;
+            _vv = vv;
+            _tv = tv;
+        }
+
+        Random random = new Random();
+        public void DatabankVuller(int aantal)
+        {
+            string merk;
+            string model;
+            string[] merkModel = new string[2];
+            
+            for (int i = 0; i < aantal; i++)
+            {
+                string straatnaam = _av.randomStraatnaam();
+                string huisnummer = _av.randomNummer();
+                int postcode = _av.randomPostcode();
+                string stad = _av.randomStad();
+                _adresCon.CreateAdres(straatnaam, huisnummer, postcode, stad);
+                merkModel = _vv.randomMerkModelArray();
+                merk = merkModel[0];
+                model = merkModel[1];
+                Voertuig voertuig = new Voertuig(merk, model, _vv.randomChassisnummer(), _vv.randomNummerplaat(), _vv.randomBrandstoftype(), 
+                                                    _vv.randomWagentype(), _vv.randomKleur(), _vv.randomAantalDeuren());
+                Tankkaart tankkaart = new Tankkaart(_tv.randomKaartnummer(), _tv.randomGeldigheidsdatum(), _tv.randomGeblokkeerd(), 
+                                                        _tv.randomPincode(), _tv.randomBrandstoftype());
+
+                string chassisnummer = null;
+                string kaartnummer = null;
+                int? adresId = null;
+                if (random.Next(10) < 6)
+                {
+                    chassisnummer = voertuig.Chassisnummer;
+                }
+                if (random.Next(10) < 6)
+                {
+                    kaartnummer = tankkaart.Kaartnummer;
+                }
+                if (random.Next(10) < 6)
+                {
+                    adresId = _adresCon.GeefLaatsteAdres().AdresId;
+                }
+                Bestuurder bestuurder = new Bestuurder(_bv.randomId(), _bv.randomNaam(), _bv.randomVoornaam(), _bv.randomDatum(), _bv.randomRijksregisternummer(), 
+                                                        _bv.randomRijbewijs(), chassisnummer, kaartnummer, adresId);
+
+                _voertuigCon.CreateVoertuig(voertuig);
+                _tankkaartCon.CreateTankkaart(tankkaart);
+                _bestuurderCon.CreateBestuurder(bestuurder);
+            }
         }
 
 
@@ -93,6 +150,11 @@ namespace Domein
         public List<Adres> GeefAdressen()
         {
             return _adresCon.GeefAdressen();
+        }
+
+        public Adres GeefLaatsteAdres()
+        {
+            return _adresCon.GeefLaatsteAdres();
         }
 
         public void CreateAdres(string straatnaam, string huisnummer, int postcode, string stad)
