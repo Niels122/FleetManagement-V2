@@ -11,27 +11,9 @@ namespace Domein.dbVullers
 {
     public class BestuurderVuller
     {
-        BestuurderController _bc;
-
-        public BestuurderVuller(BestuurderController bc)
+        public BestuurderVuller()
         {
-            _bc = bc;
-        }
 
-        public void VulBestuurderTabel(int aantal)
-        {
-            for(int i = 0; i < aantal; i++)
-            {
-                try
-                {
-                    _bc.CreateBestuurder(new Bestuurder(randomId(), randomNaam(), randomVoornaam(), randomDatum(),
-                                                        randomRijksregisternummer(), randomRijbewijs()));
-                }
-                catch
-                {
-                    i--;
-                }
-            }
         }
 
         Random random = new Random();
