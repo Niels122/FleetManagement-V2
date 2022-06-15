@@ -77,7 +77,7 @@ namespace Domein.Objects
         {
             if (pincode != null)
             {
-                if (pincode < 1000 || pincode > 9999)
+                if (pincode < 1000 || pincode > 9999 || pincode.ToString() == "0000")
                 {
                     throw new TankkaartException("Pincode moet uit 4 cijfers bestaan.");
                 }

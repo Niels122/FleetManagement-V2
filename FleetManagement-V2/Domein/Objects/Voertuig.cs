@@ -69,7 +69,7 @@ namespace Domein.Objects
             {
                 if (!letters.Contains(c))
                 {
-                    throw new VoertuigException("Chassisnummer bevat ongeldige karakters.");
+                    throw new VoertuigException("Chassisnummer bevat ongeldige karakters (o, i of q).");
                 }
             }
 

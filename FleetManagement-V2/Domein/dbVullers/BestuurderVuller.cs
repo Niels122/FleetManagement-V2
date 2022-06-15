@@ -11,11 +11,11 @@ namespace Domein.dbVullers
 {
     public class BestuurderVuller
     {
-        BestuurderController bc;
+        BestuurderController _bc;
 
-        public BestuurderVuller(BestuurderController _bc)
+        public BestuurderVuller(BestuurderController bc)
         {
-            bc = _bc;
+            _bc = bc;
         }
 
         public void VulBestuurderTabel(int aantal)
@@ -24,15 +24,12 @@ namespace Domein.dbVullers
             {
                 try
                 {
-                    bc.CreateBestuurder(new Bestuurder(randomId(), randomNaam(), randomVoornaam(), randomDatum(),
+                    _bc.CreateBestuurder(new Bestuurder(randomId(), randomNaam(), randomVoornaam(), randomDatum(),
                                                         randomRijksregisternummer(), randomRijbewijs()));
-                    //bij Adres, Voertuig en Tankkaart unieke ID meteen in bestuurder stekens
                 }
-                catch(Exception e)
+                catch
                 {
-                    Console.WriteLine("Dubbel rijksregisternummer");
                     i--;
-                    continue;
                 }
             }
         }
@@ -55,10 +52,10 @@ namespace Domein.dbVullers
             return voornaamLijst[random.Next(voornaamLijst.Count())];
         }
 
-        List<Rijbewijs> rijbewijsTypes = new List<Rijbewijs> { Rijbewijs.A, Rijbewijs.B, Rijbewijs.C, Rijbewijs.D };
+        Array rijbewijstypes = Enum.GetValues(typeof(Rijbewijs));
         public Rijbewijs randomRijbewijs()
         {
-            return rijbewijsTypes[random.Next(rijbewijsTypes.Count())];
+            return (Rijbewijs)rijbewijstypes.GetValue(random.Next(rijbewijstypes.Length));
         }
 
         string alfabet = "abcdefghijklmnopqrstuvwxyz";
@@ -71,10 +68,8 @@ namespace Domein.dbVullers
                 id += random.Next(10).ToString();
             }
 
-            int index = random.Next(alfabet.Length);
-            id += alfabet[index];
-            int index2 = random.Next(alfabet.Length);
-            id += alfabet[index2];
+            id += alfabet[random.Next(alfabet.Length)];
+            id += alfabet[random.Next(alfabet.Length)];
 
             return id;
         }

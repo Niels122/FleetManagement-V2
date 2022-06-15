@@ -29,11 +29,29 @@ namespace CUI
             DomeinController dc = new DomeinController(voertuigCon, tankkaartCon, bestuurderCon, adresCon);
 
             BestuurderVuller bv = new BestuurderVuller(bestuurderCon);
+            TankkaartVuller tc = new TankkaartVuller(tankkaartCon);
+            VoertuigVuller vc = new VoertuigVuller(voertuigCon);
+            AdresVuller ac = new AdresVuller(adresCon);
 
             Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
 
 
 
+            #region Vuller
+
+            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
+            //bv.VulBestuurderTabel(100); //4 seconden voor 1000
+            //Console.Write("Bestuurder: ");
+            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
+            //tc.VulTankkaarTabel(100); // 1 seconde voor 1000
+            //Console.Write("Tankkaart: ");
+            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
+            //vc.VulVoertuigTabel(100); // 17 seconden voor 1000
+            //Console.Write("Voertuig: ");
+            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
+            //ac.VulAdresTabel(100); // 2 seconden voor 1000
+            //Console.Write("Adres: "); //totaal voor 1000 = 24 seconden|5 seconden voor 100
+            //Console.WriteLine(DateTime.Now.ToString("HH:mm:ss tt"));
 
             //Random random = new Random();
             //public void Tabelvuller(int aantal)
@@ -56,15 +74,6 @@ namespace CUI
             //        bestuurders.Remove(bestuurder);
             //    }
             //}
-
-            
-
-            #region Vuller
-
-            //Bestuurder test = new Bestuurder(bv.randomId(), bv.randomNaam(), bv.randomVoornaam(), bv.randomDatum(), bv.randomRijksregisternummer(), bv.randomRijbewijs());
-            //bestuurderCon.CreateBestuurder(test);
-
-            //bv.VulBestuurderTabel(1);
 
             #endregion
 
@@ -102,8 +111,7 @@ namespace CUI
             //}
             //Console.WriteLine("-----------------------------------------------");
 
-            //Bestuurder testBestuurder = new Bestuurder("208476xf", "Baele", "Joerie", new DateTime(1977, 7, 18), "30092408879", 
-                                                            Domein.Enums.Rijbewijs.B, "ADMLFKSDFJ498PSPW", "111111111111111111", 7);
+            //Bestuurder testBestuurder = new Bestuurder("208476xf", "Baele", "Joerie", new DateTime(1977, 7, 18), "30092408879", Domein.Enums.Rijbewijs.B, "ADMLFKSDFJ498PSPW", "111111111111111111", 7);
             //bestuurderCon.CreateBestuurder(testBestuurder);
             //bestuurderCon.UpdateBestuurder(testBestuurder);   //getest op normale input, foute input (exception persistentie) en onbestaande input (exception persistentie)
             //bestuurderCon.DeleteBestuurder(testBestuurder);   //getest op normale input, foute input en onbestaande input
