@@ -34,6 +34,18 @@ namespace Domein
             _tv = tv;
         }
 
+        /// <summary>
+        /// Deze methode vult alle 4 de databasetabellen aan met x aantal gegevens, gekozn door de gebruiker.
+        /// Wordt opgeroepen in de DatabaseVullerPagina in de WPF.
+        /// De paramaters die worden meegegeven worden random gegenereerd in de klassen AdresVuller, BestuurderVuller, TankkaartVuller en VoertuigVuller (in de map dbVullers).
+        /// Alle gegenereerde parameters voldoen aan de checks in de klassen Adres, Bestuurder, Tankkaart en Voertuig.
+        /// 
+        /// Werking per for-loop:
+        /// Er wordt een nieuw Adres aangemaakt en weer opgehaald samen met het door de databank gegenereerd AdresId.
+        /// Er wordt een nieuw Voertuig aangemaakt, de randomMerkModelArray zorgt voor matching Merk en Model.
+        /// Er wordt een nieuwe Tankkaart aangemaakt.
+        /// Er wordt een nieuwe Bestuurder aangemaakt, inclusief 60% om elk van Chassisnummer, Kaartnummer en AdresId mee te geven aan de Bestuurder.
+        /// </summary>
         Random random = new Random();
         public void DatabankVuller(int aantal)
         {

@@ -7,9 +7,13 @@
 --DROP TABLE voertuig;
 --GO
 
---CREATE DATABASE FleetmanagementDB
+CREATE DATABASE FleetmanagementDB;
 
-CREATE TABLE tankkaart(
+GO
+USE FleetmanagementDB;
+GO
+
+CREATE TABLE FleetmanagementDB.dbo.tankkaart(
 	tankkaartnummer VARCHAR(18) PRIMARY KEY,
 	geldigheidsDatum DATE NOT NULL,
 	brandstof VARCHAR(45) NULL, 
@@ -21,7 +25,7 @@ CREATE TABLE tankkaart(
 GO
 
 
-CREATE TABLE voertuig (
+CREATE TABLE FleetmanagementDB.dbo.voertuig (
 
 	chassisnummer VARCHAR(17) PRIMARY KEY,
 	nummerplaat VARCHAR(45) NOT NULL,
@@ -38,7 +42,7 @@ CREATE TABLE voertuig (
 	
 GO
 
-CREATE TABLE adres(
+CREATE TABLE FleetmanagementDB.dbo.adres(
 	id INT IDENTITY(1,1) PRIMARY KEY,
 	straat VARCHAR(255) NOT NULL,
 	huisnummer VARCHAR(10) NOT NULL,
@@ -47,7 +51,7 @@ CREATE TABLE adres(
 )
 GO
 
-CREATE TABLE bestuurder (
+CREATE TABLE FleetmanagementDB.dbo.bestuurder (
 	id VARCHAR(8) PRIMARY KEY,
 	naam VARCHAR(45) NOT NULL,
 	voornaam VARCHAR(45) NOT NULL,
