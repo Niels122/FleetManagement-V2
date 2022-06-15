@@ -16,21 +16,14 @@ namespace UnitTests
         [Fact]
         public void Test_NieuwVoertuig_Valid()
         {
-            Voertuig voertuig = new Voertuig(1,"Mercedes", "CLA", "1224454", "AAA-111", Brandstoftype.benzine, Wagentype.personenauto);
-        }
-
-        [Fact]
-        public void Test_NieuwVoertuigOverloadCtor_Valid()
-        {
-            //Bestuurder bestuurderNiels = new("Van Maelzaeke", "Niels", 07121999, "99120750392", Rijbewijs.B);
-            //Voertuig voertuig = new Voertuig("Mercedes", "CLA", "1224454", "AAA-111", Brandstoftype.benzine, Wagentype.personenauto, "beige", 3 , bestuurderNiels);
+            Voertuig voertuig = new Voertuig("Mercedes", "CLA", "12H9GNYN9VFV7KGRM", "1-AAA-111", Brandstoftype.Benzine, Wagentype.Personenauto);
         }
         [Theory]
         [InlineData("")]
         [InlineData(null)]
         public void Test_SetMerk_MerkIsNullOrEmpty(string merk)
         {
-            var exception = Assert.Throws<VoertuigException>(() => new Voertuig(1,merk, "CLA", "1224454", "AAA-111", Brandstoftype.benzine, Wagentype.personenauto));
+            var exception = Assert.Throws<VoertuigException>(() => new Voertuig(merk, "CLA", "12H9GNYN9VFV7KGRM", "1-AAA-111", Brandstoftype.Benzine, Wagentype.Personenauto));
             Assert.Equal("Merk moet ingevuld zijn!", exception.Message);
         }
         [Theory]
@@ -38,7 +31,7 @@ namespace UnitTests
         [InlineData(null)]
         public void Test_SetModel_ModelIsNullOrEmpty(string model)
         {
-            var exception = Assert.Throws<VoertuigException>(() => new Voertuig(1, "Mercedes", model, "1224454", "AAA-111", Brandstoftype.benzine, Wagentype.personenauto));
+            var exception = Assert.Throws<VoertuigException>(() => new Voertuig("Mercedes", model, "12H9GNYN9VFV7KGRM", "1-AAA-111", Brandstoftype.Benzine, Wagentype.Personenauto));
             Assert.Equal("Model moet ingevuld zijn!", exception.Message);
         }
         [Theory]
@@ -46,7 +39,7 @@ namespace UnitTests
         [InlineData(null)]
         public void Test_SetNummerplaat_NummerplaatIsNullOrEmpty(string nummerplaat)
         {
-            var exception = Assert.Throws<VoertuigException>(() => new Voertuig(1, "Mercedes", "CLA", "1224454", nummerplaat, Brandstoftype.benzine, Wagentype.personenauto));
+            var exception = Assert.Throws<VoertuigException>(() => new Voertuig("Mercedes", "CLA", "12H9GNYN9VFV7KGRM", nummerplaat, Brandstoftype.Benzine, Wagentype.Personenauto));
             Assert.Equal("Nummerplaat moet ingevuld zijn!", exception.Message);
         }
 

@@ -15,7 +15,7 @@ namespace Domein.Objects
         public DateTime Geldigheidsdatum { get; private set; }
         public bool Geblokkeerd { get; private set; }
         public int? Pincode { get; private set; }                                                  
-        public Brandstoftype? Brandstof { get; private set; } //Moet nog een List van gemaakt worden (zie opgave)
+        public Brandstoftype? Brandstof { get; private set; }
         public string BestuurderId { get; set; }
 
         public Tankkaart(string kaartnummer, DateTime geldigheidsdatum, bool geblokkeerd,
@@ -77,7 +77,7 @@ namespace Domein.Objects
         {
             if (pincode != null)
             {
-                if (pincode < 1000 || pincode > 9999 || pincode.ToString() == "0000")
+                if (pincode < 1000 || pincode > 9999)
                 {
                     throw new TankkaartException("Pincode moet uit 4 cijfers bestaan.");
                 }

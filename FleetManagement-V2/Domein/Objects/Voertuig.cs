@@ -54,8 +54,7 @@ namespace Domein.Objects
                 throw new VoertuigException("Model moet ingevuld zijn!");
             }
 
-            string output = char.ToUpper(model[0]) + model.Substring(1).ToLower();
-            Model = output;
+            Model = model;
         }
 
         public void SetChassisnummer(string chassisnummer)
