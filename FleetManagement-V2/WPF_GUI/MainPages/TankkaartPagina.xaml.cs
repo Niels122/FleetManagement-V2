@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Objects;
+using Domein.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,9 +33,8 @@ namespace WPF_GUI.MainPages
             _dc = dc;
             RefreshTankkaarten();
 
-            string[] filterMogelijkheden = { "Kaartnummer", "Geldigheidsdatum", "Brandstoftype", "Geblokkeerd" };
-
-            cmbFilter.ItemsSource = filterMogelijkheden;
+            List<Brandstoftype?> brandstoftypes = new List<Brandstoftype?> { Brandstoftype.Benzine, Brandstoftype.Diesel };
+            cmbBrandstoftype.ItemsSource = brandstoftypes;
         }
 
         private void RefreshTankkaarten()
@@ -128,12 +128,15 @@ namespace WPF_GUI.MainPages
 
         private void btnZoek_Click(object sender, RoutedEventArgs e)
         {
-            string zoekterm = tbFilter.Text;
-            string kolom = cmbFilter.Text;
+            string kaartnummer = tbKaartnummer.Text;
+            string geldigheidsdatum = tbGeldigheidsdatum.Text;
+            string brandstoftype = cmbBrandstoftype.Text;
+            bool geblokkeerd = (bool)cbGeblokkeerd.IsChecked;
+
 
             try
             {
-                var gefilterdeTankkaarten = _dc.FilterLijstTankkaart(zoekterm, kolom);
+                var gefilterdeTankkaarten = _dc.FilterLijstTankkaartV2(kaartnummer, geldigheidsdatum, geblokkeerd, brandstoftype);
                 lvOverzichtTankkaarten.Items.Clear();
 
                 foreach (Tankkaart tankkaart in gefilterdeTankkaarten)
@@ -149,8 +152,10 @@ namespace WPF_GUI.MainPages
 
         private void btnWisFilters_Click(object sender, RoutedEventArgs e)
         {
-            tbFilter.Clear();
-            cmbFilter.SelectedIndex = -1;
+            tbKaartnummer.Clear();
+            tbGeldigheidsdatum.Clear();
+            cmbBrandstoftype.SelectedIndex = -1;
+            cbGeblokkeerd.IsChecked = false;
             RefreshTankkaarten();
         }
 
