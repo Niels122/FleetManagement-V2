@@ -29,14 +29,24 @@ namespace WPF_GUI.ReadWindows
 
             var bestuurders = _dc.GeefBestuurders();
             Bestuurder? bstrdr = bestuurders.Where(b => b.TankkaartNummer == tankkaart.Kaartnummer).FirstOrDefault();
+           
 
-          
+
             kaartnummer.Text = tankkaart.Kaartnummer.ToString();
-            geldigheidsdatum.Text = tankkaart.Geldigheidsdatum.ToString();
+            geldigheidsdatum.Text = tankkaart.Geldigheidsdatum.ToShortDateString();
             geblokkeerd.IsChecked = tankkaart.Geblokkeerd;
             brandstoftype.Text = tankkaart.Brandstof.ToString();
             pincode.Text = tankkaart.Pincode.ToString();
-            bestuurder.Text = $"ID: {bstrdr?.BestuurderId}  Naam: {bstrdr?.Voornaam} {bstrdr?.Naam}";
+
+            if (tankkaart.BestuurderId != null)
+            {
+                bestuurder.Text = $"ID: {bstrdr?.BestuurderId}  Naam: {bstrdr?.Voornaam} {bstrdr?.Naam}";
+            }
+            else
+            {
+                bestuurder.Text = $"Geen bestuurder toegekend";
+            }
+            
         }
     }
 }

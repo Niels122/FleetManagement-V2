@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Enums;
+using Domein.Exceptions;
 using Domein.Objects;
 using System;
 using System.Collections.Generic;
@@ -41,7 +42,29 @@ namespace WPF_GUI.ToevoegenWindows
             try
             {
                 var kaartnummer = tbKaartnummer.Text;
-                var geldigheidsdatum = dpGeldigheidsdatum.SelectedDate.Value;
+                var bestaandeKaarten = _dc.GeefTankkaarten();
+                List<string> bestaandeKaartnummers = new List<string>();
+                foreach (Tankkaart tankkaart in bestaandeKaarten)
+                {
+                    bestaandeKaartnummers.Add(tankkaart.Kaartnummer);
+                }
+                if (bestaandeKaartnummers.Contains(kaartnummer))
+                {
+                    throw new TankkaartException($"Kaartnummer {kaartnummer} zit reeds in het systeem");
+                }
+             
+
+
+                DateTime geldigheidsdatum;
+                if (dpGeldigheidsdatum.SelectedDate.HasValue)
+                {
+                    geldigheidsdatum = dpGeldigheidsdatum.SelectedDate.Value;
+
+                }
+                else
+                {
+                    throw new TankkaartException("Geldigheidsdatum is verplicht in te vullen");
+                }
                 bool isGeblokkeerd = false;
                 if (cbGeblokkeerd.IsChecked == true)
                 {

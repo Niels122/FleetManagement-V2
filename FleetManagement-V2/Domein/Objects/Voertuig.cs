@@ -98,10 +98,10 @@ namespace Domein.Objects
                 throw new VoertuigException("Lengte nummerplaat is verkeerd.");
             }
 
-            if (int.Parse(nummer.Substring(0, 1)) != 1 || int.Parse(nummer.Substring(0, 1)) != 2)
-            {
-                throw new VoertuigException("Eerste cijfer van nummerplaat is ongeldig.");
-            }
+            //if (int.Parse(nummer.Substring(0, 1)) <= 9 || int.Parse(nummer.Substring(0, 1)) != 2)
+            //{
+            //    throw new VoertuigException("Eerste cijfer van nummerplaat is ongeldig.");
+            //}
 
                 if (!(char.IsDigit(nummer[0]) && char.IsDigit(nummer[4]) && char.IsDigit(nummer[5]) && char.IsDigit(nummer[6]) &&
                 char.IsLetter(nummer[1]) && char.IsLetter(nummer[2]) && char.IsLetter(nummer[3])))

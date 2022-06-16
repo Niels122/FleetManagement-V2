@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Enums;
+using Domein.Exceptions;
 using Domein.Objects;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace WPF_GUI.ToevoegenWindows
     /// </summary>
     public partial class NieuwVoertuigWindow : Window
     {
+        private Dictionary<string, List<string>> _voertuigMerkEnModel;
         private DomeinController _dc;
         public NieuwVoertuigWindow(DomeinController dc)
         {
@@ -31,6 +33,15 @@ namespace WPF_GUI.ToevoegenWindows
             FillWagenType();
             FillKleur();
             FillAantalDeuren();
+            FillMerkEnModel();
+        }
+        private void FillMerkEnModel()
+        {
+
+            List<string> MercedesModellen = new List<string>();
+            MercedesModellen.Add("CLA coupé");
+            MercedesModellen.Add("AMT-GTR");
+            _voertuigMerkEnModel.Add("Mercedes", MercedesModellen);
         }
         private void FillBrandstofType()
         {
@@ -63,9 +74,36 @@ namespace WPF_GUI.ToevoegenWindows
                 string _Model = tbModel.Text;
                 string _Chassisnummer = tbChassisnummer.Text;
                 string _Nummerplaat = tbNummerplaat.Text;
-                Brandstoftype _Brandstoftype = (Brandstoftype)cmbBrandstoftype.SelectedItem;
-                Wagentype _Wagentype = (Wagentype)cmbWagentype.SelectedItem;
-                string _Kleur = cmbKleur.Text;
+                Brandstoftype _Brandstoftype;
+                if (cmbBrandstoftype.SelectedIndex == -1)
+                {
+                    throw new VoertuigException("Brandstoftype moet ingevuld zijn");
+                }
+                else
+                {
+                    _Brandstoftype = (Brandstoftype)cmbBrandstoftype.SelectedItem;
+                }
+
+                Wagentype _Wagentype;
+                if (cmbWagentype.SelectedIndex == -1)
+                {
+                    throw new VoertuigException("Wagentype moet ingevuld zijn");
+                }
+                else
+                {
+                    _Wagentype = (Wagentype)cmbWagentype.SelectedItem;
+                }
+
+                string _Kleur;
+                if (cmbKleur.SelectedItem != null)
+                {
+                    _Kleur = cmbKleur.Text;
+
+                }
+                else
+                {
+                    _Kleur = null;
+                }
                 int? _Deuren;
 
                 if (cmbAantalDeuren.SelectedItem != null)
