@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Enums;
+using Domein.Exceptions;
 using Domein.Objects;
 using System;
 using System.Collections.Generic;
@@ -63,9 +64,36 @@ namespace WPF_GUI.ToevoegenWindows
                 string _Model = tbModel.Text;
                 string _Chassisnummer = tbChassisnummer.Text;
                 string _Nummerplaat = tbNummerplaat.Text;
-                Brandstoftype _Brandstoftype = (Brandstoftype)cmbBrandstoftype.SelectedItem;
-                Wagentype _Wagentype = (Wagentype)cmbWagentype.SelectedItem;
-                string _Kleur = cmbKleur.Text;
+                Brandstoftype _Brandstoftype;
+                if (cmbBrandstoftype.SelectedIndex == -1)
+                {
+                    throw new VoertuigException("Brandstoftype moet ingevuld zijn");
+                }
+                else
+                {
+                    _Brandstoftype = (Brandstoftype)cmbBrandstoftype.SelectedItem;
+                }
+
+                Wagentype _Wagentype;
+                if (cmbWagentype.SelectedIndex == -1)
+                {
+                    throw new VoertuigException("Wagentype moet ingevuld zijn");
+                }
+                else
+                {
+                    _Wagentype = (Wagentype)cmbWagentype.SelectedItem;
+                }
+
+                string _Kleur;
+                if (cmbKleur.SelectedItem != null)
+                {
+                    _Kleur = cmbKleur.Text;
+
+                }
+                else
+                {
+                    _Kleur = null;
+                }
                 int? _Deuren;
 
                 if (cmbAantalDeuren.SelectedItem != null)
