@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Enums;
+using Domein.Exceptions;
 using Domein.Objects;
 using System;
 using System.Collections.Generic;
@@ -48,7 +49,17 @@ namespace WPF_GUI.UpdateWindows
             {
                 var kaartnummer = tbKaartnummer.Text;
 
-                var geldigheidsdatum = dpGeldigheidsdatum.SelectedDate.Value;
+                DateTime geldigheidsdatum;
+                if (dpGeldigheidsdatum.SelectedDate.HasValue)
+                {
+                    geldigheidsdatum = dpGeldigheidsdatum.SelectedDate.Value;
+
+                }
+                else
+                {
+                    throw new TankkaartException("Geldigheidsdatum is verplicht in te vullen");
+                }
+
                 bool isGeblokkeerd = false;
                 if (cbGeblokkeerd.IsChecked == true)
                 {
@@ -71,10 +82,10 @@ namespace WPF_GUI.UpdateWindows
                     pincode = null;
                 }
 
-                Tankkaart gewijzigdeTankkaart = new(kaartnummer, geldigheidsdatum, isGeblokkeerd, pincode, brandstoftype);
 
                 try
                 {
+                    Tankkaart gewijzigdeTankkaart = new(kaartnummer, geldigheidsdatum, isGeblokkeerd, pincode, brandstoftype);
                     _dc.UpdateTankkaart(gewijzigdeTankkaart);
                     MessageBox.Show($"Tankkaart met kaartnummer: {kaartnummer} is succesvol gewijzigd.", "Succes", MessageBoxButton.OK);
                     this.Close();
@@ -84,7 +95,7 @@ namespace WPF_GUI.UpdateWindows
                     MessageBox.Show(ex.Message);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
