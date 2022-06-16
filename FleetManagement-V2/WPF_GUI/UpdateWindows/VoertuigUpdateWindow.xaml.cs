@@ -102,10 +102,10 @@ namespace WPF_GUI.UpdateWindows
                 _Deuren = null;
             }
 
-            Voertuig nieuwVoertuig = new(_Merk, _Model, _Chassisnummer, _Nummerplaat, _Brandstoftype, _Wagentype, _Kleur, _Deuren);
 
             try
             {
+                Voertuig nieuwVoertuig = new(_Merk, _Model, _Chassisnummer, _Nummerplaat, _Brandstoftype, _Wagentype, _Kleur, _Deuren);
                 _dc.UpdateVoertuig(nieuwVoertuig);
                 MessageBox.Show($"Voertuig met chassisnummer: {_Chassisnummer} is succesvol gewijzigd.", "Succes", MessageBoxButton.OK);
                 this.Close();
