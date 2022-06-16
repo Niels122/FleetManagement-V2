@@ -23,6 +23,7 @@ namespace WPF_GUI.ToevoegenWindows
     /// </summary>
     public partial class NieuwVoertuigWindow : Window
     {
+        private Dictionary<string, List<string>> _voertuigMerkEnModel;
         private DomeinController _dc;
         public NieuwVoertuigWindow(DomeinController dc)
         {
@@ -32,6 +33,15 @@ namespace WPF_GUI.ToevoegenWindows
             FillWagenType();
             FillKleur();
             FillAantalDeuren();
+            FillMerkEnModel();
+        }
+        private void FillMerkEnModel()
+        {
+
+            List<string> MercedesModellen = new List<string>();
+            MercedesModellen.Add("CLA coupé");
+            MercedesModellen.Add("AMT-GTR");
+            _voertuigMerkEnModel.Add("Mercedes", MercedesModellen);
         }
         private void FillBrandstofType()
         {
