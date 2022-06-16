@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Objects;
+using Domein.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,9 @@ namespace WPF_GUI.MainPages
             InitializeComponent();
             _dc = dc;
             RefreshBestuurders();
+
+            Array rijbewijzen = Enum.GetValues(typeof(Rijbewijs));
+            cmbRijbewijs.ItemsSource = rijbewijzen;
         }
 
         private void RefreshBestuurders()
@@ -120,7 +124,7 @@ namespace WPF_GUI.MainPages
             string voornaam = tbVoornaam.Text;
             string geboortedatum = tbGeboortedatum.Text;
             string rijksregisternummer = tbRijksregisternummer.Text;
-            string rijbewijs = tbRijbewijs.Text;
+            string rijbewijs = cmbRijbewijs.Text;
             //string chassisnummer = tbVoertuig.Text;
             //string kaartnummer = tbTankkaart.Text;
 
@@ -149,7 +153,7 @@ namespace WPF_GUI.MainPages
             tbVoornaam.Clear();
             tbGeboortedatum.Clear();
             tbRijksregisternummer.Clear();
-            tbRijbewijs.Clear();
+            cmbRijbewijs.SelectedIndex = -1;
             //tbVoertuig.Clear();
             //tbTankkaart.Clear();
             RefreshBestuurders();

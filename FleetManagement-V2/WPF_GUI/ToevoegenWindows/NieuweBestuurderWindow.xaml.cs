@@ -35,8 +35,10 @@ namespace WPF_GUI.ToevoegenWindows
 
         private void FillRijbewijzen()
         {
-            var rijbewijzen = Enum.GetValues(typeof(Rijbewijs)).Cast<Rijbewijs>().ToList().Distinct(); //combobox vullen met mogelijkheden
+
+            Array rijbewijzen = Enum.GetValues(typeof(Rijbewijs));
             cmbRijbewijs.ItemsSource = rijbewijzen;
+            cmbRijbewijs.SelectedIndex = 0;
         }
         private void FillVoertuigen()
         {
@@ -68,7 +70,7 @@ namespace WPF_GUI.ToevoegenWindows
                 DateTime _Geboortedatum = dpGeboortedatum.SelectedDate.Value;
                 string _Rijksregisternummer = tbRijksregisternummer.Text;
                 Rijbewijs _Rijbewijs = (Rijbewijs)cmbRijbewijs.SelectedItem;
-
+                
                 int? _AdresId = null;
                 string? _ChassisnummerVoertuig = null;
                 string? _Tankkaartnummer = null;

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_GUI.ToevoegenWindows"
         mc:Ignorable="d"
-        Title="NieuweBestuurderWindow" Height="450" Width="800">
+        Title="NieuweBestuurderWindow" Height="475" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
