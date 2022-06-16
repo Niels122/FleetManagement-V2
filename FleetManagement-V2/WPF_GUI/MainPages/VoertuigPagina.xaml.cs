@@ -62,8 +62,15 @@ namespace WPF_GUI.MainPages
         }
         private void btnWijzigVoertuig_Click(object sender, RoutedEventArgs e)
         {
-            VoertuigUpdateWindow viw = new VoertuigUpdateWindow((Voertuig)lvOverzichtVoertuigen.SelectedItem, _dc);
-            viw.Show();
+            if (lvOverzichtVoertuigen.SelectedItem != null)
+            {
+                VoertuigUpdateWindow viw = new VoertuigUpdateWindow((Voertuig)lvOverzichtVoertuigen.SelectedItem, _dc);
+                viw.Show();
+            }
+            else
+            {
+                MessageBox.Show("Geen item geslecteerd", "Waarschuwing", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void btnVoegVoertuigToe_Click(object sender, RoutedEventArgs e)
@@ -74,7 +81,9 @@ namespace WPF_GUI.MainPages
 
         private void btnVerwijderVoertuig_Click(object sender, RoutedEventArgs e)
         {
-            Voertuig voertuig = (Voertuig)lvOverzichtVoertuigen.SelectedItem;
+           
+             Voertuig voertuig = (Voertuig)lvOverzichtVoertuigen.SelectedItem;
+      
             MessageBoxResult result = MessageBox.Show($"Bent u zeker dat u voertuig met chassisnummer: {voertuig.Chassisnummer} wilt verwijderen?", "Verwijder voertuig", MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
             {
