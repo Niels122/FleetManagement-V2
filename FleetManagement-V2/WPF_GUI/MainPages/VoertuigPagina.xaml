@@ -51,9 +51,6 @@
 
                             <Label Content="Chassisnummer"/>
                             <TextBox x:Name="tbChassisnummer" Width="100"/>
-
-                            <Label Content="Kleur"/>
-                            <TextBox x:Name="tbKleur" Width="100"/>
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -63,11 +60,11 @@
                             <Label Content="Nummerplaat"/>
                             <TextBox x:Name="tbNummerplaat" Width="100"/>
 
-                            <Label Content="AantalDeuren"/>
-                            <TextBox x:Name="tbAantalDeuren" Width="100"/>
+                            <Label Content="BestuurderId"/>
+                            <TextBox x:Name="tbBestuurderId" Width="100"/>
                         </StackPanel>
-                        
-                        <StackPanel Orientation="Horizontal">
+
+                        <StackPanel Orientation="Horizontal">                            
                             <Label Content="Brandstof"/>
                             <ComboBox x:Name="cmbBrandstoftype" Width="100"/>
 

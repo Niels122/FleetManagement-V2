@@ -52,14 +52,17 @@
 
                             <Label Name="Geldigheidsdatum" Content="Geldigheidsdatum"/>
                             <TextBox x:Name="tbGeldigheidsdatum" Width="100"/>
-                        </StackPanel>
-
-                        <StackPanel Orientation="Horizontal">
-                            <Label Content="Brandstoftype"/>
-                            <ComboBox x:Name="cmbBrandstoftype" Width="100"/>
 
                             <Label Content="Geblokkeerd"/>
                             <CheckBox x:Name="cbGeblokkeerd" />
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Name="BestuurderId" Content="BestuurderId"/>
+                            <TextBox x:Name="tbBestuurderId" Width="100"/>
+                            
+                            <Label Content="Brandstoftype"/>
+                            <ComboBox x:Name="cmbBrandstoftype" Width="100"/>
 
                             <Button x:Name="btnZoek" Content="Zoek" Width="75" Click="btnZoek_Click" />
                             <Button x:Name="btnWisFilters" Content="Wis filter" Width="75" Click="btnWisFilters_Click" />

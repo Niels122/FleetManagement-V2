@@ -52,8 +52,8 @@
                             <Label Content="Rijksregisternummer"/>
                             <TextBox x:Name="tbRijksregisternummer" Width="100" />
 
-                            <Label Content="Rijbewijs"/>
-                            <TextBox x:Name="tbRijbewijs" Width="100" />
+                            <Label Content="Geboortedatum"/>
+                            <TextBox x:Name="tbGeboortedatum" Width="100" />
                         </StackPanel>
 
                         <StackPanel Orientation="Horizontal">
@@ -63,9 +63,17 @@
                             <Label Content="Voornaam"/>
                             <TextBox x:Name="tbVoornaam" Width="100" />
 
-                            <Label Content="Geboortedatum"/>
-                            <TextBox x:Name="tbGeboortedatum" Width="100" />
-                            
+                            <Label Content="Rijbewijs"/>
+                            <ComboBox x:Name="cmbRijbewijs" Width="100"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="ChassisnummerVoertuig"/>
+                            <TextBox x:Name="tbChassisnummerVoertuig" Width="100" />
+
+                            <Label Content="TankkaartNummer"/>
+                            <TextBox x:Name="tbTankkaartNummer" Width="100" />
+
                             <Button x:Name="btnZoek" Content="Zoek" Width="75" Click="btnZoek_Click" />
                             <Button x:Name="btnWisFilters" Content="Wis filter" Width="75" Click="btnWisFilters_Click" />
                         </StackPanel>
@@ -83,6 +91,8 @@
                                 <GridViewColumn Header="Rijksregisternummer" Width="120" DisplayMemberBinding="{Binding Rijksregisternummer}" />
                                 <GridViewColumn Header="Rijbewijs" Width="55" DisplayMemberBinding="{Binding Rijbewijs}" />
                                 <GridViewColumn Header="Geboortedatum" Width="100" DisplayMemberBinding="{Binding Geboortedatum, StringFormat='dd/MM/yyyy'}" />
+                                <GridViewColumn Header="ChassisnummerVoertuig" Width="145" DisplayMemberBinding="{Binding ChassisnummerVoertuig}" />
+                                <GridViewColumn Header="TankkaartNummer" Width="145" DisplayMemberBinding="{Binding TankkaartNummer}" />
                             </GridView>
                         </ListView.View>
 

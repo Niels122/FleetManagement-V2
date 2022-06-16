@@ -1,5 +1,6 @@
 ﻿using Domein;
 using Domein.Objects;
+using Domein.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,9 @@ namespace WPF_GUI.MainPages
             InitializeComponent();
             _dc = dc;
             RefreshBestuurders();
+
+            Array rijbewijzen = Enum.GetValues(typeof(Rijbewijs));
+            cmbRijbewijs.ItemsSource = rijbewijzen;
         }
 
         private void RefreshBestuurders()
@@ -118,16 +122,17 @@ namespace WPF_GUI.MainPages
             string id = tbID.Text;
             string naam = cmbNaam.Text;
             string voornaam = tbVoornaam.Text;
+            Console.WriteLine(tbVoornaam);
             string geboortedatum = tbGeboortedatum.Text;
             string rijksregisternummer = tbRijksregisternummer.Text;
-            string rijbewijs = tbRijbewijs.Text;
-            //string chassisnummer = tbVoertuig.Text;
-            //string kaartnummer = tbTankkaart.Text;
+            string rijbewijs = cmbRijbewijs.Text;
+            string chassisnummer = tbChassisnummerVoertuig.Text;
+            string kaartnummer = tbTankkaartNummer.Text;
 
             try
             {
                 var gefilterdeBestuurders = _dc.FilterLijstBestuurderV2(id, naam, voornaam, geboortedatum, rijksregisternummer, rijbewijs
-                                                             //, chassisnummer, kaartnummer
+                                                             , chassisnummer, kaartnummer
                                                              );
                 lvOverzichtBestuurders.Items.Clear();
 
@@ -149,9 +154,9 @@ namespace WPF_GUI.MainPages
             tbVoornaam.Clear();
             tbGeboortedatum.Clear();
             tbRijksregisternummer.Clear();
-            tbRijbewijs.Clear();
-            //tbVoertuig.Clear();
-            //tbTankkaart.Clear();
+            cmbRijbewijs.SelectedIndex = -1;
+            tbChassisnummerVoertuig.Clear();
+            tbTankkaartNummer.Clear();
             RefreshBestuurders();
         }
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
