@@ -132,11 +132,12 @@ namespace WPF_GUI.MainPages
             string geldigheidsdatum = tbGeldigheidsdatum.Text;
             string brandstoftype = cmbBrandstoftype.Text;
             bool geblokkeerd = (bool)cbGeblokkeerd.IsChecked;
+            string bestuurderid = tbBestuurderId.Text;
 
 
             try
             {
-                var gefilterdeTankkaarten = _dc.FilterLijstTankkaartV2(kaartnummer, geldigheidsdatum, geblokkeerd, brandstoftype);
+                var gefilterdeTankkaarten = _dc.FilterLijstTankkaartV2(kaartnummer, geldigheidsdatum, geblokkeerd, brandstoftype, bestuurderid);
                 lvOverzichtTankkaarten.Items.Clear();
 
                 foreach (Tankkaart tankkaart in gefilterdeTankkaarten)
@@ -156,6 +157,7 @@ namespace WPF_GUI.MainPages
             tbGeldigheidsdatum.Clear();
             cmbBrandstoftype.SelectedIndex = -1;
             cbGeblokkeerd.IsChecked = false;
+            tbBestuurderId.Clear();
             RefreshTankkaarten();
         }
 

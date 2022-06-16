@@ -35,8 +35,9 @@ namespace WPF_GUI.ToevoegenWindows
 
         private void FillRijbewijzen()
         {
-            var rijbewijzen = Enum.GetValues(typeof(Rijbewijs)).Cast<Rijbewijs>().ToList().Distinct(); //combobox vullen met mogelijkheden
+            Array rijbewijzen = Enum.GetValues(typeof(Rijbewijs));
             cmbRijbewijs.ItemsSource = rijbewijzen;
+            cmbRijbewijs.SelectedIndex = 0;
         }
         private void FillVoertuigen()
         {

@@ -37,7 +37,7 @@ namespace WPF_GUI.MainPages
             cmbBrandstoftype.ItemsSource = brandstoftypes;
 
             Array wagentypes = Enum.GetValues(typeof(Wagentype));
-            cmbBrandstoftype.ItemsSource = wagentypes;
+            cmbWagentype.ItemsSource = wagentypes;
         }
 
         private void RefreshVoertuigen()
@@ -131,13 +131,12 @@ namespace WPF_GUI.MainPages
             string nummerplaat = tbNummerplaat.Text;
             string brandstoftype = cmbBrandstoftype.Text;
             string wagentype = cmbWagentype.Text;
-            string kleur = tbKleur.Text;
-            string aantalDeuren = tbAantalDeuren.Text;
+            string bestuurderid = tbBestuurderId.Text;
 
             try
             {
                 var gefilterdeVoertuigen = _dc.FilterLijstVoertuigV2(merk, model, chassisnummer, nummerplaat, 
-                                                            brandstoftype, wagentype, kleur, aantalDeuren);
+                                                            brandstoftype, wagentype, bestuurderid);
                 lvOverzichtVoertuigen.Items.Clear();
 
                 foreach(Voertuig voertuig in gefilterdeVoertuigen)
@@ -156,10 +155,9 @@ namespace WPF_GUI.MainPages
             tbModel.Clear();
             tbChassisnummer.Clear();
             tbNummerplaat.Clear();
-            tbAantalDeuren.Clear();
-            tbKleur.Clear();
             cmbBrandstoftype.SelectedIndex = -1;
             cmbWagentype.SelectedIndex = -1;
+            tbBestuurderId.Clear();
             
             RefreshVoertuigen();
         }

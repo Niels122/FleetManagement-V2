@@ -141,18 +141,17 @@ namespace WPF_GUI.UpdateWindows
                     {
                         throw new AdresException("Alle velden van adres moeten ingevuld worden");
                     }
-                Bestuurder updatedBestuurder = new(_BestuurderId, _Voornaam, _Achternaam, _Geboortedatum, _Rijksregisternummer, _Rijbewijs, _ChassisnummerVoertuig, _Tankkaartnummer, _AdresId );
-                _dc.UpdateBestuurder(updatedBestuurder);
+                    Bestuurder updatedBestuurder = new(_BestuurderId, _Voornaam, _Achternaam, _Geboortedatum, _Rijksregisternummer, _Rijbewijs, _ChassisnummerVoertuig, _Tankkaartnummer, _AdresId );
+                    _dc.UpdateBestuurder(updatedBestuurder);
+
+                    MessageBox.Show($"Wijzigingen zijn aangebracht", "Voltooid", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    this.Close();
 
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
-
-
-                MessageBox.Show($"Wijzigingen zijn aangebracht", "Voltooid", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                this.Close();
             }
             catch (Exception ex)
             {
